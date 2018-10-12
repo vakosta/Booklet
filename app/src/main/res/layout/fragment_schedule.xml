@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/weekDays"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp">
+
+        <TextView
+            android:id="@+id/currentDay"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="-33dp"
+            android:background="@drawable/shape_round_left_ungles"
+            android:gravity="center"
+            android:text="22"
+            android:textColor="@color/colorWeekdayDateNameActive"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <include
+            layout="@layout/layout_week_days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+    <me.annenkov.julistaandroid.presentation.customviews.CustomLinearLayout
+        android:id="@+id/scheduleListPagerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/scheduleListPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </me.annenkov.julistaandroid.presentation.customviews.CustomLinearLayout>
+
+</RelativeLayout>

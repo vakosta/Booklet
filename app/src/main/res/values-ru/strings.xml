@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="field_login">номер телефона или email</string>
+    <string name="field_password">пароль</string>
+    <string name="button_login">войти</string>
+    <string name="button_vk">Группа ВК</string>
+    <string name="button_problems_with_logging">Проблемы со входом?</string>
+    <string name="schedule">Расписание</string>
+    <string name="marks">Оценки</string>
+    <string name="account">Аккаунт</string>
+    <string name="settings">Настройки</string>
+    <string name="loading">Загрузка…</string>
+    <string name="currentLesson">Идёт урок</string>
+    <string name="next_lesson">Следующий урок</string>
+    <string name="plus">Плюс</string>
+    <string name="gratitude">Нам очень приятно, что вы доверяете нам. Эти деньги пойдут на развитие Julista.\n\nТеперь вам доступен весь набор уведомлений, ура! Уведомления можно включить в настройках. Более того, уведомления работают не только в приложении, но и в нашем боте. Если ещё не пользуетесь, попробуйте, вам понравится. ;)</string>
+</resources>

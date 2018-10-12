@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+    android:paddingEnd="12dp"
+    android:paddingStart="12dp"
+    android:paddingTop="8dp">
+
+    <TextView
+        android:id="@+id/itemNewsContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Иван Иванов получил 5 за контрольную!"
+        android:textColor="#fff"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/itemNewsDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="Вчера"
+        android:textColor="#fff"
+        android:textSize="12sp" />
+
+</LinearLayout>

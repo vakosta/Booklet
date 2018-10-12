@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_item_plus_bot_vk_shadow">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="@drawable/background_item_plus_bot_vk"
+        android:drawableStart="@drawable/vk"
+        android:drawablePadding="12dp"
+        android:fontFamily="@font/futurapt_medium"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="Бот для ВКонтакте"
+        android:textColor="#fff"
+        android:textSize="16sp" />
+
+</FrameLayout>

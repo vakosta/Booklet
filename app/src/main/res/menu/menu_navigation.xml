@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navAccount"
+        android:icon="@drawable/account_outline"
+        android:title="@string/account" />
+    <item
+        android:id="@+id/navMarks"
+        android:icon="@drawable/mark_outline"
+        android:title="@string/marks" />
+    <item
+        android:id="@+id/navSchedule"
+        android:icon="@drawable/schedule_outline"
+        android:title="@string/schedule" />
+    <item
+        android:id="@+id/navPlus"
+        android:icon="@drawable/plus"
+        android:title="@string/plus" />
+    <item
+        android:id="@+id/navSettings"
+        android:icon="@drawable/settings_outline"
+        android:title="@string/settings" />
+</menu>

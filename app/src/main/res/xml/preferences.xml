@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Ссылки">
+        <Preference
+            android:defaultValue="true"
+            android:key="button_vk"
+            android:layout="@layout/button_vk" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Обучение">
+        <ListPreference
+            android:dialogTitle="Ваша цель"
+            android:entries="@array/list_preference_mark_purpose_values"
+            android:entryValues="@array/list_preference_mark_purpose_values"
+            android:key="@string/preference_mark_purpose"
+            android:summary="Для советов и подсказок"
+            android:title="Цель обучения" />
+        <SwitchPreference
+            android:key="@string/preference_saturday_lessons"
+            android:title="Уроки по субботам" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Уведомления">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/preference_notification_main"
+            android:summary="Текущий урок, время до конца, полученные оценки"
+            android:title="Строка с основной информацией" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/preference_notification_new_mark"
+            android:title="Новые оценки" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/preference_notification_news"
+            android:title="События из ленты" />
+        <Preference
+            android:defaultValue="true"
+            android:key="button_exit"
+            android:layout="@layout/button_exit" />
+    </PreferenceCategory>
+</PreferenceScreen>

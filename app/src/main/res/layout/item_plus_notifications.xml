@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_item_plus_notifications">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/background_plus_item_header_icon"
+            android:padding="4dp"
+            app:srcCompat="@drawable/bell" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/futurapt_medium"
+            android:text="Уведомления"
+            android:textColor="#212121"
+            android:textSize="22sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:fontFamily="@font/futurapt_medium"
+        android:gravity="center_vertical"
+        android:text="— Новые оценки\n— Текущий/следующий урок\n— Отчётность за день\n— События в классе"
+        android:textColor="#a4a4a4"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:id="@+id/comparison"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/description"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/background_plus_item_comparison_icon"
+            android:padding="10dp"
+            app:srcCompat="@drawable/shawarma" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/futurapt_medium"
+            android:gravity="center_vertical"
+            android:text="149 рублей — как шаурма в центре Москвы"
+            android:textColor="#a4a4a4"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/buy"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/comparison"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/background_plus_button_buy"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/futurapt_medium"
+        android:gravity="center"
+        android:text="149р."
+        android:textColor="#fff"
+        android:textSize="20sp" />
+
+</RelativeLayout>

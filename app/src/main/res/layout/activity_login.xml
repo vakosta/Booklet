@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_activity_login"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/app_name"
+                app:srcCompat="@drawable/logo_julista" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:tint="#fff"
+                    app:srcCompat="@drawable/account_circle" />
+
+                <EditText
+                    android:id="@+id/loginField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:hint="@string/field_login"
+                    android:inputType="textEmailAddress"
+                    android:textColor="#fff"
+                    android:theme="@style/EditTextLight" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:tint="#fff"
+                    app:srcCompat="@drawable/lock" />
+
+                <EditText
+                    android:id="@+id/passwordField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:hint="@string/field_password"
+                    android:inputType="textPassword"
+                    android:textColor="#fff"
+                    android:theme="@style/EditTextLight" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/problemsWithLoggingButton"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/background_button_account"
+                android:clickable="true"
+                android:elevation="3dp"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/button_problems_with_logging"
+                android:textAllCaps="true"
+                android:textColor="#ff0000"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/contactButton"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/background_button_account"
+                android:clickable="true"
+                android:elevation="3dp"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/button_vk"
+                android:textAllCaps="true"
+                android:textColor="#435fc3"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/loginEnterButton"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/shape_top_rounded_16dp"
+                android:text="@string/button_login"
+                android:textColor="#5678ef"
+                android:textStyle="bold" />
+
+            <ProgressBar
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="4dp"
+                android:foregroundGravity="center"
+                android:indeterminate="true"
+                android:theme="@style/ProgressLight" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>

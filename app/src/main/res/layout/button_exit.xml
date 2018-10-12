@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:layout_marginBottom="64dp"
+    android:background="@drawable/shape_rectangle_ripple"
+    android:gravity="center_vertical"
+    android:paddingStart="16dp"
+    android:text="Выйти"
+    android:textColor="#ff0000"
+    android:textSize="16sp" />

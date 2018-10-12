@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/itemTop"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_item_top"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="horizontal"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp">
+
+    <TextView
+        android:id="@+id/topItemIndex"
+        android:layout_width="26dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0"
+        android:gravity="center"
+        android:text="@string/loading_points"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/topItemStudentName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_weight="1"
+        android:text="@string/loading"
+        android:textColor="#292929"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/topItemLevel"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_weight="0"
+        android:background="@drawable/background_mark_progress"
+        android:gravity="center"
+        android:text="@string/loading_points"
+        android:textColor="#fff"
+        android:textStyle="bold" />
+
+</LinearLayout>

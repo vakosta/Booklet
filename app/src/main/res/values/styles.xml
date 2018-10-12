@@ -1,0 +1,26 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="preferenceTheme">@style/PreferencesTheme</item>
+    </style>
+
+    <style name="PreferencesTheme" parent="PreferenceThemeOverlay.v14.Material">
+        <item name="divider">@null</item>
+        <item name="android:dividerHeight">0dp</item>
+    </style>
+
+    <style name="EditTextLight">
+        <item name="colorControlNormal">#ffffff</item>
+        <item name="colorControlActivated">#ffffff</item>
+        <item name="colorControlHighlight">#ffffff</item>
+        <item name="android:textColorHint">#deffffff</item>
+    </style>
+
+    <style name="ProgressLight">
+        <item name="colorAccent">#fff</item>
+    </style>
+
+</resources>

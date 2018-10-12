@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="horizontal"
+    android:paddingEnd="-12dp"
+    android:paddingStart="-12dp">
+
+    <LinearLayout
+        android:id="@+id/weekdayMonday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dp"
+            android:text="ПН"
+            android:textColor="@color/colorWeekdayName"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/weekdayMondayDate"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="7"
+            android:textColor="@color/colorWeekdayDateName"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/weekdayTuesday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dp"
+            android:text="ВТ"
+            android:textColor="@color/colorWeekdayName"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/weekdayTuesdayDate"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="7"
+            android:textColor="@color/colorWeekdayDateName"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/weekdayWednesday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dp"
+            android:text="СР"
+            android:textColor="@color/colorWeekdayName"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/weekdayWednesdayDate"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="7"
+            android:textColor="@color/colorWeekdayDateName"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/weekdayThursday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dp"
+            android:text="ЧТ"
+            android:textColor="@color/colorWeekdayName"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/weekdayThursdayDate"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="7"
+            android:textColor="@color/colorWeekdayDateName"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/weekdayFriday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dp"
+            android:text="ПТ"
+            android:textColor="@color/colorWeekdayName"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/weekdayFridayDate"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="7"
+            android:textColor="@color/colorWeekdayDateName"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/weekdaySaturday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dp"
+            android:text="СБ"
+            android:textColor="@color/colorWeekdayName"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/weekdaySaturdayDate"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="7"
+            android:textColor="@color/colorWeekdayDateName"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</LinearLayout>
