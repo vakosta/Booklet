@@ -173,7 +173,8 @@ class MainActivity : AppCompatActivity(),
 
     @Subscribe
     fun onPurchase(onPurchase: OnPurchase) {
-        mBp.purchase(this, "notifications_20182019")
+        if (!Preferences.getInstance(this).notificationsSubscription)
+            mBp.purchase(this, "notifications_20182019")
     }
 
     override fun initPager() {
