@@ -167,8 +167,9 @@ class NotificationsService : IntentService("NotificationsService") {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(ID_CHANNEL,
-                    "Channel",
+                    "Main",
                     NotificationManager.IMPORTANCE_DEFAULT)
+            channel.setSound(null, null)
             (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager)
                     .createNotificationChannel(channel)
         }
