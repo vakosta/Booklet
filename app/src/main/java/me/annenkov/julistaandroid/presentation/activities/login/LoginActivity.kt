@@ -8,7 +8,6 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_login.*
 import kotterknife.bindView
 import me.annenkov.julistaandroid.R
-import me.annenkov.julistaandroid.domain.Utils
 import me.annenkov.julistaandroid.domain.px
 import me.annenkov.julistaandroid.presentation.activities.main.MainActivity
 import org.jetbrains.anko.alert
@@ -27,11 +26,10 @@ class LoginActivity : AppCompatActivity(), LoginView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        mPresenter = LoginPresenter(this)
+        mPresenter = LoginPresenter(this, this)
 
         mLoginEnterButton.setOnClickListener {
-            mPresenter.login(this,
-                    mLoginField.text.toString(),
+            mPresenter.login(mLoginField.text.toString(),
                     mPasswordField.text.toString())
         }
 
@@ -41,6 +39,14 @@ class LoginActivity : AppCompatActivity(), LoginView {
 
         mContactButton.setOnClickListener {
             browse(getString(R.string.url_vk_page))
+        }
+
+        infoButton.setOnClickListener { _ ->
+            alert("Для входа в дневник вы можете использовать номер телефона или почту, " +
+                    "указанные на сайте mos.ru.\n\n" +
+                    "Вводите номер в формате +79... или 9...") {
+                yesButton {}
+            }.show()
         }
     }
 

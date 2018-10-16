@@ -15,7 +15,4 @@ interface MainView : ActivityBaseView {
 
     fun setContentBelowToolbar(below: Boolean)
     fun setToolbarIsGone(gone: Boolean)
-
-    fun setWhiteBackground()
-    fun setBlueBackground()
 }

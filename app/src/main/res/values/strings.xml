@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Julista</string>
+    <string name="app_name">Julista</string>
     <string name="field_login">login</string>
     <string name="field_password">password</string>
     <string name="button_vk">VK page</string>

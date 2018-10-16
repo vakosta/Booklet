@@ -30,17 +30,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/loginIcon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
                     android:tint="#fff"
                     app:srcCompat="@drawable/account_circle" />
 
@@ -49,24 +50,37 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
+                    android:layout_toEndOf="@id/loginIcon"
                     android:hint="@string/field_login"
                     android:inputType="textEmailAddress"
+                    android:paddingEnd="26dp"
                     android:textColor="#fff"
                     android:theme="@style/EditTextLight" />
 
-            </LinearLayout>
+                <ImageView
+                    android:id="@+id/infoButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="20dp"
+                    android:tint="#fff"
+                    app:srcCompat="@drawable/information_outline" />
 
-            <LinearLayout
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/passwordIcon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
                     android:tint="#fff"
                     app:srcCompat="@drawable/lock" />
 
@@ -75,21 +89,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
+                    android:layout_toEndOf="@id/passwordIcon"
                     android:hint="@string/field_password"
                     android:inputType="textPassword"
                     android:textColor="#fff"
                     android:theme="@style/EditTextLight" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/problemsWithLoggingButton"
                 android:layout_width="match_parent"
                 android:layout_height="36dp"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:background="@drawable/background_button_account"
                 android:clickable="true"
                 android:elevation="3dp"
@@ -104,9 +119,9 @@
                 android:id="@+id/contactButton"
                 android:layout_width="match_parent"
                 android:layout_height="36dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/background_button_account"
                 android:clickable="true"
                 android:elevation="3dp"

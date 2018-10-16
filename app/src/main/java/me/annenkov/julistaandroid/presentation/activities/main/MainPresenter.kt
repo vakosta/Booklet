@@ -28,7 +28,6 @@ class MainPresenter(private val view: MainView, private val mContext: Context) {
                 view.setFragment(0)
                 view.setToolbarText("Аккаунт")
                 view.hideMenu()
-                view.setBlueBackground()
                 view.setContentBelowToolbar(false)
                 view.setToolbarIsGone(true)
             }
@@ -36,7 +35,6 @@ class MainPresenter(private val view: MainView, private val mContext: Context) {
                 view.setFragment(1)
                 view.setToolbarText("Оценки")
                 view.hideMenu()
-                view.setBlueBackground()
                 view.setContentBelowToolbar(false)
                 view.setToolbarIsGone(true)
             }
@@ -45,7 +43,6 @@ class MainPresenter(private val view: MainView, private val mContext: Context) {
                 view.setToolbarText(DateHelper.getMonthNameByNumber(mSelectedDate.month))
                 view.setCalendarMenu()
                 view.showMenu()
-                view.setBlueBackground()
                 view.setContentBelowToolbar(false)
                 view.setToolbarIsGone(false)
             }
@@ -53,7 +50,6 @@ class MainPresenter(private val view: MainView, private val mContext: Context) {
                 view.setFragment(3)
                 view.setToolbarText("Julista Plus")
                 view.hideMenu()
-                view.setBlueBackground()
                 view.setContentBelowToolbar(false)
                 view.setToolbarIsGone(true)
             }
@@ -61,7 +57,6 @@ class MainPresenter(private val view: MainView, private val mContext: Context) {
                 view.setFragment(4)
                 view.setToolbarText("Настройки")
                 view.hideMenu()
-                view.setWhiteBackground()
                 view.setContentBelowToolbar(true)
                 view.setToolbarIsGone(false)
             }

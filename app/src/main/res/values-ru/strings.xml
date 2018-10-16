@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Дневник</string>
     <string name="field_login">номер телефона или email</string>
     <string name="field_password">пароль</string>
     <string name="button_login">войти</string>

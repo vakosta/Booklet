@@ -3,11 +3,9 @@ package me.annenkov.julistaandroid.presentation.activities.main
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.*
 import android.widget.RelativeLayout
@@ -30,7 +28,6 @@ import me.annenkov.julistaandroid.presentation.customviews.NonSwipeableViewPager
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.alert
-import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.util.*
@@ -250,14 +247,6 @@ class MainActivity : AppCompatActivity(),
     @Subscribe
     override fun onScroll(position: CardBaseView.ScrollPosition) {
         super.onScroll(position)
-    }
-
-    override fun setWhiteBackground() {
-        activityMain.backgroundColor = Color.WHITE
-    }
-
-    override fun setBlueBackground() {
-        activityMain.backgroundColor = ContextCompat.getColor(this, R.color.colorBackground)
     }
 
     override fun showToolbar() {

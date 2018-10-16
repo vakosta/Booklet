@@ -5,36 +5,42 @@ import com.google.firebase.iid.FirebaseInstanceId
 import me.annenkov.julistaandroid.data.model.julista.Auth
 import me.annenkov.julistaandroid.domain.ApiHelper
 import me.annenkov.julistaandroid.domain.Preferences
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import me.annenkov.julistaandroid.presentation.InitContentPresenter
 
-class LoginPresenter(private val view: LoginView) {
-    fun login(context: Context, login: String, password: String) {
+class LoginPresenter(
+        private val view: LoginView,
+        private val mContext: Context
+) : InitContentPresenter(mContext) {
+    private var mLogin = ""
+    private var mPassword = ""
+
+    fun login(login: String, password: String) {
         view.startLoading()
-        ApiHelper.auth(login, password, FirebaseInstanceId.getInstance().token)
-                .enqueue(object : Callback<Auth> {
-                    override fun onResponse(call: Call<Auth>, response: Response<Auth>) {
-                        val auth = response.body()
-                        if (auth?.token == null || auth.pid == null || auth.botCode == null) {
-                            view.onLoginFailed()
-                            return
-                        }
+        mLogin = login
+        mPassword = password
+        initContent()
+    }
 
-                        val prefs = Preferences.getInstance(context)
-                        prefs.userLogin = login
-                        prefs.userPassword = password
-                        prefs.userToken = auth.token!!
-                        prefs.userPid = auth.pid!!
-                        prefs.userStudentProfileId = auth.studentProfileId!!
-                        prefs.botCode = auth.botCode!!
+    override fun executeMethod(): Any = ApiHelper.auth(mLogin, mPassword,
+            FirebaseInstanceId.getInstance().token).execute().body()!!
 
-                        view.onLoginSuccessful()
-                    }
+    override fun onSuccessful(response: Any) {
+        val auth = (response as Auth)
+        val prefs = Preferences.getInstance(mContext)
+        prefs.userLogin = mLogin
+        prefs.userPassword = mPassword
+        prefs.userToken = response.token!!
+        prefs.userPid = auth.pid!!
+        prefs.userStudentProfileId = auth.studentProfileId!!
+        prefs.botCode = auth.botCode!!
+        view.onLoginSuccessful()
+    }
 
-                    override fun onFailure(call: Call<Auth>?, t: Throwable?) {
-                        view.onNetworkProblems()
-                    }
-                })
+    override fun onFailureResponse() {
+        view.onLoginFailed()
+    }
+
+    override fun onFailureNetwork() {
+        view.onNetworkProblems()
     }
 }
