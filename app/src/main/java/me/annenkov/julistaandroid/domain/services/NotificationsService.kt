@@ -6,8 +6,8 @@ import android.content.Intent
 import android.os.Build
 import android.support.v4.app.NotificationCompat
 import me.annenkov.julistaandroid.R
+import me.annenkov.julistaandroid.domain.ApiHelper
 import me.annenkov.julistaandroid.domain.DateHelper
-import me.annenkov.julistaandroid.domain.MosApiHelper
 import me.annenkov.julistaandroid.domain.Preferences
 import me.annenkov.julistaandroid.domain.model.Mark
 import me.annenkov.julistaandroid.domain.model.Time
@@ -51,7 +51,7 @@ class NotificationsService : IntentService("NotificationsService") {
         while (true) {
             mNewMarks.clear()
             mSchedule = try {
-                MosApiHelper.getSchedule(
+                ApiHelper.getInstance(this).getSchedule(
                         prefs.userToken,
                         prefs.userPid.toInt(),
                         prefs.userStudentProfileId.toInt(),
@@ -99,7 +99,7 @@ class NotificationsService : IntentService("NotificationsService") {
             for (mark in scheduleItem.marks) {
                 if (subjectMap[scheduleItem.subject] == null)
                     subjectMap[scheduleItem.subject] = arrayListOf()
-                subjectMap[scheduleItem.subject]!!.add(mark)
+                subjectMap[scheduleItem.subject]!!.add(mark.mark)
             }
         for (mark in mNewMarks) {
             if (subjectMap[mark.subject] == null)

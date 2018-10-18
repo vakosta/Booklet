@@ -21,6 +21,7 @@
     <string name="preference_token" translatable="false">token</string>
     <string name="preference_pid" translatable="false">pid</string>
     <string name="preference_student_profile_id" translatable="false">student_profile_id</string>
+    <string name="preference_student_profiles" translatable="false">student_profiles</string>
     <string name="preference_saturday_lessons" translatable="false">saturday_lessons</string>
     <string name="preference_mark_purpose" translatable="false">mark_purpose</string>
     <string name="preference_notification_new_mark" translatable="false">notification_new_mark</string>

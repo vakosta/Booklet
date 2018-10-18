@@ -172,8 +172,9 @@ class AccountPresenter(private val view: AccountView,
         }
     }
 
-    override fun executeMethod(): Account = ApiHelper.getAccount(prefs.userToken,
-            prefs.userStudentProfileId).execute().body()!!
+    override fun executeMethod(): Account = ApiHelper.getInstance(mContext)
+            .getAccount(prefs.userToken,
+                    prefs.userStudentProfileId).execute().body()!!
 
     override fun onSuccessful(response: Any) {
         val account = (response as Account)

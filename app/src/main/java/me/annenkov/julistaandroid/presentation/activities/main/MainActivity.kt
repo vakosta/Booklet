@@ -102,9 +102,11 @@ class MainActivity : AppCompatActivity(),
             val pid = prefs.userPid
             val token = prefs.userToken
             val hash = "$pid$token".subscriptionHash()
-            val result = ApiHelper.checkNotificationsSubscription(pid)
+            val result = ApiHelper.getInstance(this@MainActivity)
+                    .checkNotificationsSubscription(pid)
                     .execute().body()?.result ?: false
-            val isPurchasedSuccessfully = mBp.getPurchaseTransactionDetails("notifications_20182019")
+            val isPurchasedSuccessfully = mBp
+                    .getPurchaseTransactionDetails("notifications_20182019")
                     ?.purchaseInfo
                     ?.purchaseData
                     ?.purchaseState?.name == "PurchasedSuccessfully"
@@ -112,7 +114,8 @@ class MainActivity : AppCompatActivity(),
             if (!result && isPurchasedSuccessfully) {
                 prefs.notificationsSubscription = true
                 try {
-                    ApiHelper.setNotificationsSubscription(pid, token, hash).execute()
+                    ApiHelper.getInstance(this@MainActivity)
+                            .setNotificationsSubscription(pid, token, hash).execute()
                 } catch (e: Exception) {
                     Crashlytics.logException(e)
                 }
@@ -155,12 +158,14 @@ class MainActivity : AppCompatActivity(),
                 uiThread { _ ->
                     EventBus.getDefault().post(PurchaseUpdate())
 
-                    alert(getString(R.string.gratitude), "Спасибо! :)") {
+                    alert(getString(R.string.gratitude),
+                            "Спасибо! :)") {
                         positiveButton("Понял, хочу попробовать!") {}
                     }.show()
                 }
 
-                ApiHelper.setNotificationsSubscription(pid, token, hash).execute()
+                ApiHelper.getInstance(this@MainActivity)
+                        .setNotificationsSubscription(pid, token, hash).execute()
             }
         }
     }

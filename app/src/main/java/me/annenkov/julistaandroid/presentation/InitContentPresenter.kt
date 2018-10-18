@@ -51,14 +51,17 @@ abstract class InitContentPresenter(private val mContext: Context) {
     abstract fun onFailureNetwork()
     private fun onFailureAttempt() {
         doAsync {
-            val response = ApiHelper.auth(prefs.userLogin,
+            val response = ApiHelper.getInstance(mContext).auth(prefs.userLogin,
                     prefs.userPassword,
                     FirebaseInstanceId.getInstance().token).execute().body()
             val newToken = response?.token ?: ""
             val botCode = response?.botCode ?: ""
+            val students = response?.profiles
             uiThread {
                 if (botCode.isNotEmpty())
                     updateBotCodeIfNeed(botCode)
+                if (students != null)
+                    prefs.userStudentProfiles = students
                 if (newToken.isNotEmpty()) {
                     updateToken(newToken)
                     if (prefs.userStudentProfileId == "")

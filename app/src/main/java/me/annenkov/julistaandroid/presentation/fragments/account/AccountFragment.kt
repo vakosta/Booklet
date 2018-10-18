@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.fragment_account.*
 import me.annenkov.julistaandroid.R
+import me.annenkov.julistaandroid.domain.Preferences
 import me.annenkov.julistaandroid.presentation.ViewPagerFragment
 import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.support.v4.onRefresh
+import org.jetbrains.anko.support.v4.selector
 
 class AccountFragment : ViewPagerFragment(), AccountView {
     private lateinit var mPresenter: AccountPresenter
@@ -33,6 +35,14 @@ class AccountFragment : ViewPagerFragment(), AccountView {
         accountRefresher.setColorSchemeResources(R.color.colorAccent)
         accountRefresher.onRefresh {
             mPresenter.init()
+        }
+        changeProfileButton.setOnClickListener {
+            val prefs = Preferences.getInstance(activity!!)
+            val names = prefs.userStudentProfiles.map { it.name.toString() }
+            val ids = prefs.userStudentProfiles.map { it.studentProfileId }
+            selector("Выберите аккаунт ребёнка:", names) { _, i ->
+                prefs.userStudentProfileId = ids[i].toString()
+            }
         }
     }
 

@@ -9,10 +9,11 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import me.annenkov.julistaandroid.R
+import me.annenkov.julistaandroid.domain.ApiHelper
 import me.annenkov.julistaandroid.domain.DateHelper
-import me.annenkov.julistaandroid.domain.MosApiHelper
 import me.annenkov.julistaandroid.domain.Utils
 import me.annenkov.julistaandroid.domain.model.Time
+import me.annenkov.julistaandroid.domain.model.mos.MarkResponse
 import me.annenkov.julistaandroid.domain.model.mos.ScheduleResponse
 import me.annenkov.julistaandroid.domain.px
 import me.annenkov.julistaandroid.presentation.InitContentPresenter
@@ -50,7 +51,7 @@ class ScheduleCardPresenter(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
             for (i in list) {
                 counter++
-                layoutParams.setMargins(0, 0, 0, height.toInt())
+                layoutParams.setMargins(0, 0, 0, height)
 
                 val local = layoutInflater
                         .inflate(R.layout.item_schedule, null, false)
@@ -146,24 +147,33 @@ class ScheduleCardPresenter(
         }
     }
 
-    private fun prepareMarkView(view: TextView, marks: List<Int>) {
+    private fun prepareMarkView(view: TextView, marks: List<MarkResponse>) {
         if (marks.isNotEmpty()) {
-            view.text = marks[0].toString()
-            view.background = when (marks[0]) {
-                5 -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_five)
-                4 -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_four)
-                3 -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_three)
-                else -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_two)
+            val mark = marks[0]
+            if (!mark.isPoint) {
+                view.text = mark.mark.toString()
+                view.background = when (mark.mark) {
+                    5 -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_five)
+                    4 -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_four)
+                    3 -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_three)
+                    else -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_two)
+                }
+            } else {
+                view.background = ContextCompat.getDrawable(mContext, R.drawable.background_point)
+                val params = LinearLayout.LayoutParams(8.px, 8.px)
+                params.marginEnd = 24.px
+                view.layoutParams = params
             }
         } else {
             view.visibility = View.GONE
         }
     }
 
-    override fun executeMethod(): List<ScheduleResponse> = MosApiHelper.getSchedule(prefs.userToken,
-            prefs.userPid.toInt(),
-            prefs.userStudentProfileId.toInt(),
-            mDate, mDate)
+    override fun executeMethod(): List<ScheduleResponse> = ApiHelper.getInstance(mContext)
+            .getSchedule(prefs.userToken,
+                    prefs.userPid.toInt(),
+                    prefs.userStudentProfileId.toInt(),
+                    mDate, mDate)
 
     override fun onSuccessful(response: Any) {
         paintSchedule((response as List<ScheduleResponse>))

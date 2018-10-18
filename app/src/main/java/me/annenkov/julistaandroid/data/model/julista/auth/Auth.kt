@@ -1,4 +1,4 @@
-package me.annenkov.julistaandroid.data.model.julista
+package me.annenkov.julistaandroid.data.model.julista.auth
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
@@ -16,4 +16,7 @@ class Auth {
     @SerializedName("bot_code")
     @Expose
     var botCode: String? = null
+    @SerializedName("profiles")
+    @Expose
+    val profiles: List<Profile>? = null
 }

@@ -48,7 +48,8 @@ class MarksPagerAdapter(
     override fun getCount(): Int {
         var maxSize = 0
         for (progress in progresses) {
-            val curSize = progress.periods!!.size + 1
+            val periods = progress.periods?.size ?: 0
+            val curSize = periods + 1
             if (curSize > maxSize)
                 maxSize = curSize
         }

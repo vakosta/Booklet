@@ -3,7 +3,10 @@ package me.annenkov.julistaandroid.domain
 import android.content.Context
 import android.content.SharedPreferences
 import android.support.v7.preference.PreferenceManager
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import me.annenkov.julistaandroid.R
+import me.annenkov.julistaandroid.data.model.julista.auth.Profile
 
 class Preferences private constructor(context: Context) {
     private val KEY_BOT_CODE = context.getString(R.string.preference_bot_code)
@@ -12,6 +15,7 @@ class Preferences private constructor(context: Context) {
     private val KEY_TOKEN = context.getString(R.string.preference_token)
     private val KEY_PID = context.getString(R.string.preference_pid)
     private val KEY_STUDENT_PROFILE_ID = context.getString(R.string.preference_student_profile_id)
+    private val KEY_STUDENT_PROFILES = context.getString(R.string.preference_student_profiles)
     private val KEY_SATURDAY_LESSONS = context.getString(R.string.preference_saturday_lessons)
     private val KEY_MARK_PURPOSE = context.getString(R.string.preference_mark_purpose)
     private val KEY_NOTIFICATION_MAIN = context.getString(R.string.preference_notification_main)
@@ -45,6 +49,16 @@ class Preferences private constructor(context: Context) {
     var userStudentProfileId: String
         get() = prefs.getString(KEY_STUDENT_PROFILE_ID, "")
         set(value) = prefs.edit().putString(KEY_STUDENT_PROFILE_ID, value).apply()
+
+    var userStudentProfiles: List<Profile>
+        get() {
+            val savedString = prefs.getString(KEY_STUDENT_PROFILES, "")
+            val listType = object :
+                    TypeToken<List<Profile>>() {}
+                    .type
+            return Gson().fromJson<List<Profile>>(savedString, listType)
+        }
+        set(value) = prefs.edit().putString(KEY_STUDENT_PROFILES, Gson().toJson(value)).apply()
 
     var saturdayLessons: Boolean
         get() = prefs.getBoolean(KEY_SATURDAY_LESSONS, false)

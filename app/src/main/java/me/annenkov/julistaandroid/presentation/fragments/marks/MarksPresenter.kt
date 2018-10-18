@@ -1,7 +1,7 @@
 package me.annenkov.julistaandroid.presentation.fragments.marks
 
 import android.content.Context
-import me.annenkov.julistaandroid.domain.MosApiHelper
+import me.annenkov.julistaandroid.domain.ApiHelper
 import me.annenkov.julistaandroid.domain.model.mos.ProgressResponse
 import me.annenkov.julistaandroid.presentation.InitContentPresenter
 
@@ -19,9 +19,10 @@ class MarksPresenter(
         mPeriod = index
     }
 
-    override fun executeMethod(): List<ProgressResponse> = MosApiHelper.getProgress(prefs.userToken,
-            prefs.userPid.toInt(),
-            prefs.userStudentProfileId.toInt())
+    override fun executeMethod(): List<ProgressResponse> = ApiHelper.getInstance(mContext)
+            .getProgress(prefs.userToken,
+                    prefs.userPid.toInt(),
+                    prefs.userStudentProfileId.toInt())
 
     override fun onSuccessful(response: Any) {
         view.initPager((response as List<ProgressResponse>))

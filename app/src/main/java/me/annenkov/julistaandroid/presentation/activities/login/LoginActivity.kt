@@ -8,10 +8,13 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_login.*
 import kotterknife.bindView
 import me.annenkov.julistaandroid.R
+import me.annenkov.julistaandroid.data.model.julista.auth.Profile
+import me.annenkov.julistaandroid.domain.Preferences
 import me.annenkov.julistaandroid.domain.px
 import me.annenkov.julistaandroid.presentation.activities.main.MainActivity
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.browse
+import org.jetbrains.anko.selector
 import org.jetbrains.anko.yesButton
 
 class LoginActivity : AppCompatActivity(), LoginView {
@@ -55,9 +58,28 @@ class LoginActivity : AppCompatActivity(), LoginView {
         finish()
     }
 
-    override fun onLoginSuccessful() {
-        setResult(MainActivity.RESULT_OK)
-        finish()
+    override fun onLoginSuccessful(login: String,
+                                   password: String,
+                                   token: String,
+                                   pid: String,
+                                   studentProfileId: String,
+                                   botCode: String,
+                                   profiles: List<Profile>?) {
+        endLoading()
+        val prefs = Preferences.getInstance(this)
+        val names = profiles!!.map { it.name.toString() }
+        val ids = profiles.map { it.studentProfileId!! }
+        selector("Выберите аккаунт ребёнка:", names) { _, i ->
+            prefs.userLogin = login
+            prefs.userPassword = password
+            prefs.userToken = token
+            prefs.userPid = pid
+            prefs.userStudentProfileId = ids[i].toString()
+            prefs.botCode = botCode
+            prefs.userStudentProfiles = profiles
+            setResult(MainActivity.RESULT_OK)
+            finish()
+        }
     }
 
     override fun onLoginFailed() {

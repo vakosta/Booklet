@@ -8,5 +8,5 @@ class ScheduleResponse(val date: String,
                        val subject: String,
                        val topic: String,
                        val comment: String,
-                       val marks: ArrayList<Int>,
+                       val marks: ArrayList<MarkResponse>,
                        var homework: HomeworkResponse?)

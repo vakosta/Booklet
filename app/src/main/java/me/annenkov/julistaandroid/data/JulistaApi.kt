@@ -1,7 +1,11 @@
 package me.annenkov.julistaandroid.data
 
-import me.annenkov.julistaandroid.data.model.julista.*
+import me.annenkov.julistaandroid.data.model.julista.Progress
+import me.annenkov.julistaandroid.data.model.julista.ResultCheckNotificationsSubscription
+import me.annenkov.julistaandroid.data.model.julista.ResultSetNotificationsSubscription
+import me.annenkov.julistaandroid.data.model.julista.Schedule
 import me.annenkov.julistaandroid.data.model.julista.account.Account
+import me.annenkov.julistaandroid.data.model.julista.auth.Auth
 import me.annenkov.julistaandroid.data.model.mos.homework.HomeworkBase
 import me.annenkov.julistaandroid.data.model.mos.mark.Mark
 import me.annenkov.julistaandroid.data.model.mos.profile.Profile
@@ -39,7 +43,7 @@ interface JulistaApi {
                                      @Field("token") token: String,
                                      @Field("hash") hash: String): Call<ResultSetNotificationsSubscription>
 
-    @GET("/core/api/student_profiles/{student_profile_id}")
+    @GET("core/api/student_profiles/{student_profile_id}")
     fun getProfile(@Header("Auth-Token") token: String,
                    @Header("Profile-Id") pid: Int,
                    @Path("student_profile_id") studentProfileId: Int,
@@ -47,7 +51,7 @@ interface JulistaApi {
                    @Query("with_groups") withGroups: Boolean?,
                    @Query("with_archived_groups") withArchivedGroups: Boolean?): Call<Profile>
 
-    @GET("/jersey/api/schedule_items")
+    @GET("jersey/api/schedule_items")
     fun getSchedule(@Header("Auth-Token") token: String,
                     @Header("Profile-Id") pid: Int,
                     @Query("student_profile_id") studentProfileId: Int,
@@ -56,7 +60,7 @@ interface JulistaApi {
                     @Query("academic_year_id") academicYearId: Int?,
                     @Query("group_id") groups: String): Call<List<ScheduleItem>>
 
-    @GET("/core/api/marks")
+    @GET("core/api/marks")
     fun getMarks(@Header("Auth-Token") token: String,
                  @Header("Profile-Id") pid: Int,
                  @Query("student_profile_id") studentProfileId: Int,
@@ -66,7 +70,7 @@ interface JulistaApi {
                  @Query("page") page: Int?,
                  @Query("per_page") perPage: Int?): Call<List<Mark>>
 
-    @GET("/core/api/student_homeworks")
+    @GET("core/api/student_homeworks")
     fun getHomework(@Header("Auth-Token") token: String,
                     @Header("Profile-Id") pid: Int,
                     @Query("student_profile_id") studentProfileId: Int,
@@ -76,7 +80,7 @@ interface JulistaApi {
                     @Query("page") page: Int?,
                     @Query("per_page") perPage: Int?): Call<List<HomeworkBase>>
 
-    @GET("/reports/api/progress/json")
+    @GET("reports/api/progress/json")
     fun getProgress(@Header("Auth-Token") token: String,
                     @Header("Profile-Id") pid: Int,
                     @Query("student_profile_id") studentProfileId: Int?,

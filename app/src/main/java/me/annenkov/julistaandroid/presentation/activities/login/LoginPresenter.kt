@@ -2,9 +2,8 @@ package me.annenkov.julistaandroid.presentation.activities.login
 
 import android.content.Context
 import com.google.firebase.iid.FirebaseInstanceId
-import me.annenkov.julistaandroid.data.model.julista.Auth
+import me.annenkov.julistaandroid.data.model.julista.auth.Auth
 import me.annenkov.julistaandroid.domain.ApiHelper
-import me.annenkov.julistaandroid.domain.Preferences
 import me.annenkov.julistaandroid.presentation.InitContentPresenter
 
 class LoginPresenter(
@@ -21,19 +20,22 @@ class LoginPresenter(
         initContent()
     }
 
-    override fun executeMethod(): Any = ApiHelper.auth(mLogin, mPassword,
+    override fun executeMethod(): Any = ApiHelper.getInstance(mContext).auth(mLogin, mPassword,
             FirebaseInstanceId.getInstance().token).execute().body()!!
 
     override fun onSuccessful(response: Any) {
         val auth = (response as Auth)
-        val prefs = Preferences.getInstance(mContext)
-        prefs.userLogin = mLogin
-        prefs.userPassword = mPassword
-        prefs.userToken = response.token!!
-        prefs.userPid = auth.pid!!
-        prefs.userStudentProfileId = auth.studentProfileId!!
-        prefs.botCode = auth.botCode!!
-        view.onLoginSuccessful()
+        try {
+            view.onLoginSuccessful(mLogin,
+                    mPassword,
+                    response.token!!,
+                    auth.pid!!,
+                    auth.studentProfileId!!,
+                    auth.botCode!!,
+                    auth.profiles!!)
+        } catch (e: KotlinNullPointerException) {
+            onFailureResponse()
+        }
     }
 
     override fun onFailureResponse() {
