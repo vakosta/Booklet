@@ -12,6 +12,7 @@ import me.annenkov.julistaandroid.data.model.mos.profile.Profile
 import me.annenkov.julistaandroid.data.model.mos.schedule.HomeworkToVerify
 import me.annenkov.julistaandroid.domain.model.mos.*
 import okhttp3.Cache
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -19,34 +20,47 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
 class ApiHelper private constructor(val context: Context) {
-    val cacheSize = (5 * 1024 * 1024).toLong()
-    val myCache = Cache(context.cacheDir, cacheSize)
-
-    val HEADER_CACHE_CONTROL = "Cache-Control"
-    val HEADER_PRAGMA = "Pragma"
-
-    private val JULISTA_URL = "http://192.168.0.11:8000/"
-    private val MOS_URL = "https://dnevnik.mos.ru/"
-
     private var retrofit: Retrofit? = null
     private var retrofitMos: Retrofit? = null
 
+    private val rewriteResponseInterceptor = Interceptor { chain ->
+        val originalResponse = chain.proceed(chain.request())
+        val cacheControl = originalResponse.header("Cache-Control")
+        if (cacheControl == null
+                || cacheControl.contains("no-store")
+                || cacheControl.contains("no-cache") ||
+                cacheControl.contains("must-revalidate")
+                || cacheControl.contains("max-age=0")) {
+            originalResponse.newBuilder()
+                    .removeHeader("Pragma")
+                    .header("Cache-Control", "public, max-age=" + 5000)
+                    .build()
+        } else {
+            originalResponse
+        }
+    }
+
+    private val rewriteResponseInterceptorOffline = Interceptor { chain ->
+        var request = chain.request()
+        if (!hasNetwork()) {
+            request = request.newBuilder()
+                    .removeHeader("Pragma")
+                    .header("Cache-Control", "public, only-if-cached")
+                    .build()
+        }
+        chain.proceed(request)
+    }
+
     init {
-        val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor { chain ->
-                    var request = chain.request()
-                    request = if (hasNetwork()) {
-                        request.newBuilder().header("Cache-Control", "public, max-age=" + 60).build()
-                    } else {
-                        request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7).build()
-                    }
-                    chain.proceed(request)
-                }
-                .cache(myCache)
+        val cache = Cache(context.cacheDir, CACHE_SIZE)
+        val client = OkHttpClient().newBuilder()
+                .cache(cache)
+                .addNetworkInterceptor(rewriteResponseInterceptor)
+                .addInterceptor(rewriteResponseInterceptorOffline)
                 .build()
         val retrofitBuilder = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(okHttpClient)
+                .client(client)
 
         retrofit = retrofitBuilder
                 .baseUrl(JULISTA_URL)
@@ -338,5 +352,10 @@ class ApiHelper private constructor(val context: Context) {
         MOS,
     }
 
-    companion object : SingletonHolder<ApiHelper, Context>(::ApiHelper)
+    companion object : SingletonHolder<ApiHelper, Context>(::ApiHelper) {
+        private const val JULISTA_URL = "http://192.168.0.11:8000/"
+        private const val MOS_URL = "https://dnevnik.mos.ru/"
+
+        private const val CACHE_SIZE = (1 * 1024 * 1024).toLong()
+    }
 }

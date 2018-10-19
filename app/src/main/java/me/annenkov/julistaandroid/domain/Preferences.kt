@@ -56,7 +56,11 @@ class Preferences private constructor(context: Context) {
             val listType = object :
                     TypeToken<List<Profile>>() {}
                     .type
-            return Gson().fromJson<List<Profile>>(savedString, listType)
+            return try {
+                Gson().fromJson<List<Profile>>(savedString, listType)
+            } catch (e: IllegalStateException) {
+                listOf()
+            }
         }
         set(value) = prefs.edit().putString(KEY_STUDENT_PROFILES, Gson().toJson(value)).apply()
 
