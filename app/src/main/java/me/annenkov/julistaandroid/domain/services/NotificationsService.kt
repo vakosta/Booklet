@@ -49,6 +49,8 @@ class NotificationsService : IntentService("NotificationsService") {
 
         var currentDate = DateHelper.getDate().format("DD.MM.YYYY")
         while (true) {
+            if (!prefs.notificationsSubscription && !prefs.notificationMain)
+                stopForeground(true)
             mNewMarks.clear()
             mSchedule = try {
                 ApiHelper.getInstance(this).getSchedule(
@@ -61,22 +63,24 @@ class NotificationsService : IntentService("NotificationsService") {
             } catch (e: UnknownHostException) {
                 sendNotification("Дневник", "Проверьте подключение к интернету.",
                         "Проверьте подключение к интернету.")
+                Thread.sleep(60 * 1000)
                 continue
             } catch (e: ConnectException) {
                 sendNotification("Дневник", "Не удалось получить данные",
                         "Не удалось получить данные")
+                Thread.sleep(60 * 1000)
                 continue
             } catch (e: Exception) {
                 sendNotification("Дневник", "Произошла ошибка",
                         "Не удалось получить данные")
+                Thread.sleep(60 * 1000)
                 continue
             }
 
             while (true) {
-                if (!prefs.notificationMain) {
+                if (!prefs.notificationsSubscription && !prefs.notificationMain)
                     stopForeground(true)
-                    continue
-                }
+
                 if (DateHelper.getDate().format("DD.MM.YYYY") != currentDate) {
                     currentDate = DateHelper.getDate().format("DD.MM.YYYY")
                     break

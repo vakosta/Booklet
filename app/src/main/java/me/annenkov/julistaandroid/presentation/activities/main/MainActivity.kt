@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity(),
                     .checkNotificationsSubscription(pid)
                     .execute().body()?.result ?: false
             val isPurchasedSuccessfully = mBp
-                    .getPurchaseTransactionDetails("notifications_20182019")
+                    .getPurchaseTransactionDetails("notifications_201820192")
                     ?.purchaseInfo
                     ?.purchaseData
                     ?.purchaseState?.name == "PurchasedSuccessfully"

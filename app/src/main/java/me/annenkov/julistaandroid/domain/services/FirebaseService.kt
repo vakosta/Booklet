@@ -16,16 +16,17 @@ import org.greenrobot.eventbus.EventBus
 
 class FirebaseService : FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
+        val prefs = Preferences.getInstance(this)
         when (message.data["type"]) {
             TYPE_NEW_MARK -> {
                 EventBus.getDefault().post(Mark(message.data["grade"]?.toInt() ?: return,
                         message.data["subject"] ?: return,
                         message.data["date"] ?: return))
-                if (Preferences.getInstance(this).notificationNewMark)
+                if (prefs.notificationNewMark && prefs.notificationsSubscription)
                     sendMarkNotification(message.data)
             }
             TYPE_EVENT -> {
-                if (Preferences.getInstance(this).notificationNews)
+                if (prefs.notificationNews)
                     sendEventNotification(message.data)
             }
         }
