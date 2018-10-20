@@ -34,9 +34,10 @@
             android:defaultValue="false"
             android:key="@string/preference_notification_news"
             android:title="События из ленты" />
-        <Preference
-            android:defaultValue="true"
-            android:key="button_exit"
-            android:layout="@layout/button_exit" />
     </PreferenceCategory>
+
+    <Preference
+        android:defaultValue="true"
+        android:key="button_exit"
+        android:layout="@layout/button_exit" />
 </PreferenceScreen>
