@@ -56,7 +56,7 @@ abstract class InitContentPresenter(private val mContext: Context) {
                     FirebaseInstanceId.getInstance().token).execute().body()
             val newToken = response?.token ?: ""
             val botCode = response?.botCode ?: ""
-            val students = response?.profiles
+            val students = response?.students
             uiThread {
                 if (botCode.isNotEmpty())
                     updateBotCodeIfNeed(botCode)
