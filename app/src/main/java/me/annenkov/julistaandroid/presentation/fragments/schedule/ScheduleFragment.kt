@@ -128,8 +128,8 @@ class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener
     }
 
     override fun onStop() {
-        super.onStop()
         EventBus.getDefault().unregister(this)
+        super.onStop()
     }
 
     override fun onClick(v: View) {

@@ -77,6 +77,7 @@ class MarksFragment : ViewPagerFragment(), MarksView, View.OnClickListener, View
             }
 
             override fun onPageScrollStateChanged(state: Int) {
+                mRefresher.isEnabled = state == ViewPager.SCROLL_STATE_IDLE
             }
 
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {

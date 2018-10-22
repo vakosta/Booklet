@@ -9,6 +9,7 @@ ext {
     ankoVersion = '0.10.5'
     kotterknifeVersion = '0.1.0-SNAPSHOT'
     flowlayoutVersion = '1.2.2'
+    slidingUpPanel = '3.4.0'
     retrofitVersion = '2.4.0'
     firebaseVersion = '16.0.3'
     firebaseMessaningVersion = '17.3.0'
@@ -37,6 +38,7 @@ ext {
 
     // UI
     flowlayout = "com.nex3z:flow-layout:$flowlayoutVersion"
+    slidingUpPanel = "com.sothree.slidinguppanel:library:$slidingUpPanel"
 
     // Retrofit
     retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
@@ -79,6 +81,7 @@ ext {
 
     uiDep = [
             flowlayout,
+            slidingUpPanel,
     ]
 
     testDep = [

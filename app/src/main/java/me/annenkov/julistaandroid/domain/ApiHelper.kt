@@ -33,7 +33,7 @@ class ApiHelper private constructor(val context: Context) {
                 || cacheControl.contains("max-age=0")) {
             originalResponse.newBuilder()
                     .removeHeader("Pragma")
-                    .header("Cache-Control", "public, max-age=" + 5000)
+                    .header("Cache-Control", "public, max-age=" + (60 * 60 * 24 * 7))
                     .build()
         } else {
             originalResponse
