@@ -33,7 +33,7 @@ class ApiHelper private constructor(val context: Context) {
                 || cacheControl.contains("max-age=0")) {
             originalResponse.newBuilder()
                     .removeHeader("Pragma")
-                    .header("Cache-Control", "public, max-age=" + (60 * 60 * 24 * 7))
+                    .header("Cache-Control", "public, max-age=0")
                     .build()
         } else {
             originalResponse
@@ -45,7 +45,8 @@ class ApiHelper private constructor(val context: Context) {
         if (!hasNetwork()) {
             request = request.newBuilder()
                     .removeHeader("Pragma")
-                    .header("Cache-Control", "public, only-if-cached")
+                    .header("Cache-Control", "public, only-if-cached, max-stale="
+                            + 60 * 60 * 24 * 7)
                     .build()
         }
         chain.proceed(request)

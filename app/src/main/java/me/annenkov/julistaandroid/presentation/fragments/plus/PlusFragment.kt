@@ -18,9 +18,6 @@ import org.jetbrains.anko.support.v4.browse
 import org.jetbrains.anko.support.v4.toast
 
 class PlusFragment : ViewPagerFragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -54,10 +51,6 @@ class PlusFragment : ViewPagerFragment() {
         buy.setOnClickListener {
             EventBus.getDefault().post(OnPurchase())
         }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
     }
 
     override fun fetchData() {

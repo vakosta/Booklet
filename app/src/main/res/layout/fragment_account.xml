@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/accountStudentName"
                 android:text="@string/loading_points"
-                android:textColor="#fff"
+                android:textColor="#e9f1ff"
                 android:textSize="14sp" />
 
         </LinearLayout>

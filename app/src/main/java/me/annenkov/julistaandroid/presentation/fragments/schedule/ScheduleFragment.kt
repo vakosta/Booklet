@@ -109,10 +109,6 @@ class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener
         return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
-
     override fun fetchData() {
         mPresenter.init()
         weekdaySaturday.visibility =
