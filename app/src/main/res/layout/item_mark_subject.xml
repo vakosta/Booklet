@@ -74,10 +74,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:layout_marginTop="4dp"
             android:background="@drawable/background_advice"
             android:paddingStart="6dp"
             android:paddingEnd="6dp"
-            android:text="Получите 5 пятёрок"
+            android:text="@string/loading"
             android:textColor="#fff"
             android:textSize="12sp" />
 
