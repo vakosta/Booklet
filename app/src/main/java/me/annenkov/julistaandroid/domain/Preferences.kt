@@ -69,9 +69,9 @@ class Preferences private constructor(context: Context) {
         get() = prefs.getBoolean(KEY_SATURDAY_LESSONS, false)
         set(value) = prefs.edit().putBoolean(KEY_SATURDAY_LESSONS, value).apply()
 
-    var markPurpose: String
-        get() = prefs.getString(KEY_MARK_PURPOSE, "5")
-        set(value) = prefs.edit().putString(KEY_MARK_PURPOSE, value).apply()
+    var markPurpose: Int
+        get() = prefs.getString(KEY_MARK_PURPOSE, "5").toInt()
+        set(value) = prefs.edit().putString(KEY_MARK_PURPOSE, value.toString()).apply()
 
     var notificationMain: Boolean
         get() = prefs.getBoolean(KEY_NOTIFICATION_MAIN, false)

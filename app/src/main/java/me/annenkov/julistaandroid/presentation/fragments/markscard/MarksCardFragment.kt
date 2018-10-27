@@ -12,7 +12,6 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.fragment_item_pager_marks.*
 import me.annenkov.julistaandroid.R
-import me.annenkov.julistaandroid.domain.Utils
 import me.annenkov.julistaandroid.domain.px
 import me.annenkov.julistaandroid.presentation.customviews.VerticalSpaceItemDecoration
 import me.annenkov.julistaandroid.presentation.model.Progress
@@ -70,7 +69,7 @@ class MarksCardFragment : Fragment(), MarksCardView {
 
         marksRecyclerView.layoutManager = layoutManager
         marksRecyclerView.setHasFixedSize(true)
-        marksRecyclerView.adapter = SubjectListAdapter(progresses)
+        marksRecyclerView.adapter = SubjectListAdapter(activity!!, progresses)
         marksRecyclerView.setItemViewCacheSize(30)
         marksRecyclerView.isDrawingCacheEnabled = true
         marksRecyclerView.drawingCacheQuality = View.DRAWING_CACHE_QUALITY_HIGH

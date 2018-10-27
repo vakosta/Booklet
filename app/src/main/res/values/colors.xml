@@ -7,4 +7,6 @@
     <color name="colorWeekdayName">#fff</color>
     <color name="colorWeekdayDateName">#fff</color>
     <color name="colorWeekdayDateNameActive">#4b9aff</color>
+
+    <color name="colorPurposeLimit">#ff512f</color>
 </resources>

@@ -10,7 +10,6 @@ import android.widget.TextView
 import com.nex3z.flowlayout.FlowLayout
 import kotterknife.bindView
 import me.annenkov.julistaandroid.R
-import me.annenkov.julistaandroid.domain.Utils
 import me.annenkov.julistaandroid.domain.px
 import me.annenkov.julistaandroid.presentation.model.Result
 import org.jetbrains.anko.textColor

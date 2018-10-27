@@ -53,7 +53,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     Preferences.getInstance(activity!!).userPid = ""
                     Preferences.getInstance(activity!!).userStudentProfileId = ""
                     Preferences.getInstance(activity!!).botCode = ""
-                    Preferences.getInstance(activity!!).markPurpose = ""
+                    Preferences.getInstance(activity!!).markPurpose = 5
                     Preferences.getInstance(activity!!).saturdayLessons = false
                     Preferences.getInstance(activity!!).notificationMain = false
                     Preferences.getInstance(activity!!).notificationNewMark = false
