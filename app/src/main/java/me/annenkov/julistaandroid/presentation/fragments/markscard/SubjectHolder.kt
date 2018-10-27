@@ -99,7 +99,16 @@ class SubjectHolder(val view: View, val mContext: Context) : RecyclerView.ViewHo
                 val marksCount = marks.size + count
                 targetAvg = marksSum.toDouble() / marksCount
             }
-            view.text = "Получите $count пятёрок"
+
+            val fives = when {
+                count in 11..19 -> "пятёрок"
+                count % 10 == 0 -> "пятёрок"
+                count % 10 == 1 -> "пятёрка"
+                count % 10 <= 4 -> "пятёрки"
+                else -> "пятёрок"
+            }
+
+            view.text = "Получите $count $fives"
         }
     }
 }
