@@ -22,6 +22,7 @@ class Preferences private constructor(context: Context) {
     private val KEY_NOTIFICATION_NEW_MARK = context.getString(R.string.preference_notification_new_mark)
     private val KEY_NOTIFICATION_NEWS = context.getString(R.string.preference_notification_news)
     private val KEY_BOUGHT_NOTIFICATIONS = context.getString(R.string.preference_bought_notifications)
+    private val KEY_CLEARED_CACHE = "key_cache"
 
     private val prefs: SharedPreferences = PreferenceManager
             .getDefaultSharedPreferences(context)
@@ -87,6 +88,10 @@ class Preferences private constructor(context: Context) {
     var notificationsSubscription: Boolean
         get() = prefs.getBoolean(KEY_BOUGHT_NOTIFICATIONS, false)
         set(value) = prefs.edit().putBoolean(KEY_BOUGHT_NOTIFICATIONS, value).apply()
+
+    var clearedCache: Boolean
+        get() = prefs.getBoolean(KEY_CLEARED_CACHE, false)
+        set(value) = prefs.edit().putBoolean(KEY_CLEARED_CACHE, value).apply()
 
     fun getWorkdayCount(): Int {
         return if (saturdayLessons)

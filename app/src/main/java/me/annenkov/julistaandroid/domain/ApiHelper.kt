@@ -17,11 +17,38 @@ import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
 import java.io.IOException
 
 class ApiHelper private constructor(val context: Context) {
     private var retrofit: Retrofit? = null
     private var retrofitMos: Retrofit? = null
+
+    fun deleteCache(context: Context) {
+        try {
+            val dir = context.cacheDir
+            deleteDir(dir)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun deleteDir(dir: File?): Boolean {
+        if (dir != null && dir.isDirectory) {
+            val children = dir.list()
+            for (i in children.indices) {
+                val success = deleteDir(File(dir, children[i]))
+                if (!success) {
+                    return false
+                }
+            }
+            return dir.delete()
+        } else return if (dir != null && dir.isFile) {
+            dir.delete()
+        } else {
+            false
+        }
+    }
 
     private val rewriteResponseInterceptor = Interceptor { chain ->
         val originalResponse = chain.proceed(chain.request())
@@ -53,6 +80,10 @@ class ApiHelper private constructor(val context: Context) {
     }
 
     init {
+        if (!Preferences.getInstance(context).clearedCache) {
+            deleteCache(context)
+            Preferences.getInstance(context).clearedCache = true
+        }
         val cache = Cache(context.cacheDir, CACHE_SIZE)
         val client = OkHttpClient().newBuilder()
                 .cache(cache)
