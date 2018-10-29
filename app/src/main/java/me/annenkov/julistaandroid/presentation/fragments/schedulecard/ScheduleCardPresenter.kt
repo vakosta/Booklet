@@ -71,8 +71,7 @@ class ScheduleCardPresenter(
                 val attachmentView = local.findViewById<ImageView>(R.id.scheduleItemAttachment)
                 if (i.homework?.attachments != null && i.homework!!.attachments.isNotEmpty()) {
                     attachmentView.setOnClickListener {
-                        // mContext.browse("https://dnevnik.mos.ru${i.homework!!.attachments[0]}")
-                        mContext.toast("Ой! Файлы ещё не реализованы :с")
+                        mContext.browse("https://dnevnik.mos.ru${i.homework!!.attachments[0]}")
                     }
                     attachmentView.visibility = View.VISIBLE
                 }

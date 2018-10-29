@@ -103,7 +103,7 @@ class SubjectHolder(val view: View, val mContext: Context) : RecyclerView.ViewHo
             val fives = when {
                 count in 11..19 -> "пятёрок"
                 count % 10 == 0 -> "пятёрок"
-                count % 10 == 1 -> "пятёрка"
+                count % 10 == 1 -> "пятёрку"
                 count % 10 <= 4 -> "пятёрки"
                 else -> "пятёрок"
             }

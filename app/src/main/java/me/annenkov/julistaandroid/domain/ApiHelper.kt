@@ -121,8 +121,28 @@ class ApiHelper private constructor(val context: Context) {
         return false
     }
 
-    fun auth(login: String, password: String, fcmToken: String?): Call<Auth> {
-        return getAPI(ApiType.JULISTA).auth(login, password, fcmToken)
+    fun auth(login: String, password: String, fcmToken: String?): Auth {
+        synchronized(this) {
+            val prefs = Preferences.getInstance(context)
+            val currentTime = System.currentTimeMillis() / 1000
+            val token = if (currentTime - prefs.userTokenLastUpdate > 30
+                    || prefs.userToken.isEmpty()) {
+                val request = getAPI(ApiType.JULISTA)
+                        .auth(login, password, fcmToken).execute().body()
+                prefs.userTokenLastUpdate = currentTime
+                prefs.userToken = request?.token ?: ""
+                request
+            } else {
+                val auth = Auth()
+                auth.token = prefs.userToken
+                auth.pid = prefs.userPid
+                auth.botCode = prefs.botCode
+                auth.studentProfileId = prefs.userStudentProfileId
+                auth.students = prefs.userStudentProfiles
+                auth
+            }
+            return token ?: Auth()
+        }
     }
 
     fun getAccount(token: String, pid: String): Call<Account> {

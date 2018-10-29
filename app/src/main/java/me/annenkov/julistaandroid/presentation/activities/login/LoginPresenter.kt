@@ -21,7 +21,7 @@ class LoginPresenter(
     }
 
     override fun executeMethod(): Any = ApiHelper.getInstance(mContext).auth(mLogin, mPassword,
-            FirebaseInstanceId.getInstance().token).execute().body()!!
+            FirebaseInstanceId.getInstance().token)
 
     override fun onSuccessful(response: Any) {
         val auth = (response as Auth)

@@ -13,6 +13,7 @@ class Preferences private constructor(context: Context) {
     private val KEY_LOGIN = context.getString(R.string.preference_login)
     private val KEY_PASSWORD = context.getString(R.string.preference_password)
     private val KEY_TOKEN = context.getString(R.string.preference_token)
+    private val KEY_TOKEN_LAST_UPDATE = context.getString(R.string.preference_token_last_update)
     private val KEY_PID = context.getString(R.string.preference_pid)
     private val KEY_STUDENT_PROFILE_ID = context.getString(R.string.preference_student_profile_id)
     private val KEY_STUDENT_PROFILES = context.getString(R.string.preference_student_profiles)
@@ -42,6 +43,14 @@ class Preferences private constructor(context: Context) {
     var userToken: String
         get() = prefs.getString(KEY_TOKEN, "")
         set(value) = prefs.edit().putString(KEY_TOKEN, value).apply()
+
+    var userTokenLastUpdate: Long
+        get() {
+            var result = prefs.getString(KEY_TOKEN_LAST_UPDATE, "0")
+            if (result.isEmpty()) result = "0"
+            return result.toLong()
+        }
+        set(value) = prefs.edit().putString(KEY_TOKEN_LAST_UPDATE, value.toString()).apply()
 
     var userPid: String
         get() = prefs.getString(KEY_PID, "")

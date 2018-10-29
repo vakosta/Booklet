@@ -24,11 +24,11 @@ abstract class InitContentPresenter(private val mContext: Context) {
             } catch (e: UnknownHostException) {
                 uiThread { onFailureNetwork() }
             } catch (e: JsonParseException) {
-                uiThread { onFailureAttempt() }
+                onFailureAttempt()
             } catch (e: Exception) {
                 Crashlytics.logException(e)
                 if (prefs.userStudentProfileId == "")
-                    uiThread { onFailureAttempt() }
+                    onFailureAttempt()
                 else
                     uiThread { onFailureResponse() }
             }
@@ -36,10 +36,6 @@ abstract class InitContentPresenter(private val mContext: Context) {
     }
 
     abstract fun executeMethod(): Any
-
-    private fun updateToken(token: String) {
-        prefs.userToken = token
-    }
 
     private fun updateBotCodeIfNeed(code: String) {
         if (code != prefs.botCode)
@@ -53,23 +49,20 @@ abstract class InitContentPresenter(private val mContext: Context) {
         doAsync {
             val response = ApiHelper.getInstance(mContext).auth(prefs.userLogin,
                     prefs.userPassword,
-                    FirebaseInstanceId.getInstance().token).execute().body()
-            val newToken = response?.token ?: ""
-            val botCode = response?.botCode ?: ""
-            val students = response?.students
-            uiThread {
-                if (botCode.isNotEmpty())
-                    updateBotCodeIfNeed(botCode)
-                if (students != null)
-                    prefs.userStudentProfiles = students
-                if (newToken.isNotEmpty()) {
-                    updateToken(newToken)
-                    if (prefs.userStudentProfileId == "")
-                        prefs.userStudentProfileId = response?.studentProfileId ?: ""
-                    initContent()
-                } else
-                    onFailureResponse()
-            }
+                    FirebaseInstanceId.getInstance().token)
+            val newToken = response.token
+            val botCode = response.botCode
+            val students = response.students
+            if (botCode != null)
+                updateBotCodeIfNeed(botCode)
+            if (students != null)
+                prefs.userStudentProfiles = students
+            if (newToken != null) {
+                if (prefs.userStudentProfileId == "")
+                    prefs.userStudentProfileId = response.studentProfileId ?: ""
+                initContent()
+            } else
+                uiThread { onFailureResponse() }
         }
     }
 }

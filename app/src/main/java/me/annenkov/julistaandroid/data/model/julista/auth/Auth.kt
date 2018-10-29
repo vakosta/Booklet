@@ -18,5 +18,5 @@ class Auth {
     var botCode: String? = null
     @SerializedName("students")
     @Expose
-    val students: List<Profile>? = null
+    var students: List<Profile>? = null
 }
