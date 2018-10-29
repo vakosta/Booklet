@@ -18,6 +18,7 @@ import me.annenkov.julistaandroid.R
 import me.annenkov.julistaandroid.domain.DateHelper
 import me.annenkov.julistaandroid.domain.Preferences
 import me.annenkov.julistaandroid.domain.Utils
+import me.annenkov.julistaandroid.domain.model.Refresh
 import me.annenkov.julistaandroid.domain.px
 import me.annenkov.julistaandroid.presentation.CardBaseView
 import me.annenkov.julistaandroid.presentation.FragmentBaseView
@@ -33,8 +34,6 @@ import org.jetbrains.anko.textColor
 
 class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener, View.OnTouchListener {
     private lateinit var mPresenter: SchedulePresenter
-
-    private var mHasInflated = false
 
     private lateinit var mPager: ViewPager
     private lateinit var mPagerAdapter: SchedulePagerAdapter
@@ -109,6 +108,10 @@ class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener
         return view
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+    }
+
     override fun fetchData() {
         mPresenter.init()
         weekdaySaturday.visibility =
@@ -126,6 +129,11 @@ class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener
     override fun onStop() {
         EventBus.getDefault().unregister(this)
         super.onStop()
+    }
+
+    @Subscribe
+    fun refresh(refresh: Refresh) {
+        fetchData()
     }
 
     override fun onClick(v: View) {

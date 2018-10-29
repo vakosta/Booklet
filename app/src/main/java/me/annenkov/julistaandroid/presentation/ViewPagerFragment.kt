@@ -8,6 +8,10 @@ abstract class ViewPagerFragment : Fragment() {
     private var mIsVisible = false
     private var mHasInflated = false
 
+    fun refresh() {
+        mHasInflated = false
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mIsStarted = true

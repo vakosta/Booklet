@@ -10,7 +10,10 @@ import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.fragment_account.*
 import me.annenkov.julistaandroid.R
 import me.annenkov.julistaandroid.domain.Preferences
+import me.annenkov.julistaandroid.domain.model.Refresh
 import me.annenkov.julistaandroid.presentation.ViewPagerFragment
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.onRefresh
@@ -44,6 +47,7 @@ class AccountFragment : ViewPagerFragment(), AccountView {
             if (names.isNotEmpty()) {
                 selector("Выберите аккаунт ребёнка:", names) { _, i ->
                     prefs.userStudentProfileId = ids[i].toString()
+                    EventBus.getDefault().post(Refresh())
                 }
             } else {
                 alert("Школьные профили ещё не подгрузились. " +
@@ -56,6 +60,23 @@ class AccountFragment : ViewPagerFragment(), AccountView {
 
     override fun fetchData() {
         mPresenter.init()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        EventBus.getDefault().unregister(this)
+        super.onStop()
+    }
+
+    @Subscribe
+    fun refresh(refresh: Refresh) {
+        refresh()
+        val ft = fragmentManager!!.beginTransaction()
+        ft.detach(this).attach(this).commit()
     }
 
     override fun setBackgroundBlueColor() {

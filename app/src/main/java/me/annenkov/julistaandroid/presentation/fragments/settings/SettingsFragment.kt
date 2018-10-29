@@ -1,5 +1,6 @@
 package me.annenkov.julistaandroid.presentation.fragments.settings
 
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v14.preference.SwitchPreference
@@ -8,6 +9,7 @@ import android.view.View
 import me.annenkov.julistaandroid.R
 import me.annenkov.julistaandroid.domain.Preferences
 import me.annenkov.julistaandroid.domain.model.PurchaseUpdate
+import me.annenkov.julistaandroid.domain.model.Refresh
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.backgroundColor
@@ -16,7 +18,9 @@ import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.browse
 import org.jetbrains.anko.yesButton
 
-class SettingsFragment : PreferenceFragmentCompat() {
+
+class SettingsFragment : PreferenceFragmentCompat(),
+        SharedPreferences.OnSharedPreferenceChangeListener {
     override fun onCreatePreferences(p0: Bundle?, p1: String?) {
         addPreferencesFromResource(R.xml.preferences)
     }
@@ -67,12 +71,23 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
     }
 
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        when (key) {
+            this.getString(R.string.preference_mark_purpose) ->
+                EventBus.getDefault().post(Refresh())
+            this.getString(R.string.preference_saturday_lessons) ->
+                EventBus.getDefault().post(Refresh())
+        }
+    }
+
     override fun onStart() {
         super.onStart()
         EventBus.getDefault().register(this)
+        preferenceScreen.sharedPreferences.registerOnSharedPreferenceChangeListener(this)
     }
 
     override fun onStop() {
+        preferenceScreen.sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
         EventBus.getDefault().unregister(this)
         super.onStop()
     }

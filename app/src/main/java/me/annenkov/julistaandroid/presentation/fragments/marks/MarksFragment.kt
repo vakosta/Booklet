@@ -12,8 +12,11 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_marks.*
 import me.annenkov.julistaandroid.R
 import me.annenkov.julistaandroid.domain.Utils
+import me.annenkov.julistaandroid.domain.model.Refresh
 import me.annenkov.julistaandroid.domain.model.mos.ProgressResponse
 import me.annenkov.julistaandroid.presentation.ViewPagerFragment
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.find
 import org.jetbrains.anko.support.v4.onRefresh
 
@@ -53,6 +56,21 @@ class MarksFragment : ViewPagerFragment(), MarksView, View.OnClickListener, View
 
     override fun fetchData() {
         mPresenter.init()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        EventBus.getDefault().unregister(this)
+        super.onStop()
+    }
+
+    @Subscribe
+    fun refresh(refresh: Refresh) {
+        fetchData()
     }
 
     override fun onClick(v: View) {
