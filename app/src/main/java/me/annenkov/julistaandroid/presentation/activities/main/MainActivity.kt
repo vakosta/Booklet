@@ -216,9 +216,7 @@ class MainActivity : AppCompatActivity(),
     @Subscribe
     fun onNewDate(date: Date) {
         mPresenter.mSelectedDate = date
-
-        if (mPager.currentItem == 0)
-            setToolbarText(DateHelper.getMonthNameByNumber(date.month))
+        setToolbarText(DateHelper.getMonthNameByNumber(date.month))
     }
 
     override fun initToolbar() {
