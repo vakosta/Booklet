@@ -16,7 +16,7 @@ class Period {
     var avgHundred: Double? = null
     @SerializedName("final_mark")
     @Expose
-    var finalMark: Int? = null
+    var finalMark: String? = null
     @SerializedName("start")
     @Expose
     var start: String? = null

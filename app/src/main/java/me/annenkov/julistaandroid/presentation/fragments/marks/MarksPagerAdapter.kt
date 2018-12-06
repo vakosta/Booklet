@@ -18,7 +18,10 @@ class MarksPagerAdapter(
                 val result = Result(progress.subjectName!!,
                         arrayListOf())
                 for (period in progress.periods)
-                    result.marks.add(period.finalMark ?: continue)
+                    try {
+                        result.marks.add(period.finalMark?.toInt() ?: continue)
+                    } catch (e: NumberFormatException) {
+                    }
                 results.add(result)
             }
             return MarksCardFragment.newInstanceResults(results)
@@ -31,11 +34,12 @@ class MarksPagerAdapter(
                         progress.periods!![position].name,
                         progress.subjectName!!,
                         progress.periods!![position].avgFive.toDouble(),
-                        progress.periods!![position].finalMark,
+                        progress.periods!![position].finalMark?.toInt(),
                         progress.periods!![position].marks
                 ))
             } catch (e: NullPointerException) {
             } catch (e: IndexOutOfBoundsException) {
+            } catch (e: NumberFormatException) {
             }
         }
         return MarksCardFragment.newInstance(resultProgresses)

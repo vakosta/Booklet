@@ -18,7 +18,6 @@ import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.browse
 import org.jetbrains.anko.yesButton
 
-
 class SettingsFragment : PreferenceFragmentCompat(),
         SharedPreferences.OnSharedPreferenceChangeListener {
     override fun onCreatePreferences(p0: Bundle?, p1: String?) {
@@ -73,9 +72,9 @@ class SettingsFragment : PreferenceFragmentCompat(),
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when (key) {
-            this.getString(R.string.preference_mark_purpose) ->
+            getString(R.string.preference_mark_purpose) ->
                 EventBus.getDefault().post(Refresh())
-            this.getString(R.string.preference_saturday_lessons) ->
+            getString(R.string.preference_saturday_lessons) ->
                 EventBus.getDefault().post(Refresh())
         }
     }

@@ -363,32 +363,34 @@ class ApiHelper private constructor(val context: Context) {
 
             if (result != null) {
                 for (progress in result) {
-                    val periods = arrayListOf<PeriodResponse>()
-                    for (period in progress.periods!!) {
-                        val marks = arrayListOf<Int>()
+                    if (progress.avgFive != 0.0) {
+                        val periods = arrayListOf<PeriodResponse>()
+                        for (period in progress.periods!!) {
+                            val marks = arrayListOf<Int>()
 
-                        for (mark in period.marks!!) {
-                            marks.add(mark.values[0].five.toInt())
+                            for (mark in period.marks!!) {
+                                marks.add(mark.values[0].five.toInt())
+                            }
+
+                            try {
+                                periods.add(PeriodResponse(period.name!!,
+                                        period.avgFive!!.toFloat(),
+                                        period.avgHundred!!.toFloat(),
+                                        period.finalMark,
+                                        period.start!!,
+                                        period.end!!,
+                                        marks))
+                            } catch (ignored: NumberFormatException) {
+                            }
                         }
 
                         try {
-                            periods.add(PeriodResponse(period.name!!,
-                                    period.avgFive!!.toFloat(),
-                                    period.avgHundred!!.toFloat(),
-                                    period.finalMark,
-                                    period.start!!,
-                                    period.end!!,
-                                    marks))
+                            progresses.add(ProgressResponse(progress.subjectName,
+                                    progress.avgFive!!.toFloat(),
+                                    progress.avgHundred!!.toFloat(),
+                                    periods))
                         } catch (ignored: NumberFormatException) {
                         }
-                    }
-
-                    try {
-                        progresses.add(ProgressResponse(progress.subjectName,
-                                progress.avgFive!!.toFloat(),
-                                progress.avgHundred!!.toFloat(),
-                                periods))
-                    } catch (ignored: NumberFormatException) {
                     }
                 }
             }
