@@ -85,8 +85,8 @@ class ScheduleCardPresenter(
                     linkView.visibility = View.VISIBLE
                 }
 
-                val markView = local.findViewById<TextView>(R.id.scheduleItemMark)
-                prepareMarkView(markView, i.marks)
+                val markView = local.findViewById<LinearLayout>(R.id.scheduleMarks)
+                prepareMarksView(markView, i.marks)
 
                 previous = i
 
@@ -146,9 +146,15 @@ class ScheduleCardPresenter(
         }
     }
 
-    private fun prepareMarkView(view: TextView, marks: List<MarkResponse>) {
-        if (marks.isNotEmpty()) {
-            val mark = marks[0]
+    private fun prepareMarksView(ll: LinearLayout, marks: List<MarkResponse>) {
+        for ((index, mark) in marks.withIndex()) {
+            val view = LayoutInflater.from(mContext)
+                    .inflate(R.layout.layout_mark, null, false) as TextView
+            val param = LinearLayout.LayoutParams(22.px, 22.px)
+            if (index != 0) {
+                param.marginStart = 4.px
+            }
+            view.layoutParams = param
             if (!mark.isPoint) {
                 view.text = mark.mark.toString()
                 view.background = when (mark.mark) {
@@ -163,8 +169,10 @@ class ScheduleCardPresenter(
                 params.marginEnd = 24.px
                 view.layoutParams = params
             }
-        } else {
-            view.visibility = View.GONE
+            ll.addView(view)
+        }
+        if (marks.isEmpty()) {
+            ll.visibility = View.GONE
         }
     }
 

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scheduleItemMark"
+    android:layout_width="22dp"
+    android:layout_height="22dp"
+    android:layout_weight="0"
+    android:background="@drawable/background_mark_progress"
+    android:gravity="center"
+    android:text="@string/loading_points"
+    android:textColor="#fff"
+    android:textStyle="bold" />

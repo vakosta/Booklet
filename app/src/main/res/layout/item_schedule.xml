@@ -8,8 +8,8 @@
     android:clickable="true"
     android:focusable="true"
     android:orientation="horizontal"
-    android:paddingBottom="8dp"
-    android:paddingTop="8dp">
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
 
     <TextView
         android:id="@+id/scheduleItemIndex"
@@ -24,8 +24,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginEnd="12dp"
         android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
         android:layout_weight="1"
         android:gravity="center|start"
         android:orientation="vertical">
@@ -73,8 +73,8 @@
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
-            app:srcCompat="@drawable/link"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:srcCompat="@drawable/link" />
 
         <ImageView
             android:id="@+id/scheduleItemAttachment"
@@ -86,20 +86,15 @@
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
-            app:srcCompat="@drawable/paperclip"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:srcCompat="@drawable/paperclip" />
 
-        <TextView
-            android:id="@+id/scheduleItemMark"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_marginEnd="16dp"
-            android:layout_weight="0"
-            android:background="@drawable/background_mark_progress"
-            android:gravity="center"
-            android:text="@string/loading_points"
-            android:textColor="#fff"
-            android:textStyle="bold" />
+        <LinearLayout
+            android:id="@+id/scheduleMarks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingEnd="16dp" />
 
     </LinearLayout>
 
