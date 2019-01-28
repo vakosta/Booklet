@@ -50,11 +50,11 @@ class LoginActivity : AppCompatActivity(), LoginView {
         }
 
         regulations.setOnClickListener {
-            browse(getString(R.string.url_recover_password))
+            browse(getString(R.string.url_regulations))
         }
 
         privacyPolicy.setOnClickListener {
-            browse(getString(R.string.url_recover_password))
+            browse(getString(R.string.url_privacy_policy))
         }
 
         infoButton.setOnClickListener { _ ->
