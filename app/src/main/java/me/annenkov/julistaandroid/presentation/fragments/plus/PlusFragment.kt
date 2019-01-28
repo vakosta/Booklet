@@ -30,7 +30,7 @@ class PlusFragment : ViewPagerFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (Preferences.getInstance(activity!!).notificationsSubscription)
-            buy.text = "Доступно"
+            buy.text = getString(R.string.plus_activated)
 
         botVk.setOnClickListener { _ ->
             val botCode = Preferences.getInstance(activity!!).botCode
