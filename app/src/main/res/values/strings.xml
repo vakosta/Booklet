@@ -4,6 +4,8 @@
     <string name="field_password">password</string>
     <string name="button_vk">VK page</string>
     <string name="url_recover_password" translatable="false">https://oauth20.mos.ru/selfservice/registration/openrecoverpassword.do</string>
+    <string name="url_regulations" translatable="false">https://docs.google.com/document/d/1BjSTb_bgwHermREHdZlcwTDf6WowADiHIrjcDSC24OI/edit</string>
+    <string name="url_privacy_policy" translatable="false">https://docs.google.com/document/d/1Pt5dvKHB8404oGnpd8rVi7yVmsjM5P0hIPBV9FnrQuQ/edit</string>
     <string name="url_vk_page" translatable="false">https://vk.com/julista.mobile</string>
     <string name="button_login">sign in</string>
     <string name="button_problems_with_logging">Remember password</string>

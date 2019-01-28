@@ -2,9 +2,10 @@ package me.annenkov.julistaandroid.presentation.activities.login
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.Button
+import android.view.View
 import android.widget.EditText
-import android.widget.TextView
+import android.widget.FrameLayout
+import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_login.*
 import kotterknife.bindView
 import me.annenkov.julistaandroid.R
@@ -12,6 +13,7 @@ import me.annenkov.julistaandroid.data.model.julista.auth.Profile
 import me.annenkov.julistaandroid.domain.Preferences
 import me.annenkov.julistaandroid.domain.px
 import me.annenkov.julistaandroid.presentation.activities.main.MainActivity
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.browse
 import org.jetbrains.anko.selector
@@ -22,14 +24,21 @@ class LoginActivity : AppCompatActivity(), LoginView {
 
     private val mLoginField: EditText by bindView(R.id.loginField)
     private val mPasswordField: EditText by bindView(R.id.passwordField)
-    private val mLoginEnterButton: Button by bindView(R.id.loginEnterButton)
-    private val mProblemsWithLoggingButton: TextView by bindView(R.id.problemsWithLoggingButton)
-    private val mContactButton: TextView by bindView(R.id.contactButton)
+    private val mLoginEnterButton: FrameLayout by bindView(R.id.loginEnterButton)
+    private val mProblemsWithLoggingButton: LinearLayout by bindView(R.id.problemsWithLoggingButton)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         mPresenter = LoginPresenter(this, this)
+
+        KeyboardVisibilityEvent.setEventListener(this) {
+            if (it) {
+                header.visibility = View.GONE
+            } else {
+                header.visibility = View.VISIBLE
+            }
+        }
 
         mLoginEnterButton.setOnClickListener {
             mPresenter.login(mLoginField.text.toString(),
@@ -40,8 +49,12 @@ class LoginActivity : AppCompatActivity(), LoginView {
             browse(getString(R.string.url_recover_password))
         }
 
-        mContactButton.setOnClickListener {
-            browse(getString(R.string.url_vk_page))
+        regulations.setOnClickListener {
+            browse(getString(R.string.url_recover_password))
+        }
+
+        privacyPolicy.setOnClickListener {
+            browse(getString(R.string.url_recover_password))
         }
 
         infoButton.setOnClickListener { _ ->
@@ -99,13 +112,13 @@ class LoginActivity : AppCompatActivity(), LoginView {
     }
 
     override fun startLoading() {
-        loginEnterButton.animate()
+        mLoginEnterButton.animate()
                 .translationY(56.px.toFloat())
                 .duration = 60
     }
 
     override fun endLoading() {
-        loginEnterButton.animate()
+        mLoginEnterButton.animate()
                 .translationY(0f)
                 .duration = 60
     }

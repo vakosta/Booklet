@@ -41,16 +41,10 @@ dependencies {
     rootProject.ext.kotlinDep.each { implementation it }
     rootProject.ext.supportDep.each { implementation it }
     rootProject.ext.uiDep.each { implementation it }
+    rootProject.ext.otherDep.each { implementation it }
 
     implementation rootProject.ext.retrofit
     implementation rootProject.ext.retrofitGson
-
-    implementation rootProject.ext.firebase
-    implementation rootProject.ext.firebaseMessaning
-    implementation rootProject.ext.crashlytics
-    implementation rootProject.ext.eventbus
-    implementation rootProject.ext.date4j
-    implementation rootProject.ext.billing
 }
 
 apply plugin: 'com.google.gms.google-services'

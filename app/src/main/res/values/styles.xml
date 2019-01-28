@@ -13,14 +13,14 @@
     </style>
 
     <style name="EditTextLight">
-        <item name="colorControlNormal">#ffffff</item>
-        <item name="colorControlActivated">#ffffff</item>
-        <item name="colorControlHighlight">#ffffff</item>
-        <item name="android:textColorHint">#deffffff</item>
+        <item name="colorControlNormal">#d1d1d1</item>
+        <item name="colorControlActivated">#5690ff</item>
+        <item name="colorControlHighlight">#5690ff</item>
+        <item name="android:textColorHint">#d1d1d1</item>
     </style>
 
-    <style name="ProgressLight">
-        <item name="colorAccent">#fff</item>
+    <style name="ProgressDark">
+        <item name="colorAccent">#5690ff</item>
     </style>
 
 </resources>

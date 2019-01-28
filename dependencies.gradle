@@ -5,7 +5,7 @@ ext {
 
     supportVersion = '28.0.0'
     constraintlayoutVersion = '1.1.2'
-    kotlinVersion = '1.3.10'
+    kotlinVersion = '1.3.20'
     ankoVersion = '0.10.8'
     kotterknifeVersion = '0.1.0-SNAPSHOT'
     flowlayoutVersion = '1.2.2'
@@ -17,6 +17,7 @@ ext {
     eventbusVersion = '3.1.1'
     date4jVersion = '1.5.0'
     billingVersion = '1.0.44'
+    keyboardvVersion = '2.1.0'
     junitVersion = '4.12'
     runnerVersion = '1.0.2'
     espressoVersion = '3.0.2'
@@ -51,6 +52,7 @@ ext {
     eventbus = "org.greenrobot:eventbus:$eventbusVersion"
     date4j = "com.darwinsys:hirondelle-date4j:$date4jVersion"
     billing = "com.anjlab.android.iab.v3:library:$billingVersion"
+    keyboardv = "net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:$keyboardvVersion"
 
     // Test
     junit = "junit:junit:$junitVersion"
@@ -82,6 +84,16 @@ ext {
     uiDep = [
             flowlayout,
             slidingUpPanel,
+    ]
+
+    otherDep = [
+            firebase,
+            firebaseMessaning,
+            crashlytics,
+            eventbus,
+            date4j,
+            billing,
+            keyboardv,
     ]
 
     testDep = [
