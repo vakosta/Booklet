@@ -71,11 +71,13 @@ class SettingsFragment : PreferenceFragmentCompat(),
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        when (key) {
-            getString(R.string.preference_mark_purpose) ->
-                EventBus.getDefault().post(Refresh())
-            getString(R.string.preference_saturday_lessons) ->
-                EventBus.getDefault().post(Refresh())
+        if (activity != null && isAdded) {
+            when (key) {
+                getString(R.string.preference_mark_purpose) ->
+                    EventBus.getDefault().post(Refresh())
+                getString(R.string.preference_saturday_lessons) ->
+                    EventBus.getDefault().post(Refresh())
+            }
         }
     }
 
