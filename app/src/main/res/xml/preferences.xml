@@ -15,6 +15,7 @@
             android:key="@string/preference_mark_purpose"
             android:summary="Для советов и подсказок"
             android:title="Цель обучения" />
+        <!--android:icon="@drawable/rounded_calendar"-->
         <SwitchPreference
             android:key="@string/preference_saturday_lessons"
             android:title="Уроки по субботам" />

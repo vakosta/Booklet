@@ -1,6 +1,5 @@
 package me.annenkov.julistaandroid.presentation.fragments.schedule
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
@@ -22,7 +21,7 @@ import me.annenkov.julistaandroid.domain.model.Refresh
 import me.annenkov.julistaandroid.domain.px
 import me.annenkov.julistaandroid.presentation.CardBaseView
 import me.annenkov.julistaandroid.presentation.FragmentBaseView
-import me.annenkov.julistaandroid.presentation.ViewPagerFragment
+import me.annenkov.julistaandroid.presentation.SafeFragment
 import me.annenkov.julistaandroid.presentation.customviews.CustomLinearLayout
 import me.annenkov.julistaandroid.presentation.customviews.RotateDownTransformer
 import org.greenrobot.eventbus.EventBus
@@ -32,7 +31,7 @@ import org.jetbrains.anko.backgroundResource
 import org.jetbrains.anko.find
 import org.jetbrains.anko.textColor
 
-class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener, View.OnTouchListener {
+class ScheduleFragment : SafeFragment(), ScheduleView, View.OnClickListener, View.OnTouchListener {
     private lateinit var mPresenter: SchedulePresenter
 
     private lateinit var mPager: ViewPager
@@ -65,11 +64,13 @@ class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_schedule, container, false)
 
-        view.find<LinearLayout>(R.id.weekdaySaturday).visibility =
-                if (!Preferences.getInstance(activity!!).saturdayLessons)
-                    View.GONE
-                else
-                    View.VISIBLE
+        activityEnabled {
+            view.find<LinearLayout>(R.id.weekdaySaturday).visibility =
+                    if (!Preferences.getInstance(it).saturdayLessons)
+                        View.GONE
+                    else
+                        View.VISIBLE
+        }
 
         mPagerLayout = view.find(R.id.scheduleListPagerLayout)
         mPagerLayout.setOnTouchListener(this)
@@ -114,11 +115,13 @@ class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener
 
     override fun fetchData() {
         mPresenter.init()
-        weekdaySaturday.visibility =
-                if (!Preferences.getInstance(activity!!).saturdayLessons)
-                    View.GONE
-                else
-                    View.VISIBLE
+        activityEnabled {
+            weekdaySaturday.visibility =
+                    if (!Preferences.getInstance(it).saturdayLessons)
+                        View.GONE
+                    else
+                        View.VISIBLE
+        }
     }
 
     override fun onStart() {
@@ -147,9 +150,9 @@ class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener
         }
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(p0: View, p1: MotionEvent): Boolean {
-        return Utils.convertPixelsToDp(activity!!, p1.y) > 118
+        return if (isAdded) Utils.convertPixelsToDp(activity!!, p1.y) > 118
+        else true
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -158,25 +161,27 @@ class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener
     }
 
     override fun initPager() {
-        mPagerAdapter = SchedulePagerAdapter(childFragmentManager, activity!!)
-        mPresenter.setPosition(5000)
-        mPager.adapter = mPagerAdapter
-        mPager.setPageTransformer(false, RotateDownTransformer())
-        mPager.offscreenPageLimit = 1
+        activityEnabled {
+            mPagerAdapter = SchedulePagerAdapter(childFragmentManager, it)
+            mPresenter.setPosition(5000)
+            mPager.adapter = mPagerAdapter
+            mPager.setPageTransformer(false, RotateDownTransformer())
+            mPager.offscreenPageLimit = 1
 
-        mPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageSelected(position: Int) {
-                mPresenter.paintWeekByPosition(position)
-                if (mPresenter.index != 5000) showCurrentDay()
-                else hideCurrentDay()
-            }
+            mPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                override fun onPageSelected(position: Int) {
+                    mPresenter.paintWeekByPosition(position)
+                    if (mPresenter.index != 5000) showCurrentDay()
+                    else hideCurrentDay()
+                }
 
-            override fun onPageScrollStateChanged(state: Int) {
-            }
+                override fun onPageScrollStateChanged(state: Int) {
+                }
 
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-            }
-        })
+                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                }
+            })
+        }
     }
 
     override fun setViewPagerItem(item: Int, smooth: Boolean) {
@@ -193,8 +198,10 @@ class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener
             else -> mSaturdayDate
         }
         oldDay.backgroundResource = 0
-        oldDay.textColor = ContextCompat
-                .getColor(activity!!, R.color.colorWeekdayDateName)
+        activityEnabled {
+            oldDay.textColor = ContextCompat
+                    .getColor(it, R.color.colorWeekdayDateName)
+        }
 
         val editableDay: TextView = when (weekday) {
             1 -> mMondayDate
@@ -205,8 +212,10 @@ class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener
             else -> mSaturdayDate
         }
         editableDay.backgroundResource = R.drawable.shape_round
-        editableDay.textColor = ContextCompat
-                .getColor(activity!!, R.color.colorWeekdayDateNameActive)
+        activityEnabled {
+            editableDay.textColor = ContextCompat
+                    .getColor(it, R.color.colorWeekdayDateNameActive)
+        }
     }
 
     override fun paintWeek(week: ArrayList<DateTime>) {
@@ -219,9 +228,11 @@ class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener
     }
 
     override fun paintCurrentDay() {
-        mCurrentDay.text = DateHelper
-                .getWorkdayDate(Preferences.getInstance(activity!!)
-                        .getWorkdayCount()).day.toString()
+        activityEnabled {
+            mCurrentDay.text = DateHelper
+                    .getWorkdayDate(Preferences.getInstance(it)
+                            .getWorkdayCount()).day.toString()
+        }
     }
 
     override fun showCurrentDay() {

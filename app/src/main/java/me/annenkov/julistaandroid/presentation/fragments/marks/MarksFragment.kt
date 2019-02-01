@@ -1,6 +1,5 @@
 package me.annenkov.julistaandroid.presentation.fragments.marks
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
@@ -14,13 +13,14 @@ import me.annenkov.julistaandroid.R
 import me.annenkov.julistaandroid.domain.Utils
 import me.annenkov.julistaandroid.domain.model.Refresh
 import me.annenkov.julistaandroid.domain.model.mos.ProgressResponse
-import me.annenkov.julistaandroid.presentation.ViewPagerFragment
+import me.annenkov.julistaandroid.presentation.SafeFragment
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.find
 import org.jetbrains.anko.support.v4.onRefresh
+import kotlin.math.max
 
-class MarksFragment : ViewPagerFragment(), MarksView, View.OnClickListener, View.OnTouchListener {
+class MarksFragment : SafeFragment(), MarksView, View.OnClickListener, View.OnTouchListener {
     private lateinit var mPresenter: MarksPresenter
 
     private lateinit var mPager: ViewPager
@@ -78,7 +78,6 @@ class MarksFragment : ViewPagerFragment(), MarksView, View.OnClickListener, View
         }
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(p0: View, p1: MotionEvent): Boolean {
         return Utils.convertPixelsToDp(activity!!, p1.y) > 62
     }
@@ -88,6 +87,7 @@ class MarksFragment : ViewPagerFragment(), MarksView, View.OnClickListener, View
         mPagerAdapter = MarksPagerAdapter(fragmentManager ?: return, progresses)
         mPager.adapter = mPagerAdapter
         mPager.offscreenPageLimit = 2
+        mPager.currentItem = max(mPagerAdapter.count - 2, 0)
 
         mPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageSelected(position: Int) {
