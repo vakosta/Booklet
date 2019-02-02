@@ -5,7 +5,6 @@
     <string name="field_password">пароль</string>
     <string name="button_login">войти</string>
     <string name="button_vk">Группа ВК</string>
-    <string name="button_problems_with_logging">Проблемы со входом?</string>
     <string name="schedule">Расписание</string>
     <string name="marks">Оценки</string>
     <string name="account">Аккаунт</string>

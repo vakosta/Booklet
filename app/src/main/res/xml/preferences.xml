@@ -31,12 +31,12 @@
             android:title="Строка с основной информацией" />
         <SwitchPreference
             android:defaultValue="false"
-            android:icon="@drawable/prefs_main_notification"
+            android:icon="@drawable/prefs_notifications_marks"
             android:key="@string/preference_notification_new_mark"
             android:title="Новые оценки" />
         <SwitchPreference
             android:defaultValue="false"
-            android:icon="@drawable/prefs_notifications"
+            android:icon="@drawable/prefs_notifications_news"
             android:key="@string/preference_notification_news"
             android:title="События из ленты" />
     </PreferenceCategory>
