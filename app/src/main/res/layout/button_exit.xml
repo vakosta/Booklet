@@ -4,6 +4,8 @@
     android:layout_height="56dp"
     android:layout_marginBottom="64dp"
     android:background="@drawable/shape_rectangle_ripple"
+    android:drawableStart="@drawable/prefs_exit"
+    android:drawablePadding="28dp"
     android:gravity="center_vertical"
     android:paddingStart="16dp"
     android:text="Выйти"

@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="56dp"
     android:background="@drawable/shape_rectangle_ripple"
+    android:drawableStart="@drawable/prefs_vk"
+    android:drawablePadding="28dp"
     android:gravity="center_vertical"
     android:paddingStart="16dp"
     android:text="@string/button_vk"
