@@ -13,14 +13,14 @@ import me.annenkov.julistaandroid.R
 import me.annenkov.julistaandroid.domain.Utils
 import me.annenkov.julistaandroid.domain.model.Refresh
 import me.annenkov.julistaandroid.domain.model.mos.ProgressResponse
-import me.annenkov.julistaandroid.presentation.SafeFragment
+import me.annenkov.julistaandroid.presentation.ViewPagerFragment
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.find
 import org.jetbrains.anko.support.v4.onRefresh
 import kotlin.math.max
 
-class MarksFragment : SafeFragment(), MarksView, View.OnClickListener, View.OnTouchListener {
+class MarksFragment : ViewPagerFragment(), MarksView, View.OnClickListener, View.OnTouchListener {
     private lateinit var mPresenter: MarksPresenter
 
     private lateinit var mPager: ViewPager

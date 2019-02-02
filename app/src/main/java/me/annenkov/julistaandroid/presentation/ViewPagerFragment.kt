@@ -1,9 +1,8 @@
 package me.annenkov.julistaandroid.presentation
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 
-abstract class ViewPagerFragment : Fragment() {
+abstract class ViewPagerFragment : SafeFragment() {
     private var mIsStarted = false
     private var mIsVisible = false
     private var mHasInflated = false

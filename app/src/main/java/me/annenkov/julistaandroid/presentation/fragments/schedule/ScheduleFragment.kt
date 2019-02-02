@@ -21,7 +21,7 @@ import me.annenkov.julistaandroid.domain.model.Refresh
 import me.annenkov.julistaandroid.domain.px
 import me.annenkov.julistaandroid.presentation.CardBaseView
 import me.annenkov.julistaandroid.presentation.FragmentBaseView
-import me.annenkov.julistaandroid.presentation.SafeFragment
+import me.annenkov.julistaandroid.presentation.ViewPagerFragment
 import me.annenkov.julistaandroid.presentation.customviews.CustomLinearLayout
 import me.annenkov.julistaandroid.presentation.customviews.RotateDownTransformer
 import org.greenrobot.eventbus.EventBus
@@ -31,7 +31,7 @@ import org.jetbrains.anko.backgroundResource
 import org.jetbrains.anko.find
 import org.jetbrains.anko.textColor
 
-class ScheduleFragment : SafeFragment(), ScheduleView, View.OnClickListener, View.OnTouchListener {
+class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener, View.OnTouchListener {
     private lateinit var mPresenter: SchedulePresenter
 
     private lateinit var mPager: ViewPager

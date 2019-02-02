@@ -2,9 +2,10 @@ package me.annenkov.julistaandroid.presentation
 
 import android.app.Activity
 import android.content.Context
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 
-abstract class SafeFragment : ViewPagerFragment() {
+abstract class SafeFragment : Fragment() {
     var aeListener: IActivityEnabledListener? = null
 
     interface IActivityEnabledListener {

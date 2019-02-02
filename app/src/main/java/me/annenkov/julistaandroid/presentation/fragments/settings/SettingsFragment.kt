@@ -42,6 +42,8 @@ class SettingsFragment : PreferenceFragmentCompat(),
             newMarks.isChecked = false
         }
 
+        initMarkPurpose()
+
         findPreference("button_vk").setOnPreferenceClickListener { _ ->
             browse(getString(R.string.url_vk_page))
             true
@@ -70,11 +72,22 @@ class SettingsFragment : PreferenceFragmentCompat(),
         }
     }
 
+    private fun initMarkPurpose() {
+        val markPurposeIcon = when (Preferences.getInstance(activity!!).markPurpose) {
+            5 -> R.drawable.prefs_five
+            4 -> R.drawable.prefs_four
+            else -> R.drawable.prefs_three
+        }
+        findPreference(getString(R.string.preference_mark_purpose)).setIcon(markPurposeIcon)
+    }
+
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         if (activity != null && isAdded) {
             when (key) {
-                getString(R.string.preference_mark_purpose) ->
+                getString(R.string.preference_mark_purpose) -> {
+                    initMarkPurpose()
                     EventBus.getDefault().post(Refresh())
+                }
                 getString(R.string.preference_saturday_lessons) ->
                     EventBus.getDefault().post(Refresh())
             }
