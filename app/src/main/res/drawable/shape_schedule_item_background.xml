@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="#e0e0e0">
+    android:color="?attr/colorShadowPrimary">
     <item>
         <shape android:shape="rectangle">
 
-            <solid android:color="#e8e8e8" />
+            <solid android:color="?attr/colorScheduleItemNumber" />
             <corners
                 android:bottomLeftRadius="20dp"
                 android:bottomRightRadius="20dp"
@@ -17,7 +17,7 @@
     <item android:left="26dp">
         <shape android:shape="rectangle">
 
-            <solid android:color="#f6f6f6" />
+            <solid android:color="?attr/colorScheduleItem" />
             <corners
                 android:bottomLeftRadius="0dp"
                 android:bottomRightRadius="20dp"

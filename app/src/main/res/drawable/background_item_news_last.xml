@@ -4,7 +4,7 @@
     <item>
         <shape xmlns:android="http://schemas.android.com/apk/res/android"
             android:shape="rectangle">
-            <solid android:color="#40ffffff" />
+            <solid android:color="?attr/colorNewsItem" />
             <corners
                 android:bottomLeftRadius="20dp"
                 android:bottomRightRadius="20dp"

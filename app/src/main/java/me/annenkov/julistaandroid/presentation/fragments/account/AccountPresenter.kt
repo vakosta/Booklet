@@ -13,6 +13,7 @@ import me.annenkov.julistaandroid.data.model.julista.account.News
 import me.annenkov.julistaandroid.data.model.julista.account.Top
 import me.annenkov.julistaandroid.domain.ApiHelper
 import me.annenkov.julistaandroid.domain.DateHelper
+import me.annenkov.julistaandroid.domain.attribute
 import me.annenkov.julistaandroid.domain.px
 import me.annenkov.julistaandroid.presentation.InitContentPresenter
 import org.jetbrains.anko.textColor
@@ -53,6 +54,7 @@ class AccountPresenter(private val view: AccountView,
         headerParams.marginEnd = 28.px
         val header = TextView(mContext)
         header.text = "Топ класса"
+        header.textColor = mContext.attribute(R.attr.colorTextTop).data
         header.layoutParams = headerParams
         topLayout.addView(header)
 
@@ -84,6 +86,7 @@ class AccountPresenter(private val view: AccountView,
             positionParams.marginEnd = 28.px
             val myPosition = TextView(mContext)
             myPosition.text = "Твоя позиция ${top.myPosition}"
+            myPosition.textColor = mContext.attribute(R.attr.colorTextTop).data
             myPosition.layoutParams = positionParams
             topLayout.addView(myPosition)
         }

@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff">
+    android:background="?attr/colorBackground">
 
     <android.support.design.widget.TabLayout
         android:id="@+id/marksTabs"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_gravity="top"
-        android:background="@color/colorBackground"
+        android:background="?attr/colorPrimary"
         app:tabIndicatorColor="#fff"
         app:tabMode="fixed"
         app:tabSelectedTextColor="#fff"
@@ -32,8 +32,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:drawableTint="#808080"
             android:drawableTop="@drawable/alert"
+            android:drawableTint="#808080"
             android:gravity="center"
             android:text="Произошла ошибка"
             android:visibility="gone" />
@@ -43,8 +43,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:drawableTint="#808080"
             android:drawableTop="@drawable/alert"
+            android:drawableTint="#808080"
             android:gravity="center"
             android:text="Проверьте подключение к интернету"
             android:visibility="gone" />

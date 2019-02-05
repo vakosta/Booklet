@@ -6,9 +6,9 @@
     android:viewportWidth="32">
     <path
         android:pathData="M31 16A15 15 0 0 1 16 31 15 15 0 0 1 1 16 15 15 0 0 1 16 1 15 15 0 0 1 31 16Z"
-        android:strokeColor="#5690ff"
+        android:strokeColor="?attr/colorMarkPrimaryBackground"
         android:strokeWidth="2" />
     <path
-        android:fillColor="#5690ff"
+        android:fillColor="?attr/colorMarkPrimaryBackground"
         android:pathData="M28 16A12 12 0 0 1 16 28 12 12 0 0 1 4 16 12 12 0 0 1 16 4 12 12 0 0 1 28 16Z" />
 </vector>

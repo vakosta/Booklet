@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/loading"
-        android:textColor="#292929"
+        android:textColor="?attr/colorTextPrimary"
         android:textSize="14sp" />
 
     <com.nex3z.flowlayout.FlowLayout

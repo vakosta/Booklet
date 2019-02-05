@@ -18,6 +18,7 @@
         android:layout_weight="0"
         android:gravity="center"
         android:text="@string/loading_points"
+        android:textColor="?attr/colorTextPrimary"
         android:textSize="14sp"
         android:textStyle="bold" />
 
@@ -36,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:text="@string/loading"
-            android:textColor="#292929"
+            android:textColor="?attr/colorTextPrimary"
             android:textSize="16sp" />
 
         <TextView
@@ -44,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/loading_points"
-            android:textColor="#535353"
+            android:textColor="?attr/colorTextHomework"
             android:textSize="14sp" />
 
         <TextView
@@ -52,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/loading_points"
-            android:textColor="#999999"
+            android:textColor="?attr/colorTextTimeOfLesson"
             android:textSize="12sp" />
 
     </LinearLayout>

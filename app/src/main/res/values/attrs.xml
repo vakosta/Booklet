@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorBackground" format="reference" />
+    <attr name="colorMarkPrimaryBackground" format="reference" />
+    <attr name="colorBottomBar" format="reference" />
+    <attr name="colorBottomBarIconActive" format="reference" />
+    <attr name="colorBottomBarIcon" format="reference" />
+    <attr name="colorCard" format="reference" />
+    <attr name="colorScheduleItem" format="reference" />
+    <attr name="colorScheduleItemNumber" format="reference" />
+    <attr name="colorProgressXpOut" format="reference" />
+    <attr name="colorCurrentProgressStart" format="reference" />
+    <attr name="colorCurrentProgressEnd" format="reference" />
+    <attr name="colorTop" format="reference" />
+    <attr name="colorTextTop" format="reference" />
+    <attr name="colorNewsItem" format="reference" />
+    <attr name="colorTransparentWaves" format="reference" />
+    <attr name="colorPlusHeaderStart" format="reference" />
+    <attr name="colorPlusHeaderEnd" format="reference" />
+    <attr name="colorTextPrimary" format="reference" />
+    <attr name="colorTextHomework" format="reference" />
+    <attr name="colorTextTimeOfLesson" format="reference" />
+    <attr name="colorTextWeekdayActive" format="reference" />
+    <attr name="colorTextXp" format="reference" />
+    <attr name="colorShadowPrimary" format="reference" />
+</resources>

@@ -4,6 +4,59 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorBackground">@color/colorBackground</item>
+        <item name="colorMarkPrimaryBackground">@color/colorMarkPrimaryBackground</item>
+        <item name="colorBottomBar">@color/colorBottomBar</item>
+        <item name="colorBottomBarIconActive">@color/colorBottomBarIconActive</item>
+        <item name="colorBottomBarIcon">@color/colorBottomBarIcon</item>
+        <item name="colorCard">@color/colorCard</item>
+        <item name="colorScheduleItem">@color/colorScheduleItem</item>
+        <item name="colorScheduleItemNumber">@color/colorScheduleItemNumber</item>
+        <item name="colorProgressXpOut">@color/colorProgressXpOut</item>
+        <item name="colorCurrentProgressStart">@color/colorCurrentProgressStart</item>
+        <item name="colorCurrentProgressEnd">@color/colorCurrentProgressEnd</item>
+        <item name="colorTop">@color/colorTop</item>
+        <item name="colorTextTop">@color/colorTextTop</item>
+        <item name="colorNewsItem">@color/colorNewsItem</item>
+        <item name="colorTransparentWaves">@color/colorTransparentWaves</item>
+        <item name="colorPlusHeaderStart">@color/colorPlusHeaderStart</item>
+        <item name="colorPlusHeaderEnd">@color/colorPlusHeaderEnd</item>
+        <item name="colorTextPrimary">@color/colorTextPrimary</item>
+        <item name="colorTextHomework">@color/colorTextHomework</item>
+        <item name="colorTextTimeOfLesson">@color/colorTextTimeOfLesson</item>
+        <item name="colorTextWeekdayActive">@color/colorTextWeekdayActive</item>
+        <item name="colorTextXp">@color/colorTextXp</item>
+        <item name="colorShadowPrimary">@color/colorShadowPrimary</item>
+        <item name="preferenceTheme">@style/PreferencesTheme</item>
+    </style>
+
+    <style name="AppThemeBlack" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimaryBlack</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkBlack</item>
+        <item name="colorAccent">@color/colorAccentBlack</item>
+        <item name="colorBackground">@color/colorBackgroundBlack</item>
+        <item name="colorMarkPrimaryBackground">@color/colorMarkPrimaryBackgroundBlack</item>
+        <item name="colorBottomBar">@color/colorBottomBarBlack</item>
+        <item name="colorBottomBarIconActive">@color/colorBottomBarIconActiveBlack</item>
+        <item name="colorBottomBarIcon">@color/colorBottomBarIconBlack</item>
+        <item name="colorScheduleItem">@color/colorScheduleItemBlack</item>
+        <item name="colorCard">@color/colorCardBlack</item>
+        <item name="colorScheduleItemNumber">@color/colorScheduleItemNumberBlack</item>
+        <item name="colorProgressXpOut">@color/colorProgressXpOutBlack</item>
+        <item name="colorCurrentProgressStart">@color/colorCurrentProgressStartBlack</item>
+        <item name="colorCurrentProgressEnd">@color/colorCurrentProgressEndBlack</item>
+        <item name="colorTop">@color/colorTopBlack</item>
+        <item name="colorTextTop">@color/colorTextTopBlack</item>
+        <item name="colorNewsItem">@color/colorNewsItemBlack</item>
+        <item name="colorTransparentWaves">@color/colorTransparentWavesBlack</item>
+        <item name="colorPlusHeaderStart">@color/colorPlusHeaderStartBlack</item>
+        <item name="colorPlusHeaderEnd">@color/colorPlusHeaderEndBlack</item>
+        <item name="colorTextPrimary">@color/colorTextPrimaryBlack</item>
+        <item name="colorTextHomework">@color/colorTextHomeworkBlack</item>
+        <item name="colorTextTimeOfLesson">@color/colorTextTimeOfLessonBlack</item>
+        <item name="colorTextWeekdayActive">@color/colorTextWeekdayActiveBlack</item>
+        <item name="colorTextXp">@color/colorTextXpBlack</item>
+        <item name="colorShadowPrimary">@color/colorShadowPrimaryBlack</item>
         <item name="preferenceTheme">@style/PreferencesTheme</item>
     </style>
 

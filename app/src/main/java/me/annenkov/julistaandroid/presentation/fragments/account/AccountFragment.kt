@@ -2,7 +2,6 @@ package me.annenkov.julistaandroid.presentation.fragments.account
 
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,7 @@ import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.fragment_account.*
 import me.annenkov.julistaandroid.R
 import me.annenkov.julistaandroid.domain.Preferences
+import me.annenkov.julistaandroid.domain.attribute
 import me.annenkov.julistaandroid.domain.model.Refresh
 import me.annenkov.julistaandroid.presentation.ViewPagerFragment
 import org.greenrobot.eventbus.EventBus
@@ -80,7 +80,7 @@ class AccountFragment : ViewPagerFragment(), AccountView {
     }
 
     override fun setBackgroundBlueColor() {
-        parentLayout.backgroundColor = ContextCompat.getColor(activity!!, R.color.colorBackground)
+        parentLayout.backgroundColor = context!!.attribute(R.attr.colorPrimary).data
     }
 
     override fun setBackgroundGreyColor() {

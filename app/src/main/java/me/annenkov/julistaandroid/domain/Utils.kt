@@ -5,6 +5,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.res.Resources
 import android.util.DisplayMetrics
+import android.util.TypedValue
 import java.security.MessageDigest
 import java.util.regex.Pattern
 
@@ -23,6 +24,12 @@ fun String.md5(): String {
 }
 
 fun String.subscriptionHash(): String = this.md5().md5().md5()
+
+fun Context.attribute(value: Int): TypedValue {
+    val ret = TypedValue()
+    theme.resolveAttribute(value, ret, true)
+    return ret
+}
 
 object Utils {
     fun copyToClipboard(context: Context, label: String, data: String) {

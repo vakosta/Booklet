@@ -14,11 +14,8 @@ import hirondelle.date4j.DateTime
 import kotlinx.android.synthetic.main.layout_week_days.*
 import kotterknife.bindView
 import me.annenkov.julistaandroid.R
-import me.annenkov.julistaandroid.domain.DateHelper
-import me.annenkov.julistaandroid.domain.Preferences
-import me.annenkov.julistaandroid.domain.Utils
+import me.annenkov.julistaandroid.domain.*
 import me.annenkov.julistaandroid.domain.model.Refresh
-import me.annenkov.julistaandroid.domain.px
 import me.annenkov.julistaandroid.presentation.CardBaseView
 import me.annenkov.julistaandroid.presentation.FragmentBaseView
 import me.annenkov.julistaandroid.presentation.ViewPagerFragment
@@ -213,8 +210,7 @@ class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener
         }
         editableDay.backgroundResource = R.drawable.shape_round
         activityEnabled {
-            editableDay.textColor = ContextCompat
-                    .getColor(it, R.color.colorWeekdayDateNameActive)
+            editableDay.textColor = context!!.attribute(R.attr.colorTextWeekdayActive).data
         }
     }
 

@@ -3,12 +3,12 @@
     android:id="@+id/itemTop"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/background_item_top"
+    android:background="@drawable/shape_schedule_item_background"
     android:clickable="true"
     android:focusable="true"
     android:orientation="horizontal"
-    android:paddingBottom="8dp"
-    android:paddingTop="8dp">
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
 
     <TextView
         android:id="@+id/topItemIndex"
@@ -17,17 +17,18 @@
         android:layout_weight="0"
         android:gravity="center"
         android:text="@string/loading_points"
+        android:textColor="?attr/colorTextPrimary"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/topItemStudentName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
         android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
         android:layout_weight="1"
         android:text="@string/loading"
-        android:textColor="#292929"
+        android:textColor="?attr/colorTextPrimary"
         android:textSize="14sp" />
 
     <TextView

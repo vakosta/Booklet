@@ -34,7 +34,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="10dp"
                     android:text="@string/loading"
-                    android:textColor="#535353" />
+                    android:textColor="?attr/colorTextPrimary" />
 
             </LinearLayout>
 

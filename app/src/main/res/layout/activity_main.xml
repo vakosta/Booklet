@@ -5,14 +5,14 @@
     android:id="@+id/activityMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
+    android:background="?attr/colorPrimary"
     tools:context=".presentation.activities.main.MainActivity">
 
     <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorBackground"
+        android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:title="@string/app_name" />
 
@@ -27,7 +27,7 @@
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/shape_top_rounded_16dp"
-        android:backgroundTint="#fafafa"
+        android:backgroundTint="?attr/colorBottomBar"
         android:elevation="10dp"
         app:itemIconTint="@color/foreground_bottomnavigation"
         app:itemTextColor="@color/foreground_bottomnavigation"
