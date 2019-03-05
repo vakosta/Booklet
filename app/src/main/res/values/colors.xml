@@ -17,9 +17,11 @@
     <color name="colorProgressXpOut">#dadada</color>
     <color name="colorCurrentProgressStart">#cc00ff</color>
     <color name="colorCurrentProgressEnd">#5678ef</color>
-    <color name="colorTop">#40ffffff</color>
+    <color name="colorTop">#f6f6f6</color>
+    <color name="colorTopItem">#fff</color>
+    <color name="colorTopItemNumber">#efefef</color>
     <color name="colorTextTop">#de000000</color>
-    <color name="colorNewsItem">#364149</color>
+    <color name="colorNewsItem">#40ffffff</color>
     <color name="colorTransparentWaves">#90ffffff</color>
     <color name="colorPlusHeaderStart">#3aa9ff</color>
     <color name="colorPlusHeaderEnd">#8465ff</color>
@@ -45,6 +47,8 @@
     <color name="colorCurrentProgressStartBlack">#2e0168</color>
     <color name="colorCurrentProgressEndBlack">#76269b</color>
     <color name="colorTopBlack">#17232e</color>
+    <color name="colorTopItemBlack">#23323f</color>
+    <color name="colorTopItemNumberBlack">#2a3d4c</color>
     <color name="colorTextTopBlack">#e2e4e6</color>
     <color name="colorNewsItemBlack">#364149</color>
     <color name="colorTransparentWavesBlack">#801B2936</color>

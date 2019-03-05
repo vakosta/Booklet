@@ -16,6 +16,8 @@
         <item name="colorCurrentProgressStart">@color/colorCurrentProgressStart</item>
         <item name="colorCurrentProgressEnd">@color/colorCurrentProgressEnd</item>
         <item name="colorTop">@color/colorTop</item>
+        <item name="colorTopItem">@color/colorTopItem</item>
+        <item name="colorTopItemNumber">@color/colorTopItemNumber</item>
         <item name="colorTextTop">@color/colorTextTop</item>
         <item name="colorNewsItem">@color/colorNewsItem</item>
         <item name="colorTransparentWaves">@color/colorTransparentWaves</item>
@@ -46,6 +48,8 @@
         <item name="colorCurrentProgressStart">@color/colorCurrentProgressStartBlack</item>
         <item name="colorCurrentProgressEnd">@color/colorCurrentProgressEndBlack</item>
         <item name="colorTop">@color/colorTopBlack</item>
+        <item name="colorTopItem">@color/colorTopItemBlack</item>
+        <item name="colorTopItemNumber">@color/colorTopItemNumberBlack</item>
         <item name="colorTextTop">@color/colorTextTopBlack</item>
         <item name="colorNewsItem">@color/colorNewsItemBlack</item>
         <item name="colorTransparentWaves">@color/colorTransparentWavesBlack</item>

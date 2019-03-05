@@ -12,6 +12,8 @@
     <attr name="colorCurrentProgressStart" format="reference" />
     <attr name="colorCurrentProgressEnd" format="reference" />
     <attr name="colorTop" format="reference" />
+    <attr name="colorTopItem" format="reference" />
+    <attr name="colorTopItemNumber" format="reference" />
     <attr name="colorTextTop" format="reference" />
     <attr name="colorNewsItem" format="reference" />
     <attr name="colorTransparentWaves" format="reference" />

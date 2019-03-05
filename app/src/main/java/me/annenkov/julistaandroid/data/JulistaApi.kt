@@ -58,7 +58,9 @@ interface JulistaApi {
                     @Query("from") from: String,
                     @Query("to") to: String,
                     @Query("academic_year_id") academicYearId: Int?,
-                    @Query("group_id") groups: String): Call<List<ScheduleItem>>
+                    @Query("group_id") groups: String,
+                    @Query("with_group_class_subject_info") withGroupClassSubjectInfo: Boolean,
+                    @Query("with_lesson_info") withLessonInfo: Boolean): Call<List<ScheduleItem>>
 
     @GET("core/api/marks")
     fun getMarks(@Header("Auth-Token") token: String,

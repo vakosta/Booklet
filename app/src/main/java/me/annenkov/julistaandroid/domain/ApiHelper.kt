@@ -203,7 +203,9 @@ class ApiHelper private constructor(val context: Context) {
                         formatFrom,
                         formatTo,
                         6,
-                        groupsParam)
+                        groupsParam,
+                        true,
+                        true)
                 .execute()
 
         if (response.body() != null) {
