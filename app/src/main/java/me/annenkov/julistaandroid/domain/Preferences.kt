@@ -81,10 +81,10 @@ class Preferences private constructor(context: Context) {
     var markPurpose: Int
         get() {
             val result = prefs.getString(KEY_MARK_PURPOSE, "5")
-            if (result == null || result == "")
-                return 5
+            return if (result == null || result == "")
+                5
             else
-                return result.toInt()
+                result.toInt()
         }
         set(value) = prefs.edit().putString(KEY_MARK_PURPOSE, value.toString()).apply()
 
