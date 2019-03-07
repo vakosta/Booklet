@@ -66,9 +66,14 @@ class MainActivity : AppCompatActivity(),
         mBp = BillingProcessor(this, getString(R.string.license_key), this)
         mBp.initialize()
 
-        if (Preferences.getInstance(this).userLogin.isEmpty())
+        val prefs = Preferences.getInstance(this)
+
+        if (prefs.userLogin.isEmpty())
             startActivityForResult(Intent(this, LoginActivity::class.java),
                     REQUEST_LOGIN)
+        else if (!prefs.isShowedDarkThemePopup)
+            startActivityForResult(Intent(this, DarkThemePopupActivity::class.java),
+                    REQUEST_DARK_THEME)
 
         mPresenter.init()
 
@@ -77,7 +82,6 @@ class MainActivity : AppCompatActivity(),
         bottomNavigation.setOnNavigationItemSelectedListener(this)
         mainPager.setOnTouchListener(this)
 
-        val prefs = Preferences.getInstance(this)
         if (prefs.notificationsSubscription && prefs.notificationMain) {
             val i = Intent(this, NotificationsService::class.java)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -89,8 +93,6 @@ class MainActivity : AppCompatActivity(),
 
         if (intent.getBooleanExtra(EXTRA_IS_FROM_SETTINGS, false))
             bottomNavigation.selectedItemId = R.id.navSettings
-        if (!prefs.isShowedDarkThemePopup)
-            startActivity(Intent(this, DarkThemePopupActivity::class.java))
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -99,6 +101,12 @@ class MainActivity : AppCompatActivity(),
                 REQUEST_LOGIN -> {
                     when (resultCode) {
                         RESULT_BACK_PRESSED -> finish()
+                    }
+                }
+                REQUEST_DARK_THEME -> {
+                    when (resultCode) {
+                        RESULT_SET_DARK_THEME ->
+                            restartActivity(RestartActivity(false))
                     }
                 }
                 else -> super.onActivityResult(requestCode, resultCode, data)
@@ -330,9 +338,12 @@ class MainActivity : AppCompatActivity(),
 
     companion object {
         private const val REQUEST_LOGIN = 1
+        private const val REQUEST_DARK_THEME = 2
 
-        const val RESULT_OK = 2
-        const val RESULT_BACK_PRESSED = 3
+        const val RESULT_OK = 10
+        const val RESULT_BACK_PRESSED = 11
+        const val RESULT_SET_DARK_THEME = 12
+        const val RESULT_CANCEL = 13
 
         private const val EXTRA_IS_FROM_SETTINGS = "IS_FROM_SETTINGS"
     }
