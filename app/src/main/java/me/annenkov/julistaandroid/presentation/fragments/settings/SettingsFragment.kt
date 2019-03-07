@@ -43,7 +43,8 @@ class SettingsFragment : PreferenceFragmentCompat(),
             newMarks.isChecked = false
         }
 
-        initMarkPurpose()
+        initMarkPurposePreference()
+        initDarkThemePreference()
 
         findPreference("button_vk").setOnPreferenceClickListener { _ ->
             browse(getString(R.string.url_vk_page))
@@ -74,7 +75,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
         }
     }
 
-    private fun initMarkPurpose() {
+    private fun initMarkPurposePreference() {
         val markPurposeIcon = when (Preferences.getInstance(activity!!).markPurpose) {
             5 -> R.drawable.prefs_five
             4 -> R.drawable.prefs_four
@@ -83,11 +84,19 @@ class SettingsFragment : PreferenceFragmentCompat(),
         findPreference(getString(R.string.preference_mark_purpose)).setIcon(markPurposeIcon)
     }
 
+    private fun initDarkThemePreference() {
+        val markPurposeIcon = when (Preferences.getInstance(activity!!).isDarkTheme) {
+            false -> R.drawable.prefs_moon
+            true -> R.drawable.prefs_sun
+        }
+        findPreference(getString(R.string.preference_dark_theme)).setIcon(markPurposeIcon)
+    }
+
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         if (activity != null && isAdded) {
             when (key) {
                 getString(R.string.preference_mark_purpose) -> {
-                    initMarkPurpose()
+                    initMarkPurposePreference()
                     EventBus.getDefault().post(Refresh())
                 }
                 getString(R.string.preference_saturday_lessons) ->

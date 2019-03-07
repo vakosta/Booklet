@@ -119,12 +119,19 @@
         <item name="colorShadowPlusVkBot2">@color/colorShadowPlusVkBot2Black</item>
         <item name="colorShadowPlusVkBot1">@color/colorShadowPlusVkBot1Black</item>
         <item name="colorShadowPlusVkBot0">@color/colorShadowPlusVkBot0Black</item>
-        <item name="preferenceTheme">@style/PreferencesTheme</item>
+        <item name="preferenceTheme">@style/PreferencesThemeDark</item>
     </style>
 
     <style name="PreferencesTheme" parent="PreferenceThemeOverlay.v14.Material">
         <item name="divider">@null</item>
         <item name="android:dividerHeight">0dp</item>
+    </style>
+
+    <style name="PreferencesThemeDark" parent="PreferenceThemeOverlay.v14.Material">
+        <item name="divider">@null</item>
+        <item name="android:dividerHeight">0dp</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textColorSecondary">#dbdbdb</item>
     </style>
 
     <style name="EditTextLight">

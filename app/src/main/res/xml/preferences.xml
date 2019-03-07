@@ -22,7 +22,7 @@
             android:title="Уроки по субботам" />
         <SwitchPreference
             android:defaultValue="false"
-            android:icon="@drawable/prefs_calendar"
+            android:icon="@drawable/prefs_moon"
             android:key="@string/preference_dark_theme"
             android:title="Тёмная тема" />
     </PreferenceCategory>
