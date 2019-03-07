@@ -102,6 +102,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
                 getString(R.string.preference_saturday_lessons) ->
                     EventBus.getDefault().post(Refresh())
                 getString(R.string.preference_dark_theme) -> {
+                    Preferences.getInstance(activity!!).isShowedDarkThemePopup = true
                     EventBus.getDefault().post(RestartActivity(true))
                 }
             }

@@ -100,6 +100,7 @@ class MainActivity : AppCompatActivity(),
             when (requestCode) {
                 REQUEST_LOGIN -> {
                     when (resultCode) {
+                        RESULT_OK -> mPresenter.initPager()
                         RESULT_BACK_PRESSED -> finish()
                     }
                 }

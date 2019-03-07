@@ -18,6 +18,10 @@ class MainPresenter(private val view: MainView, private val mContext: Context) {
 
         view.initToolbar()
         view.initCalendar()
+        initPager()
+    }
+
+    fun initPager() {
         view.initPager()
         setFragmentByNavigationItem(R.id.navSchedule)
     }
