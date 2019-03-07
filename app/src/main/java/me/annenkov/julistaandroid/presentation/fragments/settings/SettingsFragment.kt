@@ -1,13 +1,13 @@
 package me.annenkov.julistaandroid.presentation.fragments.settings
 
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v14.preference.SwitchPreference
 import android.support.v7.preference.PreferenceFragmentCompat
 import android.view.View
 import me.annenkov.julistaandroid.R
 import me.annenkov.julistaandroid.domain.Preferences
+import me.annenkov.julistaandroid.domain.attribute
 import me.annenkov.julistaandroid.domain.model.PurchaseUpdate
 import me.annenkov.julistaandroid.domain.model.Refresh
 import org.greenrobot.eventbus.EventBus
@@ -26,7 +26,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.backgroundColor = Color.WHITE
+        view.backgroundColor = activity!!.attribute(R.attr.colorBackground).data
 
         val main = (findPreference(this.getString(R.string.preference_notification_main))
                 as SwitchPreference)

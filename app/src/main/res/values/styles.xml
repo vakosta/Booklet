@@ -23,12 +23,38 @@
         <item name="colorTransparentWaves">@color/colorTransparentWaves</item>
         <item name="colorPlusHeaderStart">@color/colorPlusHeaderStart</item>
         <item name="colorPlusHeaderEnd">@color/colorPlusHeaderEnd</item>
+        <item name="colorPlusDelimiter">@color/colorPlusDelimiter</item>
+        <item name="colorPlusBlock">@color/colorPlusBlock</item>
+        <item name="colorPlusBlockIconBell">@color/colorPlusBlockIconBell</item>
+        <item name="colorPlusBlockCircleBell">@color/colorPlusBlockCircleBell</item>
+        <item name="colorPlusBlockIconShawarma">@color/colorPlusBlockIconShawarma</item>
+        <item name="colorPlusBlockCircleShawarma">@color/colorPlusBlockCircleShawarma</item>
+        <item name="colorPlusTextBlockTitle">@color/colorPlusTextBlockTitle</item>
+        <item name="colorPlusTextBlockContent">@color/colorPlusTextBlockContent</item>
         <item name="colorTextPrimary">@color/colorTextPrimary</item>
         <item name="colorTextHomework">@color/colorTextHomework</item>
         <item name="colorTextTimeOfLesson">@color/colorTextTimeOfLesson</item>
         <item name="colorTextWeekdayActive">@color/colorTextWeekdayActive</item>
         <item name="colorTextXp">@color/colorTextXp</item>
         <item name="colorShadowPrimary">@color/colorShadowPrimary</item>
+        <item name="colorShadowPlusBlock5">@color/colorShadowPlusBlock5</item>
+        <item name="colorShadowPlusBlock4">@color/colorShadowPlusBlock4</item>
+        <item name="colorShadowPlusBlock3">@color/colorShadowPlusBlock3</item>
+        <item name="colorShadowPlusBlock2">@color/colorShadowPlusBlock2</item>
+        <item name="colorShadowPlusBlock1">@color/colorShadowPlusBlock1</item>
+        <item name="colorShadowPlusBlock0">@color/colorShadowPlusBlock0</item>
+        <item name="colorShadowPlusCircleShawarma5">@color/colorShadowPlusCircleShawarma5</item>
+        <item name="colorShadowPlusCircleShawarma4">@color/colorShadowPlusCircleShawarma4</item>
+        <item name="colorShadowPlusCircleShawarma3">@color/colorShadowPlusCircleShawarma3</item>
+        <item name="colorShadowPlusCircleShawarma2">@color/colorShadowPlusCircleShawarma2</item>
+        <item name="colorShadowPlusCircleShawarma1">@color/colorShadowPlusCircleShawarma1</item>
+        <item name="colorShadowPlusCircleShawarma0">@color/colorShadowPlusCircleShawarma0</item>
+        <item name="colorShadowPlusVkBot5">@color/colorShadowPlusVkBot5</item>
+        <item name="colorShadowPlusVkBot4">@color/colorShadowPlusVkBot4</item>
+        <item name="colorShadowPlusVkBot3">@color/colorShadowPlusVkBot3</item>
+        <item name="colorShadowPlusVkBot2">@color/colorShadowPlusVkBot2</item>
+        <item name="colorShadowPlusVkBot1">@color/colorShadowPlusVkBot1</item>
+        <item name="colorShadowPlusVkBot0">@color/colorShadowPlusVkBot0</item>
         <item name="preferenceTheme">@style/PreferencesTheme</item>
     </style>
 
@@ -55,12 +81,44 @@
         <item name="colorTransparentWaves">@color/colorTransparentWavesBlack</item>
         <item name="colorPlusHeaderStart">@color/colorPlusHeaderStartBlack</item>
         <item name="colorPlusHeaderEnd">@color/colorPlusHeaderEndBlack</item>
+        <item name="colorPlusDelimiter">@color/colorPlusDelimiterBlack</item>
+        <item name="colorPlusBlock">@color/colorPlusBlockBlack</item>
+        <item name="colorPlusBlockIconBell">@color/colorPlusBlockIconBellBlack</item>
+        <item name="colorPlusBlockCircleBell">@color/colorPlusBlockCircleBellBlack</item>
+        <item name="colorPlusBlockIconShawarma">@color/colorPlusBlockIconShawarmaBlack</item>
+        <item name="colorPlusBlockCircleShawarma">@color/colorPlusBlockCircleShawarmaBlack</item>
+        <item name="colorPlusTextBlockTitle">@color/colorPlusTextBlockTitleBlack</item>
+        <item name="colorPlusTextBlockContent">@color/colorPlusTextBlockContentBlack</item>
         <item name="colorTextPrimary">@color/colorTextPrimaryBlack</item>
         <item name="colorTextHomework">@color/colorTextHomeworkBlack</item>
         <item name="colorTextTimeOfLesson">@color/colorTextTimeOfLessonBlack</item>
         <item name="colorTextWeekdayActive">@color/colorTextWeekdayActiveBlack</item>
         <item name="colorTextXp">@color/colorTextXpBlack</item>
         <item name="colorShadowPrimary">@color/colorShadowPrimaryBlack</item>
+        <item name="colorShadowPlusBlock5">@color/colorShadowPlusBlock5Black</item>
+        <item name="colorShadowPlusBlock4">@color/colorShadowPlusBlock4Black</item>
+        <item name="colorShadowPlusBlock3">@color/colorShadowPlusBlock3Black</item>
+        <item name="colorShadowPlusBlock2">@color/colorShadowPlusBlock2Black</item>
+        <item name="colorShadowPlusBlock1">@color/colorShadowPlusBlock1Black</item>
+        <item name="colorShadowPlusBlock0">@color/colorShadowPlusBlock0Black</item>
+        <item name="colorShadowPlusCircleShawarma5">@color/colorShadowPlusCircleShawarma5Black
+        </item>
+        <item name="colorShadowPlusCircleShawarma4">@color/colorShadowPlusCircleShawarma4Black
+        </item>
+        <item name="colorShadowPlusCircleShawarma3">@color/colorShadowPlusCircleShawarma3Black
+        </item>
+        <item name="colorShadowPlusCircleShawarma2">@color/colorShadowPlusCircleShawarma2Black
+        </item>
+        <item name="colorShadowPlusCircleShawarma1">@color/colorShadowPlusCircleShawarma1Black
+        </item>
+        <item name="colorShadowPlusCircleShawarma0">@color/colorShadowPlusCircleShawarma0Black
+        </item>
+        <item name="colorShadowPlusVkBot5">@color/colorShadowPlusVkBot5Black</item>
+        <item name="colorShadowPlusVkBot4">@color/colorShadowPlusVkBot4Black</item>
+        <item name="colorShadowPlusVkBot3">@color/colorShadowPlusVkBot3Black</item>
+        <item name="colorShadowPlusVkBot2">@color/colorShadowPlusVkBot2Black</item>
+        <item name="colorShadowPlusVkBot1">@color/colorShadowPlusVkBot1Black</item>
+        <item name="colorShadowPlusVkBot0">@color/colorShadowPlusVkBot0Black</item>
         <item name="preferenceTheme">@style/PreferencesTheme</item>
     </style>
 

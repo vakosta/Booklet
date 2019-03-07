@@ -30,7 +30,7 @@
             android:drawablePadding="10dp"
             android:fontFamily="@font/futurapt_medium"
             android:text="Уведомления"
-            android:textColor="#212121"
+            android:textColor="?attr/colorPlusTextBlockTitle"
             android:textSize="22sp" />
 
     </LinearLayout>
@@ -46,7 +46,7 @@
         android:fontFamily="@font/futurapt_medium"
         android:gravity="center_vertical"
         android:text="— Новые оценки\n— Текущий/следующий урок\n— Отчётность за день\n— События в классе"
-        android:textColor="#a4a4a4"
+        android:textColor="?attr/colorPlusTextBlockContent"
         android:textSize="18sp" />
 
     <LinearLayout
@@ -74,7 +74,7 @@
             android:fontFamily="@font/futurapt_medium"
             android:gravity="center_vertical"
             android:text="149 рублей — как шаурма в центре Москвы"
-            android:textColor="#a4a4a4"
+            android:textColor="?attr/colorPlusTextBlockTitle"
             android:textSize="16sp" />
 
     </LinearLayout>
