@@ -24,6 +24,7 @@ import me.annenkov.julistaandroid.domain.model.RestartActivity
 import me.annenkov.julistaandroid.domain.services.NotificationsService
 import me.annenkov.julistaandroid.presentation.ActivityBaseView
 import me.annenkov.julistaandroid.presentation.CardBaseView
+import me.annenkov.julistaandroid.presentation.activities.dark_theme_popup.DarkThemePopupActivity
 import me.annenkov.julistaandroid.presentation.activities.login.LoginActivity
 import me.annenkov.julistaandroid.presentation.customviews.NonSwipeableViewPager
 import org.greenrobot.eventbus.EventBus
@@ -88,6 +89,8 @@ class MainActivity : AppCompatActivity(),
 
         if (intent.getBooleanExtra(EXTRA_IS_FROM_SETTINGS, false))
             bottomNavigation.selectedItemId = R.id.navSettings
+        if (!prefs.isShowedDarkThemePopup)
+            startActivity(Intent(this, DarkThemePopupActivity::class.java))
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

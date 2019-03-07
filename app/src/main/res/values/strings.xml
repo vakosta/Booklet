@@ -26,6 +26,7 @@
     <string name="preference_student_profiles" translatable="false">student_profiles</string>
     <string name="preference_saturday_lessons" translatable="false">saturday_lessons</string>
     <string name="preference_dark_theme" translatable="false">dark_theme</string>
+    <string name="preference_is_showed_dark_theme_popup" translatable="false">dark_theme_popup</string>
     <string name="preference_mark_purpose" translatable="false">mark_purpose</string>
     <string name="preference_notification_new_mark" translatable="false">notification_new_mark</string>
     <string name="preference_notification_news" translatable="false">notification_news</string>

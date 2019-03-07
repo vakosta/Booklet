@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:background="@drawable/background_dark_theme_button"
+    android:clickable="false"
+    android:fontFamily="@font/futurapt_medium"
+    android:text="Включить «Тёмную тему»"
+    android:textAllCaps="false"
+    android:textColor="#fff"
+    android:textSize="22sp"
+    android:textStyle="bold" />

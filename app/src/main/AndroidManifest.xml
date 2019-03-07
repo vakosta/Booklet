@@ -24,6 +24,9 @@
         <activity
             android:name=".presentation.activities.login.LoginActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.activities.dark_theme_popup.DarkThemePopupActivity"
+            android:screenOrientation="portrait" />
 
         <service android:name=".domain.services.FirebaseService">
             <intent-filter>
