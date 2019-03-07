@@ -21,8 +21,9 @@
             android:key="@string/preference_saturday_lessons"
             android:title="Уроки по субботам" />
         <SwitchPreference
+            android:defaultValue="false"
             android:icon="@drawable/prefs_calendar"
-            android:key="@string/preference_saturday_lessons"
+            android:key="@string/preference_dark_theme"
             android:title="Тёмная тема" />
     </PreferenceCategory>
 

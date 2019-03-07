@@ -29,6 +29,10 @@ class LoginActivity : AppCompatActivity(), LoginView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        when (Preferences.getInstance(this).isDarkTheme) {
+            false -> setTheme(R.style.AppTheme)
+            true -> setTheme(R.style.AppThemeBlack)
+        }
         setContentView(R.layout.activity_login)
         mPresenter = LoginPresenter(this, this)
 

@@ -10,6 +10,7 @@ import me.annenkov.julistaandroid.domain.Preferences
 import me.annenkov.julistaandroid.domain.attribute
 import me.annenkov.julistaandroid.domain.model.PurchaseUpdate
 import me.annenkov.julistaandroid.domain.model.Refresh
+import me.annenkov.julistaandroid.domain.model.RestartActivity
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.backgroundColor
@@ -64,7 +65,8 @@ class SettingsFragment : PreferenceFragmentCompat(),
                     Preferences.getInstance(activity!!).notificationNewMark = false
                     Preferences.getInstance(activity!!).notificationNews = false
                     Preferences.getInstance(activity!!).notificationsSubscription = false
-                    activity!!.recreate()
+                    Preferences.getInstance(activity!!).isDarkTheme = false
+                    EventBus.getDefault().post(RestartActivity(false))
                 }
                 noButton {}
             }.show()
@@ -90,6 +92,9 @@ class SettingsFragment : PreferenceFragmentCompat(),
                 }
                 getString(R.string.preference_saturday_lessons) ->
                     EventBus.getDefault().post(Refresh())
+                getString(R.string.preference_dark_theme) -> {
+                    EventBus.getDefault().post(RestartActivity(true))
+                }
             }
         }
     }

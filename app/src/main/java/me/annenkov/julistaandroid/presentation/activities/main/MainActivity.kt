@@ -20,6 +20,7 @@ import me.annenkov.julistaandroid.domain.*
 import me.annenkov.julistaandroid.domain.model.Date
 import me.annenkov.julistaandroid.domain.model.OnPurchase
 import me.annenkov.julistaandroid.domain.model.PurchaseUpdate
+import me.annenkov.julistaandroid.domain.model.RestartActivity
 import me.annenkov.julistaandroid.domain.services.NotificationsService
 import me.annenkov.julistaandroid.presentation.ActivityBaseView
 import me.annenkov.julistaandroid.presentation.CardBaseView
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity(),
         View.OnTouchListener,
         BillingProcessor.IBillingHandler {
     private lateinit var mPresenter: MainPresenter
+    private lateinit var starterIntent: Intent
 
     private lateinit var mFirebaseAnalytics: FirebaseAnalytics
     private lateinit var mBp: BillingProcessor
@@ -52,6 +54,11 @@ class MainActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        starterIntent = intent
+        when (Preferences.getInstance(this).isDarkTheme) {
+            false -> setTheme(R.style.AppTheme)
+            true -> setTheme(R.style.AppThemeBlack)
+        }
         setContentView(R.layout.activity_main)
         mPresenter = MainPresenter(this, this)
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
@@ -78,6 +85,9 @@ class MainActivity : AppCompatActivity(),
                 startService(i)
             }
         }
+
+        if (intent.getBooleanExtra(EXTRA_IS_FROM_SETTINGS, false))
+            bottomNavigation.selectedItemId = R.id.navSettings
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -155,7 +165,7 @@ class MainActivity : AppCompatActivity(),
                 val token = prefs.userToken
                 val hash = "$pid$token".subscriptionHash()
                 prefs.notificationsSubscription = true
-                uiThread { _ ->
+                uiThread {
                     EventBus.getDefault().post(PurchaseUpdate())
 
                     alert(getString(R.string.gratitude),
@@ -217,6 +227,13 @@ class MainActivity : AppCompatActivity(),
     fun onNewDate(date: Date) {
         mPresenter.mSelectedDate = date
         setToolbarText(DateHelper.getMonthNameByNumber(date.month))
+    }
+
+    @Subscribe
+    fun restartActivity(restartActivity: RestartActivity) {
+        finish()
+        starterIntent.putExtra(EXTRA_IS_FROM_SETTINGS, restartActivity.isFromSettings)
+        startActivity(starterIntent)
     }
 
     override fun initToolbar() {
@@ -313,5 +330,7 @@ class MainActivity : AppCompatActivity(),
 
         const val RESULT_OK = 2
         const val RESULT_BACK_PRESSED = 3
+
+        private const val EXTRA_IS_FROM_SETTINGS = "IS_FROM_SETTINGS"
     }
 }
