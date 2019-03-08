@@ -46,12 +46,12 @@ class SettingsFragment : PreferenceFragmentCompat(),
         initMarkPurposePreference()
         initDarkThemePreference()
 
-        findPreference("button_vk").setOnPreferenceClickListener { _ ->
+        findPreference("button_vk").setOnPreferenceClickListener {
             browse(getString(R.string.url_vk_page))
             true
         }
 
-        findPreference("button_exit").setOnPreferenceClickListener { _ ->
+        findPreference("button_exit").setOnPreferenceClickListener {
             alert("Вы уверены?") {
                 yesButton {
                     Preferences.getInstance(activity!!).userLogin = ""
@@ -85,11 +85,11 @@ class SettingsFragment : PreferenceFragmentCompat(),
     }
 
     private fun initDarkThemePreference() {
-        val markPurposeIcon = when (Preferences.getInstance(activity!!).isDarkTheme) {
+        val darkThemeIcon = when (Preferences.getInstance(activity!!).isDarkTheme) {
             false -> R.drawable.prefs_moon
             true -> R.drawable.prefs_sun
         }
-        findPreference(getString(R.string.preference_dark_theme)).setIcon(markPurposeIcon)
+        findPreference(getString(R.string.preference_dark_theme)).setIcon(darkThemeIcon)
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {

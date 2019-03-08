@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:drawablePadding="10dp"
             android:fontFamily="@font/futurapt_medium"
-            android:text="Уведомления"
+            android:text="Бесплатный доступ к уведомлениям"
             android:textColor="?attr/colorPlusTextBlockTitle"
             android:textSize="22sp" />
 
@@ -47,12 +47,12 @@
         android:layout_marginEnd="12dp"
         android:fontFamily="@font/futurapt_medium"
         android:gravity="center_vertical"
-        android:text="— Новые оценки\n— Текущий/следующий урок\n— Отчётность за день\n— События в классе"
+        android:text="Пригласите пять друзей и получите бесплатную подписку на год"
         android:textColor="?attr/colorPlusTextBlockContent"
         android:textSize="18sp" />
 
     <LinearLayout
-        android:id="@+id/comparison"
+        android:id="@+id/invites"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/description"
@@ -62,37 +62,31 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/background_plus_item_comparison_icon"
-            android:padding="10dp"
-            app:srcCompat="@drawable/shawarma" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/futurapt_medium"
-            android:gravity="center_vertical"
-            android:text="149 рублей — как шаурма в центре Москвы"
-            android:textColor="?attr/colorPlusTextBlockTitle"
-            android:textSize="16sp" />
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/buy"
+        android:id="@+id/invites_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/invites"
+        android:layout_centerHorizontal="true"
+        android:text="Переходов: 2/3"
+        android:textColor="#a4a4a4"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/invite"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@id/comparison"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/background_plus_button_buy"
+        android:layout_below="@id/invites_count"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/background_plus_button_invite"
         android:clickable="true"
         android:focusable="true"
         android:fontFamily="@font/futurapt_medium"
         android:gravity="center"
-        android:text="149р."
+        android:text="Пригласить друзей"
         android:textColor="#fff"
         android:textSize="20sp" />
 
