@@ -32,6 +32,8 @@ class LoginPresenter(
                     auth.pid!!,
                     auth.studentProfileId!!,
                     auth.botCode!!,
+                    auth.inviteCode!!,
+                    auth.invitations!!,
                     auth.students!!)
         } catch (e: KotlinNullPointerException) {
             onFailureResponse()

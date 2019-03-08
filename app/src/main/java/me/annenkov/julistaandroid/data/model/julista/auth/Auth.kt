@@ -16,6 +16,12 @@ class Auth {
     @SerializedName("bot_code")
     @Expose
     var botCode: String? = null
+    @SerializedName("invite_code")
+    @Expose
+    var inviteCode: String? = null
+    @SerializedName("invitations")
+    @Expose
+    var invitations: Int? = null
     @SerializedName("students")
     @Expose
     var students: List<Profile>? = null

@@ -29,10 +29,6 @@ class LoginActivity : AppCompatActivity(), LoginView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        when (Preferences.getInstance(this).isDarkTheme) {
-            false -> setTheme(R.style.AppTheme)
-            true -> setTheme(R.style.AppThemeBlack)
-        }
         setContentView(R.layout.activity_login)
         mPresenter = LoginPresenter(this, this)
 
@@ -61,7 +57,7 @@ class LoginActivity : AppCompatActivity(), LoginView {
             browse(getString(R.string.url_privacy_policy))
         }
 
-        infoButton.setOnClickListener { _ ->
+        infoButton.setOnClickListener {
             alert("Для входа в дневник вы можете использовать номер телефона или почту, " +
                     "указанные на сайте mos.ru.\n\n" +
                     "Вводите номер в формате +79... или 9...") {
@@ -81,6 +77,8 @@ class LoginActivity : AppCompatActivity(), LoginView {
                                    pid: String,
                                    studentProfileId: String,
                                    botCode: String,
+                                   inviteCode: String,
+                                   invitations: Int,
                                    profiles: List<Profile>?) {
         endLoading()
         val prefs = Preferences.getInstance(this)
@@ -93,6 +91,8 @@ class LoginActivity : AppCompatActivity(), LoginView {
             prefs.userPid = pid
             prefs.userStudentProfileId = ids[i].toString()
             prefs.botCode = botCode
+            prefs.inviteCode = inviteCode
+            prefs.invitations = invitations
             prefs.userStudentProfiles = profiles
             setResult(MainActivity.RESULT_OK)
             finish()

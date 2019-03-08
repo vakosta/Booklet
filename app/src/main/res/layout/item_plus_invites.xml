@@ -20,11 +20,12 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="top"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="2dp"
             android:layout_marginEnd="10dp"
-            android:background="@drawable/background_plus_item_header_icon"
+            android:background="@drawable/background_check_bold"
             android:padding="4dp"
-            app:srcCompat="@drawable/bell" />
+            android:tint="#fff"
+            app:srcCompat="@drawable/check_bold" />
 
         <TextView
             android:layout_width="match_parent"
@@ -59,9 +60,68 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="12dp"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:orientation="horizontal">
 
+        <ImageView
+            android:id="@+id/invite1"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:background="@drawable/background_invite_round_blue"
+            android:padding="12dp"
+            android:src="@drawable/account" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/invite2"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:background="@drawable/background_invite_round_green"
+            android:padding="12dp"
+            android:src="@drawable/account" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/invite3"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:background="@drawable/background_invite_round_orange"
+            android:padding="12dp"
+            android:src="@drawable/account" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/invite4"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:background="@drawable/background_invite_round_red"
+            android:padding="12dp"
+            android:src="@drawable/account" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/invite5"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:background="@drawable/background_invite_round_violet"
+            android:padding="12dp"
+            android:src="@drawable/account" />
 
     </LinearLayout>
 
@@ -71,7 +131,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/invites"
         android:layout_centerHorizontal="true"
-        android:text="Переходов: 2/3"
+        android:text="Переходов: 2/5"
         android:textColor="#a4a4a4"
         android:textSize="16sp" />
 

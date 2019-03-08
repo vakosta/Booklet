@@ -10,6 +10,8 @@ import me.annenkov.julistaandroid.data.model.julista.auth.Profile
 
 class Preferences private constructor(context: Context) {
     private val KEY_BOT_CODE = context.getString(R.string.preference_bot_code)
+    private val KEY_INVITE_CODE = context.getString(R.string.preference_invite_code)
+    private val KEY_INVITATIONS = context.getString(R.string.preference_invitations)
     private val KEY_LOGIN = context.getString(R.string.preference_login)
     private val KEY_PASSWORD = context.getString(R.string.preference_password)
     private val KEY_TOKEN = context.getString(R.string.preference_token)
@@ -31,8 +33,16 @@ class Preferences private constructor(context: Context) {
             .getDefaultSharedPreferences(context)
 
     var botCode: String
-        get() = prefs.getString(KEY_BOT_CODE, "")
+        get() = prefs.getString(KEY_BOT_CODE, "loading...")
         set(value) = prefs.edit().putString(KEY_BOT_CODE, value).apply()
+
+    var inviteCode: String
+        get() = prefs.getString(KEY_INVITE_CODE, "loading...")
+        set(value) = prefs.edit().putString(KEY_INVITE_CODE, value).apply()
+
+    var invitations: Int
+        get() = prefs.getInt(KEY_INVITATIONS, 0)
+        set(value) = prefs.edit().putInt(KEY_INVITATIONS, value).apply()
 
     var userLogin: String
         get() = prefs.getString(KEY_LOGIN, "")

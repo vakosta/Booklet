@@ -6,7 +6,7 @@ interface LoginView {
     fun startLoading()
     fun endLoading()
 
-    fun onLoginSuccessful(login: String, password: String, token: String, pid: String, studentProfileId: String, botCode: String, profiles: List<Profile>?)
+    fun onLoginSuccessful(login: String, password: String, token: String, pid: String, studentProfileId: String, botCode: String, inviteCode: String, invitations: Int, profiles: List<Profile>?)
     fun onLoginFailed()
     fun onNetworkProblems()
 }
