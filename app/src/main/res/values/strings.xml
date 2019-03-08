@@ -39,6 +39,8 @@
     <string name="license_key" translatable="false">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyUYPCLYEi+UdAFIIMOaBCO31QWc1i6434TrHZmID/UMWIfFF/C0h+d8mYw4xwbtIJRQ+TWMULN//oAluY8fd3UALKiVY6FvG2aFYWY3BR/IFdx64STsyV76jWJqlWyknvIXn/U/UDVUY5iKGunaKjWkyEj581VKhFjnxITLgEFCXfYHPzw3xCyLbXAWQv6cQ5gcs0mbRYOK2qT9t+9dcqFQpALRSlJ1kux8HPjYCyDg21ewnwEqzFcOPp61gBrWUS/f56KYmtOw0rLRko2/wAkplSOgb7qRz+fV83O7cbM384kzaOrJ0wC24YBG1VNBTG+/VDGPI9kd0KBemHZFcDQIDAQAB</string>
     <string name="gratitude">Нам очень приятно, что вы доверяете нам. Эти деньги пойдут на развитие Julista. Теперь вам доступен весь набор уведомлений, ура! Уведомления можно включить в настройках. Надеемся, что вы останетесь довольны.</string>
     <string name="plus_activated">Activated</string>
+    <string name="invite_code_description">Введите код приглашения, при его наличии, или оставьте поле пустым</string>
+    <string name="invite_code">invite code</string>
 
     <string-array name="list_preference_mark_purpose_values">
         <item>3</item>

@@ -22,7 +22,6 @@ import org.jetbrains.anko.support.v4.toast
 import kotlin.math.min
 
 class PlusFragment : ViewPagerFragment() {
-
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

@@ -35,14 +35,19 @@ class LoginActivity : AppCompatActivity(), LoginView {
         KeyboardVisibilityEvent.setEventListener(this) {
             if (it) {
                 header.visibility = View.GONE
+                privacyBlock.visibility = View.GONE
+                problemsWithLoggingButton.visibility = View.GONE
             } else {
                 header.visibility = View.VISIBLE
+                privacyBlock.visibility = View.VISIBLE
+                problemsWithLoggingButton.visibility = View.VISIBLE
             }
         }
 
         mLoginEnterButton.setOnClickListener {
             mPresenter.login(mLoginField.text.toString(),
-                    mPasswordField.text.toString())
+                    mPasswordField.text.toString(),
+                    inviteCodeField.text.toString())
         }
 
         mProblemsWithLoggingButton.setOnClickListener {

@@ -121,14 +121,14 @@ class ApiHelper private constructor(val context: Context) {
         return false
     }
 
-    fun auth(login: String, password: String, fcmToken: String?): Auth {
+    fun auth(login: String, password: String, fcmToken: String?, inviteCode: String?): Auth {
         synchronized(this) {
             val prefs = Preferences.getInstance(context)
             val currentTime = System.currentTimeMillis() / 1000
             val token = if (currentTime - prefs.userTokenLastUpdate > 30
                     || prefs.userToken.isEmpty()) {
                 val request = getAPI(ApiType.JULISTA)
-                        .auth(login, password, fcmToken).execute().body()
+                        .auth(login, password, fcmToken, inviteCode).execute().body()
                 prefs.userTokenLastUpdate = currentTime
                 prefs.userToken = request?.token ?: ""
                 request

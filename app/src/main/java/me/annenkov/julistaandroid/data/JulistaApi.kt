@@ -18,7 +18,8 @@ interface JulistaApi {
     @POST("auth_user/")
     fun auth(@Field("login") login: String,
              @Field("password") password: String,
-             @Field("fcm_token") fcmToken: String?): Call<Auth>
+             @Field("fcm_token") fcmToken: String?,
+             @Field("invite_code") inviteCode: String?): Call<Auth>
 
     @GET("schedule/")
     fun getScheduleJulista(@Query("token") token: String,

@@ -12,16 +12,18 @@ class LoginPresenter(
 ) : InitContentPresenter(mContext) {
     private var mLogin = ""
     private var mPassword = ""
+    private var mInviteCode = ""
 
-    fun login(login: String, password: String) {
+    fun login(login: String, password: String, inviteCode: String) {
         view.startLoading()
         mLogin = login
         mPassword = password
+        mInviteCode = inviteCode
         initContent()
     }
 
     override fun executeMethod(): Any = ApiHelper.getInstance(mContext).auth(mLogin, mPassword,
-            FirebaseInstanceId.getInstance().token)
+            FirebaseInstanceId.getInstance().token, mInviteCode)
 
     override fun onSuccessful(response: Any) {
         val auth = (response as Auth)

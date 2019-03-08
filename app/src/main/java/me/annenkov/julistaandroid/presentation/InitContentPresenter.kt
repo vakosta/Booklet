@@ -49,7 +49,7 @@ abstract class InitContentPresenter(private val mContext: Context) {
         doAsync {
             val response = ApiHelper.getInstance(mContext).auth(prefs.userLogin,
                     prefs.userPassword,
-                    FirebaseInstanceId.getInstance().token)
+                    FirebaseInstanceId.getInstance().token, null)
             val newToken = response.token
             val botCode = response.botCode
             val students = response.students
