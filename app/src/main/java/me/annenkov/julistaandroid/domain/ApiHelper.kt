@@ -125,7 +125,7 @@ class ApiHelper private constructor(val context: Context) {
         synchronized(this) {
             val prefs = Preferences.getInstance(context)
             val currentTime = System.currentTimeMillis() / 1000
-            val token = if (currentTime - prefs.userTokenLastUpdate > 30
+            val token = if (currentTime - prefs.userTokenLastUpdate > 5 // TODO: Исправить баг
                     || prefs.userToken.isEmpty()) {
                 val request = getAPI(ApiType.JULISTA)
                         .auth(login, password, fcmToken, inviteCode).execute().body()
@@ -300,7 +300,8 @@ class ApiHelper private constructor(val context: Context) {
                             "",
                             mark.values[0].grade.five.toInt(),
                             mark.isExam,
-                            mark.isPoint)
+                            mark.isPoint,
+                            mark.weight)
                     marksResponse.add(markResponse)
                 }
             }

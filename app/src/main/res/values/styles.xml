@@ -6,6 +6,8 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorBackground">@color/colorBackground</item>
         <item name="colorMarkPrimaryBackground">@color/colorMarkPrimaryBackground</item>
+        <item name="colorMarkWeightStart">@color/colorMarkWeightStart</item>
+        <item name="colorMarkWeightEnd">@color/colorMarkWeightEnd</item>
         <item name="colorBottomBar">@color/colorBottomBar</item>
         <item name="colorBottomBarIconActive">@color/colorBottomBarIconActive</item>
         <item name="colorBottomBarIcon">@color/colorBottomBarIcon</item>
@@ -64,6 +66,8 @@
         <item name="colorAccent">@color/colorAccentBlack</item>
         <item name="colorBackground">@color/colorBackgroundBlack</item>
         <item name="colorMarkPrimaryBackground">@color/colorMarkPrimaryBackgroundBlack</item>
+        <item name="colorMarkWeightStart">@color/colorMarkWeightStartBlack</item>
+        <item name="colorMarkWeightEnd">@color/colorMarkWeightEndBlack</item>
         <item name="colorBottomBar">@color/colorBottomBarBlack</item>
         <item name="colorBottomBarIconActive">@color/colorBottomBarIconActiveBlack</item>
         <item name="colorBottomBarIcon">@color/colorBottomBarIconBlack</item>
@@ -120,6 +124,7 @@
         <item name="colorShadowPlusVkBot1">@color/colorShadowPlusVkBot1Black</item>
         <item name="colorShadowPlusVkBot0">@color/colorShadowPlusVkBot0Black</item>
         <item name="preferenceTheme">@style/PreferencesThemeDark</item>
+        <item name="android:datePickerDialogTheme">@style/MyDatePickerDialogTheme</item>
     </style>
 
     <style name="PreferencesTheme" parent="PreferenceThemeOverlay.v14.Material">
@@ -143,6 +148,14 @@
 
     <style name="ProgressDark">
         <item name="colorAccent">#5690ff</item>
+    </style>
+
+    <style name="MyDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
+        <item name="android:datePickerStyle">@style/MyDatePickerStyle</item>
+    </style>
+
+    <style name="MyDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
+        <item name="android:headerBackground">#1B2936</item>
     </style>
 
 </resources>

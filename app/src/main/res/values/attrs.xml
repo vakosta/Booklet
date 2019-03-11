@@ -2,6 +2,8 @@
 <resources>
     <attr name="colorBackground" format="reference" />
     <attr name="colorMarkPrimaryBackground" format="reference" />
+    <attr name="colorMarkWeightStart" format="reference" />
+    <attr name="colorMarkWeightEnd" format="reference" />
     <attr name="colorBottomBar" format="reference" />
     <attr name="colorBottomBarIconActive" format="reference" />
     <attr name="colorBottomBarIcon" format="reference" />

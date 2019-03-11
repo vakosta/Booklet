@@ -5,6 +5,8 @@
     <color name="colorAccent">#5690ff</color>
     <color name="colorBackground">#fff</color>
     <color name="colorMarkPrimaryBackground">#5690ff</color>
+    <color name="colorMarkWeightStart">#3aa9ff</color>
+    <color name="colorMarkWeightEnd">#8465ff</color>
     <color name="colorBottomBar">#fafafa</color>
     <color name="colorBottomBarIconActive">#5690ff</color>
     <color name="colorBottomBarIcon">#a8adaf</color>
@@ -63,6 +65,8 @@
     <color name="colorAccentBlack">#5690ff</color>
     <color name="colorBackgroundBlack">#1B2936</color>
     <color name="colorMarkPrimaryBackgroundBlack">#5690ff</color>
+    <color name="colorMarkWeightStartBlack">#3aa9ff</color>
+    <color name="colorMarkWeightEndBlack">#8465ff</color>
     <color name="colorBottomBarBlack">#283D4E</color>
     <color name="colorBottomBarIconActiveBlack">#fff</color>
     <color name="colorBottomBarIconBlack">#687783</color>
@@ -93,7 +97,7 @@
     <color name="colorTextTimeOfLessonBlack">#dbdbdb</color>
     <color name="colorTextWeekdayActiveBlack">#132029</color>
     <color name="colorTextXpBlack">#fff</color>
-    <color name="colorShadowPrimaryBlack">#2C2C2C</color>
+    <color name="colorShadowPrimaryBlack">#e0e0e0</color>
     <color name="colorShadowPlusBlock5Black">#50131D26</color>
     <color name="colorShadowPlusBlock4Black">#40131D26</color>
     <color name="colorShadowPlusBlock3Black">#30131D26</color>

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import me.annenkov.julistaandroid.R
 import me.annenkov.julistaandroid.domain.ApiHelper
@@ -149,25 +150,35 @@ class ScheduleCardPresenter(
     private fun prepareMarksView(ll: LinearLayout, marks: List<MarkResponse>) {
         for ((index, mark) in marks.withIndex()) {
             val view = LayoutInflater.from(mContext)
-                    .inflate(R.layout.layout_mark, null, false) as TextView
-            val param = LinearLayout.LayoutParams(22.px, 22.px)
-            if (index != 0) {
-                param.marginStart = 4.px
+                    .inflate(R.layout.layout_mark, null, false) as RelativeLayout
+            val markView: TextView = view.find(R.id.scheduleItemMark)
+            val weightView: TextView = view.find(R.id.scheduleItemMarkWeight)
+            val param = RelativeLayout.LayoutParams(22.px, 22.px)
+            if (index < marks.size) {
+                param.marginEnd = 4.px
             }
-            view.layoutParams = param
+            markView.layoutParams = param
             if (!mark.isPoint) {
-                view.text = mark.mark.toString()
-                view.background = when (mark.mark) {
+                markView.text = mark.mark.toString()
+                markView.background = when (mark.mark) {
                     5 -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_five)
                     4 -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_four)
                     3 -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_three)
                     else -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_two)
                 }
+
+                if (mark.weight > 1) {
+                    weightView.text = mark.weight.toString()
+                    param.marginEnd = (-2).px
+                    param.topMargin = 4.px
+                } else {
+                    weightView.visibility = View.GONE
+                }
             } else {
-                view.background = ContextCompat.getDrawable(mContext, R.drawable.background_point)
+                markView.background = ContextCompat.getDrawable(mContext, R.drawable.background_point)
                 val params = LinearLayout.LayoutParams(8.px, 8.px)
                 params.marginEnd = 24.px
-                view.layoutParams = params
+                markView.layoutParams = params
             }
             ll.addView(view)
         }

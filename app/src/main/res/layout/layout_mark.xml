@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scheduleItemMark"
-    android:layout_width="22dp"
-    android:layout_height="22dp"
-    android:layout_weight="0"
-    android:background="@drawable/background_mark_progress"
-    android:gravity="center"
-    android:text="@string/loading_points"
-    android:textColor="#fff"
-    android:textStyle="bold" />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/scheduleItemMark"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:background="@drawable/background_mark_progress"
+        android:gravity="center"
+        android:text="@string/loading_points"
+        android:textColor="#fff"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/scheduleItemMarkWeight"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_below="@id/scheduleItemMark"
+        android:layout_marginStart="-8dp"
+        android:layout_marginTop="-8dp"
+        android:layout_toEndOf="@id/scheduleItemMark"
+        android:background="@drawable/background_mark_weight"
+        android:gravity="center"
+        android:text="@string/loading_points"
+        android:textColor="#fff"
+        android:textSize="10sp" />
+
+</RelativeLayout>

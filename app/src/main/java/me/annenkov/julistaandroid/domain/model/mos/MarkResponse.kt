@@ -5,4 +5,5 @@ data class MarkResponse(val scheduleLessonId: Int,
                         val subject: String,
                         val mark: Int,
                         val isExam: Boolean,
-                        val isPoint: Boolean)
+                        val isPoint: Boolean,
+                        val weight: Int)
