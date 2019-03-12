@@ -35,8 +35,8 @@
             android:drawableTop="@drawable/alert"
             android:drawableTint="?attr/colorTextPrimary"
             android:gravity="center"
-            android:textColor="?attr/colorTextPrimary"
             android:text="Произошла ошибка"
+            android:textColor="?attr/colorTextPrimary"
             android:visibility="gone" />
 
         <TextView
@@ -47,8 +47,8 @@
             android:drawableTop="@drawable/alert"
             android:drawableTint="?attr/colorTextPrimary"
             android:gravity="center"
-            android:textColor="?attr/colorTextPrimary"
             android:text="Проверьте подключение к интернету"
+            android:textColor="?attr/colorTextPrimary"
             android:visibility="gone" />
 
     </RelativeLayout>

@@ -155,7 +155,13 @@
     </style>
 
     <style name="MyDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
-        <item name="android:headerBackground">#1B2936</item>
+        <item name="android:headerBackground">#132029</item>
+    </style>
+
+    <style name="AlertDialogTheme">
+        <item name="android:background">#132029</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textColorPrimary">#fff</item>
     </style>
 
 </resources>
