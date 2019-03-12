@@ -8,5 +8,5 @@
     android:gravity="center_vertical"
     android:paddingStart="16dp"
     android:text="@string/button_vk"
-    android:textColor="#4c75a3"
+    android:textColor="#5181b8"
     android:textSize="16sp" />

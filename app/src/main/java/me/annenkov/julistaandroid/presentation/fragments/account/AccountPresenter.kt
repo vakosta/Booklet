@@ -188,6 +188,7 @@ class AccountPresenter(private val view: AccountView,
         initStatus(account.scaleOfSuccess!!)
         initTop(account.top!!)
         initNews(account.news!!)
+        view.removePadding()
 
         view.stopRefreshing()
     }

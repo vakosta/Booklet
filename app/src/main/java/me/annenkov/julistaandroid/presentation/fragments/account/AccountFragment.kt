@@ -15,6 +15,7 @@ import me.annenkov.julistaandroid.presentation.ViewPagerFragment
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.backgroundColor
+import org.jetbrains.anko.bottomPadding
 import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.selector
@@ -140,6 +141,10 @@ class AccountFragment : ViewPagerFragment(), AccountView {
         newsBlock.visibility = View.VISIBLE
         newsBlock.animate()
                 .alpha(1F)
+    }
+
+    override fun removePadding() {
+        innerLinearLayout.bottomPadding = 0
     }
 
     override fun stopRefreshing() {

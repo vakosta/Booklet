@@ -9,5 +9,6 @@
     android:gravity="center_vertical"
     android:paddingStart="16dp"
     android:text="Выйти"
-    android:textColor="#ff0000"
-    android:textSize="16sp" />
+    android:textColor="#ff4939"
+    android:textSize="16sp"
+    android:textStyle="bold" />

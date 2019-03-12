@@ -19,5 +19,7 @@ interface AccountView {
     fun showTop()
     fun showNews()
 
+    fun removePadding()
+
     fun stopRefreshing()
 }
