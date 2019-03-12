@@ -42,6 +42,11 @@ abstract class InitContentPresenter(private val mContext: Context) {
             prefs.botCode = code
     }
 
+    private fun updateInviteCodeIfNeed(code: String) {
+        if (code != prefs.inviteCode)
+            prefs.inviteCode = code
+    }
+
     abstract fun onSuccessful(response: Any)
     abstract fun onFailureResponse()
     abstract fun onFailureNetwork()
@@ -52,9 +57,15 @@ abstract class InitContentPresenter(private val mContext: Context) {
                     FirebaseInstanceId.getInstance().token, null)
             val newToken = response.token
             val botCode = response.botCode
+            val inviteCode = response.inviteCode
+            val invitations = response.invitations
             val students = response.students
             if (botCode != null)
                 updateBotCodeIfNeed(botCode)
+            if (inviteCode != null)
+                updateInviteCodeIfNeed(inviteCode)
+            if (invitations != null)
+                prefs.invitations = invitations
             if (students != null)
                 prefs.userStudentProfiles = students
             if (newToken != null) {
