@@ -148,6 +148,7 @@ class ScheduleCardPresenter(
     }
 
     private fun prepareMarksView(ll: LinearLayout, marks: List<MarkResponse>) {
+        var isCoefficients = false
         for ((index, mark) in marks.withIndex()) {
             val view = LayoutInflater.from(mContext)
                     .inflate(R.layout.layout_mark, null, false) as RelativeLayout
@@ -169,8 +170,8 @@ class ScheduleCardPresenter(
 
                 if (mark.weight > 1) {
                     weightView.text = mark.weight.toString()
-                    param.marginEnd = (-2).px
-                    param.topMargin = 4.px
+                    param.marginEnd = (-6).px
+                    isCoefficients = true
                 } else {
                     weightView.visibility = View.GONE
                 }
@@ -182,9 +183,10 @@ class ScheduleCardPresenter(
             }
             ll.addView(view)
         }
-        if (marks.isEmpty()) {
+        if (marks.isEmpty())
             ll.visibility = View.GONE
-        }
+        if (isCoefficients)
+            ll.topPadding = 8.px
     }
 
     override fun executeMethod(): List<ScheduleResponse> = ApiHelper.getInstance(mContext)
