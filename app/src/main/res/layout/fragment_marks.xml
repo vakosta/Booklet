@@ -33,8 +33,9 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:drawableTop="@drawable/alert"
-            android:drawableTint="#808080"
+            android:drawableTint="?attr/colorTextPrimary"
             android:gravity="center"
+            android:textColor="?attr/colorTextPrimary"
             android:text="Произошла ошибка"
             android:visibility="gone" />
 
@@ -44,8 +45,9 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:drawableTop="@drawable/alert"
-            android:drawableTint="#808080"
+            android:drawableTint="?attr/colorTextPrimary"
             android:gravity="center"
+            android:textColor="?attr/colorTextPrimary"
             android:text="Проверьте подключение к интернету"
             android:visibility="gone" />
 
