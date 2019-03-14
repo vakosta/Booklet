@@ -177,7 +177,7 @@ class ScheduleCardPresenter(
                 }
             } else {
                 markView.background = ContextCompat.getDrawable(mContext, R.drawable.background_point)
-                val params = LinearLayout.LayoutParams(8.px, 8.px)
+                val params = RelativeLayout.LayoutParams(8.px, 8.px)
                 params.marginEnd = 24.px
                 markView.layoutParams = params
             }
