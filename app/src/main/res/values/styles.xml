@@ -158,7 +158,7 @@
         <item name="android:headerBackground">#132029</item>
     </style>
 
-    <style name="AlertDialogTheme">
+    <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:background">#132029</item>
         <item name="android:textColor">#fff</item>
         <item name="android:textColorPrimary">#fff</item>

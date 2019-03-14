@@ -42,9 +42,6 @@ class PlusFragment : ViewPagerFragment() {
             alert("Вы можете подключить нашего бота для ВК. " +
                     "Просто откройте бота и следуйте инструкциям.\n\n" +
                     "Твой код: $botCode", "Бот для ВК") {
-                also {
-                    ctx.setTheme(R.style.AlertDialogTheme)
-                }
                 positiveButton("Скопировать и открыть") {
                     Utils.copyToClipboard(activity!!,
                             "Код для бота",
