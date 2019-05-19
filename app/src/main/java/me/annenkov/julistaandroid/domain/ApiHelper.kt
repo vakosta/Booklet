@@ -410,7 +410,7 @@ class ApiHelper private constructor(val context: Context) {
     }
 
     companion object : SingletonHolder<ApiHelper, Context>(::ApiHelper) {
-        private const val JULISTA_URL = "https://api.julista.org/"
+        private const val JULISTA_URL = "https://julista.annenkov.me/"
         private const val MOS_URL = "https://dnevnik.mos.ru/"
 
         private const val CACHE_SIZE = (1 * 1024 * 1024).toLong()
