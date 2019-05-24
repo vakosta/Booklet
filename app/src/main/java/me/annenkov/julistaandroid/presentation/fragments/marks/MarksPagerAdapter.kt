@@ -15,8 +15,8 @@ class MarksPagerAdapter(
         if (position == count - 1) {
             val results = arrayListOf<Result>()
             for (progress in progresses) {
-                val result = Result(progress.subjectName!!,
-                        arrayListOf())
+                val result = Result(progress.subjectName,
+                        arrayListOf(), progress.final)
                 for (period in progress.periods)
                     try {
                         result.marks.add(period.finalMark?.toInt() ?: continue)

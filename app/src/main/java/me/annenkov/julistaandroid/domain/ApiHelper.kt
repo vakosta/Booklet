@@ -388,10 +388,11 @@ class ApiHelper private constructor(val context: Context) {
                         }
 
                         try {
-                            progresses.add(ProgressResponse(progress.subjectName,
+                            progresses.add(ProgressResponse(progress.subjectName!!,
                                     progress.avgFive!!.toFloat(),
                                     progress.avgHundred!!.toFloat(),
-                                    periods))
+                                    periods,
+                                    progress.final?.toInt()))
                         } catch (ignored: NumberFormatException) {
                         }
                     }

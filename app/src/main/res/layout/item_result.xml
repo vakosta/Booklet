@@ -4,17 +4,17 @@
     android:id="@+id/itemSchedule"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="12dp"
     android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
     android:background="@drawable/shape_mark_subject_item_background"
     android:baselineAligned="false"
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical"
-    android:paddingBottom="8dp"
-    android:paddingEnd="12dp"
     android:paddingStart="12dp"
-    android:paddingTop="8dp">
+    android:paddingTop="8dp"
+    android:paddingEnd="12dp"
+    android:paddingBottom="8dp">
 
     <TextView
         android:id="@+id/marksItemSubject"
@@ -24,13 +24,27 @@
         android:textColor="?attr/colorTextPrimary"
         android:textSize="14sp" />
 
-    <com.nex3z.flowlayout.FlowLayout
-        android:id="@+id/marksMarkList"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:orientation="horizontal"
-        app:flChildSpacing="16dp"
-        app:flRowSpacing="8dp" />
+        android:orientation="horizontal">
+
+        <com.nex3z.flowlayout.FlowLayout
+            android:id="@+id/marksMarkList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            app:flChildSpacing="16dp"
+            app:flRowSpacing="8dp" />
+
+        <TextView
+            android:id="@+id/finalMark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible" />
+
+    </LinearLayout>
 
 </LinearLayout>

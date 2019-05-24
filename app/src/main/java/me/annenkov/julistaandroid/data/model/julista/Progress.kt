@@ -16,4 +16,7 @@ class Progress {
     @SerializedName("periods")
     @Expose
     var periods: List<Period>? = null
+    @SerializedName("year_mark")
+    @Expose
+    var final: String? = null
 }
