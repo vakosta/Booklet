@@ -122,10 +122,10 @@ class MainActivity : AppCompatActivity(),
             val prefs = Preferences.getInstance(this@MainActivity)
 
             val pid = prefs.userPid
-            val token = prefs.userToken
+            val token = prefs.userSecret
             val hash = "$pid$token".subscriptionHash()
             val result = ApiHelper.getInstance(this@MainActivity)
-                    .checkNotificationsSubscription(pid)
+                    .checkNotificationsSubscription(pid.toString())
                     .execute().body()?.result ?: false
             val isPurchasedSuccessfully = mBp
                     .getPurchaseTransactionDetails("notifications_20182019")
@@ -137,7 +137,7 @@ class MainActivity : AppCompatActivity(),
                 prefs.notificationsSubscription = true
                 try {
                     ApiHelper.getInstance(this@MainActivity)
-                            .setNotificationsSubscription(pid, token, hash).execute()
+                            .setNotificationsSubscription(pid.toString(), token!!, hash).execute()
                 } catch (e: Exception) {
                     Crashlytics.logException(e)
                 }
@@ -174,7 +174,7 @@ class MainActivity : AppCompatActivity(),
         if (!prefs.notificationsSubscription) {
             doAsync {
                 val pid = prefs.userPid
-                val token = prefs.userToken
+                val token = prefs.userSecret
                 val hash = "$pid$token".subscriptionHash()
                 prefs.notificationsSubscription = true
                 uiThread {
@@ -187,7 +187,7 @@ class MainActivity : AppCompatActivity(),
                 }
 
                 ApiHelper.getInstance(this@MainActivity)
-                        .setNotificationsSubscription(pid, token, hash).execute()
+                        .setNotificationsSubscription(pid.toString(), token!!, hash).execute()
             }
         }
     }

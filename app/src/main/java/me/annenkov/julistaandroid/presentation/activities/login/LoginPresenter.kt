@@ -2,9 +2,11 @@ package me.annenkov.julistaandroid.presentation.activities.login
 
 import android.content.Context
 import com.google.firebase.iid.FirebaseInstanceId
-import me.annenkov.julistaandroid.data.model.julista.auth.Auth
+import me.annenkov.julistaandroid.data.model.booklet.Auth
 import me.annenkov.julistaandroid.domain.ApiHelper
 import me.annenkov.julistaandroid.presentation.InitContentPresenter
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 class LoginPresenter(
         private val view: LoginView,
@@ -28,15 +30,16 @@ class LoginPresenter(
     override fun onSuccessful(response: Any) {
         val auth = (response as Auth)
         try {
+            doAsync {
+                val students = ApiHelper
+                        .getInstance(mContext)
+                        .getStudents(prefs.userPid!!, prefs.userSecret!!)
+                uiThread { }
+            }
             view.onLoginSuccessful(mLogin,
                     mPassword,
-                    response.token!!,
-                    auth.pid!!,
-                    auth.studentProfileId!!,
-                    auth.botCode!!,
-                    auth.inviteCode!!,
-                    auth.invitations!!,
-                    auth.students!!)
+                    response.secret!!,
+                    arrayListOf())
         } catch (e: KotlinNullPointerException) {
             onFailureResponse()
         }

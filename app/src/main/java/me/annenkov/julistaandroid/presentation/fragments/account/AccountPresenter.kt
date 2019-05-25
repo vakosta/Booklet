@@ -176,7 +176,7 @@ class AccountPresenter(private val view: AccountView,
     }
 
     override fun executeMethod(): Account = ApiHelper.getInstance(mContext)
-            .getAccount(prefs.userToken,
+            .getAccount(prefs.userSecret!!,
                     prefs.userStudentProfileId).execute().body()!!
 
     override fun onSuccessful(response: Any) {

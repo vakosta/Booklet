@@ -20,8 +20,8 @@ class MarksPresenter(
     }
 
     override fun executeMethod(): List<ProgressResponse> = ApiHelper.getInstance(mContext)
-            .getProgress(prefs.userToken,
-                    prefs.userPid.toInt(),
+            .getProgress(prefs.userSecret!!,
+                    prefs.userPid!!.toInt(),
                     prefs.userStudentProfileId.toInt())
 
     override fun onSuccessful(response: Any) {

@@ -1,11 +1,11 @@
 package me.annenkov.julistaandroid.data
 
+import me.annenkov.julistaandroid.data.model.booklet.Auth
 import me.annenkov.julistaandroid.data.model.julista.Progress
 import me.annenkov.julistaandroid.data.model.julista.ResultCheckNotificationsSubscription
 import me.annenkov.julistaandroid.data.model.julista.ResultSetNotificationsSubscription
 import me.annenkov.julistaandroid.data.model.julista.Schedule
 import me.annenkov.julistaandroid.data.model.julista.account.Account
-import me.annenkov.julistaandroid.data.model.julista.auth.Auth
 import me.annenkov.julistaandroid.data.model.mos.homework.HomeworkBase
 import me.annenkov.julistaandroid.data.model.mos.mark.Mark
 import me.annenkov.julistaandroid.data.model.mos.profile.Profile
@@ -15,11 +15,16 @@ import retrofit2.http.*
 
 interface JulistaApi {
     @FormUrlEncoded
-    @POST("auth_user/")
-    fun auth(@Field("login") login: String,
-             @Field("password") password: String,
-             @Field("fcm_token") fcmToken: String?,
-             @Field("invite_code") inviteCode: String?): Call<Auth>
+    @POST("auth/")
+    fun auth(@Field("diary") diary: String,
+             @Field("login") login: String,
+             @Field("password") password: String): Call<Auth>
+
+    @GET("api/profile/students/")
+    fun getStudents(
+            @Query("id") id: Int,
+            @Query("secret") secret: String
+    )
 
     @GET("schedule/")
     fun getScheduleJulista(@Query("token") token: String,

@@ -56,8 +56,8 @@ class SettingsFragment : PreferenceFragmentCompat(),
                 yesButton {
                     Preferences.getInstance(activity!!).userLogin = ""
                     Preferences.getInstance(activity!!).userPassword = ""
-                    Preferences.getInstance(activity!!).userToken = ""
-                    Preferences.getInstance(activity!!).userPid = ""
+                    Preferences.getInstance(activity!!).userSecret = ""
+                    Preferences.getInstance(activity!!).userPid = 0
                     Preferences.getInstance(activity!!).userStudentProfileId = ""
                     Preferences.getInstance(activity!!).botCode = ""
                     Preferences.getInstance(activity!!).markPurpose = 5

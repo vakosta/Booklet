@@ -78,12 +78,7 @@ class LoginActivity : AppCompatActivity(), LoginView {
 
     override fun onLoginSuccessful(login: String,
                                    password: String,
-                                   token: String,
-                                   pid: String,
-                                   studentProfileId: String,
-                                   botCode: String,
-                                   inviteCode: String,
-                                   invitations: Int,
+                                   secret: String,
                                    profiles: List<Profile>?) {
         endLoading()
         val prefs = Preferences.getInstance(this)
@@ -92,12 +87,8 @@ class LoginActivity : AppCompatActivity(), LoginView {
         selector("Выберите аккаунт ребёнка:", names) { _, i ->
             prefs.userLogin = login
             prefs.userPassword = password
-            prefs.userToken = token
-            prefs.userPid = pid
+            prefs.userSecret = secret
             prefs.userStudentProfileId = ids[i].toString()
-            prefs.botCode = botCode
-            prefs.inviteCode = inviteCode
-            prefs.invitations = invitations
             prefs.userStudentProfiles = profiles
             setResult(MainActivity.RESULT_OK)
             finish()

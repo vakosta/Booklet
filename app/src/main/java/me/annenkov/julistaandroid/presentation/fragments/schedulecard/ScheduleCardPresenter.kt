@@ -190,8 +190,8 @@ class ScheduleCardPresenter(
     }
 
     override fun executeMethod(): List<ScheduleResponse> = ApiHelper.getInstance(mContext)
-            .getSchedule(prefs.userToken,
-                    prefs.userPid.toInt(),
+            .getSchedule(prefs.userSecret!!,
+                    prefs.userPid!!.toInt(),
                     prefs.userStudentProfileId.toInt(),
                     mDate, mDate)
 

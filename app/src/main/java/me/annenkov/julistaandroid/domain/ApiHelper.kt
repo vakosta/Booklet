@@ -4,10 +4,10 @@ import android.content.Context
 import android.util.Log
 import com.google.gson.JsonParseException
 import me.annenkov.julistaandroid.data.JulistaApi
+import me.annenkov.julistaandroid.data.model.booklet.Auth
 import me.annenkov.julistaandroid.data.model.julista.ResultCheckNotificationsSubscription
 import me.annenkov.julistaandroid.data.model.julista.ResultSetNotificationsSubscription
 import me.annenkov.julistaandroid.data.model.julista.account.Account
-import me.annenkov.julistaandroid.data.model.julista.auth.Auth
 import me.annenkov.julistaandroid.data.model.mos.profile.Profile
 import me.annenkov.julistaandroid.data.model.mos.schedule.HomeworkToVerify
 import me.annenkov.julistaandroid.domain.model.mos.*
@@ -126,23 +126,28 @@ class ApiHelper private constructor(val context: Context) {
             val prefs = Preferences.getInstance(context)
             val currentTime = System.currentTimeMillis() / 1000
             val token = if (currentTime - prefs.userTokenLastUpdate > 5 // TODO: Исправить баг
-                    || prefs.userToken.isEmpty()) {
+                    || prefs.userSecret!!.isEmpty()) {
                 val request = getAPI(ApiType.JULISTA)
-                        .auth(login, password, fcmToken, inviteCode).execute().body()
+                        .auth("mosru", login, password).execute().body()
                 prefs.userTokenLastUpdate = currentTime
-                prefs.userToken = request?.token ?: ""
+                prefs.userPid = request?.id
+                prefs.userSecret = request?.secret
                 request
             } else {
                 val auth = Auth()
-                auth.token = prefs.userToken
-                auth.pid = prefs.userPid
-                auth.botCode = prefs.botCode
-                auth.studentProfileId = prefs.userStudentProfileId
-                auth.students = prefs.userStudentProfiles
+                auth.status = true
+                auth.message = "Ok"
+                auth.id = 123
+                auth.secret = prefs.userSecret
+                auth.created = false
                 auth
             }
             return token ?: Auth()
         }
+    }
+
+    fun getStudents(id: Int, secret: String) {
+        getAPI(ApiType.JULISTA).getStudents(id, secret)
     }
 
     fun getAccount(token: String, pid: String): Call<Account> {
@@ -411,7 +416,7 @@ class ApiHelper private constructor(val context: Context) {
     }
 
     companion object : SingletonHolder<ApiHelper, Context>(::ApiHelper) {
-        private const val JULISTA_URL = "https://julista.annenkov.me/"
+        private const val JULISTA_URL = "http://35.204.83.97/"
         private const val MOS_URL = "https://dnevnik.mos.ru/"
 
         private const val CACHE_SIZE = (1 * 1024 * 1024).toLong()

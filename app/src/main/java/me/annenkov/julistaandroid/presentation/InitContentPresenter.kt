@@ -55,22 +55,8 @@ abstract class InitContentPresenter(private val mContext: Context) {
             val response = ApiHelper.getInstance(mContext).auth(prefs.userLogin,
                     prefs.userPassword,
                     FirebaseInstanceId.getInstance().token, null)
-            val newToken = response.token
-            val botCode = response.botCode
-            val inviteCode = response.inviteCode
-            val invitations = response.invitations
-            val students = response.students
-            if (botCode != null)
-                updateBotCodeIfNeed(botCode)
-            if (inviteCode != null)
-                updateInviteCodeIfNeed(inviteCode)
-            if (invitations != null)
-                prefs.invitations = invitations
-            if (students != null)
-                prefs.userStudentProfiles = students
-            if (newToken != null) {
-                if (prefs.userStudentProfileId == "")
-                    prefs.userStudentProfileId = response.studentProfileId ?: ""
+            val newSecret = response.secret
+            if (newSecret != null) {
                 initContent()
             } else
                 uiThread { onFailureResponse() }

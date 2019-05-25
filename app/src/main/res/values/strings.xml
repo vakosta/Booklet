@@ -19,7 +19,7 @@
 
     <string name="preference_login" translatable="false">login</string>
     <string name="preference_password" translatable="false">password</string>
-    <string name="preference_token" translatable="false">token</string>
+    <string name="preference_secret" translatable="false">secret</string>
     <string name="preference_token_last_update" translatable="false">token_last_update</string>
     <string name="preference_pid" translatable="false">pid</string>
     <string name="preference_student_profile_id" translatable="false">student_profile_id</string>

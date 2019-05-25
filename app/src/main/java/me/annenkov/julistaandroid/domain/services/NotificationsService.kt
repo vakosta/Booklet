@@ -54,8 +54,8 @@ class NotificationsService : IntentService("NotificationsService") {
             mNewMarks.clear()
             mSchedule = try {
                 ApiHelper.getInstance(this).getSchedule(
-                        prefs.userToken,
-                        prefs.userPid.toInt(),
+                        prefs.userSecret!!,
+                        prefs.userPid!!.toInt(),
                         prefs.userStudentProfileId.toInt(),
                         currentDate,
                         currentDate
