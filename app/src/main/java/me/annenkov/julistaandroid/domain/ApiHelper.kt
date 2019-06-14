@@ -5,6 +5,7 @@ import android.util.Log
 import com.google.gson.JsonParseException
 import me.annenkov.julistaandroid.data.JulistaApi
 import me.annenkov.julistaandroid.data.model.booklet.Auth
+import me.annenkov.julistaandroid.data.model.booklet.students.Students
 import me.annenkov.julistaandroid.data.model.julista.ResultCheckNotificationsSubscription
 import me.annenkov.julistaandroid.data.model.julista.ResultSetNotificationsSubscription
 import me.annenkov.julistaandroid.data.model.julista.account.Account
@@ -146,8 +147,8 @@ class ApiHelper private constructor(val context: Context) {
         }
     }
 
-    fun getStudents(id: Int, secret: String) {
-        getAPI(ApiType.JULISTA).getStudents(id, secret)
+    fun getStudents(id: Long, secret: String): Call<Students> {
+        return getAPI(ApiType.JULISTA).getStudents(id, secret)
     }
 
     fun getAccount(token: String, pid: String): Call<Account> {
@@ -416,7 +417,7 @@ class ApiHelper private constructor(val context: Context) {
     }
 
     companion object : SingletonHolder<ApiHelper, Context>(::ApiHelper) {
-        private const val JULISTA_URL = "http://35.204.83.97/"
+        private const val JULISTA_URL = "http://35.204.83.97/api/"
         private const val MOS_URL = "https://dnevnik.mos.ru/"
 
         private const val CACHE_SIZE = (1 * 1024 * 1024).toLong()

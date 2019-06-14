@@ -1,6 +1,7 @@
 package me.annenkov.julistaandroid.data
 
 import me.annenkov.julistaandroid.data.model.booklet.Auth
+import me.annenkov.julistaandroid.data.model.booklet.students.Students
 import me.annenkov.julistaandroid.data.model.julista.Progress
 import me.annenkov.julistaandroid.data.model.julista.ResultCheckNotificationsSubscription
 import me.annenkov.julistaandroid.data.model.julista.ResultSetNotificationsSubscription
@@ -20,11 +21,11 @@ interface JulistaApi {
              @Field("login") login: String,
              @Field("password") password: String): Call<Auth>
 
-    @GET("api/profile/students/")
+    @GET("profile/students/")
     fun getStudents(
-            @Query("id") id: Int,
+            @Query("id") id: Long,
             @Query("secret") secret: String
-    )
+    ): Call<Students>
 
     @GET("schedule/")
     fun getScheduleJulista(@Query("token") token: String,

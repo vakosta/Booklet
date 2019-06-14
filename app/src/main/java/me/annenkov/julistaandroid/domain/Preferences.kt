@@ -6,7 +6,7 @@ import android.support.v7.preference.PreferenceManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import me.annenkov.julistaandroid.R
-import me.annenkov.julistaandroid.data.model.julista.auth.Profile
+import me.annenkov.julistaandroid.data.model.booklet.students.Student
 
 class Preferences private constructor(context: Context) {
     private val KEY_BOT_CODE = context.getString(R.string.preference_bot_code)
@@ -64,22 +64,22 @@ class Preferences private constructor(context: Context) {
         }
         set(value) = prefs.edit().putString(KEY_TOKEN_LAST_UPDATE, value.toString()).apply()
 
-    var userPid: Int?
-        get() = prefs.getInt(KEY_PID, 0)
-        set(value) = prefs.edit().putInt(KEY_PID, value ?: 0).apply()
+    var userPid: Long?
+        get() = prefs.getLong(KEY_PID, 0)
+        set(value) = prefs.edit().putLong(KEY_PID, value ?: 0).apply()
 
     var userStudentProfileId: String
         get() = prefs.getString(KEY_STUDENT_PROFILE_ID, "")
         set(value) = prefs.edit().putString(KEY_STUDENT_PROFILE_ID, value).apply()
 
-    var userStudentProfiles: List<Profile>
+    var userStudentProfiles: List<Student>
         get() {
             val savedString = prefs.getString(KEY_STUDENT_PROFILES, "")
             val listType = object :
-                    TypeToken<List<Profile>>() {}
+                    TypeToken<List<Student>>() {}
                     .type
             return try {
-                Gson().fromJson<List<Profile>>(savedString, listType)
+                Gson().fromJson<List<Student>>(savedString, listType)
             } catch (e: IllegalStateException) {
                 listOf()
             }

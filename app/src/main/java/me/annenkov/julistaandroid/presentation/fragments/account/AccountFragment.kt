@@ -44,7 +44,7 @@ class AccountFragment : ViewPagerFragment(), AccountView {
         changeProfileButton.setOnClickListener { _ ->
             val prefs = Preferences.getInstance(activity!!)
             val names = prefs.userStudentProfiles.map { it.name.toString() }
-            val ids = prefs.userStudentProfiles.map { it.studentProfileId }
+            val ids = prefs.userStudentProfiles.map { it.id }
             if (names.isNotEmpty()) {
                 selector("Выберите аккаунт ребёнка:", names) { _, i ->
                     prefs.userStudentProfileId = ids[i].toString()

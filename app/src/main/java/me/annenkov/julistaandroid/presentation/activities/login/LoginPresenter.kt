@@ -34,12 +34,15 @@ class LoginPresenter(
                 val students = ApiHelper
                         .getInstance(mContext)
                         .getStudents(prefs.userPid!!, prefs.userSecret!!)
-                uiThread { }
+                        .execute().body()?.students
+                uiThread {
+                    view.onLoginSuccessful(mLogin,
+                            mPassword,
+                            response.secret!!,
+                            students)
+                }
             }
-            view.onLoginSuccessful(mLogin,
-                    mPassword,
-                    response.secret!!,
-                    arrayListOf())
+
         } catch (e: KotlinNullPointerException) {
             onFailureResponse()
         }

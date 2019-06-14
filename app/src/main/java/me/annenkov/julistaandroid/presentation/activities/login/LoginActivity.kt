@@ -9,7 +9,7 @@ import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_login.*
 import kotterknife.bindView
 import me.annenkov.julistaandroid.R
-import me.annenkov.julistaandroid.data.model.julista.auth.Profile
+import me.annenkov.julistaandroid.data.model.booklet.students.Student
 import me.annenkov.julistaandroid.domain.Preferences
 import me.annenkov.julistaandroid.domain.px
 import me.annenkov.julistaandroid.presentation.activities.main.MainActivity
@@ -79,11 +79,11 @@ class LoginActivity : AppCompatActivity(), LoginView {
     override fun onLoginSuccessful(login: String,
                                    password: String,
                                    secret: String,
-                                   profiles: List<Profile>?) {
+                                   profiles: List<Student>?) {
         endLoading()
         val prefs = Preferences.getInstance(this)
         val names = profiles!!.map { it.name.toString() }
-        val ids = profiles.map { it.studentProfileId!! }
+        val ids = profiles.map { it.id!! }
         selector("Выберите аккаунт ребёнка:", names) { _, i ->
             prefs.userLogin = login
             prefs.userPassword = password

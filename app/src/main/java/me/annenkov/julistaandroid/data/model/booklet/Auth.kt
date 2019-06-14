@@ -13,7 +13,7 @@ class Auth {
     var message: String? = null
     @SerializedName("id")
     @Expose
-    var id: Int? = null
+    var id: Long? = null
     @SerializedName("secret")
     @Expose
     var secret: String? = null
