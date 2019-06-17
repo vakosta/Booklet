@@ -5,15 +5,13 @@ import android.util.Log
 import com.google.gson.JsonParseException
 import me.annenkov.julistaandroid.data.JulistaApi
 import me.annenkov.julistaandroid.data.model.booklet.Auth
+import me.annenkov.julistaandroid.data.model.booklet.journal.SubjectsItem
 import me.annenkov.julistaandroid.data.model.booklet.students.Students
 import me.annenkov.julistaandroid.data.model.julista.ResultCheckNotificationsSubscription
 import me.annenkov.julistaandroid.data.model.julista.ResultSetNotificationsSubscription
 import me.annenkov.julistaandroid.data.model.julista.account.Account
-import me.annenkov.julistaandroid.data.model.mos.profile.Profile
-import me.annenkov.julistaandroid.domain.model.mos.HomeworkResponse
 import me.annenkov.julistaandroid.domain.model.mos.PeriodResponse
 import me.annenkov.julistaandroid.domain.model.mos.ProgressResponse
-import me.annenkov.julistaandroid.domain.model.mos.ScheduleResponse
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -98,7 +96,7 @@ class ApiHelper private constructor(val context: Context) {
                 .client(client)
 
         retrofit = retrofitBuilder
-                .baseUrl(JULISTA_URL)
+                .baseUrl(BOOKLET_URL)
                 .build()
         retrofitMos = retrofitBuilder
                 .baseUrl(MOS_URL)
@@ -107,7 +105,7 @@ class ApiHelper private constructor(val context: Context) {
 
     private fun getAPI(apiType: ApiType): JulistaApi {
         return when (apiType) {
-            ApiType.JULISTA -> retrofit!!.create<JulistaApi>(JulistaApi::class.java)
+            ApiType.BOOKLET -> retrofit!!.create<JulistaApi>(JulistaApi::class.java)
             ApiType.MOS -> retrofitMos!!.create<JulistaApi>(JulistaApi::class.java)
         }
     }
@@ -130,7 +128,7 @@ class ApiHelper private constructor(val context: Context) {
             val currentTime = System.currentTimeMillis() / 1000
             val token = if (currentTime - prefs.userTokenLastUpdate > 5 // TODO: Исправить баг
                     || prefs.userSecret!!.isEmpty()) {
-                val request = getAPI(ApiType.JULISTA)
+                val request = getAPI(ApiType.BOOKLET)
                         .auth("mosru", login, password).execute().body()
                 prefs.userTokenLastUpdate = currentTime
                 prefs.userPid = request?.id
@@ -150,84 +148,33 @@ class ApiHelper private constructor(val context: Context) {
     }
 
     fun getStudents(id: Long, secret: String): Call<Students> {
-        return getAPI(ApiType.JULISTA).getStudents(id, secret)
+        return getAPI(ApiType.BOOKLET).getStudents(id, secret)
     }
 
     fun getAccount(token: String, pid: String): Call<Account> {
-        return getAPI(ApiType.JULISTA).getAccount(token, pid)
+        return getAPI(ApiType.BOOKLET).getAccount(token, pid)
     }
 
     fun checkNotificationsSubscription(pid: String): Call<ResultCheckNotificationsSubscription> {
-        return getAPI(ApiType.JULISTA).checkNotificationsSubscription(pid)
+        return getAPI(ApiType.BOOKLET).checkNotificationsSubscription(pid)
     }
 
     fun setNotificationsSubscription(pid: String, token: String, hash: String)
             : Call<ResultSetNotificationsSubscription> {
-        return getAPI(ApiType.JULISTA).setNotificationsSubscription(pid, token, hash)
-    }
-
-    @Throws(IOException::class, JsonParseException::class)
-    fun getProfile(token: String, pid: Int?, studentProfileId: Int): Profile {
-        val response = getAPI(ApiType.MOS)
-                .getProfile(token,
-                        pid!!,
-                        studentProfileId,
-                        6,
-                        true,
-                        true)
-                .execute()
-
-        if (response.body() != null) {
-            return response.body()!!
-        }
-
-        throw JsonParseException("Wrong JSON object.")
+        return getAPI(ApiType.BOOKLET).setNotificationsSubscription(pid, token, hash)
     }
 
     @Throws(IOException::class, JsonParseException::class)
     fun getSchedule(pid: Long,
                     secret: String?,
                     from: String,
-                    to: String): List<ScheduleResponse> {
-        val response = getAPI(ApiType.JULISTA)
+                    to: String): List<SubjectsItem?> {
+        return getAPI(ApiType.BOOKLET)
                 .getSchedule(pid,
                         secret!!,
                         from,
                         to)
-                .execute()
-
-        if (response.body() != null) {
-            val days = response.body()!!.data!!.days
-            val scheduleResponses = arrayListOf<ScheduleResponse>()
-
-            for (day in days!!) {
-                val subjects = day?.subjects
-
-                for (subject in subjects!!) {
-                    val scheduleResponse = ScheduleResponse(
-                            day.date!!,
-                            subject!!.time!![0]!!.split(":").map { it.toInt() },
-                            subject.time!![1]!!.split(":").map { it.toInt() },
-                            1,
-                            subject.number!!,
-                            subject.name!!,
-                            subject.label!!.title!!,
-                            "",
-                            subject.marks ?: arrayListOf(),
-                            HomeworkResponse(1,
-                                    "kek",
-                                    "ksdmfk",
-                                    "sdfkm",
-                                    arrayListOf<String>())
-                    )
-                    scheduleResponses.add(scheduleResponse)
-                }
-            }
-
-            return scheduleResponses
-        }
-
-        throw JsonParseException("Wrong JSON object.")
+                .execute().body()!!.data!!.days!![0]!!.subjects ?: arrayListOf()
     }
 
     @Throws(IOException::class, JsonParseException::class)
@@ -283,12 +230,12 @@ class ApiHelper private constructor(val context: Context) {
     }
 
     enum class ApiType {
-        JULISTA,
+        BOOKLET,
         MOS,
     }
 
     companion object : SingletonHolder<ApiHelper, Context>(::ApiHelper) {
-        private const val JULISTA_URL = "http://bklet.ml/api/"
+        private const val BOOKLET_URL = "http://bklet.ml/api/"
         private const val MOS_URL = "https://dnevnik.mos.ru/"
 
         private const val CACHE_SIZE = (1 * 1024 * 1024).toLong()

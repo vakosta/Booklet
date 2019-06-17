@@ -6,12 +6,12 @@ import android.content.Intent
 import android.os.Build
 import android.support.v4.app.NotificationCompat
 import me.annenkov.julistaandroid.R
+import me.annenkov.julistaandroid.data.model.booklet.journal.SubjectsItem
 import me.annenkov.julistaandroid.domain.ApiHelper
 import me.annenkov.julistaandroid.domain.DateHelper
 import me.annenkov.julistaandroid.domain.Preferences
 import me.annenkov.julistaandroid.domain.model.Mark
 import me.annenkov.julistaandroid.domain.model.Time
-import me.annenkov.julistaandroid.domain.model.mos.ScheduleResponse
 import me.annenkov.julistaandroid.presentation.activities.main.MainActivity
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -19,7 +19,7 @@ import java.net.ConnectException
 import java.net.UnknownHostException
 
 class NotificationsService : IntentService("NotificationsService") {
-    private lateinit var mSchedule: List<ScheduleResponse>
+    private lateinit var mSchedule: List<SubjectsItem?>
     private val mNewMarks = arrayListOf<Mark>()
 
     override fun onCreate() {
@@ -93,16 +93,16 @@ class NotificationsService : IntentService("NotificationsService") {
         }
     }
 
-    private fun updateNotification(schedule: List<ScheduleResponse>) {
+    private fun updateNotification(schedule: List<SubjectsItem?>) {
         val currentTime = DateHelper.getCurrentTime()
         var endPreviousTime = Time(0, 0)
 
         val subjectMap = hashMapOf<String, ArrayList<Int>>()
         for (scheduleItem in schedule)
-            for (mark in scheduleItem.marks) {
-                if (subjectMap[scheduleItem.subject] == null)
-                    subjectMap[scheduleItem.subject] = arrayListOf()
-                subjectMap[scheduleItem.subject]!!.add(mark!!.score!!)
+            for (mark in scheduleItem!!.marks!!) {
+                if (subjectMap[scheduleItem.name] == null)
+                    subjectMap[scheduleItem.name!!] = arrayListOf()
+                subjectMap[scheduleItem.name]!!.add(mark!!.score!!)
             }
         for (mark in mNewMarks) {
             if (subjectMap[mark.subject] == null)
@@ -130,29 +130,32 @@ class NotificationsService : IntentService("NotificationsService") {
         var body = "Уроков нет. Разверни для подробной информации."
         var expandBody = marksText
         for (scheduleItem in schedule) {
-            val beginTime = Time(scheduleItem.beginTime[0], scheduleItem.beginTime[1])
-            val endTime = Time(scheduleItem.endTime[0], scheduleItem.endTime[1])
+            val sTime = scheduleItem!!.time!![0]!!.split(":").map { it.toInt() }
+            val eTime = scheduleItem.time!![1]!!.split(":").map { it.toInt() }
+
+            val beginTime = Time(sTime[0], sTime[1])
+            val endTime = Time(eTime[0], eTime[1])
             if (DateHelper.isTimeInInterval(DateHelper.getCurrentTime(),
                             beginTime,
                             endTime)) {
                 val minRemaining = DateHelper.numTimeFrom(currentTime, endTime)
-                body = "Сейчас ${scheduleItem.subject.toLowerCase()}. " +
+                body = "Сейчас ${scheduleItem.name!!.toLowerCase()}. " +
                         "Осталось $minRemaining мин."
-                expandBody = "Предмет: ${scheduleItem.subject.toLowerCase()}." +
+                expandBody = "Предмет: ${scheduleItem.name.toLowerCase()}." +
                         "\nОсталось времени: $minRemaining мин." +
                         "\n\n$marksText"
             } else if (DateHelper.isTimeInInterval(DateHelper.getCurrentTime(),
                             endPreviousTime,
                             beginTime)) {
                 val minRemaining = DateHelper.numTimeFrom(currentTime, beginTime)
-                body = "Следующий урок ${scheduleItem.subject.toLowerCase()}. " +
+                body = "Следующий урок ${scheduleItem.name!!.toLowerCase()}. " +
                         "Осталось $minRemaining мин."
-                expandBody = "Следующий урок: ${scheduleItem.subject.toLowerCase()}." +
+                expandBody = "Следующий урок: ${scheduleItem.name.toLowerCase()}." +
                         "\nОсталось времени: $minRemaining мин." +
                         "\n\n$marksText"
             }
 
-            endPreviousTime = Time(scheduleItem.endTime[0], scheduleItem.endTime[1])
+            endPreviousTime = Time(eTime[0], eTime[1])
         }
 
         sendNotification("Дневник",

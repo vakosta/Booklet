@@ -11,11 +11,11 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import me.annenkov.julistaandroid.R
 import me.annenkov.julistaandroid.data.model.booklet.journal.MarksItem
+import me.annenkov.julistaandroid.data.model.booklet.journal.SubjectsItem
 import me.annenkov.julistaandroid.domain.ApiHelper
 import me.annenkov.julistaandroid.domain.DateHelper
 import me.annenkov.julistaandroid.domain.Utils
 import me.annenkov.julistaandroid.domain.model.Time
-import me.annenkov.julistaandroid.domain.model.mos.ScheduleResponse
 import me.annenkov.julistaandroid.domain.px
 import me.annenkov.julistaandroid.presentation.InitContentPresenter
 import org.jetbrains.anko.*
@@ -35,7 +35,7 @@ class ScheduleCardPresenter(
         initContent()
     }
 
-    private fun paintSchedule(list: List<ScheduleResponse>) {
+    private fun paintSchedule(list: List<SubjectsItem?>) {
         doAsync {
             if (list.isEmpty())
                 uiThread { view.setEmptyContentLayout() }
@@ -46,7 +46,7 @@ class ScheduleCardPresenter(
             addableView.orientation = LinearLayout.VERTICAL
 
             var counter = 0
-            var previous: ScheduleResponse = list[0]
+            var previous = list[0]
             val layoutInflater = LayoutInflater.from(mContext)
             val layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
@@ -57,25 +57,34 @@ class ScheduleCardPresenter(
                 val local = layoutInflater
                         .inflate(R.layout.item_schedule, null, false)
                 local.findViewById<TextView>(R.id.scheduleItemIndex).text = counter.toString()
-                local.findViewById<TextView>(R.id.scheduleItemSubject).text = i.subject
+                local.findViewById<TextView>(R.id.scheduleItemSubject).text = i?.name ?: ""
 
                 val homeworkView = local.findViewById<TextView>(R.id.scheduleItemHomework)
-                val homeworkDescription = i.homework?.description ?: ""
+                val homeworkDescription = if (i?.assignments != null) {
+                    i.assignments[0]?.text ?: ""
+                } else {
+                    ""
+                }
                 prepareHomeworkView(homeworkView, homeworkDescription)
 
                 val timeView = local.findViewById<TextView>(R.id.scheduleItemTime)
+                val startTime = i!!.time!![0]!!.split(":").map { it.toInt() }
+                val endTime = i.time!![1]!!.split(":").map { it.toInt() }
+                val previousEndTime = previous!!.time!![1]!!
+                        .split(":").map { it.toInt() }
                 prepareTimeView(timeView, counter,
-                        Time(i.beginTime[0], i.beginTime[1]),
-                        Time(i.endTime[0], i.endTime[1]),
-                        Time(previous.endTime[0], previous.endTime[1]))
+                        Time(startTime[0], startTime[1]),
+                        Time(endTime[0], endTime[1]),
+                        Time(previousEndTime[0], previousEndTime[1]))
 
-                val attachmentView = local.findViewById<ImageView>(R.id.scheduleItemAttachment)
+                // TODO: Реализовать аттачменты
+                /*val attachmentView = local.findViewById<ImageView>(R.id.scheduleItemAttachment)
                 if (i.homework?.attachments != null && i.homework!!.attachments.isNotEmpty()) {
                     attachmentView.setOnClickListener {
                         mContext.browse("https://dnevnik.mos.ru${i.homework!!.attachments[0]}")
                     }
                     attachmentView.visibility = View.VISIBLE
-                }
+                }*/
 
                 val linkView = local.findViewById<ImageView>(R.id.scheduleItemLink)
                 val urls = Utils.extractUrls(homeworkDescription)
@@ -87,7 +96,7 @@ class ScheduleCardPresenter(
                 }
 
                 val markView = local.findViewById<LinearLayout>(R.id.scheduleMarks)
-                prepareMarksView(markView, i.marks)
+                prepareMarksView(markView, i.marks ?: arrayListOf())
 
                 previous = i
 
@@ -191,13 +200,13 @@ class ScheduleCardPresenter(
             ll.topPadding = 8.px
     }
 
-    override fun executeMethod(): List<ScheduleResponse> = ApiHelper.getInstance(mContext)
+    override fun executeMethod(): List<SubjectsItem?> = ApiHelper.getInstance(mContext)
             .getSchedule(prefs.userPid!!,
                     prefs.userSecret!!,
                     mDate, mDate)
 
     override fun onSuccessful(response: Any) {
-        paintSchedule((response as List<ScheduleResponse>))
+        paintSchedule((response as List<SubjectsItem?>))
         view.stopRefreshing()
     }
 

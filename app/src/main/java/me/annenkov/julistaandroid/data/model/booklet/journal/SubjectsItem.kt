@@ -19,5 +19,8 @@ data class SubjectsItem(
         val room: String? = null,
 
         @field:SerializedName("marks")
-        val marks: List<MarksItem?>? = null
+        val marks: List<MarksItem?>? = null,
+
+        @field:SerializedName("assignments")
+        val assignments: List<Assignment?>? = null
 )
