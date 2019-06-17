@@ -97,7 +97,7 @@ class NotificationsService : IntentService("NotificationsService") {
         val currentTime = DateHelper.getCurrentTime()
         var endPreviousTime = Time(0, 0)
 
-        val subjectMap = hashMapOf<String, ArrayList<Int>>()
+        val subjectMap = hashMapOf<String, ArrayList<String>>()
         for (scheduleItem in schedule)
             for (mark in scheduleItem!!.marks!!) {
                 if (subjectMap[scheduleItem.name] == null)
@@ -107,7 +107,7 @@ class NotificationsService : IntentService("NotificationsService") {
         for (mark in mNewMarks) {
             if (subjectMap[mark.subject] == null)
                 subjectMap[mark.subject] = arrayListOf()
-            subjectMap[mark.subject]!!.add(mark.grade)
+            subjectMap[mark.subject]!!.add(mark.grade.toString())
         }
 
         var marksText = "Оценки за день:\n"

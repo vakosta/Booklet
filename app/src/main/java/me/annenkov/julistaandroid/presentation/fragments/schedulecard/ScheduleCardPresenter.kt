@@ -173,9 +173,9 @@ class ScheduleCardPresenter(
             if (true) {
                 markView.text = mark!!.score.toString()
                 markView.background = when (mark.score) {
-                    5 -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_five)
-                    4 -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_four)
-                    3 -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_three)
+                    "5" -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_five)
+                    "4" -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_four)
+                    "3" -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_three)
                     else -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_two)
                 }
 

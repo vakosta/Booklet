@@ -169,12 +169,17 @@ class ApiHelper private constructor(val context: Context) {
                     secret: String?,
                     from: String,
                     to: String): List<SubjectsItem?> {
-        return getAPI(ApiType.BOOKLET)
+        val response = getAPI(ApiType.BOOKLET)
                 .getSchedule(pid,
                         secret!!,
                         from,
                         to)
-                .execute().body()!!.data!!.days!![0]!!.subjects ?: arrayListOf()
+                .execute()
+        val days = response.body()?.data?.days
+        return if (days != null && days.isNotEmpty())
+            days[0]?.subjects ?: arrayListOf()
+        else
+            arrayListOf()
     }
 
     @Throws(IOException::class, JsonParseException::class)
