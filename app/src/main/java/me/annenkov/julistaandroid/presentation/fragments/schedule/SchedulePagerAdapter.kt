@@ -23,7 +23,7 @@ class SchedulePagerAdapter(
         ))
 
         return ScheduleCardFragment.newInstance(position - 5000,
-                date.format("DD.MM.YYYY").toString())
+                date.format("DD.MM.YY").toString())
     }
 
     override fun getItemPosition(`object`: Any): Int {

@@ -1,16 +1,15 @@
 package me.annenkov.julistaandroid.data
 
 import me.annenkov.julistaandroid.data.model.booklet.Auth
+import me.annenkov.julistaandroid.data.model.booklet.journal.Response
 import me.annenkov.julistaandroid.data.model.booklet.students.Students
 import me.annenkov.julistaandroid.data.model.julista.Progress
 import me.annenkov.julistaandroid.data.model.julista.ResultCheckNotificationsSubscription
 import me.annenkov.julistaandroid.data.model.julista.ResultSetNotificationsSubscription
-import me.annenkov.julistaandroid.data.model.julista.Schedule
 import me.annenkov.julistaandroid.data.model.julista.account.Account
 import me.annenkov.julistaandroid.data.model.mos.homework.HomeworkBase
 import me.annenkov.julistaandroid.data.model.mos.mark.Mark
 import me.annenkov.julistaandroid.data.model.mos.profile.Profile
-import me.annenkov.julistaandroid.data.model.mos.schedule.ScheduleItem
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -27,11 +26,11 @@ interface JulistaApi {
             @Query("secret") secret: String
     ): Call<Students>
 
-    @GET("schedule/")
-    fun getScheduleJulista(@Query("token") token: String,
-                           @Query("pid") pid: String,
-                           @Query("from") from: String,
-                           @Query("to") to: String): Call<List<Schedule>>
+    @GET("diary/journal/dates/")
+    fun getSchedule(@Query("id") id: Long,
+                    @Query("secret") secret: String,
+                    @Query("start") start: String,
+                    @Query("end") end: String): Call<Response>
 
     @GET("progress/")
     fun getProgressJulista(@Query("token") token: String,
@@ -57,17 +56,6 @@ interface JulistaApi {
                    @Query("academic_year_id") academicYearId: Int?,
                    @Query("with_groups") withGroups: Boolean?,
                    @Query("with_archived_groups") withArchivedGroups: Boolean?): Call<Profile>
-
-    @GET("jersey/api/schedule_items")
-    fun getSchedule(@Header("Auth-Token") token: String,
-                    @Header("Profile-Id") pid: Int,
-                    @Query("student_profile_id") studentProfileId: Int,
-                    @Query("from") from: String,
-                    @Query("to") to: String,
-                    @Query("academic_year_id") academicYearId: Int?,
-                    @Query("group_id") groups: String,
-                    @Query("with_group_class_subject_info") withGroupClassSubjectInfo: Boolean,
-                    @Query("with_lesson_info") withLessonInfo: Boolean): Call<List<ScheduleItem>>
 
     @GET("core/api/marks")
     fun getMarks(@Header("Auth-Token") token: String,

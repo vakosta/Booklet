@@ -54,9 +54,8 @@ class NotificationsService : IntentService("NotificationsService") {
             mNewMarks.clear()
             mSchedule = try {
                 ApiHelper.getInstance(this).getSchedule(
+                        prefs.userPid!!,
                         prefs.userSecret!!,
-                        prefs.userPid!!.toInt(),
-                        prefs.userStudentProfileId.toInt(),
                         currentDate,
                         currentDate
                 )
@@ -103,7 +102,7 @@ class NotificationsService : IntentService("NotificationsService") {
             for (mark in scheduleItem.marks) {
                 if (subjectMap[scheduleItem.subject] == null)
                     subjectMap[scheduleItem.subject] = arrayListOf()
-                subjectMap[scheduleItem.subject]!!.add(mark.mark)
+                subjectMap[scheduleItem.subject]!!.add(mark!!.score!!)
             }
         for (mark in mNewMarks) {
             if (subjectMap[mark.subject] == null)

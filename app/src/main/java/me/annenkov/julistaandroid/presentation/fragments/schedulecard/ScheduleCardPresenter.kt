@@ -10,11 +10,11 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import me.annenkov.julistaandroid.R
+import me.annenkov.julistaandroid.data.model.booklet.journal.MarksItem
 import me.annenkov.julistaandroid.domain.ApiHelper
 import me.annenkov.julistaandroid.domain.DateHelper
 import me.annenkov.julistaandroid.domain.Utils
 import me.annenkov.julistaandroid.domain.model.Time
-import me.annenkov.julistaandroid.domain.model.mos.MarkResponse
 import me.annenkov.julistaandroid.domain.model.mos.ScheduleResponse
 import me.annenkov.julistaandroid.domain.px
 import me.annenkov.julistaandroid.presentation.InitContentPresenter
@@ -147,7 +147,7 @@ class ScheduleCardPresenter(
         }
     }
 
-    private fun prepareMarksView(ll: LinearLayout, marks: List<MarkResponse>) {
+    private fun prepareMarksView(ll: LinearLayout, marks: List<MarksItem?>) {
         var isCoefficients = false
         for ((index, mark) in marks.withIndex()) {
             val view = LayoutInflater.from(mContext)
@@ -159,16 +159,18 @@ class ScheduleCardPresenter(
                 param.marginEnd = 4.px
             }
             markView.layoutParams = param
-            if (!mark.isPoint) {
-                markView.text = mark.mark.toString()
-                markView.background = when (mark.mark) {
+
+            // TODO: Реализовать !mark.isPoint
+            if (true) {
+                markView.text = mark!!.score.toString()
+                markView.background = when (mark.score) {
                     5 -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_five)
                     4 -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_four)
                     3 -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_three)
                     else -> ContextCompat.getDrawable(mContext, R.drawable.background_mark_two)
                 }
 
-                if (mark.weight > 1) {
+                if (mark.weight!! > 1) {
                     weightView.text = mark.weight.toString()
                     param.marginEnd = (-6).px
                     isCoefficients = true
@@ -190,9 +192,8 @@ class ScheduleCardPresenter(
     }
 
     override fun executeMethod(): List<ScheduleResponse> = ApiHelper.getInstance(mContext)
-            .getSchedule(prefs.userSecret!!,
-                    prefs.userPid!!.toInt(),
-                    prefs.userStudentProfileId.toInt(),
+            .getSchedule(prefs.userPid!!,
+                    prefs.userSecret!!,
                     mDate, mDate)
 
     override fun onSuccessful(response: Any) {

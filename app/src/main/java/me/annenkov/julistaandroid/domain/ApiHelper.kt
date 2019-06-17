@@ -10,8 +10,10 @@ import me.annenkov.julistaandroid.data.model.julista.ResultCheckNotificationsSub
 import me.annenkov.julistaandroid.data.model.julista.ResultSetNotificationsSubscription
 import me.annenkov.julistaandroid.data.model.julista.account.Account
 import me.annenkov.julistaandroid.data.model.mos.profile.Profile
-import me.annenkov.julistaandroid.data.model.mos.schedule.HomeworkToVerify
-import me.annenkov.julistaandroid.domain.model.mos.*
+import me.annenkov.julistaandroid.domain.model.mos.HomeworkResponse
+import me.annenkov.julistaandroid.domain.model.mos.PeriodResponse
+import me.annenkov.julistaandroid.domain.model.mos.ProgressResponse
+import me.annenkov.julistaandroid.domain.model.mos.ScheduleResponse
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -183,177 +185,46 @@ class ApiHelper private constructor(val context: Context) {
     }
 
     @Throws(IOException::class, JsonParseException::class)
-    fun getSchedule(token: String,
-                    pid: Int?,
-                    studentProfileId: Int,
+    fun getSchedule(pid: Long,
+                    secret: String?,
                     from: String,
                     to: String): List<ScheduleResponse> {
-        val fromArray = from.split("\\.".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-        val formatFrom = String.format("%s-%s-%s", fromArray[2], fromArray[1], fromArray[0])
-
-        val toArray = to.split("\\.".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-        val formatTo = String.format("%s-%s-%s", toArray[2], toArray[1], toArray[0])
-
-        val groups = getProfile(token, pid, studentProfileId).groups
-        val groupsParamBuilder = StringBuilder()
-        for (group in groups) {
-            groupsParamBuilder.append(String.format("%s,", group.id))
-        }
-        groupsParamBuilder.deleteCharAt(groupsParamBuilder.length - 1)
-        val groupsParam = groupsParamBuilder.toString()
-
-        val response = getAPI(ApiType.MOS)
-                .getSchedule(token,
-                        pid!!,
-                        studentProfileId,
-                        formatFrom,
-                        formatTo,
-                        6,
-                        groupsParam,
-                        true,
-                        true)
+        val response = getAPI(ApiType.JULISTA)
+                .getSchedule(pid,
+                        secret!!,
+                        from,
+                        to)
                 .execute()
 
         if (response.body() != null) {
-            val scheduleItems = response.body()
+            val days = response.body()!!.data!!.days
             val scheduleResponses = arrayListOf<ScheduleResponse>()
-            val marks = getMarks(token, pid, studentProfileId, from, to)
-            val homeworks = getHomework(token, pid, studentProfileId, from, to)
 
-            if (scheduleItems != null) {
-                for (scheduleItem in scheduleItems) {
-                    val scheduleResponse = ScheduleResponse(String.format("%s.%s.%s",
-                            scheduleItem.date!![0],
-                            scheduleItem.date!![1],
-                            scheduleItem.date!![2]),
-                            scheduleItem.time ?: arrayListOf(0, 0),
-                            DateHelper.getEndTime(scheduleItem.time as MutableList<Int>),
-                            scheduleItem.dayNumber ?: 0,
-                            scheduleItem.lessonNumber ?: 0,
-                            scheduleItem.subjectName ?: "",
-                            scheduleItem.topicName ?: "",
-                            scheduleItem.comment ?: "",
-                            ArrayList(),
-                            HomeworkResponse(0, "", "", "", ArrayList()))
+            for (day in days!!) {
+                val subjects = day?.subjects
 
-                    val markIterator = marks.iterator()
-                    while (markIterator.hasNext()) {
-                        val mark = markIterator.next()
-                        if (mark.scheduleLessonId == scheduleItem.id) {
-                            scheduleResponse.marks.add(mark)
-                            markIterator.remove()
-                        }
-                    }
-
-                    val homeworkIterator = homeworks.iterator()
-                    while (homeworkIterator.hasNext()) {
-                        val homework = homeworkIterator.next()
-                        val homeworkToVerify = HomeworkToVerify()
-                        homeworkToVerify.id = homework.id
-                        if (scheduleItem.homeworksToVerify?.contains(homeworkToVerify)
-                                        ?: continue) {
-                            scheduleResponse.homework = homework
-                            homeworkIterator.remove()
-                            break
-                        }
-                    }
-
+                for (subject in subjects!!) {
+                    val scheduleResponse = ScheduleResponse(
+                            day.date!!,
+                            subject!!.time!![0]!!.split(":").map { it.toInt() },
+                            subject.time!![1]!!.split(":").map { it.toInt() },
+                            1,
+                            subject.number!!,
+                            subject.name!!,
+                            subject.label!!.title!!,
+                            "",
+                            subject.marks ?: arrayListOf(),
+                            HomeworkResponse(1,
+                                    "kek",
+                                    "ksdmfk",
+                                    "sdfkm",
+                                    arrayListOf<String>())
+                    )
                     scheduleResponses.add(scheduleResponse)
                 }
             }
 
-            scheduleResponses.sortWith(Comparator { o1, o2 ->
-                val sComp = o1.dayNumber - o2.dayNumber
-
-                if (sComp != 0) {
-                    return@Comparator sComp
-                }
-
-                o1.lessonNumber - o2.lessonNumber
-            })
-
             return scheduleResponses
-        }
-
-        throw JsonParseException("Wrong JSON object.")
-    }
-
-    @Throws(IOException::class, JsonParseException::class)
-    fun getMarks(token: String,
-                 pid: Int?,
-                 studentProfileId: Int,
-                 createdAtFrom: String,
-                 createdAtTo: String): MutableList<MarkResponse> {
-        val response = getAPI(ApiType.MOS)
-                .getMarks(token,
-                        pid!!,
-                        studentProfileId,
-                        createdAtFrom,
-                        createdAtTo,
-                        6,
-                        1,
-                        50)
-                .execute()
-
-        if (response.body() != null) {
-            val marks = response.body()
-            val marksResponse = arrayListOf<MarkResponse>()
-
-            if (marks != null) {
-                for (mark in marks) {
-                    val markResponse = MarkResponse(mark.scheduleLessonId,
-                            mark.date,
-                            "",
-                            mark.values[0].grade.five.toInt(),
-                            mark.isExam,
-                            mark.isPoint,
-                            mark.weight)
-                    marksResponse.add(markResponse)
-                }
-            }
-
-            return marksResponse
-        }
-
-        throw JsonParseException("Wrong JSON object.")
-    }
-
-    @Throws(IOException::class, JsonParseException::class)
-    fun getHomework(token: String,
-                    pid: Int?,
-                    studentProfileId: Int,
-                    beginDate: String,
-                    endDate: String): MutableList<HomeworkResponse> {
-        val response = getAPI(ApiType.MOS)
-                .getHomework(token,
-                        pid!!,
-                        studentProfileId,
-                        beginDate,
-                        endDate,
-                        6,
-                        1,
-                        50)
-                .execute()
-
-        if (response.body() != null) {
-            val homeworkBases = response.body()
-            val homeworks = arrayListOf<HomeworkResponse>()
-
-            if (homeworkBases != null) {
-                for (hw in homeworkBases) {
-                    val homeworkResponse = HomeworkResponse(hw.homeworkEntry.homeworkId,
-                            hw.homeworkEntry.homework.datePreparedFor,
-                            hw.homeworkEntry.homework.subject.name,
-                            hw.homeworkEntry.description,
-                            ArrayList())
-                    for (attachment in hw.homeworkEntry.attachments) {
-                        homeworkResponse.attachments.add(attachment.path)
-                    }
-                    homeworks.add(homeworkResponse)
-                }
-            }
-
-            return homeworks
         }
 
         throw JsonParseException("Wrong JSON object.")
@@ -417,7 +288,7 @@ class ApiHelper private constructor(val context: Context) {
     }
 
     companion object : SingletonHolder<ApiHelper, Context>(::ApiHelper) {
-        private const val JULISTA_URL = "http://35.204.83.97/api/"
+        private const val JULISTA_URL = "http://bklet.ml/api/"
         private const val MOS_URL = "https://dnevnik.mos.ru/"
 
         private const val CACHE_SIZE = (1 * 1024 * 1024).toLong()

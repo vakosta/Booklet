@@ -1,0 +1,11 @@
+package me.annenkov.julistaandroid.data.model.booklet.journal
+
+import com.google.gson.annotations.SerializedName
+
+data class MarksItem(
+        @field:SerializedName("score")
+        val score: Int? = null,
+
+        @field:SerializedName("weight")
+        val weight: Int? = null
+)
