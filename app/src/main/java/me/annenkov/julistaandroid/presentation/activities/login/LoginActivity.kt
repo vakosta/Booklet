@@ -1,7 +1,10 @@
 package me.annenkov.julistaandroid.presentation.activities.login
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.FrameLayout
@@ -9,8 +12,9 @@ import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_login.*
 import kotterknife.bindView
 import me.annenkov.julistaandroid.R
-import me.annenkov.julistaandroid.data.model.booklet.students.Student
+import me.annenkov.julistaandroid.data.model.booklet.auth.Student
 import me.annenkov.julistaandroid.domain.Preferences
+import me.annenkov.julistaandroid.domain.TestViewModel
 import me.annenkov.julistaandroid.domain.px
 import me.annenkov.julistaandroid.presentation.activities.main.MainActivity
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
@@ -21,6 +25,7 @@ import org.jetbrains.anko.yesButton
 
 class LoginActivity : AppCompatActivity(), LoginView {
     private lateinit var mPresenter: LoginPresenter
+    private lateinit var tmdbViewModel: TestViewModel
 
     private val mLoginField: EditText by bindView(R.id.loginField)
     private val mPasswordField: EditText by bindView(R.id.passwordField)
@@ -31,6 +36,8 @@ class LoginActivity : AppCompatActivity(), LoginView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         mPresenter = LoginPresenter(this, this)
+
+        tmdbViewModel = ViewModelProviders.of(this).get(TestViewModel::class.java)
 
         KeyboardVisibilityEvent.setEventListener(this) {
             if (it) {
@@ -45,9 +52,10 @@ class LoginActivity : AppCompatActivity(), LoginView {
         }
 
         mLoginEnterButton.setOnClickListener {
-            mPresenter.login(mLoginField.text.toString(),
-                    mPasswordField.text.toString(),
-                    inviteCodeField.text.toString())
+            startLoading()
+            tmdbViewModel.doAuth("mosru",
+                    mLoginField.text.toString(),
+                    mPasswordField.text.toString())
         }
 
         mProblemsWithLoggingButton.setOnClickListener {
@@ -69,6 +77,15 @@ class LoginActivity : AppCompatActivity(), LoginView {
                 yesButton {}
             }.show()
         }
+
+        tmdbViewModel.popularMoviesLiveData.observe(this, Observer {
+            endLoading()
+            onLoginSuccessful(mLoginField.text.toString(),
+                    mPasswordField.text.toString(),
+                    it!!.secret!!,
+                    it.students!!.list)
+            Log.d("Login", "Auth data received")
+        })
     }
 
     override fun onBackPressed() {

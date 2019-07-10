@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.Log
 import com.google.gson.JsonParseException
 import me.annenkov.julistaandroid.data.JulistaApi
-import me.annenkov.julistaandroid.data.model.booklet.Auth
 import me.annenkov.julistaandroid.data.model.booklet.journal.SubjectsItem
 import me.annenkov.julistaandroid.data.model.booklet.students.Students
 import me.annenkov.julistaandroid.data.model.julista.ResultCheckNotificationsSubscription
@@ -25,7 +24,7 @@ class ApiHelper private constructor(val context: Context) {
     private var retrofit: Retrofit? = null
     private var retrofitMos: Retrofit? = null
 
-    fun deleteCache(context: Context) {
+    private fun deleteCache(context: Context) {
         try {
             val dir = context.cacheDir
             deleteDir(dir)
@@ -34,7 +33,7 @@ class ApiHelper private constructor(val context: Context) {
         }
     }
 
-    fun deleteDir(dir: File?): Boolean {
+    private fun deleteDir(dir: File?): Boolean {
         if (dir != null && dir.isDirectory) {
             val children = dir.list()
             for (i in children.indices) {
@@ -103,14 +102,14 @@ class ApiHelper private constructor(val context: Context) {
                 .build()
     }
 
-    private fun getAPI(apiType: ApiType): JulistaApi {
+    fun getAPI(apiType: ApiType): JulistaApi {
         return when (apiType) {
-            ApiType.BOOKLET -> retrofit!!.create<JulistaApi>(JulistaApi::class.java)
-            ApiType.MOS -> retrofitMos!!.create<JulistaApi>(JulistaApi::class.java)
+            ApiType.BOOKLET -> retrofit!!.create(JulistaApi::class.java)
+            ApiType.MOS -> retrofitMos!!.create(JulistaApi::class.java)
         }
     }
 
-    fun hasNetwork(): Boolean {
+    private fun hasNetwork(): Boolean {
         try {
             val e = context.getSystemService(
                     Context.CONNECTIVITY_SERVICE) as android.net.ConnectivityManager
@@ -120,31 +119,6 @@ class ApiHelper private constructor(val context: Context) {
             Log.w("API", e.toString())
         }
         return false
-    }
-
-    fun auth(login: String, password: String, fcmToken: String?, inviteCode: String?): Auth {
-        synchronized(this) {
-            val prefs = Preferences.getInstance(context)
-            val currentTime = System.currentTimeMillis() / 1000
-            val token = if (currentTime - prefs.userTokenLastUpdate > 5 // TODO: Исправить баг
-                    || prefs.userSecret!!.isEmpty()) {
-                val request = getAPI(ApiType.BOOKLET)
-                        .auth("mosru", login, password).execute().body()
-                prefs.userTokenLastUpdate = currentTime
-                prefs.userPid = request?.id
-                prefs.userSecret = request?.secret
-                request
-            } else {
-                val auth = Auth()
-                auth.status = true
-                auth.message = "Ok"
-                auth.id = 123
-                auth.secret = prefs.userSecret
-                auth.created = false
-                auth
-            }
-            return token ?: Auth()
-        }
     }
 
     fun getStudents(id: Long, secret: String): Call<Students> {

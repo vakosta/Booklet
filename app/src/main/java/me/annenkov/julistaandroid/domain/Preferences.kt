@@ -6,7 +6,7 @@ import android.support.v7.preference.PreferenceManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import me.annenkov.julistaandroid.R
-import me.annenkov.julistaandroid.data.model.booklet.students.Student
+import me.annenkov.julistaandroid.data.model.booklet.auth.Student
 
 class Preferences private constructor(context: Context) {
     private val KEY_BOT_CODE = context.getString(R.string.preference_bot_code)
@@ -79,7 +79,7 @@ class Preferences private constructor(context: Context) {
                     TypeToken<List<Student>>() {}
                     .type
             return try {
-                Gson().fromJson<List<Student>>(savedString, listType)
+                Gson().fromJson(savedString, listType)
             } catch (e: IllegalStateException) {
                 listOf()
             }

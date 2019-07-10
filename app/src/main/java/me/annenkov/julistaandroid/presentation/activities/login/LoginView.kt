@@ -1,6 +1,6 @@
 package me.annenkov.julistaandroid.presentation.activities.login
 
-import me.annenkov.julistaandroid.data.model.booklet.students.Student
+import me.annenkov.julistaandroid.data.model.booklet.auth.Student
 
 interface LoginView {
     fun startLoading()

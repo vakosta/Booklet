@@ -2,9 +2,7 @@ package me.annenkov.julistaandroid.presentation
 
 import android.content.Context
 import com.crashlytics.android.Crashlytics
-import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.JsonParseException
-import me.annenkov.julistaandroid.domain.ApiHelper
 import me.annenkov.julistaandroid.domain.Preferences
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -51,7 +49,7 @@ abstract class InitContentPresenter(private val mContext: Context) {
     abstract fun onFailureResponse()
     abstract fun onFailureNetwork()
     private fun onFailureAttempt() {
-        doAsync {
+        /*doAsync {
             val response = ApiHelper.getInstance(mContext).auth(prefs.userLogin,
                     prefs.userPassword,
                     FirebaseInstanceId.getInstance().token, null)
@@ -60,6 +58,6 @@ abstract class InitContentPresenter(private val mContext: Context) {
                 initContent()
             } else
                 uiThread { onFailureResponse() }
-        }
+        }*/
     }
 }
