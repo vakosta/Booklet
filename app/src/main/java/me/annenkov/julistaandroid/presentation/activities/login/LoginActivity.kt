@@ -14,7 +14,6 @@ import kotterknife.bindView
 import me.annenkov.julistaandroid.R
 import me.annenkov.julistaandroid.data.model.booklet.auth.Student
 import me.annenkov.julistaandroid.domain.Preferences
-import me.annenkov.julistaandroid.domain.TestViewModel
 import me.annenkov.julistaandroid.domain.px
 import me.annenkov.julistaandroid.presentation.activities.main.MainActivity
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
@@ -25,7 +24,7 @@ import org.jetbrains.anko.yesButton
 
 class LoginActivity : AppCompatActivity(), LoginView {
     private lateinit var mPresenter: LoginPresenter
-    private lateinit var tmdbViewModel: TestViewModel
+    private lateinit var tmdbViewModel: LoginViewModel
 
     private val mLoginField: EditText by bindView(R.id.loginField)
     private val mPasswordField: EditText by bindView(R.id.passwordField)
@@ -37,7 +36,7 @@ class LoginActivity : AppCompatActivity(), LoginView {
         setContentView(R.layout.activity_login)
         mPresenter = LoginPresenter(this, this)
 
-        tmdbViewModel = ViewModelProviders.of(this).get(TestViewModel::class.java)
+        tmdbViewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
 
         KeyboardVisibilityEvent.setEventListener(this) {
             if (it) {
@@ -78,13 +77,29 @@ class LoginActivity : AppCompatActivity(), LoginView {
             }.show()
         }
 
-        tmdbViewModel.popularMoviesLiveData.observe(this, Observer {
-            endLoading()
-            onLoginSuccessful(mLoginField.text.toString(),
-                    mPasswordField.text.toString(),
-                    it!!.secret!!,
-                    it.students!!.list)
+        tmdbViewModel.authLiveData.observe(this, Observer {
             Log.d("Login", "Auth data received")
+            endLoading()
+            val auth = it?.body()
+            when {
+                auth == null ->
+                    alert("Проверьте подключение к интернету.") { yesButton {} }
+                            .show()
+                !it.isSuccessful ->
+                    alert("Произошла ошибка. Попробуйте ещё раз.") { yesButton {} }
+                            .show()
+                auth.status == null ->
+                    alert("Произошла ошибка. Попробуйте ещё раз.") { yesButton {} }
+                            .show()
+                !auth.status ->
+                    alert("Неверный логин или пароль.") { yesButton {} }
+                            .show()
+                else ->
+                    onLoginSuccessful(mLoginField.text.toString(),
+                            mPasswordField.text.toString(),
+                            auth.secret!!,
+                            auth.students!!.list)
+            }
         })
     }
 

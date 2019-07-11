@@ -80,10 +80,6 @@ class ApiHelper private constructor(val context: Context) {
     }
 
     init {
-        if (!Preferences.getInstance(context).clearedCache) {
-            deleteCache(context)
-            Preferences.getInstance(context).clearedCache = true
-        }
         val cache = Cache(context.cacheDir, CACHE_SIZE)
         val client = OkHttpClient().newBuilder()
                 .cache(cache)
