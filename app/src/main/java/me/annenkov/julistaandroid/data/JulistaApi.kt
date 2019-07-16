@@ -1,6 +1,7 @@
 package me.annenkov.julistaandroid.data
 
 import me.annenkov.julistaandroid.data.model.booklet.auth.Auth
+import me.annenkov.julistaandroid.data.model.booklet.marks.Data
 import me.annenkov.julistaandroid.data.model.booklet.students.Students
 import me.annenkov.julistaandroid.data.model.julista.Progress
 import me.annenkov.julistaandroid.data.model.julista.ResultCheckNotificationsSubscription
@@ -30,6 +31,10 @@ interface JulistaApi {
                     @Query("end") end: String):
             Call<me.annenkov.julistaandroid.data.model.booklet.journal.Response>
 
+    @GET("diary/marks/all/")
+    fun getProgress(@Query("id") id: Long,
+                    @Query("secret") secret: String): Call<Data>
+
     @GET("progress/")
     fun getProgressJulista(@Query("token") token: String,
                            @Query("pid") pid: String): Call<List<Progress>>
@@ -46,10 +51,4 @@ interface JulistaApi {
     fun setNotificationsSubscription(@Field("pid") pid: String,
                                      @Field("token") token: String,
                                      @Field("hash") hash: String): Call<ResultSetNotificationsSubscription>
-
-    @GET("reports/api/progress/json")
-    fun getProgress(@Header("Auth-Token") token: String,
-                    @Header("Profile-Id") pid: Int,
-                    @Query("student_profile_id") studentProfileId: Int?,
-                    @Query("academic_year_id") academicYearId: Int?): Call<List<Progress>>
 }

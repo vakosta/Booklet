@@ -3,23 +3,28 @@ package me.annenkov.julistaandroid.presentation.fragments.marks
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import me.annenkov.julistaandroid.domain.model.mos.ProgressResponse
+import me.annenkov.julistaandroid.data.model.booklet.marks.Subject
 import me.annenkov.julistaandroid.presentation.fragments.markscard.MarksCardFragment
 import me.annenkov.julistaandroid.presentation.model.Result
 
 class MarksPagerAdapter(
         fm: FragmentManager,
-        private val progresses: List<ProgressResponse>
+        private val progresses: List<Subject>
 ) : FragmentStatePagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {
         if (position == count - 1) {
             val results = arrayListOf<Result>()
             for (progress in progresses) {
-                val result = Result(progress.subjectName,
-                        arrayListOf(), progress.final)
-                for (period in progress.periods)
+                val yearMark = try {
+                    progress.yearMark?.toInt() ?: 0
+                } catch (e: NumberFormatException) {
+                    1
+                }
+                val result = Result(progress.name!!,
+                        arrayListOf(), yearMark)
+                for (period in progress.periods!!)
                     try {
-                        result.marks.add(period.finalMark?.toInt() ?: continue)
+                        result.marks.add(period!!.finalMark?.toInt() ?: continue)
                     } catch (e: NumberFormatException) {
                     }
                 results.add(result)
@@ -31,11 +36,12 @@ class MarksPagerAdapter(
         for (progress in progresses) {
             try {
                 resultProgresses.add(me.annenkov.julistaandroid.presentation.model.Progress(
-                        progress.periods!![position].name,
-                        progress.subjectName!!,
-                        progress.periods!![position].avgFive.toDouble(),
-                        progress.periods!![position].finalMark?.toInt(),
-                        progress.periods!![position].marks
+                        progress.periods!![position]!!.title!!,
+                        progress.name!!,
+                        //progress.periods!![position].avgFive.toDouble(),
+                        5.14,
+                        progress.periods[position]!!.finalMark?.toInt(),
+                        progress.periods[position]!!.marks!!
                 ))
             } catch (e: NullPointerException) {
             } catch (e: IndexOutOfBoundsException) {
@@ -46,7 +52,7 @@ class MarksPagerAdapter(
     }
 
     override fun getItemPosition(`object`: Any): Int {
-        return FragmentStatePagerAdapter.POSITION_NONE
+        return POSITION_NONE
     }
 
     override fun getCount(): Int {

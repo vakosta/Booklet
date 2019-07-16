@@ -5,12 +5,11 @@ import android.util.Log
 import com.google.gson.JsonParseException
 import me.annenkov.julistaandroid.data.JulistaApi
 import me.annenkov.julistaandroid.data.model.booklet.journal.SubjectsItem
+import me.annenkov.julistaandroid.data.model.booklet.marks.Subject
 import me.annenkov.julistaandroid.data.model.booklet.students.Students
 import me.annenkov.julistaandroid.data.model.julista.ResultCheckNotificationsSubscription
 import me.annenkov.julistaandroid.data.model.julista.ResultSetNotificationsSubscription
 import me.annenkov.julistaandroid.data.model.julista.account.Account
-import me.annenkov.julistaandroid.domain.model.mos.PeriodResponse
-import me.annenkov.julistaandroid.domain.model.mos.ProgressResponse
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -153,55 +152,10 @@ class ApiHelper private constructor(val context: Context) {
     }
 
     @Throws(IOException::class, JsonParseException::class)
-    fun getProgress(token: String,
-                    pid: Int?, studentProfileId: Int): List<ProgressResponse> {
-        val response = getAPI(ApiType.MOS)
-                .getProgress(token, pid!!, studentProfileId, 6)
-                .execute()
-
-        if (response.body() != null) {
-            val result = response.body()
-            val progresses = arrayListOf<ProgressResponse>()
-
-            if (result != null) {
-                for (progress in result) {
-                    if (progress.avgFive != 0.0) {
-                        val periods = arrayListOf<PeriodResponse>()
-                        for (period in progress.periods!!) {
-                            val marks = arrayListOf<Int>()
-
-                            for (mark in period.marks!!) {
-                                marks.add(mark.values[0].five.toInt())
-                            }
-
-                            try {
-                                periods.add(PeriodResponse(period.name!!,
-                                        period.avgFive!!.toFloat(),
-                                        period.avgHundred!!.toFloat(),
-                                        period.finalMark,
-                                        period.start!!,
-                                        period.end!!,
-                                        marks))
-                            } catch (ignored: NumberFormatException) {
-                            }
-                        }
-
-                        try {
-                            progresses.add(ProgressResponse(progress.subjectName!!,
-                                    progress.avgFive!!.toFloat(),
-                                    progress.avgHundred!!.toFloat(),
-                                    periods,
-                                    progress.final?.toInt()))
-                        } catch (ignored: NumberFormatException) {
-                        }
-                    }
-                }
-            }
-
-            return progresses
-        }
-
-        throw JsonParseException("Wrong JSON object.")
+    fun getProgress(id: Long, secret: String): List<Subject?>? {
+        return getAPI(ApiType.BOOKLET)
+                .getProgress(id, secret)
+                .execute().body()!!.data
     }
 
     enum class ApiType {
@@ -210,7 +164,7 @@ class ApiHelper private constructor(val context: Context) {
     }
 
     companion object : SingletonHolder<ApiHelper, Context>(::ApiHelper) {
-        private const val BOOKLET_URL = "http://bklet.ml/api/"
+        private const val BOOKLET_URL = "https://bklet.ml/api/"
         private const val MOS_URL = "https://dnevnik.mos.ru/"
 
         private const val CACHE_SIZE = (1 * 1024 * 1024).toLong()

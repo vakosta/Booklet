@@ -10,9 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_marks.*
 import me.annenkov.julistaandroid.R
+import me.annenkov.julistaandroid.data.model.booklet.marks.Subject
 import me.annenkov.julistaandroid.domain.Utils
 import me.annenkov.julistaandroid.domain.model.Refresh
-import me.annenkov.julistaandroid.domain.model.mos.ProgressResponse
 import me.annenkov.julistaandroid.presentation.ViewPagerFragment
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -82,7 +82,7 @@ class MarksFragment : ViewPagerFragment(), MarksView, View.OnClickListener, View
         return Utils.convertPixelsToDp(activity!!, p1.y) > 62
     }
 
-    override fun initPager(progresses: List<ProgressResponse>) {
+    override fun initPager(progresses: List<Subject>) {
         mPresenter.setPosition(0)
         mPagerAdapter = MarksPagerAdapter(fragmentManager ?: return, progresses)
         mPager.adapter = mPagerAdapter

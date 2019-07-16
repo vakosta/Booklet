@@ -34,11 +34,18 @@ class SubjectHolder(val view: View, val mContext: Context) : RecyclerView.ViewHo
 
         for (mark in progress.marks) {
             val markView = TextView(view.context)
-            prepareMarkView(markView, mark.toString())
+            prepareMarkView(markView, mark!!.value.toString())
             mMarkList.addView(markView)
         }
 
-        preparePurpose(mPurpose, purpose, progress.avgFive, progress.marks)
+        preparePurpose(mPurpose, purpose, progress.avgFive,
+                progress.marks.map {
+                    try {
+                        it!!.value!!.toInt()
+                    } catch (e: NumberFormatException) {
+                        5
+                    }
+                })
     }
 
     private fun prepareAvgView(view: TextView, avg: Double, purpose: Int) {

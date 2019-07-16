@@ -19,7 +19,7 @@ import org.jetbrains.anko.browse
 import org.jetbrains.anko.selector
 import org.jetbrains.anko.yesButton
 
-class LoginActivity : AppCompatActivity(), LoginView {
+class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,6 +75,7 @@ class LoginActivity : AppCompatActivity(), LoginView {
                 else ->
                     onLoginSuccessful(loginField.text.toString(),
                             passwordField.text.toString(),
+                            auth.id!!,
                             auth.secret!!,
                             auth.students!!.list)
             }
@@ -86,16 +87,18 @@ class LoginActivity : AppCompatActivity(), LoginView {
         finish()
     }
 
-    override fun onLoginSuccessful(login: String,
-                                   password: String,
-                                   secret: String,
-                                   profiles: List<Student>?) {
+    private fun onLoginSuccessful(login: String,
+                                  password: String,
+                                  pid: Long,
+                                  secret: String,
+                                  profiles: List<Student>?) {
         val prefs = Preferences.getInstance(this)
         val names = profiles!!.map { it.name.toString() }
         val ids = profiles.map { it.id!! }
         selector("Выберите аккаунт ребёнка:", names) { _, i ->
             prefs.userLogin = login
             prefs.userPassword = password
+            prefs.userPid = pid
             prefs.userSecret = secret
             prefs.userStudentProfileId = ids[i].toString()
             prefs.userStudentProfiles = profiles
@@ -104,28 +107,28 @@ class LoginActivity : AppCompatActivity(), LoginView {
         }
     }
 
-    override fun onLoginFailed(text: String?) {
+    private fun onLoginFailed(text: String?) {
         alert(text ?: "Неверный логин или пароль.") { yesButton {} }
                 .show()
     }
 
-    override fun onNetworkProblems() {
+    private fun onNetworkProblems() {
         alert("Проверьте подключение к интернету.") { yesButton {} }
                 .show()
     }
 
-    override fun onUnknownError() {
+    private fun onUnknownError() {
         alert("Произошла ошибка. Попробуйте ещё раз.") { yesButton {} }
                 .show()
     }
 
-    override fun startLoading() {
+    private fun startLoading() {
         loginEnterButton.animate()
                 .translationY(56.px.toFloat())
                 .duration = 60
     }
 
-    override fun stopLoading() {
+    private fun stopLoading() {
         loginEnterButton.animate()
                 .translationY(0f)
                 .duration = 60
