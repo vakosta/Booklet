@@ -4,9 +4,10 @@ import me.annenkov.julistaandroid.data.model.booklet.auth.Student
 
 interface LoginView {
     fun startLoading()
-    fun endLoading()
+    fun stopLoading()
 
     fun onLoginSuccessful(login: String, password: String, secret: String, profiles: List<Student>?)
-    fun onLoginFailed()
+    fun onLoginFailed(text: String?)
     fun onNetworkProblems()
+    fun onUnknownError()
 }

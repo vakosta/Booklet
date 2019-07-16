@@ -1,256 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="me.annenkov.julistaandroid.presentation.activities.login.LoginViewModel" />
+
+    </data>
+
+    <ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#fff"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <FrameLayout
-            android:id="@+id/header"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:visibility="@{viewModel.keyboardIsShowing ? View.GONE : View.VISIBLE}">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:paddingStart="32dp"
+                    android:paddingEnd="32dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Добро пожаловать"
+                        android:textColor="#212121"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Войдите с помощью данных акканута mos.ru"
+                        android:textColor="#767676"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
                 android:orientation="vertical"
-                android:paddingStart="32dp"
-                android:paddingEnd="32dp">
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Добро пожаловать"
-                    android:textColor="#212121"
-                    android:textSize="24sp" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                    <ImageView
+                        android:id="@+id/loginIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:tint="#5690ff"
+                        app:srcCompat="@drawable/account_circle" />
+
+                    <EditText
+                        android:id="@+id/loginField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_toEndOf="@id/loginIcon"
+                        android:hint="@string/field_login"
+                        android:inputType="textEmailAddress"
+                        android:paddingEnd="26dp"
+                        android:textColor="#1f1f1f"
+                        android:theme="@style/EditTextLight" />
+
+                    <ImageView
+                        android:id="@+id/infoButton"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="20dp"
+                        android:tint="#d1d1d1"
+                        app:srcCompat="@drawable/information_outline" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Войдите с помощью данных акканута mos.ru"
-                    android:textColor="#767676"
-                    android:textSize="20sp" />
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/passwordIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:tint="#5690ff"
+                        app:srcCompat="@drawable/lock" />
+
+                    <EditText
+                        android:id="@+id/passwordField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_toEndOf="@id/passwordIcon"
+                        android:hint="@string/field_password"
+                        android:inputType="textPassword"
+                        android:textColor="#1f1f1f"
+                        android:theme="@style/EditTextLight" />
+
+                </RelativeLayout>
 
             </LinearLayout>
 
-        </FrameLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="6dp"
-            android:paddingBottom="6dp">
-
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/privacyBlock"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='Нажимая "войти", вы соглашаетесь на обработку, хранение, передачу ваших персональных данных.'
+                    android:textColor="#6d6d6d"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/regulations"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Регламент"
+                    android:textColor="#1f1f1f"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/privacyPolicy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Политика конфиденциальности"
+                    android:textColor="#1f1f1f"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/problemsWithLoggingButton"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginBottom="4dp"
+                android:gravity="center"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/loginIcon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:tint="#5690ff"
-                    app:srcCompat="@drawable/account_circle" />
-
-                <EditText
-                    android:id="@+id/loginField"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_toEndOf="@id/loginIcon"
-                    android:hint="@string/field_login"
-                    android:inputType="textEmailAddress"
-                    android:paddingEnd="26dp"
-                    android:textColor="#1f1f1f"
-                    android:theme="@style/EditTextLight" />
+                    android:text="Забыли данные учетной записи?"
+                    android:textColor="#6d6d6d"
+                    android:textSize="14sp" />
 
-                <ImageView
-                    android:id="@+id/infoButton"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="20dp"
-                    android:tint="#d1d1d1"
-                    app:srcCompat="@drawable/information_outline" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/passwordIcon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:tint="#5690ff"
-                    app:srcCompat="@drawable/lock" />
-
-                <EditText
-                    android:id="@+id/passwordField"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_toEndOf="@id/passwordIcon"
-                    android:hint="@string/field_password"
-                    android:inputType="textPassword"
+                    android:layout_marginStart="2dp"
+                    android:text="Восстановить"
                     android:textColor="#1f1f1f"
-                    android:theme="@style/EditTextLight" />
+                    android:textSize="14sp" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/inviteCodeDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/invite_code_description"
-                android:textColor="#767676"
-                android:textSize="14sp"
-                android:textStyle="normal" />
-
-            <RelativeLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/inviteCodeIcon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:tint="#5690ff"
-                    app:srcCompat="@drawable/gift_outline" />
+                <ProgressBar
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:foregroundGravity="center"
+                    android:indeterminate="true"
+                    android:theme="@style/ProgressDark" />
 
-                <EditText
-                    android:id="@+id/inviteCodeField"
+                <include
+                    android:id="@+id/loginEnterButton"
+                    layout="@layout/layout_login_button"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_toEndOf="@id/inviteCodeIcon"
-                    android:hint="@string/invite_code"
-                    android:textColor="#1f1f1f"
-                    android:theme="@style/EditTextLight" />
+                    android:layout_height="56dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="-6dp"
+                    android:layout_marginEnd="-6dp"
+                    android:background="@drawable/shape_top_rounded_16dp" />
 
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/privacyBlock"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text='Нажимая "войти", вы соглашаетесь на обработку, хранение, передачу ваших персональных данных.'
-                android:textColor="#6d6d6d"
-                android:textSize="13sp" />
-
-            <TextView
-                android:id="@+id/regulations"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Регламент"
-                android:textColor="#1f1f1f"
-                android:textSize="13sp" />
-
-            <TextView
-                android:id="@+id/privacyPolicy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Политика конфиденциальности"
-                android:textColor="#1f1f1f"
-                android:textSize="13sp" />
+            </FrameLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/problemsWithLoggingButton"
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:layout_marginBottom="4dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Забыли данные учетной записи?"
-                android:textColor="#6d6d6d"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:text="Восстановить"
-                android:textColor="#1f1f1f"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ProgressBar
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:foregroundGravity="center"
-                android:indeterminate="true"
-                android:theme="@style/ProgressDark" />
-
-            <include
-                android:id="@+id/loginEnterButton"
-                layout="@layout/layout_login_button"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="-6dp"
-                android:layout_marginEnd="-6dp"
-                android:background="@drawable/shape_top_rounded_16dp" />
-
-        </FrameLayout>
-
-    </LinearLayout>
-
-</ScrollView>
+    </ScrollView>
+</layout>

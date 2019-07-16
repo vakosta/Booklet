@@ -24,6 +24,9 @@ android {
     lintOptions {
         checkReleaseBuilds false
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 repositories {

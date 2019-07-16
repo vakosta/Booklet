@@ -39,6 +39,7 @@ ext {
     // Lifecycle
     lifecycleViewmodel = "android.arch.lifecycle:viewmodel:$lifecycleVersion"
     lifecycleExtensions = "android.arch.lifecycle:extensions:$lifecycleVersion"
+    lifecycleRuntime = "android.arch.lifecycle:runtime:$lifecycleVersion"
     room = "android.arch.persistence.room:runtime:$roomVersion"
     paging = "android.arch.paging:runtime:$pagingVersion"
     lifecycleKapt = "android.arch.lifecycle:compiler:$lifecycleVersion"
@@ -92,6 +93,7 @@ ext {
     lifecycleDep = [
             lifecycleViewmodel,
             lifecycleExtensions,
+            lifecycleRuntime,
             room,
             paging,
     ]

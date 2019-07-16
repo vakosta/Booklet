@@ -2,17 +2,14 @@ package me.annenkov.julistaandroid.presentation.activities.login
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.View
-import android.widget.EditText
-import android.widget.FrameLayout
-import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_login.*
-import kotterknife.bindView
 import me.annenkov.julistaandroid.R
 import me.annenkov.julistaandroid.data.model.booklet.auth.Student
+import me.annenkov.julistaandroid.databinding.ActivityLoginBinding
 import me.annenkov.julistaandroid.domain.Preferences
 import me.annenkov.julistaandroid.domain.px
 import me.annenkov.julistaandroid.presentation.activities.main.MainActivity
@@ -23,41 +20,26 @@ import org.jetbrains.anko.selector
 import org.jetbrains.anko.yesButton
 
 class LoginActivity : AppCompatActivity(), LoginView {
-    private lateinit var mPresenter: LoginPresenter
-    private lateinit var tmdbViewModel: LoginViewModel
-
-    private val mLoginField: EditText by bindView(R.id.loginField)
-    private val mPasswordField: EditText by bindView(R.id.passwordField)
-    private val mLoginEnterButton: FrameLayout by bindView(R.id.loginEnterButton)
-    private val mProblemsWithLoggingButton: LinearLayout by bindView(R.id.problemsWithLoggingButton)
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-        mPresenter = LoginPresenter(this, this)
-
-        tmdbViewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        binding.viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
+        binding.executePendingBindings()
 
         KeyboardVisibilityEvent.setEventListener(this) {
-            if (it) {
-                header.visibility = View.GONE
-                privacyBlock.visibility = View.GONE
-                problemsWithLoggingButton.visibility = View.GONE
-            } else {
-                header.visibility = View.VISIBLE
-                privacyBlock.visibility = View.VISIBLE
-                problemsWithLoggingButton.visibility = View.VISIBLE
-            }
+            binding.viewModel!!.keyboardIsShowing.set(it)
         }
 
-        mLoginEnterButton.setOnClickListener {
+        loginEnterButton.setOnClickListener {
             startLoading()
-            tmdbViewModel.doAuth("mosru",
-                    mLoginField.text.toString(),
-                    mPasswordField.text.toString())
+            binding.viewModel!!.doAuth("mosru",
+                    loginField.text.toString(),
+                    passwordField.text.toString())
         }
 
-        mProblemsWithLoggingButton.setOnClickListener {
+        problemsWithLoggingButton.setOnClickListener {
             browse(getString(R.string.url_recover_password))
         }
 
@@ -77,26 +59,22 @@ class LoginActivity : AppCompatActivity(), LoginView {
             }.show()
         }
 
-        tmdbViewModel.authLiveData.observe(this, Observer {
+        binding.viewModel!!.authLiveData.observe(this, Observer {
             Log.d("Login", "Auth data received")
-            endLoading()
+            stopLoading()
             val auth = it?.body()
             when {
                 auth == null ->
-                    alert("Проверьте подключение к интернету.") { yesButton {} }
-                            .show()
+                    onNetworkProblems()
                 !it.isSuccessful ->
-                    alert("Произошла ошибка. Попробуйте ещё раз.") { yesButton {} }
-                            .show()
+                    onUnknownError()
                 auth.status == null ->
-                    alert("Произошла ошибка. Попробуйте ещё раз.") { yesButton {} }
-                            .show()
+                    onUnknownError()
                 !auth.status ->
-                    alert("Неверный логин или пароль.") { yesButton {} }
-                            .show()
+                    onLoginFailed(auth.message)
                 else ->
-                    onLoginSuccessful(mLoginField.text.toString(),
-                            mPasswordField.text.toString(),
+                    onLoginSuccessful(loginField.text.toString(),
+                            passwordField.text.toString(),
                             auth.secret!!,
                             auth.students!!.list)
             }
@@ -112,7 +90,6 @@ class LoginActivity : AppCompatActivity(), LoginView {
                                    password: String,
                                    secret: String,
                                    profiles: List<Student>?) {
-        endLoading()
         val prefs = Preferences.getInstance(this)
         val names = profiles!!.map { it.name.toString() }
         val ids = profiles.map { it.id!! }
@@ -127,30 +104,29 @@ class LoginActivity : AppCompatActivity(), LoginView {
         }
     }
 
-    override fun onLoginFailed() {
-        alert("Неправильный логин или пароль") {
-            yesButton {}
-        }.show()
-
-        endLoading()
+    override fun onLoginFailed(text: String?) {
+        alert(text ?: "Неверный логин или пароль.") { yesButton {} }
+                .show()
     }
 
     override fun onNetworkProblems() {
-        alert("Проверьте подключение к интернету") {
-            yesButton {}
-        }.show()
+        alert("Проверьте подключение к интернету.") { yesButton {} }
+                .show()
+    }
 
-        endLoading()
+    override fun onUnknownError() {
+        alert("Произошла ошибка. Попробуйте ещё раз.") { yesButton {} }
+                .show()
     }
 
     override fun startLoading() {
-        mLoginEnterButton.animate()
+        loginEnterButton.animate()
                 .translationY(56.px.toFloat())
                 .duration = 60
     }
 
-    override fun endLoading() {
-        mLoginEnterButton.animate()
+    override fun stopLoading() {
+        loginEnterButton.animate()
                 .translationY(0f)
                 .duration = 60
     }
