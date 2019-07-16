@@ -11,17 +11,19 @@ import android.view.*
 import android.widget.RelativeLayout
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.TransactionDetails
-import com.crashlytics.android.Crashlytics
 import com.google.firebase.analytics.FirebaseAnalytics
 import hirondelle.date4j.DateTime
 import kotlinx.android.synthetic.main.activity_main.*
 import me.annenkov.julistaandroid.R
-import me.annenkov.julistaandroid.domain.*
+import me.annenkov.julistaandroid.domain.DateHelper
+import me.annenkov.julistaandroid.domain.Preferences
+import me.annenkov.julistaandroid.domain.Utils
 import me.annenkov.julistaandroid.domain.model.Date
 import me.annenkov.julistaandroid.domain.model.OnPurchase
 import me.annenkov.julistaandroid.domain.model.PurchaseUpdate
 import me.annenkov.julistaandroid.domain.model.RestartActivity
 import me.annenkov.julistaandroid.domain.services.NotificationsService
+import me.annenkov.julistaandroid.domain.subscriptionHash
 import me.annenkov.julistaandroid.presentation.ActivityBaseView
 import me.annenkov.julistaandroid.presentation.CardBaseView
 import me.annenkov.julistaandroid.presentation.activities.dark_theme_popup.DarkThemePopupActivity
@@ -124,28 +126,19 @@ class MainActivity : AppCompatActivity(),
             val pid = prefs.userPid
             val token = prefs.userSecret
             val hash = "$pid$token".subscriptionHash()
-            val result = ApiHelper.getInstance(this@MainActivity)
-                    .checkNotificationsSubscription(pid.toString())
-                    .execute().body()?.result ?: false
             val isPurchasedSuccessfully = mBp
                     .getPurchaseTransactionDetails("notifications_20182019")
                     ?.purchaseInfo
                     ?.purchaseData
                     ?.purchaseState?.name == "PurchasedSuccessfully"
 
-            if (!result && isPurchasedSuccessfully) {
-                prefs.notificationsSubscription = true
-                try {
-                    ApiHelper.getInstance(this@MainActivity)
-                            .setNotificationsSubscription(pid.toString(), token!!, hash).execute()
-                } catch (e: Exception) {
-                    Crashlytics.logException(e)
-                }
-                uiThread { EventBus.getDefault().post(PurchaseUpdate()) }
-            } else if (result && !prefs.notificationsSubscription) {
+            if (isPurchasedSuccessfully) {
                 prefs.notificationsSubscription = true
                 uiThread { EventBus.getDefault().post(PurchaseUpdate()) }
-            } else if (!result && !isPurchasedSuccessfully && prefs.notificationsSubscription) {
+            } else if (!prefs.notificationsSubscription) {
+                prefs.notificationsSubscription = true
+                uiThread { EventBus.getDefault().post(PurchaseUpdate()) }
+            } else if (!isPurchasedSuccessfully && prefs.notificationsSubscription) {
                 prefs.notificationsSubscription = false
                 uiThread { EventBus.getDefault().post(PurchaseUpdate()) }
             }
@@ -185,9 +178,6 @@ class MainActivity : AppCompatActivity(),
                         positiveButton("Понял, хочу попробовать!") {}
                     }.show()
                 }
-
-                ApiHelper.getInstance(this@MainActivity)
-                        .setNotificationsSubscription(pid.toString(), token!!, hash).execute()
             }
         }
     }

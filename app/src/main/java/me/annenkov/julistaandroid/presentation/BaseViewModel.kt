@@ -17,7 +17,7 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
 
     private val api = ApiHelper
             .getInstance(application.applicationContext)
-            .getAPI(ApiHelper.ApiType.BOOKLET)
+            .getAPI()
 
     abstract val repository: BaseRepository
 

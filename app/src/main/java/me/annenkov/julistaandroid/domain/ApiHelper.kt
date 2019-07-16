@@ -3,12 +3,10 @@ package me.annenkov.julistaandroid.domain
 import android.content.Context
 import android.util.Log
 import com.google.gson.JsonParseException
-import me.annenkov.julistaandroid.data.JulistaApi
+import me.annenkov.julistaandroid.data.BookletApi
 import me.annenkov.julistaandroid.data.model.booklet.journal.SubjectsItem
 import me.annenkov.julistaandroid.data.model.booklet.marks.Subject
 import me.annenkov.julistaandroid.data.model.booklet.students.Students
-import me.annenkov.julistaandroid.data.model.julista.ResultCheckNotificationsSubscription
-import me.annenkov.julistaandroid.data.model.julista.ResultSetNotificationsSubscription
 import me.annenkov.julistaandroid.data.model.julista.account.Account
 import okhttp3.Cache
 import okhttp3.Interceptor
@@ -21,7 +19,6 @@ import java.io.IOException
 
 class ApiHelper private constructor(val context: Context) {
     private var retrofit: Retrofit? = null
-    private var retrofitMos: Retrofit? = null
 
     private fun deleteCache(context: Context) {
         try {
@@ -92,16 +89,10 @@ class ApiHelper private constructor(val context: Context) {
         retrofit = retrofitBuilder
                 .baseUrl(BOOKLET_URL)
                 .build()
-        retrofitMos = retrofitBuilder
-                .baseUrl(MOS_URL)
-                .build()
     }
 
-    fun getAPI(apiType: ApiType): JulistaApi {
-        return when (apiType) {
-            ApiType.BOOKLET -> retrofit!!.create(JulistaApi::class.java)
-            ApiType.MOS -> retrofitMos!!.create(JulistaApi::class.java)
-        }
+    fun getAPI(): BookletApi {
+        return retrofit!!.create(BookletApi::class.java)
     }
 
     private fun hasNetwork(): Boolean {
@@ -117,20 +108,11 @@ class ApiHelper private constructor(val context: Context) {
     }
 
     fun getStudents(id: Long, secret: String): Call<Students> {
-        return getAPI(ApiType.BOOKLET).getStudents(id, secret)
+        return getAPI().getStudents(id, secret)
     }
 
     fun getAccount(token: String, pid: String): Call<Account> {
-        return getAPI(ApiType.BOOKLET).getAccount(token, pid)
-    }
-
-    fun checkNotificationsSubscription(pid: String): Call<ResultCheckNotificationsSubscription> {
-        return getAPI(ApiType.BOOKLET).checkNotificationsSubscription(pid)
-    }
-
-    fun setNotificationsSubscription(pid: String, token: String, hash: String)
-            : Call<ResultSetNotificationsSubscription> {
-        return getAPI(ApiType.BOOKLET).setNotificationsSubscription(pid, token, hash)
+        return getAPI().getAccount(token, pid)
     }
 
     @Throws(IOException::class, JsonParseException::class)
@@ -138,7 +120,7 @@ class ApiHelper private constructor(val context: Context) {
                     secret: String?,
                     from: String,
                     to: String): List<SubjectsItem?> {
-        val response = getAPI(ApiType.BOOKLET)
+        val response = getAPI()
                 .getSchedule(pid,
                         secret!!,
                         from,
@@ -153,19 +135,13 @@ class ApiHelper private constructor(val context: Context) {
 
     @Throws(IOException::class, JsonParseException::class)
     fun getProgress(id: Long, secret: String): List<Subject?>? {
-        return getAPI(ApiType.BOOKLET)
+        return getAPI()
                 .getProgress(id, secret)
                 .execute().body()!!.data
     }
 
-    enum class ApiType {
-        BOOKLET,
-        MOS,
-    }
-
     companion object : SingletonHolder<ApiHelper, Context>(::ApiHelper) {
         private const val BOOKLET_URL = "https://bklet.ml/api/"
-        private const val MOS_URL = "https://dnevnik.mos.ru/"
 
         private const val CACHE_SIZE = (1 * 1024 * 1024).toLong()
     }

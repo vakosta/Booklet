@@ -3,15 +3,12 @@ package me.annenkov.julistaandroid.data
 import me.annenkov.julistaandroid.data.model.booklet.auth.Auth
 import me.annenkov.julistaandroid.data.model.booklet.marks.Data
 import me.annenkov.julistaandroid.data.model.booklet.students.Students
-import me.annenkov.julistaandroid.data.model.julista.Progress
-import me.annenkov.julistaandroid.data.model.julista.ResultCheckNotificationsSubscription
-import me.annenkov.julistaandroid.data.model.julista.ResultSetNotificationsSubscription
 import me.annenkov.julistaandroid.data.model.julista.account.Account
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
-interface JulistaApi {
+interface BookletApi {
     @FormUrlEncoded
     @POST("auth/")
     suspend fun auth(@Field("diary") diary: String,
@@ -35,20 +32,7 @@ interface JulistaApi {
     fun getProgress(@Query("id") id: Long,
                     @Query("secret") secret: String): Call<Data>
 
-    @GET("progress/")
-    fun getProgressJulista(@Query("token") token: String,
-                           @Query("pid") pid: String): Call<List<Progress>>
-
     @GET("profile_screen/")
     fun getAccount(@Query("token") token: String,
                    @Query("pid") pid: String): Call<Account>
-
-    @GET("notifications_subscription/")
-    fun checkNotificationsSubscription(@Query("pid") pid: String): Call<ResultCheckNotificationsSubscription>
-
-    @FormUrlEncoded
-    @POST("notifications_subscription/")
-    fun setNotificationsSubscription(@Field("pid") pid: String,
-                                     @Field("token") token: String,
-                                     @Field("hash") hash: String): Call<ResultSetNotificationsSubscription>
 }
