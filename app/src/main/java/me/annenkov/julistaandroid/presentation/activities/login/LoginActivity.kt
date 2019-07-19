@@ -1,11 +1,11 @@
 package me.annenkov.julistaandroid.presentation.activities.login
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_login.*
 import me.annenkov.julistaandroid.R
 import me.annenkov.julistaandroid.data.model.booklet.auth.Student

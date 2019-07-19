@@ -1,9 +1,8 @@
 package me.annenkov.julistaandroid.presentation.customviews
 
-import android.support.v4.view.ViewPager
 import android.view.View
 
-class RotateDownTransformer : ViewPager.PageTransformer {
+class RotateDownTransformer : androidx.viewpager.widget.ViewPager.PageTransformer {
     private fun inRange(position: Float): Boolean {
         return position <= 1.0 && position >= -1.0
     }

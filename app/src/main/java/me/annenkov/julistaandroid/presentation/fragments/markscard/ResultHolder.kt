@@ -2,11 +2,10 @@ package me.annenkov.julistaandroid.presentation.fragments.markscard
 
 import android.graphics.Color
 import android.graphics.Typeface
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
 import android.view.Gravity
 import android.view.View
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.nex3z.flowlayout.FlowLayout
 import kotterknife.bindView
 import me.annenkov.julistaandroid.R
@@ -14,7 +13,7 @@ import me.annenkov.julistaandroid.domain.px
 import me.annenkov.julistaandroid.presentation.model.Result
 import org.jetbrains.anko.textColor
 
-class ResultHolder(val view: View) : RecyclerView.ViewHolder(view) {
+class ResultHolder(val view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
     private val mSubjectName: TextView by bindView(R.id.marksItemSubject)
     private val mMarkList: FlowLayout by bindView(R.id.marksMarkList)
     private val mFinal: TextView by bindView(R.id.finalMark)

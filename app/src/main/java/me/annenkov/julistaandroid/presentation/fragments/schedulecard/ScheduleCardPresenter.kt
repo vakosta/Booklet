@@ -2,13 +2,13 @@ package me.annenkov.julistaandroid.presentation.fragments.schedulecard
 
 import android.content.Context
 import android.graphics.Color
-import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import me.annenkov.julistaandroid.R
 import me.annenkov.julistaandroid.data.model.booklet.journal.MarksItem
 import me.annenkov.julistaandroid.data.model.booklet.journal.SubjectsItem

@@ -3,8 +3,6 @@ package me.annenkov.julistaandroid.presentation.fragments.schedulecard
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.widget.SwipeRefreshLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,14 +17,14 @@ import org.greenrobot.eventbus.EventBus
 import org.jetbrains.anko.find
 import org.jetbrains.anko.support.v4.onRefresh
 
-class ScheduleCardFragment : Fragment(), ScheduleCardView {
+class ScheduleCardFragment : androidx.fragment.app.Fragment(), ScheduleCardView {
     private lateinit var mPresenter: ScheduleCardPresenter
     private lateinit var mContext: Context
 
     private lateinit var mHeader: TextView
     private lateinit var mScheduleLayout: LinearLayout
 
-    private lateinit var mRefresher: SwipeRefreshLayout
+    private lateinit var mRefresher: androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
     private var mHasInflated = false
     private var mIsVisibleToUser = false

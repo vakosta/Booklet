@@ -1,17 +1,16 @@
 package me.annenkov.julistaandroid.presentation.fragments.marks
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.view.ViewPager
-import android.support.v4.widget.SwipeRefreshLayout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_marks.*
 import me.annenkov.julistaandroid.R
 import me.annenkov.julistaandroid.data.model.booklet.marks.Subject
@@ -33,10 +32,10 @@ class MarksFragment : ViewPagerFragment(), MarksView, View.OnClickListener, View
     lateinit var prefs: Preferences
 
     private lateinit var mMarksTab: TabLayout
-    private lateinit var mPager: ViewPager
+    private lateinit var mPager: androidx.viewpager.widget.ViewPager
     private lateinit var mPagerAdapter: MarksPagerAdapter
 
-    private lateinit var mRefresher: SwipeRefreshLayout
+    private lateinit var mRefresher: androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -119,12 +118,12 @@ class MarksFragment : ViewPagerFragment(), MarksView, View.OnClickListener, View
         mPager.offscreenPageLimit = 2
         mPager.currentItem = max(mPagerAdapter.count - 2, 0)
 
-        mPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        mPager.addOnPageChangeListener(object : androidx.viewpager.widget.ViewPager.OnPageChangeListener {
             override fun onPageSelected(position: Int) {
             }
 
             override fun onPageScrollStateChanged(state: Int) {
-                mRefresher.isEnabled = state == ViewPager.SCROLL_STATE_IDLE
+                mRefresher.isEnabled = state == androidx.viewpager.widget.ViewPager.SCROLL_STATE_IDLE
             }
 
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {

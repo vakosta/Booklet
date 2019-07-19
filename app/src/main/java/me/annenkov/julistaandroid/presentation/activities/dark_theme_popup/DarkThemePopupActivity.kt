@@ -1,7 +1,7 @@
 package me.annenkov.julistaandroid.presentation.activities.dark_theme_popup
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_dark_theme_popup.*
 import me.annenkov.julistaandroid.R
 import me.annenkov.julistaandroid.domain.Preferences

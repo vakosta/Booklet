@@ -2,10 +2,10 @@ package me.annenkov.julistaandroid.presentation.fragments.account
 
 import android.content.Context
 import android.graphics.Color
-import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import me.annenkov.julistaandroid.R
 import me.annenkov.julistaandroid.data.model.julista.account.Account
 import me.annenkov.julistaandroid.data.model.julista.account.Level

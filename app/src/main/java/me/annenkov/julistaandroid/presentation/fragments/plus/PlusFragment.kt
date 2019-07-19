@@ -1,10 +1,10 @@
 package me.annenkov.julistaandroid.presentation.fragments.plus
 
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.fragment_plus.*
 import kotlinx.android.synthetic.main.item_plus_invites.*
 import kotlinx.android.synthetic.main.item_plus_notifications.*

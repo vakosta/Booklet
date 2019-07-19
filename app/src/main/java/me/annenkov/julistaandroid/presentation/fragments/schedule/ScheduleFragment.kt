@@ -1,8 +1,6 @@
 package me.annenkov.julistaandroid.presentation.fragments.schedule
 
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -10,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import hirondelle.date4j.DateTime
 import kotlinx.android.synthetic.main.layout_week_days.*
 import kotterknife.bindView
@@ -31,7 +30,7 @@ import org.jetbrains.anko.textColor
 class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener, View.OnTouchListener {
     private lateinit var mPresenter: SchedulePresenter
 
-    private lateinit var mPager: ViewPager
+    private lateinit var mPager: androidx.viewpager.widget.ViewPager
     private lateinit var mPagerAdapter: SchedulePagerAdapter
 
     private lateinit var mPagerLayout: CustomLinearLayout
@@ -165,7 +164,7 @@ class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener
             mPager.setPageTransformer(false, RotateDownTransformer())
             mPager.offscreenPageLimit = 1
 
-            mPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            mPager.addOnPageChangeListener(object : androidx.viewpager.widget.ViewPager.OnPageChangeListener {
                 override fun onPageSelected(position: Int) {
                     mPresenter.paintWeekByPosition(position)
                     if (mPresenter.index != 5000) showCurrentDay()

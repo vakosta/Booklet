@@ -1,8 +1,8 @@
 package me.annenkov.julistaandroid.presentation.activities.login
 
 import android.app.Application
-import android.arch.lifecycle.MutableLiveData
-import android.databinding.ObservableField
+import androidx.databinding.ObservableField
+import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.launch
 import me.annenkov.julistaandroid.data.model.booklet.auth.Auth
 import me.annenkov.julistaandroid.domain.repository.AuthRepository

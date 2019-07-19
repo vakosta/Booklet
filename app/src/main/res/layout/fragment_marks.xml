@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:background="?attr/colorBackground">
 
-        <android.support.design.widget.TabLayout
+        <com.google.android.material.tabs.TabLayout
             android:id="@+id/marksTabs"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -68,20 +68,20 @@
 
         </RelativeLayout>
 
-        <android.support.v4.widget.SwipeRefreshLayout
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/marksRefresher"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/marksTabs">
 
-            <android.support.v4.view.ViewPager
+            <androidx.viewpager.widget.ViewPager
                 android:id="@+id/marksListPager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:alpha="0"
                 android:visibility="@{viewModel.status == Status.LOADED ? View.VISIBLE : View.GONE}" />
 
-        </android.support.v4.widget.SwipeRefreshLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </RelativeLayout>
 

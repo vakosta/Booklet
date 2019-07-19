@@ -1,7 +1,6 @@
 package me.annenkov.julistaandroid.presentation.fragments.markscard
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import me.annenkov.julistaandroid.R
@@ -11,7 +10,7 @@ import me.annenkov.julistaandroid.presentation.model.Progress
 class SubjectListAdapter(
         private val mContext: Context,
         private val mProgresses: List<Progress>
-) : RecyclerView.Adapter<SubjectHolder>() {
+) : androidx.recyclerview.widget.RecyclerView.Adapter<SubjectHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubjectHolder =
             SubjectHolder(LayoutInflater
                     .from(parent.context)

@@ -3,11 +3,10 @@ package me.annenkov.julistaandroid.presentation.fragments.markscard
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
 import android.view.Gravity
 import android.view.View
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.nex3z.flowlayout.FlowLayout
 import kotterknife.bindView
 import me.annenkov.julistaandroid.R
@@ -17,7 +16,7 @@ import org.jetbrains.anko.leftPadding
 import org.jetbrains.anko.rightPadding
 import org.jetbrains.anko.textColor
 
-class SubjectHolder(val view: View, val mContext: Context) : RecyclerView.ViewHolder(view) {
+class SubjectHolder(val view: View, val mContext: Context) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
     private val mPurposeLimit = 0.4
     private val mPurposeExtraLimit = 0.5
 

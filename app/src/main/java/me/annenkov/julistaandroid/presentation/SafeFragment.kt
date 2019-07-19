@@ -2,20 +2,18 @@ package me.annenkov.julistaandroid.presentation
 
 import android.app.Activity
 import android.content.Context
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
 
-abstract class SafeFragment : Fragment() {
+abstract class SafeFragment : androidx.fragment.app.Fragment() {
     var aeListener: IActivityEnabledListener? = null
 
     interface IActivityEnabledListener {
-        fun onActivityEnabled(activity: FragmentActivity)
+        fun onActivityEnabled(activity: androidx.fragment.app.FragmentActivity)
     }
 
-    inline fun activityEnabled(crossinline action: (activity: FragmentActivity) -> Unit):
+    inline fun activityEnabled(crossinline action: (activity: androidx.fragment.app.FragmentActivity) -> Unit):
             IActivityEnabledListener {
         aeListener = object : IActivityEnabledListener {
-            override fun onActivityEnabled(activity: FragmentActivity) {
+            override fun onActivityEnabled(activity: androidx.fragment.app.FragmentActivity) {
                 action(activity)
             }
         }
@@ -28,7 +26,7 @@ abstract class SafeFragment : Fragment() {
         super.onAttach(context)
 
         if (aeListener != null) {
-            aeListener!!.onActivityEnabled(context as FragmentActivity)
+            aeListener!!.onActivityEnabled(context as androidx.fragment.app.FragmentActivity)
             aeListener = null
         }
     }
@@ -37,7 +35,7 @@ abstract class SafeFragment : Fragment() {
         super.onAttach(activity)
 
         if (aeListener != null) {
-            aeListener!!.onActivityEnabled(activity as FragmentActivity)
+            aeListener!!.onActivityEnabled(activity as androidx.fragment.app.FragmentActivity)
             aeListener = null
         }
     }

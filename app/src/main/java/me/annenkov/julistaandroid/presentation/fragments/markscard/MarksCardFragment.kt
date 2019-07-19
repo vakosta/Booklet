@@ -2,8 +2,6 @@ package me.annenkov.julistaandroid.presentation.fragments.markscard
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +15,7 @@ import me.annenkov.julistaandroid.presentation.customviews.VerticalSpaceItemDeco
 import me.annenkov.julistaandroid.presentation.model.Progress
 import me.annenkov.julistaandroid.presentation.model.Result
 
-class MarksCardFragment : Fragment(), MarksCardView {
+class MarksCardFragment : androidx.fragment.app.Fragment(), MarksCardView {
     private lateinit var mContext: Context
 
     private lateinit var mHeader: TextView
@@ -63,7 +61,7 @@ class MarksCardFragment : Fragment(), MarksCardView {
     }
 
     override fun initRecyclerView(progresses: List<Progress>) {
-        val layoutManager = LinearLayoutManager(activity!!)
+        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity!!)
 
         marksRecyclerView.layoutManager = layoutManager
         marksRecyclerView.setHasFixedSize(true)
@@ -78,7 +76,7 @@ class MarksCardFragment : Fragment(), MarksCardView {
     }
 
     override fun initRecyclerViewResults(results: List<Result>) {
-        val layoutManager = LinearLayoutManager(activity)
+        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
 
         marksRecyclerView.layoutManager = layoutManager
         marksRecyclerView.setHasFixedSize(true)

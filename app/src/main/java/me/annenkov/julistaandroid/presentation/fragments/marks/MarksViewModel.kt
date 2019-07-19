@@ -1,8 +1,8 @@
 package me.annenkov.julistaandroid.presentation.fragments.marks
 
 import android.app.Application
-import android.arch.lifecycle.MutableLiveData
-import android.databinding.ObservableField
+import androidx.databinding.ObservableField
+import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.launch
 import me.annenkov.julistaandroid.data.model.booklet.marks.Data
 import me.annenkov.julistaandroid.domain.repository.MarksRepository

@@ -2,9 +2,9 @@ package me.annenkov.julistaandroid.presentation.fragments.settings
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.v14.preference.SwitchPreference
-import android.support.v7.preference.PreferenceFragmentCompat
 import android.view.View
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreference
 import me.annenkov.julistaandroid.R
 import me.annenkov.julistaandroid.domain.Preferences
 import me.annenkov.julistaandroid.domain.attribute

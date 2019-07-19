@@ -1,17 +1,14 @@
 package me.annenkov.julistaandroid.presentation.fragments.marks
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
 import me.annenkov.julistaandroid.data.model.booklet.marks.Subject
 import me.annenkov.julistaandroid.presentation.fragments.markscard.MarksCardFragment
 import me.annenkov.julistaandroid.presentation.model.Result
 
 class MarksPagerAdapter(
-        fm: FragmentManager,
+        fm: androidx.fragment.app.FragmentManager,
         private val progresses: List<Subject>
-) : FragmentStatePagerAdapter(fm) {
-    override fun getItem(position: Int): Fragment {
+) : androidx.fragment.app.FragmentStatePagerAdapter(fm) {
+    override fun getItem(position: Int): androidx.fragment.app.Fragment {
         if (position == count - 1) {
             val results = arrayListOf<Result>()
             for (progress in progresses) {
