@@ -29,8 +29,8 @@ interface BookletApi {
             Call<me.annenkov.julistaandroid.data.model.booklet.journal.Response>
 
     @GET("diary/marks/all/")
-    fun getProgress(@Query("id") id: Long,
-                    @Query("secret") secret: String): Call<Data>
+    suspend fun getProgress(@Query("id") id: Long,
+                            @Query("secret") secret: String): Response<Data>
 
     @GET("profile_screen/")
     fun getAccount(@Query("token") token: String,

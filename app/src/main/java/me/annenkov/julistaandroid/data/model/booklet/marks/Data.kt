@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class Data(
         @SerializedName("data")
-        val data: List<Subject?>? = null
+        val data: List<Subject>? = null
 )

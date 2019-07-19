@@ -18,14 +18,12 @@ import me.annenkov.julistaandroid.presentation.model.Progress
 import me.annenkov.julistaandroid.presentation.model.Result
 
 class MarksCardFragment : Fragment(), MarksCardView {
-    private lateinit var mPresenter: MarksCardPresenter
     private lateinit var mContext: Context
 
     private lateinit var mHeader: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mPresenter = MarksCardPresenter(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -44,17 +42,17 @@ class MarksCardFragment : Fragment(), MarksCardView {
         when (arguments!!.getString(ARGUMENT_TYPE, "")) {
             TYPE_MARKS -> {
                 val listType = object :
-                        TypeToken<ArrayList<me.annenkov.julistaandroid.presentation.model.Progress>>() {}
+                        TypeToken<ArrayList<Progress>>() {}
                         .type
-                val progresses = Gson().fromJson<ArrayList<me.annenkov.julistaandroid.presentation.model
-                .Progress>>(arguments!!.getString(ARGUMENT_PROGRESS), listType)
-                mPresenter.init(progresses)
+                val progresses = Gson().fromJson<ArrayList<Progress>>(arguments!!
+                        .getString(ARGUMENT_PROGRESS), listType)
+                initRecyclerView(progresses)
             }
             else -> {
                 val listType = object : TypeToken<ArrayList<Result>>() {}.type
                 val results = Gson().fromJson<ArrayList<Result>>(
                         arguments!!.getString(ARGUMENT_PROGRESS), listType)
-                mPresenter.initResults(results)
+                initRecyclerViewResults(results)
             }
         }
     }
@@ -101,7 +99,7 @@ class MarksCardFragment : Fragment(), MarksCardView {
         const val ARGUMENT_TYPE = "arg_type"
         const val ARGUMENT_PROGRESS = "arg_progress"
 
-        fun newInstance(progresses: List<me.annenkov.julistaandroid.presentation.model.Progress>):
+        fun newInstance(progresses: List<Progress>):
                 MarksCardFragment {
             val fragment = MarksCardFragment()
             val arguments = Bundle()

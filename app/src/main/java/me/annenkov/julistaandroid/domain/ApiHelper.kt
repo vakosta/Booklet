@@ -5,7 +5,6 @@ import android.util.Log
 import com.google.gson.JsonParseException
 import me.annenkov.julistaandroid.data.BookletApi
 import me.annenkov.julistaandroid.data.model.booklet.journal.SubjectsItem
-import me.annenkov.julistaandroid.data.model.booklet.marks.Subject
 import me.annenkov.julistaandroid.data.model.booklet.students.Students
 import me.annenkov.julistaandroid.data.model.julista.account.Account
 import okhttp3.Cache
@@ -131,13 +130,6 @@ class ApiHelper private constructor(val context: Context) {
             days[0]?.subjects ?: arrayListOf()
         else
             arrayListOf()
-    }
-
-    @Throws(IOException::class, JsonParseException::class)
-    fun getProgress(id: Long, secret: String): List<Subject?>? {
-        return getAPI()
-                .getProgress(id, secret)
-                .execute().body()!!.data
     }
 
     companion object : SingletonHolder<ApiHelper, Context>(::ApiHelper) {

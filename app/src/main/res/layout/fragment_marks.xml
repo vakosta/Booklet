@@ -1,70 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/colorBackground">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/marksTabs"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_gravity="top"
-        android:background="?attr/colorPrimary"
-        app:tabIndicatorColor="#fff"
-        app:tabMode="fixed"
-        app:tabSelectedTextColor="#fff"
-        app:tabTextColor="#b3ffffff" />
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="me.annenkov.julistaandroid.presentation.fragments.marks.MarksViewModel.Status" />
+
+        <variable
+            name="viewModel"
+            type="me.annenkov.julistaandroid.presentation.fragments.marks.MarksViewModel" />
+
+    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/marksTabs">
+        android:background="?attr/colorBackground">
 
-        <ProgressBar
-            android:id="@+id/marksProgress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
+        <android.support.design.widget.TabLayout
+            android:id="@+id/marksTabs"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="top"
+            android:background="?attr/colorPrimary"
+            app:tabIndicatorColor="#fff"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="#fff"
+            app:tabTextColor="#b3ffffff" />
 
-        <TextView
-            android:id="@+id/responseErrorView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:drawableTop="@drawable/alert"
-            android:drawableTint="?attr/colorTextPrimary"
-            android:gravity="center"
-            android:text="Произошла ошибка"
-            android:textColor="?attr/colorTextPrimary"
-            android:visibility="gone" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/marksTabs">
 
-        <TextView
-            android:id="@+id/networkErrorView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:drawableTop="@drawable/alert"
-            android:drawableTint="?attr/colorTextPrimary"
-            android:gravity="center"
-            android:text="Проверьте подключение к интернету"
-            android:textColor="?attr/colorTextPrimary"
-            android:visibility="gone" />
+            <ProgressBar
+                android:id="@+id/marksProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="@{viewModel.status == Status.LOADING ? View.VISIBLE : View.GONE}" />
+
+            <TextView
+                android:id="@+id/responseErrorView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:drawableTop="@drawable/alert"
+                android:drawableTint="?attr/colorTextPrimary"
+                android:gravity="center"
+                android:text="Произошла ошибка"
+                android:textColor="?attr/colorTextPrimary"
+                android:visibility="@{viewModel.status == Status.ERROR_UNKNOWN ? View.VISIBLE : View.GONE}" />
+
+            <TextView
+                android:id="@+id/networkErrorView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:drawableTop="@drawable/alert"
+                android:drawableTint="?attr/colorTextPrimary"
+                android:gravity="center"
+                android:text="Проверьте подключение к интернету"
+                android:textColor="?attr/colorTextPrimary"
+                android:visibility="@{viewModel.status == Status.ERROR_NETWORK ? View.VISIBLE : View.GONE}" />
+
+        </RelativeLayout>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/marksRefresher"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/marksTabs">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/marksListPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0"
+                android:visibility="@{viewModel.status == Status.LOADED ? View.VISIBLE : View.GONE}" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
 
     </RelativeLayout>
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/marksRefresher"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/marksTabs">
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/marksListPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:alpha="0" />
-
-    </android.support.v4.widget.SwipeRefreshLayout>
-
-</RelativeLayout>
+</layout>
