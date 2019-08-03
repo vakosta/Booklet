@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/g1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/navSchedule"
+            android:icon="@drawable/schedule_outline"
+            android:title="@string/schedule" />
+        <item
+            android:id="@+id/navMarks"
+            android:icon="@drawable/mark_outline"
+            android:title="@string/marks" />
+        <item
+            android:id="@+id/navAccount"
+            android:icon="@drawable/gamepad_variant_outline"
+            android:title="@string/account" />
+        <item
+            android:id="@+id/navNews"
+            android:icon="@drawable/newspaper"
+            android:title="События" />
+        <item
+            android:id="@+id/navCharts"
+            android:icon="@drawable/chart_timeline_variant"
+            android:title="Графики" />
+    </group>
+
+    <group
+        android:id="@+id/g2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/navCalendar"
+            android:icon="@drawable/calendar_month"
+            android:title="Календарь" />
+        <item
+            android:id="@+id/navClassmates"
+            android:icon="@drawable/account_group_outline"
+            android:title="Одноклассники" />
+        <item
+            android:id="@+id/navTeachers"
+            android:icon="@drawable/account_outline"
+            android:title="Преподаватели" />
+        <item
+            android:id="@+id/navSchoolNews"
+            android:icon="@drawable/newspaper"
+            android:title="Новости школы" />
+    </group>
+
+    <group
+        android:id="@+id/g3"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/navPlus"
+            android:icon="@drawable/plus"
+            android:title="@string/plus" />
+        <item
+            android:id="@+id/navSupport"
+            android:icon="@drawable/face_agent"
+            android:title="Техподдержка" />
+        <item
+            android:id="@+id/navSettings"
+            android:icon="@drawable/settings_outline"
+            android:title="@string/settings" />
+    </group>
+</menu>

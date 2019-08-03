@@ -59,6 +59,7 @@
     <color name="colorShadowPlusVkBot2">#206b8ce4</color>
     <color name="colorShadowPlusVkBot1">#106b8ce4</color>
     <color name="colorShadowPlusVkBot0">#006b8ce4</color>
+    <color name="colorListDivider">#1e000000</color>
 
     <color name="colorPrimaryBlack">#132029</color>
     <color name="colorPrimaryDarkBlack">#0e1b23</color>
@@ -116,4 +117,5 @@
     <color name="colorShadowPlusVkBot2Black">#206b8ce4</color>
     <color name="colorShadowPlusVkBot1Black">#106b8ce4</color>
     <color name="colorShadowPlusVkBot0Black">#006b8ce4</color>
+    <color name="colorListDividerBlack">#1e000000</color>
 </resources>

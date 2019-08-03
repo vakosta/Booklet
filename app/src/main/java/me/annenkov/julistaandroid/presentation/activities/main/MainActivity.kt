@@ -29,6 +29,7 @@ import me.annenkov.julistaandroid.presentation.CardBaseView
 import me.annenkov.julistaandroid.presentation.activities.dark_theme_popup.DarkThemePopupActivity
 import me.annenkov.julistaandroid.presentation.activities.login.LoginActivity
 import me.annenkov.julistaandroid.presentation.customviews.NonSwipeableViewPager
+import me.annenkov.julistaandroid.presentation.fragments.BottomNavigationDrawerFragment
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.alert
@@ -53,7 +54,7 @@ class MainActivity : AppCompatActivity(),
     private lateinit var mDatePicker: DatePickerDialog
 
     private var mIsHideMenu = false
-    private var mMenu = R.menu.menu_calendar
+    private var mMenu = R.menu.menu_bottom_schedule
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,9 +80,6 @@ class MainActivity : AppCompatActivity(),
 
         mPresenter.init()
 
-        bottomNavigation.selectedItemId = R.id.navSchedule
-
-        bottomNavigation.setOnNavigationItemSelectedListener(this)
         mainPager.setOnTouchListener(this)
 
         if (prefs.notificationsSubscription && prefs.notificationMain) {
@@ -93,8 +91,8 @@ class MainActivity : AppCompatActivity(),
             }
         }
 
-        if (intent.getBooleanExtra(EXTRA_IS_FROM_SETTINGS, false))
-            bottomNavigation.selectedItemId = R.id.navSettings
+        /*if (intent.getBooleanExtra(EXTRA_IS_FROM_SETTINGS, false))
+            bottomNavigation.selectedItemId = R.id.navSettings*/
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -216,6 +214,11 @@ class MainActivity : AppCompatActivity(),
                 openDatePicker()
                 true
             }
+            android.R.id.home -> {
+                val bottomNavDrawerFragment = BottomNavigationDrawerFragment()
+                bottomNavDrawerFragment.show(supportFragmentManager, bottomNavDrawerFragment.tag)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -239,7 +242,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun initToolbar() {
-        setSupportActionBar(toolbar)
+        setSupportActionBar(bottomNavigation)
     }
 
     override fun initCalendar() {
@@ -313,9 +316,9 @@ class MainActivity : AppCompatActivity(),
         val params = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT)
         if (below) {
-            params.addRule(RelativeLayout.BELOW, R.id.toolbar)
+            //params.be(RelativeLayout.BELOW, R.id.toolbar)
         } else {
-            params.removeRule(RelativeLayout.BELOW)
+            //params.removeRule(RelativeLayout.BELOW)
         }
         mPager.layoutParams = params
     }

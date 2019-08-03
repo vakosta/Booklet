@@ -13,7 +13,7 @@ data class Student(
         val schoolName: String? = null,
 
         @SerializedName("id")
-        val id: Int? = null,
+        val id: Long? = null,
 
         @SerializedName("class")
         val jsonMemberClass: String? = null

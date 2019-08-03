@@ -34,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
 
         loginEnterButton.setOnClickListener {
             startLoading()
-            binding.viewModel!!.doAuth("mosru",
+            binding.viewModel!!.doAuth("dnevnikru",
                     loginField.text.toString(),
                     passwordField.text.toString())
         }

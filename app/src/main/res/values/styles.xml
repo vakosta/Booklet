@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -60,7 +60,7 @@
         <item name="preferenceTheme">@style/PreferencesTheme</item>
     </style>
 
-    <style name="AppThemeBlack" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppThemeBlack" parent="Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/colorPrimaryBlack</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkBlack</item>
         <item name="colorAccent">@color/colorAccentBlack</item>
@@ -162,6 +162,11 @@
         <item name="android:background">#132029</item>
         <item name="android:textColor">#fff</item>
         <item name="android:textColorPrimary">#fff</item>
+    </style>
+
+    <style name="NavigationDrawerStyle">
+        <item name="android:listDivider">@color/colorListDivider</item>
+        <item name="android:textColorSecondary">@color/colorPrimary</item>
     </style>
 
 </resources>
