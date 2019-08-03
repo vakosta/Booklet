@@ -30,6 +30,7 @@ import me.annenkov.julistaandroid.presentation.activities.dark_theme_popup.DarkT
 import me.annenkov.julistaandroid.presentation.activities.login.LoginActivity
 import me.annenkov.julistaandroid.presentation.customviews.NonSwipeableViewPager
 import me.annenkov.julistaandroid.presentation.fragments.BottomNavigationDrawerFragment
+import me.annenkov.julistaandroid.presentation.model.NavigationDrawerItem
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.alert
@@ -210,16 +211,26 @@ class MainActivity : AppCompatActivity(),
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.menuItemCalendar -> {
-                openDatePicker()
-                true
-            }
             android.R.id.home -> {
                 val bottomNavDrawerFragment = BottomNavigationDrawerFragment()
                 bottomNavDrawerFragment.show(supportFragmentManager, bottomNavDrawerFragment.tag)
                 true
             }
+            R.id.menuItemCalendar -> {
+                openDatePicker()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    @Subscribe
+    fun onNavigationDrawerItemSelected(item: NavigationDrawerItem) {
+        when (item.id) {
+            BottomNavigationDrawerFragment.ID_SCHEDULE -> setFragment(2)
+            BottomNavigationDrawerFragment.ID_MARKS -> setFragment(1)
+            BottomNavigationDrawerFragment.ID_GAMEFICATION -> setFragment(0)
+            BottomNavigationDrawerFragment.ID_SETTINGS -> setFragment(4)
         }
     }
 
