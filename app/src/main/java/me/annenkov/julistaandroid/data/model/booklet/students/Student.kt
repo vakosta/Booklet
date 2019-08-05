@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 class Student {
     @SerializedName("id")
     @Expose
-    var id: Int? = null
+    var id: Long? = null
     @SerializedName("name")
     @Expose
     var name: String? = null

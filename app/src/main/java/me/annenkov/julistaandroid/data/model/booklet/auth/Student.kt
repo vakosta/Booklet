@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Student(
         @SerializedName("school_id")
-        val schoolId: Int? = null,
+        val schoolId: Long? = null,
 
         @SerializedName("name")
         val name: String? = null,

@@ -32,7 +32,7 @@ class MarksFragment : ViewPagerFragment(), MarksView, View.OnClickListener, View
     lateinit var prefs: Preferences
 
     private lateinit var mMarksTab: TabLayout
-    private lateinit var mPager: androidx.viewpager.widget.ViewPager
+    private lateinit var mPager: ViewPager
     private lateinit var mPagerAdapter: MarksPagerAdapter
 
     private lateinit var mRefresher: androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -72,7 +72,7 @@ class MarksFragment : ViewPagerFragment(), MarksView, View.OnClickListener, View
                 !it.isSuccessful ->
                     onUnknownError()
                 else -> {
-                    initPager(it.body()!!.data!!)
+                    initPager(it.body()?.data ?: arrayListOf())
                     showContent()
                     stopRefreshing()
                 }
@@ -118,12 +118,12 @@ class MarksFragment : ViewPagerFragment(), MarksView, View.OnClickListener, View
         mPager.offscreenPageLimit = 2
         mPager.currentItem = max(mPagerAdapter.count - 2, 0)
 
-        mPager.addOnPageChangeListener(object : androidx.viewpager.widget.ViewPager.OnPageChangeListener {
+        mPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageSelected(position: Int) {
             }
 
             override fun onPageScrollStateChanged(state: Int) {
-                mRefresher.isEnabled = state == androidx.viewpager.widget.ViewPager.SCROLL_STATE_IDLE
+                mRefresher.isEnabled = state == ViewPager.SCROLL_STATE_IDLE
             }
 
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
