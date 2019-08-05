@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.ViewPager
 import com.booklet.bookletandroid.R
 import com.booklet.bookletandroid.data.model.booklet.marks.Subject
@@ -35,7 +36,7 @@ class MarksFragment : ViewPagerFragment(), MarksView, View.OnClickListener, View
     private lateinit var mPager: ViewPager
     private lateinit var mPagerAdapter: MarksPagerAdapter
 
-    private lateinit var mRefresher: androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    private lateinit var mRefresher: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

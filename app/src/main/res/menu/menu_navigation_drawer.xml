@@ -16,7 +16,7 @@
             android:icon="@drawable/gamepad_variant_outline"
             android:title="@string/account" />
         <item
-            android:id="@+id/navNews"
+            android:id="@+id/navEvents"
             android:icon="@drawable/newspaper"
             android:title="События" />
         <item

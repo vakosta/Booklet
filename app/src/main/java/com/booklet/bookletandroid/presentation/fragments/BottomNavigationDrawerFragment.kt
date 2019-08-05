@@ -28,6 +28,8 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
                     EventBus.getDefault().post(NavigationDrawerItem(ID_GAMEFICATION))
                 R.id.navSettings ->
                     EventBus.getDefault().post(NavigationDrawerItem(ID_SETTINGS))
+                R.id.navEvents ->
+                    EventBus.getDefault().post(NavigationDrawerItem(ID_EVENTS))
             }
 
             dismiss()
@@ -40,7 +42,7 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
         const val ID_SCHEDULE = 1
         const val ID_MARKS = 2
         const val ID_GAMEFICATION = 3
-        const val ID_NEWS = 4
+        const val ID_EVENTS = 4
         const val ID_CHARTS = 5
         const val ID_CALENDAR = 6
         const val ID_CLASSMATES = 7

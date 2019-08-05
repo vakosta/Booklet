@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/background_event_default"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/eventIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:src="@color/colorListDivider" />
+
+    <TextView
+        android:id="@+id/eventText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="4dp"
+        android:layout_toEndOf="@id/eventIcon"
+        android:text="kekekekekek"
+        android:textColor="#525252"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/eventDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/eventText"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="end"
+        android:text="Сегодня"
+        android:textColor="#525252"
+        android:textSize="13sp" />
+
+</RelativeLayout>

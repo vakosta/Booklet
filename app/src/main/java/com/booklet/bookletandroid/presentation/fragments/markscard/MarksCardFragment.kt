@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.booklet.bookletandroid.R
 import com.booklet.bookletandroid.domain.px
 import com.booklet.bookletandroid.presentation.customviews.VerticalSpaceItemDecoration
@@ -15,7 +17,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.fragment_item_pager_marks.*
 
-class MarksCardFragment : androidx.fragment.app.Fragment(), MarksCardView {
+class MarksCardFragment : Fragment(), MarksCardView {
     private lateinit var mContext: Context
 
     private lateinit var mHeader: TextView
@@ -61,7 +63,7 @@ class MarksCardFragment : androidx.fragment.app.Fragment(), MarksCardView {
     }
 
     override fun initRecyclerView(progresses: List<Progress>) {
-        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity!!)
+        val layoutManager = LinearLayoutManager(activity!!)
 
         marksRecyclerView.layoutManager = layoutManager
         marksRecyclerView.setHasFixedSize(true)
@@ -76,7 +78,7 @@ class MarksCardFragment : androidx.fragment.app.Fragment(), MarksCardView {
     }
 
     override fun initRecyclerViewResults(results: List<Result>) {
-        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
+        val layoutManager = LinearLayoutManager(activity)
 
         marksRecyclerView.layoutManager = layoutManager
         marksRecyclerView.setHasFixedSize(true)

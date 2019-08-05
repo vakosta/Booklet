@@ -3,6 +3,7 @@ package com.booklet.bookletandroid.presentation.activities.main
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.booklet.bookletandroid.presentation.fragments.account.AccountFragment
+import com.booklet.bookletandroid.presentation.fragments.events.EventsFragment
 import com.booklet.bookletandroid.presentation.fragments.marks.MarksFragment
 import com.booklet.bookletandroid.presentation.fragments.plus.PlusFragment
 import com.booklet.bookletandroid.presentation.fragments.schedule.ScheduleFragment
@@ -15,7 +16,8 @@ class MainPagerAdapter(fm: androidx.fragment.app.FragmentManager) : FragmentStat
             1 -> MarksFragment()
             2 -> ScheduleFragment()
             3 -> PlusFragment()
-            else -> SettingsFragment()
+            4 -> SettingsFragment()
+            else -> EventsFragment()
         }
     }
 
@@ -23,5 +25,5 @@ class MainPagerAdapter(fm: androidx.fragment.app.FragmentManager) : FragmentStat
         return POSITION_NONE
     }
 
-    override fun getCount(): Int = 5
+    override fun getCount(): Int = 6
 }

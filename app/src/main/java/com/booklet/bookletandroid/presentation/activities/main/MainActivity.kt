@@ -231,6 +231,7 @@ class MainActivity : AppCompatActivity(),
             BottomNavigationDrawerFragment.ID_MARKS -> setFragment(1)
             BottomNavigationDrawerFragment.ID_GAMEFICATION -> setFragment(0)
             BottomNavigationDrawerFragment.ID_SETTINGS -> setFragment(4)
+            BottomNavigationDrawerFragment.ID_EVENTS -> setFragment(5)
         }
     }
 
