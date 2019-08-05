@@ -6,11 +6,11 @@
 
         <import type="android.view.View" />
 
-        <import type="me.annenkov.julistaandroid.presentation.fragments.marks.MarksViewModel.Status" />
+        <import type="com.booklet.bookletandroid.presentation.fragments.marks.MarksViewModel.Status" />
 
         <variable
             name="viewModel"
-            type="me.annenkov.julistaandroid.presentation.fragments.marks.MarksViewModel" />
+            type="com.booklet.bookletandroid.presentation.fragments.marks.MarksViewModel" />
 
     </data>
 

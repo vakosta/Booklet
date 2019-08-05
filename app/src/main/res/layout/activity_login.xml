@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="me.annenkov.julistaandroid.presentation.activities.login.LoginViewModel" />
+            type="com.booklet.bookletandroid.presentation.activities.login.LoginViewModel" />
 
     </data>
 

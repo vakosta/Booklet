@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.annenkov.julistaandroid">
+    package="com.booklet.bookletandroid">
 
     <uses-permission android:name="com.android.vending.BILLING" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".presentation.activities.main.MainActivity"
+            android:name="com.booklet.bookletandroid.presentation.activities.main.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,18 +22,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.activities.login.LoginActivity"
+            android:name="com.booklet.bookletandroid.presentation.activities.login.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.activities.dark_theme_popup.DarkThemePopupActivity"
+            android:name="com.booklet.bookletandroid.presentation.activities.dark_theme_popup.DarkThemePopupActivity"
             android:screenOrientation="portrait" />
 
-        <service android:name=".domain.services.FirebaseService">
+        <service android:name="com.booklet.bookletandroid.domain.services.FirebaseService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".domain.services.NotificationsService"></service>
+        <service android:name="com.booklet.bookletandroid.domain.services.NotificationsService"></service>
     </application>
 
 </manifest>

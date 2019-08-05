@@ -16,7 +16,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:title="@string/app_name" />
 
-    <me.annenkov.julistaandroid.presentation.customviews.NonSwipeableViewPager
+    <com.booklet.bookletandroid.presentation.customviews.NonSwipeableViewPager
         android:id="@+id/mainPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
