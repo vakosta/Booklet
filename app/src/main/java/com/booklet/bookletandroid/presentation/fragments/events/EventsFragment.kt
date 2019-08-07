@@ -27,6 +27,7 @@ class EventsFragment : ViewPagerFragment() {
                 Event(Event.Type.GRADE, "Hello", "Сегодня"),
                 Event(Event.Type.TEST, "Завтра состоится <b>контрольная работа</b> по предмету <b>ОБЖ</b>", "Сегодня"),
                 Event(Event.Type.GRADE, "Hello", "Сегодня"),
+                Event(Event.Type.NEW_USER, "Какой-то чел присоединился к нашему дневнику!", "Сегодня"),
                 Event(Event.Type.GRADE, "Hello", "Сегодня"),
                 Event(Event.Type.GRADE, "Hello", "Сегодня"),
                 Event(Event.Type.GRADE, "Hello", "Сегодня")

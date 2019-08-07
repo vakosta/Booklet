@@ -9,7 +9,7 @@ import androidx.core.text.HtmlCompat
 import com.booklet.bookletandroid.R
 import kotterknife.bindView
 
-class TestHolder(v: View) : EventHolder(v) {
+class HolidaysHolder(v: View) : EventHolder(v) {
     private val mIcon: ImageView by bindView(R.id.eventIcon)
     private val mText: TextView by bindView(R.id.eventText)
     private val mDate: TextView by bindView(R.id.eventDate)

@@ -17,6 +17,18 @@ class EventsAdapter(
                         .inflate(R.layout.item_event_default,
                                 parent,
                                 false))
+            Event.Type.HOLIDAYS.code ->
+                HolidaysHolder(LayoutInflater
+                        .from(parent.context)
+                        .inflate(R.layout.item_event_default,
+                                parent,
+                                false))
+            Event.Type.NEW_USER.code ->
+                NewUserHolder(LayoutInflater
+                        .from(parent.context)
+                        .inflate(R.layout.item_event_colored,
+                                parent,
+                                false))
             else ->
                 TestHolder(LayoutInflater
                         .from(parent.context)
