@@ -32,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:backgroundTint="?attr/colorBottomBar"
+            android:theme="@style/BottomAppBarTheme"
             app:fabAlignmentMode="center"
             app:navigationIcon="@drawable/menu" />
 

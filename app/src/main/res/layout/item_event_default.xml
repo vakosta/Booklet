@@ -14,7 +14,7 @@
         android:layout_height="24dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="10dp"
-        android:src="@color/colorListDivider" />
+        android:src="@drawable/prefs_five" />
 
     <TextView
         android:id="@+id/eventText"

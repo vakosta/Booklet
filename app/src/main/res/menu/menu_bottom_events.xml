@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <item
-        android:id="@+id/menuItemCalendar"
-        android:icon="@drawable/calendar"
+        android:id="@+id/menuItemKek"
+        android:icon="@drawable/filter_outline"
         android:orderInCategory="200"
-        android:title="Calendar"
+        android:title="Filter"
         app:showAsAction="always" />
-
 </menu>

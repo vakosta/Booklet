@@ -22,7 +22,7 @@ abstract class SafeFragment : androidx.fragment.app.Fragment() {
         return aeListener!!
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
 
         if (aeListener != null) {
@@ -31,7 +31,7 @@ abstract class SafeFragment : androidx.fragment.app.Fragment() {
         }
     }
 
-    override fun onAttach(activity: Activity?) {
+    override fun onAttach(activity: Activity) {
         super.onAttach(activity)
 
         if (aeListener != null) {

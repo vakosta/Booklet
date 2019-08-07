@@ -65,6 +65,7 @@ class MainActivity : AppCompatActivity(),
             true -> setTheme(R.style.AppThemeBlack)
         }
         setContentView(R.layout.activity_main)
+        setSupportActionBar(bottomNavigation)
         mPresenter = MainPresenter(this, this)
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
         mBp = BillingProcessor(this, getString(R.string.license_key), this)
@@ -198,15 +199,12 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        mPresenter.setFragmentByNavigationItem(item.itemId)
         return true
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(mMenu, menu)
-        for (i in 0 until menu.size())
-            menu.getItem(i).isVisible = mIsHideMenu
-        return true
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -227,11 +225,17 @@ class MainActivity : AppCompatActivity(),
     @Subscribe
     fun onNavigationDrawerItemSelected(item: NavigationDrawerItem) {
         when (item.id) {
-            BottomNavigationDrawerFragment.ID_SCHEDULE -> setFragment(2)
+            BottomNavigationDrawerFragment.ID_SCHEDULE -> {
+                bottomNavigation.replaceMenu(R.menu.menu_bottom_schedule)
+                setFragment(2)
+            }
             BottomNavigationDrawerFragment.ID_MARKS -> setFragment(1)
             BottomNavigationDrawerFragment.ID_GAMEFICATION -> setFragment(0)
             BottomNavigationDrawerFragment.ID_SETTINGS -> setFragment(4)
-            BottomNavigationDrawerFragment.ID_EVENTS -> setFragment(5)
+            BottomNavigationDrawerFragment.ID_EVENTS -> {
+                bottomNavigation.replaceMenu(R.menu.menu_bottom_events)
+                setFragment(5)
+            }
         }
     }
 
@@ -254,14 +258,16 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun initToolbar() {
-        setSupportActionBar(bottomNavigation)
+
     }
 
     override fun initCalendar() {
         val dateAndTime = Calendar.getInstance()
         mDatePicker = DatePickerDialog(this@MainActivity,
                 DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                    EventBus.getDefault().post(DateTime.forDateOnly(year, month + 1, dayOfMonth))
+                    EventBus.getDefault().post(DateTime.forDateOnly(year,
+                            month + 1,
+                            dayOfMonth))
                 },
                 dateAndTime.get(Calendar.YEAR),
                 dateAndTime.get(Calendar.MONTH),
@@ -318,8 +324,8 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun setCalendarMenu() {
-        if (mMenu != R.menu.menu_calendar) {
-            mMenu = R.menu.menu_calendar
+        if (mMenu != R.menu.menu_bottom_schedule) {
+            mMenu = R.menu.menu_bottom_schedule
             invalidateOptionsMenu()
         }
     }

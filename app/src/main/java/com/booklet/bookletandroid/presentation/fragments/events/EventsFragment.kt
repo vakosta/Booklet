@@ -19,12 +19,13 @@ class EventsFragment : ViewPagerFragment() {
 
     override fun fetchData() {
         initRecyclerView(listOf(
-                Event(Event.Type.GRADE, "Сегодня в классе кто-то получил пятёрку!", "Сегодня"),
+                Event(Event.Type.GRADE, "Сегодня в классе кто-то получил <b>пятёрку</b>!", "Сегодня"),
                 Event(Event.Type.GRADE, "Ебой, это ещё одно событие какое-то, лол", "Сегодня"),
                 Event(Event.Type.GRADE, "Hello", "Сегодня"),
                 Event(Event.Type.GRADE, "Hello", "Сегодня"),
                 Event(Event.Type.GRADE, "Hello", "Сегодня"),
                 Event(Event.Type.GRADE, "Hello", "Сегодня"),
+                Event(Event.Type.TEST, "Завтра состоится <b>контрольная работа</b> по предмету <b>ОБЖ</b>", "Сегодня"),
                 Event(Event.Type.GRADE, "Hello", "Сегодня"),
                 Event(Event.Type.GRADE, "Hello", "Сегодня"),
                 Event(Event.Type.GRADE, "Hello", "Сегодня"),

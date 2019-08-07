@@ -10,18 +10,20 @@ class EventsAdapter(
         private val mEvents: List<Event>
 ) : RecyclerView.Adapter<EventHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventHolder {
-        val layout = when (viewType) {
+        return when (viewType) {
             Event.Type.GRADE.code ->
-                R.layout.item_event_default
+                GradeHolder(LayoutInflater
+                        .from(parent.context)
+                        .inflate(R.layout.item_event_default,
+                                parent,
+                                false))
             else ->
-                R.layout.item_event_default
+                TestHolder(LayoutInflater
+                        .from(parent.context)
+                        .inflate(R.layout.item_event_default,
+                                parent,
+                                false))
         }
-
-        return GradeHolder(LayoutInflater
-                .from(parent.context)
-                .inflate(layout,
-                        parent,
-                        false))
     }
 
     override fun onBindViewHolder(holder: EventHolder, position: Int) {
@@ -29,4 +31,7 @@ class EventsAdapter(
     }
 
     override fun getItemCount(): Int = mEvents.size
+
+    override fun getItemViewType(position: Int): Int =
+            mEvents[position].type.code
 }

@@ -88,9 +88,9 @@ class ScheduleCardFragment : androidx.fragment.app.Fragment(), ScheduleCardView 
         }
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
-        mContext = context!!
+        mContext = context
     }
 
     fun onScroll(scrollY: Int) {

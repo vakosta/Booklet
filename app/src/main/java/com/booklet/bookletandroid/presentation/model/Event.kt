@@ -6,6 +6,7 @@ class Event(
         val date: String
 ) {
     enum class Type(val code: Int) {
-        GRADE(1)
+        GRADE(1),
+        TEST(2),
     }
 }

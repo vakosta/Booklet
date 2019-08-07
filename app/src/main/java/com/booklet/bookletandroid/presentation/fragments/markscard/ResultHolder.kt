@@ -6,6 +6,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.booklet.bookletandroid.R
 import com.booklet.bookletandroid.domain.px
 import com.booklet.bookletandroid.presentation.model.Result
@@ -13,7 +14,7 @@ import com.nex3z.flowlayout.FlowLayout
 import kotterknife.bindView
 import org.jetbrains.anko.textColor
 
-class ResultHolder(val view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+class ResultHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val mSubjectName: TextView by bindView(R.id.marksItemSubject)
     private val mMarkList: FlowLayout by bindView(R.id.marksMarkList)
     private val mFinal: TextView by bindView(R.id.finalMark)
