@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="24dp"
+            android:text="Фильтры"
+            android:textColor="#292929"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/closeImageView"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/close"
+            android:tint="#999999" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/colorListDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="12dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/gradeEventFilter"
+                layout="@layout/layout_filter_button" />
+
+            <TextView
+                android:layout_width="78dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="События в классе"
+                android:textAlignment="center"
+                android:textColor="#999999"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/newMarksEventFilter"
+                layout="@layout/layout_filter_button" />
+
+            <TextView
+                android:layout_width="78dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Новые оценки"
+                android:textAlignment="center"
+                android:textColor="#999999"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/testEventFilter"
+                layout="@layout/layout_filter_button" />
+
+            <TextView
+                android:layout_width="78dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Грядущие контрольные"
+                android:textAlignment="center"
+                android:textColor="#999999"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/holidaysEventFilter"
+                layout="@layout/layout_filter_button" />
+
+            <TextView
+                android:layout_width="78dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Грядущие каникулы и праздничные дни"
+                android:textAlignment="center"
+                android:textColor="#999999"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

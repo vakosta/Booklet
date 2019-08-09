@@ -53,4 +53,21 @@
     <attr name="colorShadowPlusVkBot2" format="reference" />
     <attr name="colorShadowPlusVkBot1" format="reference" />
     <attr name="colorShadowPlusVkBot0" format="reference" />
+
+    <!-- Events attrs -->
+    <attr name="colorDefaultEventBackground" format="reference" />
+    <attr name="colorDefaultEventBorder" format="reference" />
+    <attr name="colorColoredEventStartColor1" format="reference" />
+    <attr name="colorColoredEventEndColor1" format="reference" />
+    <attr name="colorColoredEventStartColor2" format="reference" />
+    <attr name="colorColoredEventEndColor2" format="reference" />
+    <attr name="colorColoredEventIcon" format="reference" />
+    <attr name="colorDefaultEventText" format="reference" />
+    <attr name="colorDefaultEventDate" format="reference" />
+    <attr name="colorColoredEventText" format="reference" />
+    <attr name="colorColoredEventDate" format="reference" />
+    <attr name="colorColoredEventDateBackground" format="reference" />
+    <attr name="colorEventFilterText" format="reference" />
+    <attr name="colorEventFilterIconEnable" format="reference" />
+    <attr name="colorEventFilterIconDisable" format="reference" />
 </resources>

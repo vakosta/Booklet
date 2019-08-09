@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="64dp"
+    android:layout_height="64dp"
+    android:background="@drawable/background_event_filter_disable"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/eventIcon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/account_group_outline"
+        android:tint="?attr/colorEventFilterIconDisable" />
+
+</LinearLayout>

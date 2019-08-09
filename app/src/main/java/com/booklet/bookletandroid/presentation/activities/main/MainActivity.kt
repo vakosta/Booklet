@@ -26,6 +26,7 @@ import com.booklet.bookletandroid.presentation.activities.dark_theme_popup.DarkT
 import com.booklet.bookletandroid.presentation.activities.login.LoginActivity
 import com.booklet.bookletandroid.presentation.customviews.NonSwipeableViewPager
 import com.booklet.bookletandroid.presentation.fragments.BottomNavigationDrawerFragment
+import com.booklet.bookletandroid.presentation.fragments.EventFilterFragment
 import com.booklet.bookletandroid.presentation.model.NavigationDrawerItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -216,6 +217,11 @@ class MainActivity : AppCompatActivity(),
             }
             R.id.menuItemCalendar -> {
                 openDatePicker()
+                true
+            }
+            R.id.menuItemFilter -> {
+                val bottomNavDrawerFragment = EventFilterFragment()
+                bottomNavDrawerFragment.show(supportFragmentManager, bottomNavDrawerFragment.tag)
                 true
             }
             else -> super.onOptionsItemSelected(item)

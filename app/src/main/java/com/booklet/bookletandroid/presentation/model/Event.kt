@@ -1,6 +1,7 @@
 package com.booklet.bookletandroid.presentation.model
 
 class Event(
+        val id: Int,
         val type: Type,
         val text: String,
         val date: String

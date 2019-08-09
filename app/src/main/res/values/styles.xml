@@ -1,6 +1,7 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -58,9 +59,27 @@
         <item name="colorShadowPlusVkBot1">@color/colorShadowPlusVkBot1</item>
         <item name="colorShadowPlusVkBot0">@color/colorShadowPlusVkBot0</item>
         <item name="preferenceTheme">@style/PreferencesTheme</item>
+
+        <!-- Events items -->
+        <item name="colorDefaultEventBackground">@color/colorDefaultEventBackground</item>
+        <item name="colorDefaultEventBorder">@color/colorDefaultEventBorder</item>
+        <item name="colorColoredEventStartColor1">@color/colorColoredEventStartColor1</item>
+        <item name="colorColoredEventEndColor1">@color/colorColoredEventEndColor1</item>
+        <item name="colorColoredEventStartColor2">@color/colorColoredEventStartColor2</item>
+        <item name="colorColoredEventEndColor2">@color/colorColoredEventEndColor2</item>
+        <item name="colorColoredEventIcon">@color/colorColoredEventIcon</item>
+        <item name="colorDefaultEventText">@color/colorDefaultEventText</item>
+        <item name="colorDefaultEventDate">@color/colorDefaultEventDate</item>
+        <item name="colorColoredEventText">@color/colorColoredEventText</item>
+        <item name="colorColoredEventDate">@color/colorColoredEventDate</item>
+        <item name="colorColoredEventDateBackground">@color/colorColoredEventDateBackground</item>
+        <item name="colorEventFilterText">@color/colorEventFilterText</item>
+        <item name="colorEventFilterIconEnable">@color/colorEventFilterIconEnable</item>
+        <item name="colorEventFilterIconDisable">@color/colorEventFilterIconDisable</item>
     </style>
 
     <style name="AppThemeBlack" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="colorPrimary">@color/colorPrimaryBlack</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkBlack</item>
         <item name="colorAccent">@color/colorAccentBlack</item>
@@ -125,6 +144,24 @@
         <item name="colorShadowPlusVkBot0">@color/colorShadowPlusVkBot0Black</item>
         <item name="preferenceTheme">@style/PreferencesThemeDark</item>
         <item name="android:datePickerDialogTheme">@style/MyDatePickerDialogTheme</item>
+
+        <!-- Events items -->
+        <item name="colorDefaultEventBackground">@color/colorDefaultEventBackgroundBlack</item>
+        <item name="colorDefaultEventBorder">@color/colorDefaultEventBorderBlack</item>
+        <item name="colorColoredEventStartColor1">@color/colorColoredEventStartColor1Black</item>
+        <item name="colorColoredEventEndColor1">@color/colorColoredEventEndColor1Black</item>
+        <item name="colorColoredEventStartColor2">@color/colorColoredEventStartColor2Black</item>
+        <item name="colorColoredEventEndColor2">@color/colorColoredEventEndColor2Black</item>
+        <item name="colorColoredEventIcon">@color/colorColoredEventIconBlack</item>
+        <item name="colorDefaultEventText">@color/colorDefaultEventTextBlack</item>
+        <item name="colorDefaultEventDate">@color/colorDefaultEventDateBlack</item>
+        <item name="colorColoredEventText">@color/colorColoredEventTextBlack</item>
+        <item name="colorColoredEventDate">@color/colorColoredEventDateBlack</item>
+        <item name="colorColoredEventDateBackground">@color/colorColoredEventDateBackgroundBlack
+        </item>
+        <item name="colorEventFilterText">@color/colorEventFilterTextBlack</item>
+        <item name="colorEventFilterIconEnable">@color/colorEventFilterIconEnableBlack</item>
+        <item name="colorEventFilterIconDisable">@color/colorEventFilterIconDisableBlack</item>
     </style>
 
     <style name="PreferencesTheme" parent="PreferenceThemeOverlay.v14.Material">
@@ -171,6 +208,14 @@
 
     <style name="BottomAppBarTheme" parent="@style/ThemeOverlay.AppCompat.Light">
         <item name="colorControlHighlight">#DFDFDF</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/shape_round_bottom_ungles</item>
     </style>
 
 </resources>

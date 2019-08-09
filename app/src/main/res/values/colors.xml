@@ -61,6 +61,25 @@
     <color name="colorShadowPlusVkBot0">#006b8ce4</color>
     <color name="colorListDivider">#1e000000</color>
 
+    <!-- Events colors -->
+    <color name="colorDefaultEventBackground">#fff</color>
+    <color name="colorDefaultEventBorder">#e8e8e8</color>
+    <color name="colorColoredEventStartColor1">#9a83fe</color>
+    <color name="colorColoredEventEndColor1">#6faeff</color>
+    <color name="colorColoredEventStartColor2">#f5317f</color>
+    <color name="colorColoredEventEndColor2">#ff7c6e</color>
+    <color name="colorColoredEventIcon">#4cffffff</color>
+    <color name="colorDefaultEventText">#525252</color>
+    <color name="colorDefaultEventDate">#8c8c8c</color>
+    <color name="colorColoredEventText">#fff</color>
+    <color name="colorColoredEventDate">#fff</color>
+    <color name="colorColoredEventDateBackground">#33ffffff</color>
+    <color name="colorEventFilterText">#999999</color>
+    <color name="colorEventFilterIconEnable">#fff</color>
+    <color name="colorEventFilterIconDisable">#a8adaf</color>
+
+
+    <!-- Black theme -->
     <color name="colorPrimaryBlack">#132029</color>
     <color name="colorPrimaryDarkBlack">#0e1b23</color>
     <color name="colorAccentBlack">#5690ff</color>
@@ -118,4 +137,21 @@
     <color name="colorShadowPlusVkBot1Black">#106b8ce4</color>
     <color name="colorShadowPlusVkBot0Black">#006b8ce4</color>
     <color name="colorListDividerBlack">#1e000000</color>
+
+    <!-- Events colors -->
+    <color name="colorDefaultEventBackgroundBlack">#fff</color>
+    <color name="colorDefaultEventBorderBlack">#e8e8e8</color>
+    <color name="colorColoredEventStartColor1Black">#9a83fe</color>
+    <color name="colorColoredEventEndColor1Black">#6faeff</color>
+    <color name="colorColoredEventStartColor2Black">#f5317f</color>
+    <color name="colorColoredEventEndColor2Black">#ff7c6e</color>
+    <color name="colorColoredEventIconBlack">#4cffffff</color>
+    <color name="colorDefaultEventTextBlack">#525252</color>
+    <color name="colorDefaultEventDateBlack">#8c8c8c</color>
+    <color name="colorColoredEventTextBlack">#fff</color>
+    <color name="colorColoredEventDateBlack">#fff</color>
+    <color name="colorColoredEventDateBackgroundBlack">#33ffffff</color>
+    <color name="colorEventFilterTextBlack">#999999</color>
+    <color name="colorEventFilterIconEnableBlack">#fff</color>
+    <color name="colorEventFilterIconDisableBlack">#a8adaf</color>
 </resources>

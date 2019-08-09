@@ -24,6 +24,10 @@ class Preferences private constructor(context: Context) {
     private val KEY_NOTIFICATION_MAIN = context.getString(R.string.preference_notification_main)
     private val KEY_NOTIFICATION_NEW_MARK = context.getString(R.string.preference_notification_new_mark)
     private val KEY_NOTIFICATION_NEWS = context.getString(R.string.preference_notification_news)
+    private val KEY_FILTER_GRADE = context.getString(R.string.preference_filter_grade)
+    private val KEY_FILTER_NEW_MARKS = context.getString(R.string.preference_filter_new_marks)
+    private val KEY_FILTER_TESTS = context.getString(R.string.preference_filter_tests)
+    private val KEY_FILTER_HOLIDAYS = context.getString(R.string.preference_filter_holidays)
     private val KEY_BOUGHT_NOTIFICATIONS = context.getString(R.string.preference_bought_notifications)
     private val KEY_CLEARED_CACHE = "key_cache"
     private val KEY_IS_DARK_THEME = context.getString(R.string.preference_dark_theme)
@@ -111,6 +115,22 @@ class Preferences private constructor(context: Context) {
     var notificationNews: Boolean
         get() = prefs.getBoolean(KEY_NOTIFICATION_NEWS, false)
         set(value) = prefs.edit().putBoolean(KEY_NOTIFICATION_NEWS, value).apply()
+
+    var filterGrade: Boolean
+        get() = prefs.getBoolean(KEY_FILTER_GRADE, true)
+        set(value) = prefs.edit().putBoolean(KEY_FILTER_GRADE, value).apply()
+
+    var filterNewMarks: Boolean
+        get() = prefs.getBoolean(KEY_FILTER_NEW_MARKS, true)
+        set(value) = prefs.edit().putBoolean(KEY_FILTER_NEW_MARKS, value).apply()
+
+    var filterTests: Boolean
+        get() = prefs.getBoolean(KEY_FILTER_TESTS, true)
+        set(value) = prefs.edit().putBoolean(KEY_FILTER_TESTS, value).apply()
+
+    var filterHolidays: Boolean
+        get() = prefs.getBoolean(KEY_FILTER_HOLIDAYS, true)
+        set(value) = prefs.edit().putBoolean(KEY_FILTER_HOLIDAYS, value).apply()
 
     var notificationsSubscription: Boolean
         get() = prefs.getBoolean(KEY_BOUGHT_NOTIFICATIONS, false)

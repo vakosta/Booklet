@@ -31,6 +31,10 @@
     <string name="preference_notification_new_mark" translatable="false">notification_new_mark</string>
     <string name="preference_notification_news" translatable="false">notification_news</string>
     <string name="preference_notification_main" translatable="false">preference_notification_main</string>
+    <string name="preference_filter_grade" translatable="false">preference_filter_grade</string>
+    <string name="preference_filter_new_marks" translatable="false">preference_filter_new_marks</string>
+    <string name="preference_filter_tests" translatable="false">preference_filter_tests</string>
+    <string name="preference_filter_holidays" translatable="false">preference_filter_holidays</string>
     <string name="preference_bot_code" translatable="false">bot_code</string>
     <string name="preference_invite_code" translatable="false">invite_code</string>
     <string name="preference_invitations" translatable="false">invitations</string>
