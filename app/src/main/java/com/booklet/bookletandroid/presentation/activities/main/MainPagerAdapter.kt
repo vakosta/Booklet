@@ -17,7 +17,8 @@ class MainPagerAdapter(fm: androidx.fragment.app.FragmentManager) : FragmentStat
             2 -> ScheduleFragment()
             3 -> PlusFragment()
             4 -> SettingsFragment()
-            else -> EventsFragment()
+            5 -> EventsFragment()
+            else -> PlusFragment()
         }
     }
 

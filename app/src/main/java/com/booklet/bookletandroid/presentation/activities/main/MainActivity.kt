@@ -8,8 +8,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
-import com.anjlab.android.iab.v3.BillingProcessor
-import com.anjlab.android.iab.v3.TransactionDetails
+import com.android.billingclient.api.*
 import com.booklet.bookletandroid.R
 import com.booklet.bookletandroid.domain.DateHelper
 import com.booklet.bookletandroid.domain.Preferences
@@ -42,13 +41,12 @@ import java.util.*
 class MainActivity : AppCompatActivity(),
         MainView,
         BottomNavigationView.OnNavigationItemSelectedListener,
-        View.OnTouchListener,
-        BillingProcessor.IBillingHandler {
+        View.OnTouchListener, PurchasesUpdatedListener {
     private lateinit var mPresenter: MainPresenter
     private lateinit var starterIntent: Intent
 
     private lateinit var mFirebaseAnalytics: FirebaseAnalytics
-    private lateinit var mBp: BillingProcessor
+    private lateinit var mBc: BillingClient
 
     private lateinit var mPager: NonSwipeableViewPager
     private lateinit var mPagerAdapter: MainPagerAdapter
@@ -69,8 +67,20 @@ class MainActivity : AppCompatActivity(),
         setSupportActionBar(bottomNavigation)
         mPresenter = MainPresenter(this, this)
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
-        mBp = BillingProcessor(this, getString(R.string.license_key), this)
-        mBp.initialize()
+        mBc = BillingClient.newBuilder(this)
+                .enablePendingPurchases()
+                .setListener(this).build()
+        mBc.startConnection(object : BillingClientStateListener {
+            override fun onBillingSetupFinished(billingResult: BillingResult?) {
+                val prefs = Preferences.getInstance(this@MainActivity)
+                val purchases = mBc.queryPurchases(BillingClient.SkuType.SUBS)
+                prefs.notificationsSubscription = (purchases.billingResult.responseCode == 0
+                        && purchases.purchasesList.isNotEmpty())
+            }
+
+            override fun onBillingServiceDisconnected() {
+            }
+        })
 
         val prefs = Preferences.getInstance(this)
 
@@ -98,52 +108,51 @@ class MainActivity : AppCompatActivity(),
             bottomNavigation.selectedItemId = R.id.navSettings*/
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (!mBp.handleActivityResult(requestCode, resultCode, data))
-            when (requestCode) {
-                REQUEST_LOGIN -> {
-                    when (resultCode) {
-                        RESULT_OK -> mPresenter.initPager()
-                        RESULT_BACK_PRESSED -> finish()
+    override fun onPurchasesUpdated(billingResult: BillingResult?,
+                                    purchases: MutableList<Purchase>?) {
+        if (billingResult!!.responseCode == BillingClient.BillingResponseCode.OK && purchases != null) {
+            val prefs = Preferences.getInstance(this)
+
+            if (!prefs.notificationsSubscription) {
+                doAsync {
+                    val pid = prefs.userPid
+                    val token = prefs.userSecret
+                    val hash = "$pid$token".subscriptionHash()
+                    prefs.notificationsSubscription = true
+                    uiThread {
+                        EventBus.getDefault().post(PurchaseUpdate())
+
+                        alert(getString(R.string.gratitude),
+                                "Спасибо! :)") {
+                            positiveButton("Понял, хочу попробовать!") {}
+                        }.show()
                     }
                 }
-                REQUEST_DARK_THEME -> {
-                    when (resultCode) {
-                        RESULT_SET_DARK_THEME ->
-                            restartActivity(RestartActivity(false))
-                    }
-                }
-                else -> super.onActivityResult(requestCode, resultCode, data)
             }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            REQUEST_LOGIN -> {
+                when (resultCode) {
+                    RESULT_OK -> mPresenter.initPager()
+                    RESULT_BACK_PRESSED -> finish()
+                }
+            }
+            REQUEST_DARK_THEME -> {
+                when (resultCode) {
+                    RESULT_SET_DARK_THEME ->
+                        restartActivity(RestartActivity(false))
+                }
+            }
+            else -> super.onActivityResult(requestCode, resultCode, data)
+        }
     }
 
     override fun onStart() {
         super.onStart()
         EventBus.getDefault().register(this)
-
-        doAsync {
-            val prefs = Preferences.getInstance(this@MainActivity)
-
-            val pid = prefs.userPid
-            val token = prefs.userSecret
-            val hash = "$pid$token".subscriptionHash()
-            val isPurchasedSuccessfully = mBp
-                    .getPurchaseTransactionDetails("notifications_20182019")
-                    ?.purchaseInfo
-                    ?.purchaseData
-                    ?.purchaseState?.name == "PurchasedSuccessfully"
-
-            if (isPurchasedSuccessfully) {
-                prefs.notificationsSubscription = true
-                uiThread { EventBus.getDefault().post(PurchaseUpdate()) }
-            } else if (!prefs.notificationsSubscription) {
-                prefs.notificationsSubscription = true
-                uiThread { EventBus.getDefault().post(PurchaseUpdate()) }
-            } else if (!isPurchasedSuccessfully && prefs.notificationsSubscription) {
-                prefs.notificationsSubscription = false
-                uiThread { EventBus.getDefault().post(PurchaseUpdate()) }
-            }
-        }
     }
 
     override fun onStop() {
@@ -151,45 +160,13 @@ class MainActivity : AppCompatActivity(),
         super.onStop()
     }
 
-    override fun onDestroy() {
-        mBp.release()
-        super.onDestroy()
-    }
-
-    override fun onBillingInitialized() {
-    }
-
-    override fun onPurchaseHistoryRestored() {
-    }
-
-    override fun onProductPurchased(productId: String, details: TransactionDetails?) {
-        val prefs = Preferences.getInstance(this)
-
-        if (!prefs.notificationsSubscription) {
-            doAsync {
-                val pid = prefs.userPid
-                val token = prefs.userSecret
-                val hash = "$pid$token".subscriptionHash()
-                prefs.notificationsSubscription = true
-                uiThread {
-                    EventBus.getDefault().post(PurchaseUpdate())
-
-                    alert(getString(R.string.gratitude),
-                            "Спасибо! :)") {
-                        positiveButton("Понял, хочу попробовать!") {}
-                    }.show()
-                }
-            }
-        }
-    }
-
-    override fun onBillingError(errorCode: Int, error: Throwable?) {
-    }
-
     @Subscribe
     fun onPurchase(onPurchase: OnPurchase) {
-        if (!Preferences.getInstance(this).notificationsSubscription)
-            mBp.purchase(this, "notifications_20182019")
+        if (!Preferences.getInstance(this).notificationsSubscription) {
+            val params = BillingFlowParams.newBuilder().setSkuDetails(SkuDetails("{\"skuDetailsToken\":\"AEuhp4K0XflXJUdybwOSLjEIyUYBaHkNVL1zCMcCUEgV-vMq64Us0Acq9FaGuNBwkJYT\",\"productId\":\"booklet_plus\",\"type\":\"subs\",\"price\":\"249,00 \u20BD\",\"price_amount_micros\":249000000,\"price_currency_code\":\"RUB\",\"subscriptionPeriod\":\"P1Y\",\"title\":\"Booklet Plus (Дневник МЭШ)\",\"description\":\"- Уведомления об оценках\"}"))
+                    .build()
+            mBc.launchBillingFlow(this, params)
+        }
     }
 
     override fun initPager() {
@@ -242,6 +219,7 @@ class MainActivity : AppCompatActivity(),
                 bottomNavigation.replaceMenu(R.menu.menu_bottom_events)
                 setFragment(5)
             }
+            BottomNavigationDrawerFragment.ID_PLUS -> setFragment(3)
         }
     }
 

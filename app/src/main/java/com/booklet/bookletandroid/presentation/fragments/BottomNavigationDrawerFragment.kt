@@ -36,6 +36,8 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
                     EventBus.getDefault().post(NavigationDrawerItem(ID_SETTINGS))
                 R.id.navEvents ->
                     EventBus.getDefault().post(NavigationDrawerItem(ID_EVENTS))
+                R.id.navPlus ->
+                    EventBus.getDefault().post(NavigationDrawerItem(ID_PLUS))
             }
             dismiss()
             true
@@ -94,5 +96,6 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
         const val ID_SCHOOL_NEWS = 9
         const val ID_SUPPORT = 10
         const val ID_SETTINGS = 11
+        const val ID_PLUS = 12
     }
 }

@@ -23,7 +23,7 @@ ext {
     crashlyticsVersion = '2.9.5'
     eventbusVersion = '3.1.1'
     date4jVersion = '1.5.0'
-    billingVersion = '1.0.44'
+    billingVersion = '2.0.3'
     keyboardvVersion = '2.1.0'
     junitVersion = '4.12'
     runnerVersion = '1.1.0'
@@ -70,7 +70,7 @@ ext {
     crashlytics = "com.crashlytics.sdk.android:crashlytics:$crashlyticsVersion"
     eventbus = "org.greenrobot:eventbus:$eventbusVersion"
     date4j = "com.darwinsys:hirondelle-date4j:$date4jVersion"
-    billing = "com.anjlab.android.iab.v3:library:$billingVersion"
+    billing = "com.android.billingclient:billing:$billingVersion"
     keyboardv = "net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:$keyboardvVersion"
 
     // Test
