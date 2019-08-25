@@ -25,6 +25,9 @@
             android:name="com.booklet.bookletandroid.presentation.activities.login.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.booklet.bookletandroid.presentation.activities.login.LoginDiaryActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.booklet.bookletandroid.presentation.activities.dark_theme_popup.DarkThemePopupActivity"
             android:screenOrientation="portrait" />
 

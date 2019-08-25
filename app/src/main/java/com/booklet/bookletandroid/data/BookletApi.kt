@@ -2,6 +2,7 @@ package com.booklet.bookletandroid.data
 
 import com.booklet.bookletandroid.data.model.booklet.auth.Auth
 import com.booklet.bookletandroid.data.model.booklet.marks.Data
+import com.booklet.bookletandroid.data.model.booklet.netschool_data.NetschoolData
 import com.booklet.bookletandroid.data.model.booklet.students.Students
 import com.booklet.bookletandroid.data.model.julista.account.Account
 import retrofit2.Call
@@ -14,6 +15,13 @@ interface BookletApi {
     suspend fun auth(@Field("diary") diary: String,
                      @Field("login") login: String,
                      @Field("password") password: String): Response<Auth>
+
+    @GET("auth/get_data/")
+    suspend fun getNetschoolData(
+            @Query("region") region: Int?,
+            @Query("province") province: Int?,
+            @Query("city") city: Int?
+    ): Response<NetschoolData>
 
     @GET("profile/students/")
     fun getStudents(

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <ProgressBar
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:foregroundGravity="center"
+            android:indeterminate="true"
+            android:theme="@style/ProgressDark" />
+
+        <include
+            android:id="@+id/loginEnterButton"
+            layout="@layout/layout_login_button"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="-6dp"
+            android:layout_marginEnd="-6dp"
+            android:background="@drawable/shape_top_rounded_16dp" />
+
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="14dp"
+                android:text="Какой у вас дневник?"
+                android:textColor="#212121"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <include
+                android:id="@+id/meshDiary"
+                layout="@layout/button_diary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="8dp" />
+
+            <include
+                android:id="@+id/mosregDiary"
+                layout="@layout/button_diary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="8dp" />
+
+            <include
+                android:id="@+id/dnevnikruDiary"
+                layout="@layout/button_diary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="8dp" />
+
+            <include
+                android:id="@+id/netschoolDiary"
+                layout="@layout/button_diary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

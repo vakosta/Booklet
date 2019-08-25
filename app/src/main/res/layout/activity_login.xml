@@ -45,6 +45,7 @@
                         android:textSize="24sp" />
 
                     <TextView
+                        android:id="@+id/loginTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Войдите с помощью данных акканута mos.ru"
@@ -128,6 +129,46 @@
                         android:theme="@style/EditTextLight" />
 
                 </RelativeLayout>
+
+                <include
+                    android:id="@+id/netschoolRegion"
+                    layout="@layout/button_netschool"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:visibility="gone" />
+
+                <include
+                    android:id="@+id/netschoolProvince"
+                    layout="@layout/button_netschool"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:visibility="gone" />
+
+                <include
+                    android:id="@+id/netschoolCity"
+                    layout="@layout/button_netschool"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:visibility="gone" />
+
+                <include
+                    android:id="@+id/netschoolSchool"
+                    layout="@layout/button_netschool"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:visibility="gone" />
 
             </LinearLayout>
 

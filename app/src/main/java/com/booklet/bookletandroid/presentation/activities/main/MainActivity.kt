@@ -22,7 +22,7 @@ import com.booklet.bookletandroid.domain.subscriptionHash
 import com.booklet.bookletandroid.presentation.ActivityBaseView
 import com.booklet.bookletandroid.presentation.CardBaseView
 import com.booklet.bookletandroid.presentation.activities.dark_theme_popup.DarkThemePopupActivity
-import com.booklet.bookletandroid.presentation.activities.login.LoginActivity
+import com.booklet.bookletandroid.presentation.activities.login.LoginDiaryActivity
 import com.booklet.bookletandroid.presentation.customviews.NonSwipeableViewPager
 import com.booklet.bookletandroid.presentation.fragments.BottomNavigationDrawerFragment
 import com.booklet.bookletandroid.presentation.fragments.EventFilterFragment
@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity(),
         val prefs = Preferences.getInstance(this)
 
         if (prefs.userLogin.isEmpty())
-            startActivityForResult(Intent(this, LoginActivity::class.java),
+            startActivityForResult(Intent(this, LoginDiaryActivity::class.java),
                     REQUEST_LOGIN)
         else if (!prefs.isShowedDarkThemePopup)
             startActivityForResult(Intent(this, DarkThemePopupActivity::class.java),

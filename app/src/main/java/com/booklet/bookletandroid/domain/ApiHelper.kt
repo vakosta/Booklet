@@ -133,7 +133,7 @@ class ApiHelper private constructor(val context: Context) {
     }
 
     companion object : SingletonHolder<ApiHelper, Context>(::ApiHelper) {
-        private const val BOOKLET_URL = "https://bklet.ml/api/"
+        private const val BOOKLET_URL = "http://bklet.ml/api/"
 
         private const val CACHE_SIZE = (1 * 1024 * 1024).toLong()
     }
