@@ -7,7 +7,7 @@ import com.booklet.bookletandroid.R
 import com.booklet.bookletandroid.presentation.model.Event
 
 class EventsAdapter(
-        private val mEvents: List<Event>
+        private val mEvents: List<com.booklet.bookletandroid.data.model.booklet.events.Event>
 ) : RecyclerView.Adapter<EventHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventHolder {
         return when (viewType) {
@@ -39,11 +39,20 @@ class EventsAdapter(
     }
 
     override fun onBindViewHolder(holder: EventHolder, position: Int) {
-        holder.bind(mEvents[position].text, mEvents[position].date)
+        holder.bind(mEvents[position].text!!, mEvents[position].date!!)
     }
 
     override fun getItemCount(): Int = mEvents.size
 
-    override fun getItemViewType(position: Int): Int =
-            mEvents[position].type.code
+    override fun getItemViewType(position: Int): Int {
+        return when (mEvents[position].type) {
+            "CLASS_EVENT" -> 1
+            "TEST" -> 2
+            "HOLIDAYS" -> 3
+            "SUBSCRIPTION" -> 4
+            "NEW_MARK" -> 5
+            "NEW_USER" -> 6
+            else -> 1
+        }
+    }
 }

@@ -1,18 +1,17 @@
 package com.booklet.bookletandroid.presentation.fragments.events
 
 import androidx.recyclerview.widget.DiffUtil
-import com.booklet.bookletandroid.presentation.model.Event
 
 class EventDiffUtilCallback(
-        private val oldList: List<Event>,
-        private val newList: List<Event>
+        private val oldList: ArrayList<com.booklet.bookletandroid.data.model.booklet.events.Event>,
+        private val newList: List<com.booklet.bookletandroid.data.model.booklet.events.Event>
 ) : DiffUtil.Callback() {
     override fun getOldListSize(): Int = oldList.size
 
     override fun getNewListSize(): Int = newList.size
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].id == newList[newItemPosition].id
+        return oldList[oldItemPosition].date == newList[newItemPosition].date
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {

@@ -1,6 +1,7 @@
 package com.booklet.bookletandroid.data
 
 import com.booklet.bookletandroid.data.model.booklet.auth.Auth
+import com.booklet.bookletandroid.data.model.booklet.events.Event
 import com.booklet.bookletandroid.data.model.booklet.marks.Data
 import com.booklet.bookletandroid.data.model.booklet.netschool_data.NetschoolData
 import com.booklet.bookletandroid.data.model.booklet.students.Students
@@ -28,6 +29,12 @@ interface BookletApi {
             @Query("province") province: Int?,
             @Query("city") city: Int?
     ): Response<NetschoolData>
+
+    @GET("diary/events/")
+    suspend fun getEvents(
+            @Query("id") id: Long,
+            @Query("secret") secret: String
+    ): Response<ArrayList<Event>>
 
     @GET("profile/students/")
     fun getStudents(

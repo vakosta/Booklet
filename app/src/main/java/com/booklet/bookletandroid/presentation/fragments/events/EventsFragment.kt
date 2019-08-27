@@ -4,44 +4,72 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.booklet.bookletandroid.R
+import com.booklet.bookletandroid.data.model.booklet.events.Event
+import com.booklet.bookletandroid.databinding.FragmentEventsBinding
 import com.booklet.bookletandroid.domain.Preferences
 import com.booklet.bookletandroid.presentation.ViewPagerFragment
-import com.booklet.bookletandroid.presentation.model.Event
 import com.booklet.bookletandroid.presentation.model.Filter
 import kotlinx.android.synthetic.main.fragment_events.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
+import org.jetbrains.anko.support.v4.onRefresh
 
 class EventsFragment : ViewPagerFragment() {
-    val allItems = arrayListOf(
-            Event(1, Event.Type.GRADE, "Сегодня в классе кто-то получил <b>пятёрку</b>!", "Сегодня"),
-            Event(2, Event.Type.GRADE, "Ебой, это ещё одно событие какое-то, лол", "Сегодня"),
-            Event(3, Event.Type.NEW_MARK, "Вы получили новую оценку!", "Сегодня"),
-            Event(4, Event.Type.GRADE, "Hello", "Сегодня"),
-            Event(5, Event.Type.HOLIDAYS, "Ура, каникулы уже завтра!", "Сегодня"),
-            Event(6, Event.Type.NEW_MARK, "Вы получили новую оценку!", "Сегодня"),
-            Event(7, Event.Type.GRADE, "Hello", "Сегодня"),
-            Event(8, Event.Type.TEST, "Завтра состоится <b>контрольная работа</b> по предмету <b>ОБЖ</b>", "Сегодня"),
-            Event(9, Event.Type.GRADE, "Hello", "Сегодня"),
-            Event(10, Event.Type.NEW_USER, "Какой-то чел присоединился к нашему дневнику!", "Сегодня"),
-            Event(11, Event.Type.HOLIDAYS, "Завтра праздник :)", "Сегодня"),
-            Event(12, Event.Type.GRADE, "Hello", "Сегодня"),
-            Event(13, Event.Type.GRADE, "Hello", "Сегодня")
-    )
+    private lateinit var binding: FragmentEventsBinding
+
+    val allItems = arrayListOf<Event>()
     var filteredItems = arrayListOf<Event>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_events, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_events, container, false)
+        binding.viewModel = ViewModelProviders.of(this).get(EventsViewModel::class.java)
+        binding.executePendingBindings()
+        val view = binding.root
+
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
     }
 
     override fun fetchData() {
-        filteredItems.addAll(allItems)
         initRecyclerView(filteredItems)
+        val prefs = Preferences.getInstance(activity!!)
+
+        binding.viewModel!!.getEvents(prefs.userPid!!, prefs.userSecret!!)
+
+        binding.viewModel!!.eventsLiveData.observe(this, Observer {
+            eventsRefresher.isRefreshing = false
+            allItems.clear()
+            allItems.addAll(it!!.body()!!)
+            paintItems()
+        })
+
+        eventsRefresher.onRefresh {
+            binding.viewModel!!.getEvents(prefs.userPid!!, prefs.userSecret!!)
+        }
+    }
+
+    private fun paintItems() {
+        filteredItems.addAll(allItems)
+        onFilter(Filter(Filter.State.CLOSED))
     }
 
     override fun onStart() {
@@ -65,10 +93,10 @@ class EventsFragment : ViewPagerFragment() {
     fun onFilter(filter: Filter) {
         val prefs = Preferences.getInstance(activity!!)
         val newItems = allItems.filter {
-            (prefs.filterGrade || (it.type != Event.Type.GRADE && it.type != Event.Type.NEW_USER)) &&
-                    (prefs.filterNewMarks || it.type != Event.Type.NEW_MARK) &&
-                    (prefs.filterTests || it.type != Event.Type.TEST) &&
-                    (prefs.filterHolidays || it.type != Event.Type.HOLIDAYS)
+            (prefs.filterGrade || (it.type != "CLASS_EVENT" && it.type != "NEW_USER")) &&
+                    (prefs.filterNewMarks || it.type != "NEW_MARK") &&
+                    (prefs.filterTests || it.type != "TEST") &&
+                    (prefs.filterHolidays || it.type != "HOLIDAYS")
         }
         val productDiffUtilCallback = EventDiffUtilCallback(filteredItems, newItems)
         val productDiffResult = DiffUtil.calculateDiff(productDiffUtilCallback)
