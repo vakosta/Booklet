@@ -20,9 +20,15 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
 
     val keyboardIsShowing = ObservableField(false)
 
-    fun doAuth(diary: String, login: String, password: String) {
+    fun doAuth(diary: String,
+               login: String,
+               password: String,
+               region: Int?,
+               province: Int?,
+               city: Int?,
+               school: Int?) {
         scope.launch {
-            val auth = repository.auth(diary, login, password)
+            val auth = repository.auth(diary, login, password, region, province, city, school)
             authLiveData.postValue(auth)
         }
     }

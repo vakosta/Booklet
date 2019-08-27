@@ -12,9 +12,15 @@ import retrofit2.http.*
 interface BookletApi {
     @FormUrlEncoded
     @POST("auth/")
-    suspend fun auth(@Field("diary") diary: String,
-                     @Field("login") login: String,
-                     @Field("password") password: String): Response<Auth>
+    suspend fun auth(
+            @Field("diary") diary: String,
+            @Field("login") login: String,
+            @Field("password") password: String,
+            @Field("region") region: Int?,
+            @Field("province") province: Int?,
+            @Field("city") city: Int?,
+            @Field("school") school: Int?
+    ): Response<Auth>
 
     @GET("auth/get_data/")
     suspend fun getNetschoolData(

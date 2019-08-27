@@ -149,9 +149,13 @@ class LoginActivity : AppCompatActivity() {
 
         loginEnterButton.setOnClickListener {
             startLoading()
-            binding.viewModel!!.doAuth("dnevnikru",
+            binding.viewModel!!.doAuth(diaryName,
                     loginField.text.toString(),
-                    passwordField.text.toString())
+                    passwordField.text.toString(),
+                    regionId,
+                    provinceId,
+                    cityId,
+                    schoolId)
         }
 
         problemsWithLoggingButton.setOnClickListener {
