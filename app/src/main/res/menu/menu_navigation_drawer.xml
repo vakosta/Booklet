@@ -11,21 +11,21 @@
             android:id="@+id/navMarks"
             android:icon="@drawable/mark_outline"
             android:title="@string/marks" />
-        <item
+        <!--<item
             android:id="@+id/navAccount"
             android:icon="@drawable/gamepad_variant_outline"
-            android:title="@string/account" />
+            android:title="@string/account" />-->
         <item
             android:id="@+id/navEvents"
             android:icon="@drawable/newspaper"
             android:title="События" />
-        <item
+        <!--<item
             android:id="@+id/navCharts"
             android:icon="@drawable/chart_timeline_variant"
-            android:title="Графики" />
+            android:title="Графики" />-->
     </group>
 
-    <group
+    <!--<group
         android:id="@+id/g2"
         android:checkableBehavior="single">
         <item
@@ -44,7 +44,7 @@
             android:id="@+id/navSchoolNews"
             android:icon="@drawable/newspaper"
             android:title="Новости школы" />
-    </group>
+    </group>-->
 
     <group
         android:id="@+id/g3"
@@ -53,10 +53,10 @@
             android:id="@+id/navPlus"
             android:icon="@drawable/plus"
             android:title="@string/plus" />
-        <item
+        <!--<item
             android:id="@+id/navSupport"
             android:icon="@drawable/face_agent"
-            android:title="Техподдержка" />
+            android:title="Техподдержка" />-->
         <item
             android:id="@+id/navSettings"
             android:icon="@drawable/settings_outline"

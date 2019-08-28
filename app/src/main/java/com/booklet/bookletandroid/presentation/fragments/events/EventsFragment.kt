@@ -41,14 +41,6 @@ class EventsFragment : ViewPagerFragment() {
         return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
-
     override fun fetchData() {
         initRecyclerView(filteredItems)
         val prefs = Preferences.getInstance(activity!!)
@@ -56,6 +48,7 @@ class EventsFragment : ViewPagerFragment() {
         binding.viewModel!!.getEvents(prefs.userPid!!, prefs.userSecret!!)
 
         binding.viewModel!!.eventsLiveData.observe(this, Observer {
+            eventsProgress.visibility = View.GONE
             eventsRefresher.isRefreshing = false
             allItems.clear()
             allItems.addAll(it!!.body()!!)
