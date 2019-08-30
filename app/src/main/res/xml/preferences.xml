@@ -13,6 +13,14 @@
             android:entries="@array/list_preference_mark_purpose_values"
             android:entryValues="@array/list_preference_mark_purpose_values"
             android:icon="@drawable/prefs_five"
+            android:key="@string/preference_student_profile_id"
+            android:summary="%s"
+            android:title="Ученик" />
+        <ListPreference
+            android:dialogTitle="Ваша цель"
+            android:entries="@array/list_preference_mark_purpose_values"
+            android:entryValues="@array/list_preference_mark_purpose_values"
+            android:icon="@drawable/prefs_five"
             android:key="@string/preference_mark_purpose"
             android:summary="Для советов и подсказок"
             android:title="Цель обучения" />

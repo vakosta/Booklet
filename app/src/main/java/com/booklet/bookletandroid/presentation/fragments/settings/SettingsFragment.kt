@@ -3,6 +3,7 @@ package com.booklet.bookletandroid.presentation.fragments.settings
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.booklet.bookletandroid.R
@@ -18,6 +19,7 @@ import org.jetbrains.anko.noButton
 import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.browse
 import org.jetbrains.anko.yesButton
+
 
 class SettingsFragment : PreferenceFragmentCompat(),
         SharedPreferences.OnSharedPreferenceChangeListener {
@@ -73,6 +75,8 @@ class SettingsFragment : PreferenceFragmentCompat(),
             }.show()
             true
         }
+
+        setStudents()
     }
 
     private fun initMarkPurposePreference() {
@@ -125,5 +129,16 @@ class SettingsFragment : PreferenceFragmentCompat(),
     fun onRefresh(purchaseUpdate: PurchaseUpdate) {
         preferenceScreen.removeAll()
         addPreferencesFromResource(R.xml.preferences)
+    }
+
+    fun setStudents() {
+        val prefs = Preferences.getInstance(activity!!)
+        val names = prefs.userStudentProfiles.map { it.name.toString() }
+        val ids = prefs.userStudentProfiles.map { it.id.toString() }
+        val students = findPreference(context!!.getString(R.string.preference_student_profile_id)) as ListPreference
+        students.entries = names.toTypedArray()
+        students.setDefaultValue(prefs.userStudentProfileId)
+        students.entryValues = ids.toTypedArray()
+        EventBus.getDefault().post(Refresh())
     }
 }
