@@ -60,11 +60,11 @@ class ScheduleCardFragment : androidx.fragment.app.Fragment(), ScheduleCardView 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mPresenter.init(arguments!!.getInt(ARGUMENT_POSITION),
-                arguments!!.getString(ARGUMENT_DATE))
+                arguments!!.getString(ARGUMENT_DATE)!!)
         mRefresher.setColorSchemeResources(R.color.colorAccent)
         mRefresher.onRefresh {
             mPresenter.init(arguments!!.getInt(ARGUMENT_POSITION),
-                    arguments!!.getString(ARGUMENT_DATE))
+                    arguments!!.getString(ARGUMENT_DATE)!!)
         }
         mHasInflated = true
 

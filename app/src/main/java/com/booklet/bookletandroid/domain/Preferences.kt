@@ -37,11 +37,11 @@ class Preferences private constructor(context: Context) {
             .getDefaultSharedPreferences(context)
 
     var botCode: String
-        get() = prefs.getString(KEY_BOT_CODE, "loading...")
+        get() = prefs.getString(KEY_BOT_CODE, "loading...")!!
         set(value) = prefs.edit().putString(KEY_BOT_CODE, value).apply()
 
     var inviteCode: String
-        get() = prefs.getString(KEY_INVITE_CODE, "loading...")
+        get() = prefs.getString(KEY_INVITE_CODE, "loading...")!!
         set(value) = prefs.edit().putString(KEY_INVITE_CODE, value).apply()
 
     var invitations: Int
@@ -49,11 +49,11 @@ class Preferences private constructor(context: Context) {
         set(value) = prefs.edit().putInt(KEY_INVITATIONS, value).apply()
 
     var userLogin: String
-        get() = prefs.getString(KEY_LOGIN, "")
+        get() = prefs.getString(KEY_LOGIN, "")!!
         set(value) = prefs.edit().putString(KEY_LOGIN, value).apply()
 
     var userPassword: String
-        get() = prefs.getString(KEY_PASSWORD, "")
+        get() = prefs.getString(KEY_PASSWORD, "")!!
         set(value) = prefs.edit().putString(KEY_PASSWORD, value).apply()
 
     var userSecret: String?
@@ -62,7 +62,7 @@ class Preferences private constructor(context: Context) {
 
     var userTokenLastUpdate: Long
         get() {
-            var result = prefs.getString(KEY_TOKEN_LAST_UPDATE, "0")
+            var result = prefs.getString(KEY_TOKEN_LAST_UPDATE, "0")!!
             if (result.isEmpty()) result = "0"
             return result.toLong()
         }
@@ -73,7 +73,7 @@ class Preferences private constructor(context: Context) {
         set(value) = prefs.edit().putLong(KEY_PID, value ?: 0).apply()
 
     var userStudentProfileId: String
-        get() = prefs.getString(KEY_STUDENT_PROFILE_ID, "")
+        get() = prefs.getString(KEY_STUDENT_PROFILE_ID, "")!!
         set(value) = prefs.edit().putString(KEY_STUDENT_PROFILE_ID, value).apply()
 
     var userStudentProfiles: List<Student>

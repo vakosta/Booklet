@@ -36,7 +36,7 @@ object Utils {
         val clipboard = context
                 .getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText(label, data)
-        clipboard.primaryClip = clip
+        clipboard.setPrimaryClip(clip)
     }
 
     fun convertPixelsToDp(context: Context, px: Float): Float {
