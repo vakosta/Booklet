@@ -2,8 +2,6 @@ package com.booklet.bookletandroid.presentation.activities.login
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -21,77 +19,9 @@ import org.jetbrains.anko.browse
 import org.jetbrains.anko.selector
 import org.jetbrains.anko.yesButton
 
-class LoginActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityLoginBinding
-    private lateinit var diaryName: String
-
-    private var regionId: Int? = null
-    private var regionName: String? = null
-        set(value) {
-            field = value
-
-            if (value != null) {
-                netschoolRegion.findViewById<TextView>(R.id.infoText).text = value
-                netschoolProvince.visibility = View.VISIBLE
-            } else
-                netschoolRegion.findViewById<TextView>(R.id.infoText).text = "Выберите регион"
-
-            clearProvince()
-            clearCity()
-            clearSchool()
-        }
-
-    private var provinceId: Int? = null
-    private var provinceName: String? = null
-        set(value) {
-            field = value
-
-            if (value != null) {
-                netschoolProvince.findViewById<TextView>(R.id.infoText).text = value
-                netschoolCity.visibility = View.VISIBLE
-            } else {
-                netschoolProvince.findViewById<TextView>(R.id.infoText).text = "Выберите область"
-
-                if (regionId == null)
-                    netschoolProvince.visibility = View.GONE
-            }
-
-            clearCity()
-            clearSchool()
-        }
-
-    private var cityId: Int? = null
-    private var cityName: String? = null
-        set(value) {
-            field = value
-
-            if (value != null) {
-                netschoolCity.findViewById<TextView>(R.id.infoText).text = value
-                netschoolSchool.visibility = View.VISIBLE
-            } else {
-                netschoolCity.findViewById<TextView>(R.id.infoText).text = "Выберите город"
-
-                if (provinceId == null)
-                    netschoolCity.visibility = View.GONE
-            }
-
-            clearSchool()
-        }
-
-    private var schoolId: Int? = null
-    private var schoolName: String? = null
-        set(value) {
-            field = value
-
-            if (value != null) {
-                netschoolSchool.findViewById<TextView>(R.id.infoText).text = value
-            } else {
-                netschoolSchool.findViewById<TextView>(R.id.infoText).text = "Выберите школу"
-
-                if (cityId == null)
-                    netschoolSchool.visibility = View.GONE
-            }
-        }
+open class LoginActivity : AppCompatActivity() {
+    protected lateinit var binding: ActivityLoginBinding
+    protected lateinit var diaryName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,51 +41,8 @@ class LoginActivity : AppCompatActivity() {
         }
         loginTitle.text = "Войдите с помощью данных акканута $title"
 
-        if (diary == LoginDiaryActivity.Diary.NETSCHOOL)
-            netschoolRegion.visibility = View.VISIBLE
-
-        netschoolRegion.setOnClickListener {
-            clearRegion()
-            netschoolRegion.findViewById<TextView>(R.id.infoText).text = "Загрузка..."
-            binding.viewModel!!.getNetschoolData(regionId,
-                    provinceId,
-                    cityId)
-        }
-        netschoolProvince.setOnClickListener {
-            clearProvince()
-            netschoolProvince.findViewById<TextView>(R.id.infoText).text = "Загрузка..."
-            binding.viewModel!!.getNetschoolData(regionId,
-                    provinceId,
-                    cityId)
-        }
-        netschoolCity.setOnClickListener {
-            clearCity()
-            netschoolCity.findViewById<TextView>(R.id.infoText).text = "Загрузка..."
-            binding.viewModel!!.getNetschoolData(regionId,
-                    provinceId,
-                    cityId)
-        }
-        netschoolSchool.setOnClickListener {
-            clearSchool()
-            netschoolSchool.findViewById<TextView>(R.id.infoText).text = "Загрузка..."
-            binding.viewModel!!.getNetschoolData(regionId,
-                    provinceId,
-                    cityId)
-        }
-
         KeyboardVisibilityEvent.setEventListener(this) {
             binding.viewModel!!.keyboardIsShowing.set(it)
-        }
-
-        loginEnterButton.setOnClickListener {
-            startLoading()
-            binding.viewModel!!.doAuth(diaryName,
-                    loginField.text.toString(),
-                    passwordField.text.toString(),
-                    regionId,
-                    provinceId,
-                    cityId,
-                    schoolId)
         }
 
         problemsWithLoggingButton.setOnClickListener {
@@ -199,62 +86,6 @@ class LoginActivity : AppCompatActivity() {
                             auth.students!!.list)
             }
         })
-
-        binding.viewModel!!.netschoolRegionLiveData.observe(this, Observer { response ->
-            val data = response?.body()!!.data!!
-            val countries = data.map { it.name.toString() }
-            selector("Выберите ваш регион", countries) { _, i ->
-                regionId = data[i].id
-                regionName = data[i].name
-            }
-        })
-
-        binding.viewModel!!.netschoolProvinceLiveData.observe(this, Observer { response ->
-            val data = response?.body()!!.data!!
-            val countries = data.map { it.name.toString() }
-            selector("Выберите вашу область", countries) { _, i ->
-                provinceId = data[i].id
-                provinceName = data[i].name
-            }
-        })
-
-        binding.viewModel!!.netschoolCityLiveData.observe(this, Observer { response ->
-            val data = response?.body()!!.data!!
-            val countries = data.map { it.name.toString() }
-            selector("Выберите ваш город", countries) { _, i ->
-                cityId = data[i].id
-                cityName = data[i].name
-            }
-        })
-
-        binding.viewModel!!.netschoolSchoolLiveData.observe(this, Observer { response ->
-            val data = response?.body()!!.data!!
-            val countries = data.map { it.name.toString() }
-            selector("Выберите ваш регион", countries) { _, i ->
-                schoolId = data[i].id
-                schoolName = data[i].name
-            }
-        })
-    }
-
-    private fun clearRegion() {
-        regionId = null
-        regionName = null
-    }
-
-    private fun clearProvince() {
-        provinceId = null
-        provinceName = null
-    }
-
-    private fun clearCity() {
-        cityId = null
-        cityName = null
-    }
-
-    private fun clearSchool() {
-        schoolId = null
-        schoolName = null
     }
 
     override fun onBackPressed() {
@@ -297,13 +128,13 @@ class LoginActivity : AppCompatActivity() {
                 .show()
     }
 
-    private fun startLoading() {
+    protected fun startLoading() {
         loginEnterButton.animate()
                 .translationY(56.px.toFloat())
                 .duration = 60
     }
 
-    private fun stopLoading() {
+    protected fun stopLoading() {
         loginEnterButton.animate()
                 .translationY(0f)
                 .duration = 60

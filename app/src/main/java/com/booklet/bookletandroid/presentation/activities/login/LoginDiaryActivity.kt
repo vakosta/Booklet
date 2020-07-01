@@ -48,7 +48,10 @@ class LoginDiaryActivity : AppCompatActivity() {
         }
 
         loginEnterButton.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = if (selectedDiary != Diary.NETSCHOOL)
+                Intent(this, LoginActivity::class.java)
+            else
+                Intent(this, NetSchoolLoginActivity::class.java)
             intent.putExtra(EXTRA_DIARY, selectedDiary)
             startActivity(intent)
         }
