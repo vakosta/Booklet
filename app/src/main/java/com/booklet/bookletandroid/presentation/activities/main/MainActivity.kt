@@ -24,9 +24,7 @@ import com.booklet.bookletandroid.presentation.CardBaseView
 import com.booklet.bookletandroid.presentation.activities.dark_theme_popup.DarkThemePopupActivity
 import com.booklet.bookletandroid.presentation.activities.login.LoginDiaryActivity
 import com.booklet.bookletandroid.presentation.customviews.NonSwipeableViewPager
-import com.booklet.bookletandroid.presentation.fragments.BottomNavigationDrawerFragment
 import com.booklet.bookletandroid.presentation.fragments.EventFilterFragment
-import com.booklet.bookletandroid.presentation.model.NavigationDrawerItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.analytics.FirebaseAnalytics
 import hirondelle.date4j.DateTime
@@ -64,7 +62,6 @@ class MainActivity : AppCompatActivity(),
             true -> setTheme(R.style.AppThemeBlack)
         }
         setContentView(R.layout.activity_main)
-        setSupportActionBar(bottomNavigation)
         mPresenter = MainPresenter(this, this)
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
         mBc = BillingClient.newBuilder(this)
@@ -81,6 +78,8 @@ class MainActivity : AppCompatActivity(),
             override fun onBillingServiceDisconnected() {
             }
         })
+
+        bottomNavigation.setOnNavigationItemSelectedListener(this)
 
         val prefs = Preferences.getInstance(this)
 
@@ -177,6 +176,13 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.navSchedule -> setFragment(2)
+            R.id.navMarks -> setFragment(1)
+            R.id.navAccount -> setFragment(4)
+            R.id.navGamefication -> setFragment(0)
+            R.id.navEvents -> setFragment(5)
+        }
         return true
     }
 
@@ -187,11 +193,6 @@ class MainActivity : AppCompatActivity(),
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            android.R.id.home -> {
-                val bottomNavDrawerFragment = BottomNavigationDrawerFragment()
-                bottomNavDrawerFragment.show(supportFragmentManager, bottomNavDrawerFragment.tag)
-                true
-            }
             R.id.menuItemCalendar -> {
                 openDatePicker()
                 true
@@ -202,24 +203,6 @@ class MainActivity : AppCompatActivity(),
                 true
             }
             else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    @Subscribe
-    fun onNavigationDrawerItemSelected(item: NavigationDrawerItem) {
-        when (item.id) {
-            BottomNavigationDrawerFragment.ID_SCHEDULE -> {
-                bottomNavigation.replaceMenu(R.menu.menu_bottom_schedule)
-                setFragment(2)
-            }
-            BottomNavigationDrawerFragment.ID_MARKS -> setFragment(1)
-            BottomNavigationDrawerFragment.ID_GAMEFICATION -> setFragment(0)
-            BottomNavigationDrawerFragment.ID_SETTINGS -> setFragment(4)
-            BottomNavigationDrawerFragment.ID_EVENTS -> {
-                bottomNavigation.replaceMenu(R.menu.menu_bottom_events)
-                setFragment(5)
-            }
-            BottomNavigationDrawerFragment.ID_PLUS -> setFragment(3)
         }
     }
 
@@ -242,7 +225,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun initToolbar() {
-
+        //setSupportActionBar(bottomNavigation)
     }
 
     override fun initCalendar() {

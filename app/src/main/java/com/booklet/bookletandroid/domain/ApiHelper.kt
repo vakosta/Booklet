@@ -10,13 +10,17 @@ import com.google.gson.JsonParseException
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.io.IOException
+import java.net.SocketTimeoutException
+import java.net.UnknownServiceException
 
 class ApiHelper private constructor(val context: Context) {
+
     private var retrofit: Retrofit? = null
 
     private fun deleteCache(context: Context) {
@@ -63,15 +67,37 @@ class ApiHelper private constructor(val context: Context) {
     }
 
     private val rewriteResponseInterceptorOffline = Interceptor { chain ->
-        var request = chain.request()
-        if (!hasNetwork()) {
-            request = request.newBuilder()
-                    .removeHeader("Pragma")
-                    .header("Cache-Control", "public, only-if-cached, max-stale="
-                            + 60 * 60 * 24 * 7)
-                    .build()
-        }
-        chain.proceed(request)
+        var isSuccess = false
+        var isRequestError = false
+
+        lateinit var result: Response
+
+        do {
+            var request = chain.request()
+            if (!hasNetwork() || isRequestError) {
+                request = request.newBuilder()
+                        .removeHeader("Pragma")
+                        .header("Cache-Control",
+                                "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7)
+                        .build()
+            }
+
+            try {
+                result = chain.proceed(request)
+                isSuccess = true
+            } catch (ex: UnknownServiceException) {
+                Log.e(TAG, "Ошибка при попытке создать offline interceptor.", ex)
+                isRequestError = true
+            } catch (ex: SocketTimeoutException) {
+                Log.e(TAG, "Таймаут запроса при попытке создать offline interceptor.", ex)
+                isRequestError = true
+            } catch (ex: Exception) {
+                Log.e(TAG, "Неизвестная ошибка при создании offline interceptor.", ex)
+                isRequestError = true
+            }
+        } while (!isSuccess)
+
+        result
     }
 
     init {
@@ -133,7 +159,9 @@ class ApiHelper private constructor(val context: Context) {
     }
 
     companion object : SingletonHolder<ApiHelper, Context>(::ApiHelper) {
-        private const val BOOKLET_URL = "http://bklet.ml/api/"
+        private val TAG = this::class.java.simpleName
+
+        private const val BOOKLET_URL = "https://bklet.ml/api/"
 
         private const val CACHE_SIZE = (1 * 1024 * 1024).toLong()
     }

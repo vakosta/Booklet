@@ -10,7 +10,7 @@
     <string name="button_login">sign in</string>
     <string name="schedule">Schedule</string>
     <string name="marks">Marks</string>
-    <string name="account">Account</string>
+    <string name="profile">Profile</string>
     <string name="settings">Settings</string>
     <string name="loading">Loading…</string>
     <string name="loading_points" translatable="false">…</string>

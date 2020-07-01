@@ -65,8 +65,15 @@ open class LoginActivity : AppCompatActivity() {
             }.show()
         }
 
+        loginEnterButton.setOnClickListener {
+            startLoading()
+            binding.viewModel!!.doAuth(diaryName,
+                    loginField.text.toString(),
+                    passwordField.text.toString())
+        }
+
         binding.viewModel!!.authLiveData.observe(this, Observer {
-            Log.d("Login", "Auth data received")
+            Log.d(TAG, "Ответ при авторизации получен.")
             stopLoading()
             val auth = it?.body()
             when {
@@ -138,5 +145,9 @@ open class LoginActivity : AppCompatActivity() {
         loginEnterButton.animate()
                 .translationY(0f)
                 .duration = 60
+    }
+
+    companion object {
+        private val TAG = this::class.java.simpleName
     }
 }

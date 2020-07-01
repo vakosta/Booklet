@@ -16,6 +16,14 @@ interface BookletApi {
     suspend fun auth(
             @Field("diary") diary: String,
             @Field("login") login: String,
+            @Field("password") password: String
+    ): Response<Auth>
+
+    @FormUrlEncoded
+    @POST("auth/")
+    suspend fun auth(
+            @Field("diary") diary: String,
+            @Field("login") login: String,
             @Field("password") password: String,
             @Field("region") region: Int?,
             @Field("province") province: Int?,

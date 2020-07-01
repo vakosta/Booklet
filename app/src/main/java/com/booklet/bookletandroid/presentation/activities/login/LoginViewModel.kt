@@ -20,6 +20,34 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
 
     val keyboardIsShowing = ObservableField(false)
 
+    /**
+     * Метод для отправки запроса на авторизацию.
+     *
+     * @param diary это имя дневника для авторизации.
+     * @param login это логин пользователя.
+     * @param password это пароль пользователя.
+     */
+    fun doAuth(diary: String,
+               login: String,
+               password: String) {
+        scope.launch {
+            val auth = repository.auth(diary, login, password)
+            authLiveData.postValue(auth)
+        }
+    }
+
+    /**
+     * Метод для отправки запроса на авторизацию специально
+     * для дневника NetSchool.
+     *
+     * @param diary это имя дневника для авторизации.
+     * @param login это логин пользователя.
+     * @param password это пароль пользователя.
+     * @param region это регион школы.
+     * @param province это провинция школы.
+     * @param city это город школы.
+     * @param school это номер школы.
+     */
     fun doAuth(diary: String,
                login: String,
                password: String,
@@ -33,6 +61,16 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
         }
     }
 
+    /**
+     * Метод для получения списка регионов/провинций/городов/школ для
+     * авторизации в дневнике NetSchool.
+     *
+     * Загружает данные, основываясь на входных параметрах.
+     *
+     * @param region это регион школы.
+     * @param province это провинция школы.
+     * @param city это город школы.
+     */
     fun getNetschoolData(region: Int?, province: Int?, city: Int?) {
         scope.launch {
             val data = repository.getNetschoolData(region, province, city)
