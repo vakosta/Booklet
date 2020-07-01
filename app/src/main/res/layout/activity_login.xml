@@ -63,72 +63,57 @@
                 android:paddingTop="6dp"
                 android:paddingBottom="6dp">
 
-                <RelativeLayout
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/loginFieldOutline"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="24dp"
+                    android:hint="Логин"
+                    app:boxCornerRadiusBottomEnd="14dp"
+                    app:boxCornerRadiusBottomStart="14dp"
+                    app:boxCornerRadiusTopEnd="14dp"
+                    app:boxCornerRadiusTopStart="14dp"
+                    app:boxStrokeColor="@color/colorAccent"
+                    app:boxStrokeWidth="2dp"
+                    app:endIconDrawable="@drawable/information_outline"
+                    app:endIconMode="custom"
+                    app:startIconDrawable="@drawable/account_circle">
 
-                    <ImageView
-                        android:id="@+id/loginIcon"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:tint="#5690ff"
-                        app:srcCompat="@drawable/account_circle" />
-
-                    <EditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/loginField"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:layout_toEndOf="@id/loginIcon"
-                        android:hint="@string/field_login"
-                        android:inputType="textEmailAddress"
-                        android:paddingEnd="26dp"
-                        android:textColor="#1f1f1f"
-                        android:theme="@style/EditTextLight" />
+                        android:singleLine="true" />
 
-                    <ImageView
-                        android:id="@+id/infoButton"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="20dp"
-                        android:tint="#d1d1d1"
-                        app:srcCompat="@drawable/information_outline" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                </RelativeLayout>
-
-                <RelativeLayout
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:hint="Пароль"
+                    app:boxCornerRadiusBottomEnd="14dp"
+                    app:boxCornerRadiusBottomStart="14dp"
+                    app:boxCornerRadiusTopEnd="14dp"
+                    app:boxCornerRadiusTopStart="14dp"
+                    app:boxStrokeColor="@color/colorAccent"
+                    app:boxStrokeWidth="2dp"
+                    app:endIconMode="password_toggle"
+                    app:startIconDrawable="@drawable/lock">
 
-                    <ImageView
-                        android:id="@+id/passwordIcon"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:tint="#5690ff"
-                        app:srcCompat="@drawable/lock" />
-
-                    <EditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/passwordField"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:layout_toEndOf="@id/passwordIcon"
-                        android:hint="@string/field_password"
                         android:inputType="textPassword"
-                        android:textColor="#1f1f1f"
-                        android:theme="@style/EditTextLight" />
+                        android:singleLine="true" />
 
-                </RelativeLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <include
                     android:id="@+id/netschoolRegion"

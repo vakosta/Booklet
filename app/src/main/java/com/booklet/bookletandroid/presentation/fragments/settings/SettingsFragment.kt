@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.preference.ListPreference
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.booklet.bookletandroid.R
@@ -20,7 +21,6 @@ import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.browse
 import org.jetbrains.anko.yesButton
 
-
 class SettingsFragment : PreferenceFragmentCompat(),
         SharedPreferences.OnSharedPreferenceChangeListener {
     override fun onCreatePreferences(p0: Bundle?, p1: String?) {
@@ -29,46 +29,44 @@ class SettingsFragment : PreferenceFragmentCompat(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.backgroundColor = activity!!.attribute(R.attr.colorBackground).data
+        view.backgroundColor = requireActivity().attribute(R.attr.colorBackground).data
 
-        val main = (findPreference(this.getString(R.string.preference_notification_main))
-                as SwitchPreference)
-        val newMarks = (findPreference(this.getString(R.string.preference_notification_new_mark))
-                as SwitchPreference)
-        if (Preferences.getInstance(activity!!).notificationsSubscription) {
-            main.isEnabled = true
-            newMarks.isEnabled = true
+        val main = (findPreference<SwitchPreference>(this.getString(R.string.preference_notification_main)))
+        val newMarks = (findPreference<SwitchPreference>(this.getString(R.string.preference_notification_new_mark)))
+        if (Preferences.getInstance(requireActivity()).notificationsSubscription) {
+            main?.isEnabled = true
+            newMarks?.isEnabled = true
         } else {
-            main.isEnabled = false
-            main.isChecked = false
-            newMarks.isEnabled = false
-            newMarks.isChecked = false
+            main?.isEnabled = false
+            main?.isChecked = false
+            newMarks?.isEnabled = false
+            newMarks?.isChecked = false
         }
 
         initMarkPurposePreference()
         initDarkThemePreference()
 
-        findPreference("button_vk").setOnPreferenceClickListener {
+        findPreference<Preference>("button_vk")?.setOnPreferenceClickListener {
             browse(getString(R.string.url_vk_page))
             true
         }
 
-        findPreference("button_exit").setOnPreferenceClickListener {
+        findPreference<Preference>("button_exit")?.setOnPreferenceClickListener {
             alert("Вы уверены?") {
                 yesButton {
-                    Preferences.getInstance(activity!!).userLogin = ""
-                    Preferences.getInstance(activity!!).userPassword = ""
-                    Preferences.getInstance(activity!!).userSecret = ""
-                    Preferences.getInstance(activity!!).userPid = 0
-                    Preferences.getInstance(activity!!).userStudentProfileId = ""
-                    Preferences.getInstance(activity!!).botCode = ""
-                    Preferences.getInstance(activity!!).markPurpose = 5
-                    Preferences.getInstance(activity!!).saturdayLessons = false
-                    Preferences.getInstance(activity!!).notificationMain = false
-                    Preferences.getInstance(activity!!).notificationNewMark = false
-                    Preferences.getInstance(activity!!).notificationNews = false
-                    Preferences.getInstance(activity!!).notificationsSubscription = false
-                    Preferences.getInstance(activity!!).isDarkTheme = false
+                    Preferences.getInstance(requireActivity()).userLogin = ""
+                    Preferences.getInstance(requireActivity()).userPassword = ""
+                    Preferences.getInstance(requireActivity()).userSecret = ""
+                    Preferences.getInstance(requireActivity()).userPid = 0
+                    Preferences.getInstance(requireActivity()).userStudentProfileId = ""
+                    Preferences.getInstance(requireActivity()).botCode = ""
+                    Preferences.getInstance(requireActivity()).markPurpose = 5
+                    Preferences.getInstance(requireActivity()).saturdayLessons = false
+                    Preferences.getInstance(requireActivity()).notificationMain = false
+                    Preferences.getInstance(requireActivity()).notificationNewMark = false
+                    Preferences.getInstance(requireActivity()).notificationNews = false
+                    Preferences.getInstance(requireActivity()).notificationsSubscription = false
+                    Preferences.getInstance(requireActivity()).isDarkTheme = false
                     EventBus.getDefault().post(RestartActivity(false))
                 }
                 noButton {}
@@ -80,20 +78,20 @@ class SettingsFragment : PreferenceFragmentCompat(),
     }
 
     private fun initMarkPurposePreference() {
-        val markPurposeIcon = when (Preferences.getInstance(activity!!).markPurpose) {
+        val markPurposeIcon = when (Preferences.getInstance(requireActivity()).markPurpose) {
             5 -> R.drawable.prefs_five
             4 -> R.drawable.prefs_four
             else -> R.drawable.prefs_three
         }
-        findPreference(getString(R.string.preference_mark_purpose)).setIcon(markPurposeIcon)
+        findPreference<ListPreference>(getString(R.string.preference_mark_purpose))?.setIcon(markPurposeIcon)
     }
 
     private fun initDarkThemePreference() {
-        val darkThemeIcon = when (Preferences.getInstance(activity!!).isDarkTheme) {
+        val darkThemeIcon = when (Preferences.getInstance(requireActivity()).isDarkTheme) {
             false -> R.drawable.prefs_moon
             true -> R.drawable.prefs_sun
         }
-        findPreference(getString(R.string.preference_dark_theme)).setIcon(darkThemeIcon)
+        findPreference<SwitchPreference>(getString(R.string.preference_dark_theme))?.setIcon(darkThemeIcon)
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
@@ -106,7 +104,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
                 getString(R.string.preference_saturday_lessons) ->
                     EventBus.getDefault().post(Refresh())
                 getString(R.string.preference_dark_theme) -> {
-                    Preferences.getInstance(activity!!).isShowedDarkThemePopup = true
+                    Preferences.getInstance(requireActivity()).isShowedDarkThemePopup = true
                     EventBus.getDefault().post(RestartActivity(true))
                 }
             }
@@ -132,13 +130,13 @@ class SettingsFragment : PreferenceFragmentCompat(),
     }
 
     fun setStudents() {
-        val prefs = Preferences.getInstance(activity!!)
+        val prefs = Preferences.getInstance(requireActivity())
         val names = prefs.userStudentProfiles.map { it.name.toString() }
         val ids = prefs.userStudentProfiles.map { it.id.toString() }
-        val students = findPreference(context!!.getString(R.string.preference_student_profile_id)) as ListPreference
-        students.entries = names.toTypedArray()
-        students.setDefaultValue(prefs.userStudentProfileId)
-        students.entryValues = ids.toTypedArray()
+        val students = findPreference<ListPreference>(requireContext().getString(R.string.preference_student_profile_id))
+        students?.entries = names.toTypedArray()
+        students?.setDefaultValue(prefs.userStudentProfileId)
+        students?.entryValues = ids.toTypedArray()
         EventBus.getDefault().post(Refresh())
     }
 }

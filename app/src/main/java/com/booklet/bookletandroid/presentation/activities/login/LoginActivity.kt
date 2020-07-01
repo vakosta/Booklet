@@ -170,7 +170,7 @@ class LoginActivity : AppCompatActivity() {
             browse(getString(R.string.url_privacy_policy))
         }
 
-        infoButton.setOnClickListener {
+        loginFieldOutline.setEndIconOnClickListener {
             alert("Для входа в дневник вы можете использовать номер телефона или почту, " +
                     "указанные на сайте mos.ru.\n\n" +
                     "Вводите номер в формате +79... или 9...") {
