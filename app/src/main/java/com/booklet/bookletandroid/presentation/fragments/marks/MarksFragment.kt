@@ -63,7 +63,7 @@ class MarksFragment : ViewPagerFragment(), MarksView, View.OnClickListener, View
             fetchData()
         }
 
-        binding.viewModel!!.authLiveData.observe(this, Observer {
+        binding.viewModel!!.authLiveData.observe(viewLifecycleOwner, Observer {
             binding.viewModel!!.status.set(MarksViewModel.Status.LOADED)
             Log.d("Login", "Auth data received")
             val auth = it?.body()
