@@ -1,8 +1,6 @@
 # Booklet
 **Booklet** is diary aggregator for Russian schools.
 
-_Now this project may now work correctly. I'm going to fix it later._
-
 ## Contact
 Send me a message in Telegram: [@vakosta](https://t.me/vakosta).
 
