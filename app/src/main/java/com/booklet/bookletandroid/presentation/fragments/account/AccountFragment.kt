@@ -25,7 +25,7 @@ class AccountFragment : ViewPagerFragment(), AccountView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mPresenter = AccountPresenter(this, activity!!)
+        mPresenter = AccountPresenter(this, requireActivity())
     }
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -42,7 +42,7 @@ class AccountFragment : ViewPagerFragment(), AccountView {
             mPresenter.init()
         }
         changeProfileButton.setOnClickListener { _ ->
-            val prefs = Preferences.getInstance(activity!!)
+            val prefs = Preferences.getInstance(requireActivity())
             val names = prefs.userStudentProfiles.map { it.name.toString() }
             val ids = prefs.userStudentProfiles.map { it.id }
             if (names.isNotEmpty()) {
@@ -76,7 +76,7 @@ class AccountFragment : ViewPagerFragment(), AccountView {
     @Subscribe
     fun refresh(refresh: Refresh) {
         refresh()
-        val ft = fragmentManager!!.beginTransaction()
+        val ft = requireFragmentManager().beginTransaction()
         ft.detach(this).attach(this).commit()
     }
 

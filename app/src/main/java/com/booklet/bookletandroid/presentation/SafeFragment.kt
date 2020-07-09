@@ -18,7 +18,7 @@ abstract class SafeFragment : androidx.fragment.app.Fragment() {
             }
         }
         if (activity != null)
-            aeListener!!.onActivityEnabled(activity!!)
+            aeListener!!.onActivityEnabled(requireActivity())
         return aeListener!!
     }
 

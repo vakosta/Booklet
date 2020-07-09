@@ -31,7 +31,7 @@ class ScheduleCardFragment : androidx.fragment.app.Fragment(), ScheduleCardView 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mPresenter = ScheduleCardPresenter(this, activity!!)
+        mPresenter = ScheduleCardPresenter(this, requireActivity())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

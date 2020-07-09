@@ -54,7 +54,7 @@ class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mPresenter = SchedulePresenter(this, activity!!)
+        mPresenter = SchedulePresenter(this, requireActivity())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -147,7 +147,7 @@ class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener
     }
 
     override fun onTouch(p0: View, p1: MotionEvent): Boolean {
-        return if (isAdded) Utils.convertPixelsToDp(activity!!, p1.y) > 118
+        return if (isAdded) Utils.convertPixelsToDp(requireActivity(), p1.y) > 118
         else true
     }
 

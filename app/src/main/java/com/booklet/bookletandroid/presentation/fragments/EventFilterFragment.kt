@@ -28,7 +28,7 @@ class EventFilterFragment : BottomSheetDialogFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val prefs = Preferences.getInstance(activity!!)
+        val prefs = Preferences.getInstance(requireActivity())
 
         changeFilterState(gradeEventFilter, prefs.filterGrade)
         setEventIcon(gradeEventFilter, R.drawable.account_group_outline)
@@ -109,7 +109,7 @@ class EventFilterFragment : BottomSheetDialogFragment() {
         theme.resolveAttribute(R.attr.colorEventFilterIconEnable, typedValue, true)
 
         view.findViewById<ImageView>(R.id.eventIcon)
-                .setColorFilter(ContextCompat.getColor(activity!!, typedValue.resourceId),
+                .setColorFilter(ContextCompat.getColor(requireActivity(), typedValue.resourceId),
                         android.graphics.PorterDuff.Mode.SRC_IN)
         view.backgroundResource = R.drawable.background_event_filter_enable
     }
@@ -120,7 +120,7 @@ class EventFilterFragment : BottomSheetDialogFragment() {
         theme.resolveAttribute(R.attr.colorEventFilterIconDisable, typedValue, true)
 
         view.findViewById<ImageView>(R.id.eventIcon)
-                .setColorFilter(ContextCompat.getColor(activity!!, typedValue.resourceId),
+                .setColorFilter(ContextCompat.getColor(requireActivity(), typedValue.resourceId),
                         android.graphics.PorterDuff.Mode.SRC_IN)
         view.backgroundResource = R.drawable.background_event_filter_disable
     }

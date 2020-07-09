@@ -63,11 +63,11 @@ class MarksCardFragment : Fragment(), MarksCardView {
     }
 
     override fun initRecyclerView(progresses: List<Progress>) {
-        val layoutManager = LinearLayoutManager(activity!!)
+        val layoutManager = LinearLayoutManager(requireActivity())
 
         marksRecyclerView.layoutManager = layoutManager
         marksRecyclerView.setHasFixedSize(true)
-        marksRecyclerView.adapter = SubjectListAdapter(activity!!, progresses)
+        marksRecyclerView.adapter = SubjectListAdapter(requireActivity(), progresses)
         marksRecyclerView.setItemViewCacheSize(30)
         marksRecyclerView.isDrawingCacheEnabled = true
         marksRecyclerView.drawingCacheQuality = View.DRAWING_CACHE_QUALITY_HIGH

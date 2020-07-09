@@ -57,7 +57,7 @@ class MarksFragment : ViewPagerFragment(), MarksView, View.OnClickListener, View
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        prefs = Preferences.getInstance(activity!!)
+        prefs = Preferences.getInstance(requireActivity())
         mRefresher.setColorSchemeResources(R.color.colorAccent)
         mRefresher.onRefresh {
             fetchData()
@@ -110,7 +110,7 @@ class MarksFragment : ViewPagerFragment(), MarksView, View.OnClickListener, View
     }
 
     override fun onTouch(p0: View, p1: MotionEvent): Boolean {
-        return Utils.convertPixelsToDp(activity!!, p1.y) > 62
+        return Utils.convertPixelsToDp(requireActivity(), p1.y) > 62
     }
 
     override fun initPager(progresses: List<Subject>) {

@@ -32,18 +32,18 @@ class PlusFragment : ViewPagerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (Preferences.getInstance(activity!!).notificationsSubscription)
+        if (Preferences.getInstance(requireActivity()).notificationsSubscription)
             buy.text = getString(R.string.plus_activated)
 
         initInvitesBlock()
 
         botVk.setOnClickListener {
-            val botCode = Preferences.getInstance(activity!!).botCode
+            val botCode = Preferences.getInstance(requireActivity()).botCode
             alert("Вы можете подключить нашего бота для ВК. " +
                     "Просто откройте бота и следуйте инструкциям.\n\n" +
                     "Твой код: $botCode", "Бот для ВК") {
                 positiveButton("Скопировать и открыть") {
-                    Utils.copyToClipboard(activity!!,
+                    Utils.copyToClipboard(requireActivity(),
                             "Код для бота",
                             botCode)
                     toast("Код скопирован")
@@ -54,12 +54,12 @@ class PlusFragment : ViewPagerFragment() {
             }.show()
         }
         invite.setOnClickListener {
-            val inviteCode = Preferences.getInstance(activity!!).inviteCode
+            val inviteCode = Preferences.getInstance(requireActivity()).inviteCode
             alert("Получите бесплатные уведомления за приглашённых знакомых.\n\n" +
                     "При авторизации ваши знакомые должны ввести ваш пригласительный код.\n\n" +
                     "Код: $inviteCode", "Бесплатные уведомления") {
                 positiveButton("Скопировать") {
-                    Utils.copyToClipboard(activity!!,
+                    Utils.copyToClipboard(requireActivity(),
                             "Пригласительный код",
                             inviteCode)
                     toast("Код скопирован")
@@ -72,19 +72,19 @@ class PlusFragment : ViewPagerFragment() {
     }
 
     private fun initInvitesBlock() {
-        val invitations = Preferences.getInstance(activity!!).invitations
+        val invitations = Preferences.getInstance(requireActivity()).invitations
 
         invites_count.text = "Переходов: ${min(invitations, 5)}/5"
         if (invitations >= 1)
-            invite1.image = ContextCompat.getDrawable(activity!!, R.drawable.check)
+            invite1.image = ContextCompat.getDrawable(requireActivity(), R.drawable.check)
         if (invitations >= 2)
-            invite2.image = ContextCompat.getDrawable(activity!!, R.drawable.check)
+            invite2.image = ContextCompat.getDrawable(requireActivity(), R.drawable.check)
         if (invitations >= 3)
-            invite3.image = ContextCompat.getDrawable(activity!!, R.drawable.check)
+            invite3.image = ContextCompat.getDrawable(requireActivity(), R.drawable.check)
         if (invitations >= 4)
-            invite4.image = ContextCompat.getDrawable(activity!!, R.drawable.check)
+            invite4.image = ContextCompat.getDrawable(requireActivity(), R.drawable.check)
         if (invitations >= 5)
-            invite5.image = ContextCompat.getDrawable(activity!!, R.drawable.check)
+            invite5.image = ContextCompat.getDrawable(requireActivity(), R.drawable.check)
     }
 
     override fun fetchData() {
