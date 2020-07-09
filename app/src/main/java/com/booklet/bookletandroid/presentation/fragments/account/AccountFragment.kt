@@ -81,7 +81,7 @@ class AccountFragment : ViewPagerFragment(), AccountView {
     }
 
     override fun setBackgroundBlueColor() {
-        parentLayout.backgroundColor = context!!.attribute(R.attr.colorPrimary).data
+        parentLayout.backgroundColor = requireContext().attribute(R.attr.colorPrimary).data
     }
 
     override fun setBackgroundGreyColor() {

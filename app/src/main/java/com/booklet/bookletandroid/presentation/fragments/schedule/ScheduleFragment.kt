@@ -209,7 +209,7 @@ class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener
         }
         editableDay.backgroundResource = R.drawable.shape_round
         activityEnabled {
-            editableDay.textColor = context!!.attribute(R.attr.colorTextWeekdayActive).data
+            editableDay.textColor = requireContext().attribute(R.attr.colorTextWeekdayActive).data
         }
     }
 

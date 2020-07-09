@@ -105,7 +105,7 @@ class EventFilterFragment : BottomSheetDialogFragment() {
 
     private fun enableFilter(view: View) {
         val typedValue = TypedValue()
-        val theme = context!!.theme
+        val theme = requireContext().theme
         theme.resolveAttribute(R.attr.colorEventFilterIconEnable, typedValue, true)
 
         view.findViewById<ImageView>(R.id.eventIcon)
@@ -116,7 +116,7 @@ class EventFilterFragment : BottomSheetDialogFragment() {
 
     private fun disableFilter(view: View) {
         val typedValue = TypedValue()
-        val theme = context!!.theme
+        val theme = requireContext().theme
         theme.resolveAttribute(R.attr.colorEventFilterIconDisable, typedValue, true)
 
         view.findViewById<ImageView>(R.id.eventIcon)
