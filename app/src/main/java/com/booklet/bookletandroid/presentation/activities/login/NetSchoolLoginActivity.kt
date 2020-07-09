@@ -123,7 +123,7 @@ class NetSchoolLoginActivity : LoginActivity() {
         }
 
         binding.viewModel!!.netschoolRegionLiveData.observe(this, Observer { response ->
-            val data = response?.body()!!.data!!
+            val data = response?.data!!.data!!
             val countries = data.map { it.name.toString() }
             selector("Выберите ваш регион", countries) { _, i ->
                 regionId = data[i].id
@@ -132,7 +132,7 @@ class NetSchoolLoginActivity : LoginActivity() {
         })
 
         binding.viewModel!!.netschoolProvinceLiveData.observe(this, Observer { response ->
-            val data = response?.body()!!.data!!
+            val data = response?.data!!.data!!
             val countries = data.map { it.name.toString() }
             selector("Выберите вашу область", countries) { _, i ->
                 provinceId = data[i].id
@@ -141,7 +141,7 @@ class NetSchoolLoginActivity : LoginActivity() {
         })
 
         binding.viewModel!!.netschoolCityLiveData.observe(this, Observer { response ->
-            val data = response?.body()!!.data!!
+            val data = response?.data!!.data!!
             val countries = data.map { it.name.toString() }
             selector("Выберите ваш город", countries) { _, i ->
                 cityId = data[i].id
@@ -150,7 +150,7 @@ class NetSchoolLoginActivity : LoginActivity() {
         })
 
         binding.viewModel!!.netschoolSchoolLiveData.observe(this, Observer { response ->
-            val data = response?.body()!!.data!!
+            val data = response?.data!!.data!!
             val countries = data.map { it.name.toString() }
             selector("Выберите ваш регион", countries) { _, i ->
                 schoolId = data[i].id

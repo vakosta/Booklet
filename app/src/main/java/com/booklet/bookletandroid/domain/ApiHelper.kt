@@ -20,7 +20,6 @@ import java.net.SocketTimeoutException
 import java.net.UnknownServiceException
 
 class ApiHelper private constructor(val context: Context) {
-
     private var retrofit: Retrofit? = null
 
     private fun deleteCache(context: Context) {

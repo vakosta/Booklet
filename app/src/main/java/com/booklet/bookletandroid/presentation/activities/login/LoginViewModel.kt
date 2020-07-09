@@ -5,18 +5,18 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.booklet.bookletandroid.data.model.booklet.auth.Auth
 import com.booklet.bookletandroid.data.model.booklet.netschool_data.NetschoolData
+import com.booklet.bookletandroid.domain.model.Result
 import com.booklet.bookletandroid.domain.repository.AuthRepository
 import com.booklet.bookletandroid.presentation.BaseViewModel
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 class LoginViewModel(application: Application) : BaseViewModel(application) {
     override val repository = AuthRepository(application.applicationContext)
-    val authLiveData = MutableLiveData<Response<Auth>?>()
-    val netschoolRegionLiveData = MutableLiveData<Response<NetschoolData>?>()
-    val netschoolProvinceLiveData = MutableLiveData<Response<NetschoolData>?>()
-    val netschoolCityLiveData = MutableLiveData<Response<NetschoolData>?>()
-    val netschoolSchoolLiveData = MutableLiveData<Response<NetschoolData>?>()
+    val authLiveData = MutableLiveData<Result<Auth>?>()
+    val netschoolRegionLiveData = MutableLiveData<Result<NetschoolData>?>()
+    val netschoolProvinceLiveData = MutableLiveData<Result<NetschoolData>?>()
+    val netschoolCityLiveData = MutableLiveData<Result<NetschoolData>?>()
+    val netschoolSchoolLiveData = MutableLiveData<Result<NetschoolData>?>()
 
     val keyboardIsShowing = ObservableField(false)
 
@@ -31,8 +31,15 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
                login: String,
                password: String) {
         scope.launch {
+            authLiveData.postValue(Result.loading(data = null))
+
             val auth = repository.auth(diary, login, password)
-            authLiveData.postValue(auth)
+            if (auth.body() != null && auth.isSuccessful)
+                authLiveData.postValue(Result.success(data = auth.body()!!))
+            else
+                authLiveData.postValue(Result.error(data = null,
+                        errorType = Result.ErrorType.MISSING_NETWORK_ERROR,
+                        message = "Возникла ошибка!"))
         }
     }
 
@@ -56,8 +63,15 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
                city: Int?,
                school: Int?) {
         scope.launch {
+            authLiveData.postValue(Result.loading(data = null))
+
             val auth = repository.auth(diary, login, password, region, province, city, school)
-            authLiveData.postValue(auth)
+            if (auth.body() != null && auth.isSuccessful)
+                authLiveData.postValue(Result.success(data = auth.body()!!))
+            else
+                authLiveData.postValue(Result.error(data = null,
+                        errorType = Result.ErrorType.MISSING_NETWORK_ERROR,
+                        message = "Возникла ошибка!"))
         }
     }
 
@@ -77,13 +91,13 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
 
             when {
                 region == null ->
-                    netschoolRegionLiveData.postValue(data)
+                    netschoolRegionLiveData.postValue(Result.success(data = data.body()!!))
                 province == null ->
-                    netschoolProvinceLiveData.postValue(data)
+                    netschoolProvinceLiveData.postValue(Result.success(data = data.body()!!))
                 city == null ->
-                    netschoolCityLiveData.postValue(data)
+                    netschoolCityLiveData.postValue(Result.success(data = data.body()!!))
                 else ->
-                    netschoolSchoolLiveData.postValue(data)
+                    netschoolSchoolLiveData.postValue(Result.success(data = data.body()!!))
             }
         }
     }

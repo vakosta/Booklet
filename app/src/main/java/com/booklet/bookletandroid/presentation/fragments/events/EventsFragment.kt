@@ -43,15 +43,17 @@ class EventsFragment : ViewPagerFragment() {
 
     override fun fetchData() {
         initRecyclerView(filteredItems)
-        val prefs = Preferences.getInstance(activity!!)
+        val prefs = Preferences.getInstance(requireActivity())
 
         binding.viewModel!!.getEvents(prefs.userPid!!, prefs.userSecret!!)
 
         binding.viewModel!!.eventsLiveData.observe(this, Observer {
             eventsProgress.visibility = View.GONE
             eventsRefresher.isRefreshing = false
+            val response = it?.body()
+
+            allItems.addAll(response!!)
             allItems.clear()
-            allItems.addAll(it!!.body()!!)
             paintItems()
         })
 
@@ -76,7 +78,7 @@ class EventsFragment : ViewPagerFragment() {
     }
 
     private fun initRecyclerView(events: List<Event>) {
-        eventsRecyclerView.layoutManager = LinearLayoutManager(activity!!)
+        eventsRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
         eventsRecyclerView.setHasFixedSize(true)
         eventsRecyclerView.adapter = EventsAdapter(events)
         eventsRecyclerView.setItemViewCacheSize(30)
@@ -84,7 +86,7 @@ class EventsFragment : ViewPagerFragment() {
 
     @Subscribe
     fun onFilter(filter: Filter) {
-        val prefs = Preferences.getInstance(activity!!)
+        val prefs = Preferences.getInstance(requireActivity())
         val newItems = allItems.filter {
             (prefs.filterGrade || (it.type != "CLASS_EVENT" && it.type != "NEW_USER")) &&
                     (prefs.filterNewMarks || it.type != "NEW_MARK") &&

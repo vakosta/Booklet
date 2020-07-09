@@ -10,6 +10,7 @@ import com.booklet.bookletandroid.R
 import com.booklet.bookletandroid.data.model.booklet.auth.Student
 import com.booklet.bookletandroid.databinding.ActivityLoginBinding
 import com.booklet.bookletandroid.domain.Preferences
+import com.booklet.bookletandroid.domain.model.Result
 import com.booklet.bookletandroid.domain.px
 import com.booklet.bookletandroid.presentation.activities.main.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
@@ -29,6 +30,12 @@ open class LoginActivity : AppCompatActivity() {
         binding.viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
         binding.executePendingBindings()
 
+        setupUI()
+        setupListeners()
+        setupObservers()
+    }
+
+    private fun setupUI() {
         val diary = intent.getSerializableExtra(LoginDiaryActivity.EXTRA_DIARY)
                 as LoginDiaryActivity.Diary
         diaryName = diary.apiName
@@ -40,7 +47,9 @@ open class LoginActivity : AppCompatActivity() {
             LoginDiaryActivity.Diary.NETSCHOOL -> "NetSchool"
         }
         loginTitle.text = "Войдите с помощью данных акканута $title"
+    }
 
+    private fun setupListeners() {
         KeyboardVisibilityEvent.setEventListener(this) {
             binding.viewModel!!.keyboardIsShowing.set(it)
         }
@@ -71,33 +80,35 @@ open class LoginActivity : AppCompatActivity() {
                     loginField.text.toString(),
                     passwordField.text.toString())
         }
-
-        binding.viewModel!!.authLiveData.observe(this, Observer {
-            Log.d(TAG, "Ответ при авторизации получен.")
-            stopLoading()
-            val auth = it?.body()
-            when {
-                auth == null ->
-                    onNetworkProblems()
-                !it.isSuccessful ->
-                    onUnknownError()
-                auth.status == null ->
-                    onUnknownError()
-                !auth.status ->
-                    onLoginFailed(auth.message)
-                else ->
-                    onLoginSuccessful(loginField.text.toString(),
-                            passwordField.text.toString(),
-                            auth.id!!,
-                            auth.secret!!,
-                            auth.students!!.list)
-            }
-        })
     }
 
-    override fun onBackPressed() {
-        setResult(MainActivity.RESULT_BACK_PRESSED)
-        finish()
+    private fun setupObservers() {
+        binding.viewModel!!.authLiveData.observe(this, Observer {
+            it?.let { result ->
+                when (result.status) {
+                    Result.Status.SUCCESS -> {
+                        Log.d(TAG, "Успешная авторизация.")
+                        stopLoading()
+
+                        onLoginSuccessful(loginField.text.toString(),
+                                passwordField.text.toString(),
+                                result.data!!.id!!,
+                                result.data.secret!!,
+                                result.data.students!!.list)
+                    }
+                    Result.Status.ERROR -> {
+                        Log.d(TAG, "Ошибка при авторизации.")
+                        stopLoading()
+
+                        onUnknownError()
+                    }
+                    Result.Status.LOADING -> {
+                        Log.d(TAG, "Начался запрос авторизации.")
+                        startLoading()
+                    }
+                }
+            }
+        })
     }
 
     private fun onLoginSuccessful(login: String,
@@ -118,6 +129,11 @@ open class LoginActivity : AppCompatActivity() {
             setResult(MainActivity.RESULT_OK)
             finish()
         }
+    }
+
+    override fun onBackPressed() {
+        setResult(MainActivity.RESULT_BACK_PRESSED)
+        finish()
     }
 
     private fun onLoginFailed(text: String?) {
