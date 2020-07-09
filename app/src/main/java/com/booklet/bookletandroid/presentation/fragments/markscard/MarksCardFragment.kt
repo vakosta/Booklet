@@ -39,19 +39,19 @@ class MarksCardFragment : Fragment(), MarksCardView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        when (arguments!!.getString(ARGUMENT_TYPE, "")) {
+        when (requireArguments().getString(ARGUMENT_TYPE, "")) {
             TYPE_MARKS -> {
                 val listType = object :
                         TypeToken<ArrayList<Progress>>() {}
                         .type
-                val progresses = Gson().fromJson<ArrayList<Progress>>(arguments!!
+                val progresses = Gson().fromJson<ArrayList<Progress>>(requireArguments()
                         .getString(ARGUMENT_PROGRESS), listType)
                 initRecyclerView(progresses)
             }
             else -> {
                 val listType = object : TypeToken<ArrayList<Result>>() {}.type
                 val results = Gson().fromJson<ArrayList<Result>>(
-                        arguments!!.getString(ARGUMENT_PROGRESS), listType)
+                        requireArguments().getString(ARGUMENT_PROGRESS), listType)
                 initRecyclerViewResults(results)
             }
         }
