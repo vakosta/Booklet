@@ -2,7 +2,7 @@ package com.booklet.bookletandroid.presentation
 
 import android.content.Context
 import com.booklet.bookletandroid.domain.Preferences
-import com.crashlytics.android.Crashlytics
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.gson.JsonParseException
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -24,7 +24,7 @@ abstract class InitContentPresenter(private val mContext: Context) {
             } catch (e: JsonParseException) {
                 onFailureAttempt()
             } catch (e: Exception) {
-                Crashlytics.logException(e)
+                FirebaseCrashlytics.getInstance().recordException(e)
                 if (prefs.userStudentProfileId == "")
                     onFailureAttempt()
                 else

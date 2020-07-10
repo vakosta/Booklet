@@ -19,11 +19,11 @@ ext {
     flowlayoutVersion = '1.2.2'
     slidingUpPanel = '3.4.0'
     retrofitVersion = '2.9.0'
-    firebaseVersion = '17.2.2'
+    firebaseVersion = '17.4.4'
     firebasePerfVersion = '19.0.7'
-    firebaseAnalyticsVersion = '17.2.2'
+    firebaseAnalyticsVersion = '17.4.4'
     firebaseMessaningVersion = '20.2.3'
-    crashlyticsVersion = '2.9.5'
+    crashlyticsVersion = '17.1.1'
     eventbusVersion = '3.1.1'
     date4jVersion = '1.5.0'
     billingVersion = '2.0.3'
@@ -72,9 +72,9 @@ ext {
     // Other
     firebase = "com.google.firebase:firebase-core:$firebaseVersion"
     firebasePerf = "com.google.firebase:firebase-perf:$firebasePerfVersion"
-    firebaseAnalytics = "com.google.firebase:firebase-analytics:$firebaseAnalyticsVersion"
+    firebaseAnalytics = "com.google.firebase:firebase-analytics-ktx:$firebaseAnalyticsVersion"
     firebaseMessaning = "com.google.firebase:firebase-messaging:$firebaseMessaningVersion"
-    crashlytics = "com.crashlytics.sdk.android:crashlytics:$crashlyticsVersion"
+    crashlytics = "com.google.firebase:firebase-crashlytics:$crashlyticsVersion"
     eventbus = "org.greenrobot:eventbus:$eventbusVersion"
     date4j = "com.darwinsys:hirondelle-date4j:$date4jVersion"
     billing = "com.android.billingclient:billing:$billingVersion"
