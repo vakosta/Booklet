@@ -19,8 +19,10 @@ ext {
     flowlayoutVersion = '1.2.2'
     slidingUpPanel = '3.4.0'
     retrofitVersion = '2.9.0'
-    firebaseVersion = '16.0.3'
-    firebaseMessaningVersion = '17.3.0'
+    firebaseVersion = '17.2.2'
+    firebasePerfVersion = '19.0.7'
+    firebaseAnalyticsVersion = '17.2.2'
+    firebaseMessaningVersion = '20.2.3'
     crashlyticsVersion = '2.9.5'
     eventbusVersion = '3.1.1'
     date4jVersion = '1.5.0'
@@ -69,6 +71,8 @@ ext {
 
     // Other
     firebase = "com.google.firebase:firebase-core:$firebaseVersion"
+    firebasePerf = "com.google.firebase:firebase-perf:$firebasePerfVersion"
+    firebaseAnalytics = "com.google.firebase:firebase-analytics:$firebaseAnalyticsVersion"
     firebaseMessaning = "com.google.firebase:firebase-messaging:$firebaseMessaningVersion"
     crashlytics = "com.crashlytics.sdk.android:crashlytics:$crashlyticsVersion"
     eventbus = "org.greenrobot:eventbus:$eventbusVersion"
@@ -128,6 +132,8 @@ ext {
 
     otherDep = [
             firebase,
+            firebasePerf,
+            firebaseAnalytics,
             firebaseMessaning,
             crashlytics,
             eventbus,
