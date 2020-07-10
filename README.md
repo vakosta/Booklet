@@ -20,6 +20,16 @@ Application contains following screens:
 - [ ] Paid Subscription;
 - [ ] Advertising Subscription.
 
+## Technologies
+
+- Kotlin;
+- Coroutines;
+- Firebase;
+- Retrofit2;
+- EventBus.
+
+All dependencies you can see [here](https://github.com/Vakosta/Booklet/blob/master/dependencies.gradle).
+
 ## Linked repositories
 
 - [Backend](https://github.com/dormantman/booklet) — server-side of Booklet.
