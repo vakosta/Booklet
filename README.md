@@ -7,6 +7,23 @@ Schedule | Marks |  Support
 
 Application supports Android 6 and above.
 
+## Screens
+
+Application contains following screens:
+
+- [x] Schedule;
+- [x] Marks;
+- [ ] Gamefication;
+- [ ] Statistics;
+- [ ] Support;
+- [ ] Menu screen;
+- [ ] Paid Subscription;
+- [ ] Advertising Subscription.
+
+## Linked repositories
+
+- [Backend](https://github.com/dormantman/booklet) — server-side of Booklet.
+
 ## Contact
 Send me a message in Telegram: [@vakosta](https://t.me/vakosta).
 
