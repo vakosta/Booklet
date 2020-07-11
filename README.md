@@ -22,6 +22,8 @@ Application contains following screens:
 
 ## Technologies
 
+Application implements MVVM and MVP architecture patterns. Now I rewrite architecture from MVP to MVVM.
+
 - Kotlin;
 - Coroutines;
 - Firebase;
