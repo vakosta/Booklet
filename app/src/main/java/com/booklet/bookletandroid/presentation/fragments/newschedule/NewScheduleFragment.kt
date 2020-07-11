@@ -16,10 +16,13 @@ import com.booklet.bookletandroid.presentation.customviews.RotateDownTransformer
 import com.booklet.bookletandroid.presentation.fragments.schedule.SchedulePagerAdapter
 import kotlinx.android.synthetic.main.fragment_schedule.*
 import kotlinx.android.synthetic.main.layout_week_days.*
+import kotlin.math.abs
 
 class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTouchListener {
     protected lateinit var mViewModel: NewScheduleViewModel
     protected lateinit var mBinding: FragmentScheduleBinding
+
+    private var mIndex = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +39,6 @@ class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTo
         mBinding.viewModel = mViewModel
 
         val view = mBinding.root
-
         return view
     }
 
@@ -51,7 +53,7 @@ class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTo
         weekdaySaturday.setOnClickListener(this)
 
         currentDay.setOnClickListener {
-            // TODO: Implement this method.
+            setPagerPosition(5000)
         }
 
         initPager()
@@ -64,9 +66,9 @@ class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTo
     override fun fetchData() {
     }
 
-    fun initPager() {
+    private fun initPager() {
         activityEnabled {
-            // mPresenter.setPosition(5000)
+            setPagerPosition(5000)
             scheduleListPager.adapter = SchedulePagerAdapter(childFragmentManager, it)
             scheduleListPager.setPageTransformer(false, RotateDownTransformer())
             scheduleListPager.offscreenPageLimit = 1
@@ -87,8 +89,16 @@ class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTo
         }
     }
 
-    override fun onClick(v: View) {
-        mViewModel.currentWeekday = when (v.id) {
+    private fun setPagerPosition(position: Int) {
+        scheduleListPager.setCurrentItem(position, abs(mIndex - position) <= 8)
+    }
+
+    private fun setWeekPagerPosition(position: Int) {
+        // TODO: Реализовать обновление Pager с неделями.
+    }
+
+    override fun onClick(view: View) {
+        mViewModel.currentWeekday = when (view.id) {
             R.id.weekdayMonday -> NewScheduleViewModel.Weekday.MONDAY
             R.id.weekdayTuesday -> NewScheduleViewModel.Weekday.TUESDAY
             R.id.weekdayWednesday -> NewScheduleViewModel.Weekday.WEDNESDAY
@@ -98,8 +108,8 @@ class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTo
         }
     }
 
-    override fun onTouch(p0: View, p1: MotionEvent): Boolean {
-        return if (isAdded) Utils.convertPixelsToDp(requireActivity(), p1.y) > 118
+    override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
+        return if (isAdded) Utils.convertPixelsToDp(requireActivity(), motionEvent.y) > 118
         else true
     }
 }

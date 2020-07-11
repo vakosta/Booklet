@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class Data(
         @SerializedName("days")
-        val days: List<DaysItem?>? = null
+        val days: List<DayItem?>? = null
 )

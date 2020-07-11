@@ -4,12 +4,12 @@ import android.content.Context
 import com.booklet.bookletandroid.data.model.booklet.journal.*
 
 class ScheduleRepository(context: Context) : BaseRepository(context) {
-    suspend fun getSchedule(id: Long, secret: String, date: String, isOffline: Boolean): Response {
-        if (!isOffline)
-            return client.getSchedule(id, secret, date, date).body()!!
+    suspend fun getSchedule(start: String, end: String, isOffline: Boolean): Response {
+        if (!isOffline) // TODO: Добавить получение id и secret.
+            return client.getSchedule(1, "secret", start, end).body()!!
 
         return Response(Data(listOf(
-                DaysItem(date, listOf(
+                DayItem(start, listOf(
                         SubjectsItem(1,
                                 "Алгебра",
                                 Label("Модуль", "Заголовок"),

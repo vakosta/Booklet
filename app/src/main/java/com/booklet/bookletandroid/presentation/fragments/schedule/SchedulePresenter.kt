@@ -4,6 +4,7 @@ import android.content.Context
 import com.booklet.bookletandroid.domain.DateHelper
 import com.booklet.bookletandroid.domain.Preferences
 import hirondelle.date4j.DateTime
+import kotlin.math.abs
 
 class SchedulePresenter(val view: ScheduleView, val mContext: Context) {
     var isCurrentDayShowing = true
@@ -21,7 +22,7 @@ class SchedulePresenter(val view: ScheduleView, val mContext: Context) {
     }
 
     fun setPosition(position: Int) {
-        view.setViewPagerItem(position, Math.abs(index - position) <= 8)
+        view.setViewPagerItem(position, abs(index - position) <= 8)
         paintWeekByPosition(position)
     }
 

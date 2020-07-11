@@ -2,7 +2,7 @@ package com.booklet.bookletandroid.data.model.booklet.journal
 
 import com.google.gson.annotations.SerializedName
 
-data class DaysItem(
+data class DayItem(
         @field:SerializedName("date")
         val date: String? = null,
 
