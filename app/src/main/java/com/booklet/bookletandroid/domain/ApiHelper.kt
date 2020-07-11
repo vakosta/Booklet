@@ -149,7 +149,6 @@ class ApiHelper private constructor(val context: Context) {
                         secret!!,
                         from,
                         to)
-                .execute()
         val days = response.body()?.data?.days
         return if (days != null && days.isNotEmpty())
             days[0]?.subjects ?: arrayListOf()

@@ -55,7 +55,7 @@ interface BookletApi {
                     @Query("secret") secret: String,
                     @Query("start") start: String,
                     @Query("end") end: String):
-            Call<com.booklet.bookletandroid.data.model.booklet.journal.Response>
+            Response<com.booklet.bookletandroid.data.model.booklet.journal.Response>
 
     @GET("diary/marks/all/")
     suspend fun getProgress(@Query("id") id: Long,

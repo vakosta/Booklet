@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel(application: Application) : BaseViewModel(application) {
     override val repository = AuthRepository(application.applicationContext)
+
     val authLiveData = MutableLiveData<Result<Auth>?>()
     val netschoolRegionLiveData = MutableLiveData<Result<NetschoolData>?>()
     val netschoolProvinceLiveData = MutableLiveData<Result<NetschoolData>?>()

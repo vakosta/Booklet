@@ -5,8 +5,8 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import com.booklet.bookletandroid.presentation.fragments.account.AccountFragment
 import com.booklet.bookletandroid.presentation.fragments.events.EventsFragment
 import com.booklet.bookletandroid.presentation.fragments.marks.MarksFragment
+import com.booklet.bookletandroid.presentation.fragments.newschedule.NewScheduleFragment
 import com.booklet.bookletandroid.presentation.fragments.plus.PlusFragment
-import com.booklet.bookletandroid.presentation.fragments.schedule.ScheduleFragment
 import com.booklet.bookletandroid.presentation.fragments.settings.SettingsFragment
 
 class MainPagerAdapter(fm: androidx.fragment.app.FragmentManager) : FragmentStatePagerAdapter(fm) {
@@ -14,7 +14,7 @@ class MainPagerAdapter(fm: androidx.fragment.app.FragmentManager) : FragmentStat
         return when (position) {
             0 -> AccountFragment()
             1 -> MarksFragment()
-            2 -> ScheduleFragment()
+            2 -> NewScheduleFragment()
             3 -> PlusFragment()
             4 -> SettingsFragment()
             5 -> EventsFragment()

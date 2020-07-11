@@ -2,13 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
         <import type="android.view.View" />
 
         <variable
             name="viewModel"
             type="com.booklet.bookletandroid.presentation.activities.login.LoginViewModel" />
-
     </data>
 
     <ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
