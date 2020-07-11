@@ -13,7 +13,7 @@ Application contains following screens:
 
 - [x] Schedule;
 - [x] Marks;
-- [ ] Gamefication;
+- [x] Gamefication;
 - [ ] Statistics;
 - [ ] Support;
 - [ ] Menu screen;
