@@ -24,7 +24,7 @@ ext {
     firebaseAnalyticsVersion = '17.4.4'
     firebaseMessaningVersion = '20.2.3'
     crashlyticsVersion = '17.1.1'
-    eventbusVersion = '3.1.1'
+    eventbusVersion = '3.2.0'
     date4jVersion = '1.5.0'
     billingVersion = '2.0.3'
     keyboardvVersion = '2.1.0'

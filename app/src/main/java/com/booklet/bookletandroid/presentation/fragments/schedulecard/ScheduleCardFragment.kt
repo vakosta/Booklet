@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.booklet.bookletandroid.R
 import com.booklet.bookletandroid.domain.model.Date
 import com.booklet.bookletandroid.domain.px
@@ -17,14 +19,14 @@ import org.greenrobot.eventbus.EventBus
 import org.jetbrains.anko.find
 import org.jetbrains.anko.support.v4.onRefresh
 
-class ScheduleCardFragment : androidx.fragment.app.Fragment(), ScheduleCardView {
+class ScheduleCardFragment : Fragment(), ScheduleCardView {
     private lateinit var mPresenter: ScheduleCardPresenter
     private lateinit var mContext: Context
 
     private lateinit var mHeader: TextView
     private lateinit var mScheduleLayout: LinearLayout
 
-    private lateinit var mRefresher: androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    private lateinit var mRefresher: SwipeRefreshLayout
 
     private var mHasInflated = false
     private var mIsVisibleToUser = false
@@ -34,7 +36,9 @@ class ScheduleCardFragment : androidx.fragment.app.Fragment(), ScheduleCardView 
         mPresenter = ScheduleCardPresenter(this, requireActivity())
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_card, container, false)
 
         val scheduleListScrollView: ScrollView = view.find(R.id.cardListScrollView)

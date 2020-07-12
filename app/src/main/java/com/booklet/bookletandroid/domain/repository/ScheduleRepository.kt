@@ -4,8 +4,8 @@ import android.content.Context
 import com.booklet.bookletandroid.data.model.booklet.journal.*
 
 class ScheduleRepository(context: Context) : BaseRepository(context) {
-    suspend fun getSchedule(start: String, end: String, isOffline: Boolean): Response {
-        if (!isOffline) // TODO: Добавить получение id и secret.
+    suspend fun getSchedule(start: String, end: String, isDemo: Boolean): Response {
+        if (!isDemo) // TODO: Добавить получение id и secret.
             return client.getSchedule(1, "secret", start, end).body()!!
 
         return Response(Data(listOf(

@@ -2,7 +2,8 @@ package com.booklet.bookletandroid.presentation.fragments.newschedule
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import com.booklet.bookletandroid.data.model.booklet.journal.DayItem
+import com.booklet.bookletandroid.data.model.booklet.journal.Data
+import com.booklet.bookletandroid.domain.model.Result
 import com.booklet.bookletandroid.domain.repository.ScheduleRepository
 import com.booklet.bookletandroid.presentation.BaseViewModel
 import kotlinx.coroutines.launch
@@ -10,21 +11,38 @@ import kotlinx.coroutines.launch
 class NewScheduleViewModel(application: Application) : BaseViewModel(application) {
     override val repository = ScheduleRepository(application.applicationContext)
 
-    val scheduleLiveData = MutableLiveData<List<DayItem?>>()
+    val scheduleLiveData = MutableLiveData<Result<Data>>()
 
-    var currentWeekday: Weekday = Weekday.MONDAY
-    var currentWeek: Long = 2
+    var pagerPosition = 5000
+    var currentWeekday = Weekday.MONDAY
+    var currentWeek = 2
     var withSaturdays = true
 
+    /**
+     * Метод для получения расписания.
+     * Дополнительно берёт на себя ответственность, за определение
+     * ошибки при запросе к серверу.
+     *
+     * После реализации запроса обновляет scheduleLiveData переменную.
+     *
+     * @param start это начальная дата расписания.
+     * @param end это конечная дата расписания (включительно).
+     */
     fun getSchedule(start: String, end: String) {
         scope.launch {
             // TODO: Реализовать заполнение LiveData.
             val data = repository.getSchedule(start, end, true)
 
-            scheduleLiveData.postValue(data.data!!.days)
+            val kek = Result.success(data = data.data!!)
+            scheduleLiveData.postValue(kek)
         }
     }
 
+    /**
+     * Класс-перечисление с днями недели.
+     *
+     * @param number это номер дня недели.
+     */
     enum class Weekday(val number: Int) {
         MONDAY(1),
         TUESDAY(2),

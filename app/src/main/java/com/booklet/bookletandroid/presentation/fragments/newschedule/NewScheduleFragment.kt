@@ -6,16 +6,19 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.booklet.bookletandroid.R
 import com.booklet.bookletandroid.databinding.FragmentScheduleBinding
 import com.booklet.bookletandroid.domain.Utils
+import com.booklet.bookletandroid.domain.model.Result
 import com.booklet.bookletandroid.presentation.ViewPagerFragment
 import com.booklet.bookletandroid.presentation.customviews.RotateDownTransformer
 import com.booklet.bookletandroid.presentation.fragments.schedule.SchedulePagerAdapter
 import kotlinx.android.synthetic.main.fragment_schedule.*
 import kotlinx.android.synthetic.main.layout_week_days.*
+import org.greenrobot.eventbus.EventBus
 import kotlin.math.abs
 
 class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTouchListener {
@@ -45,6 +48,33 @@ class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTo
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        setupObservers()
+        setupListeners()
+        initPager()
+    }
+
+    override fun fetchData() {
+    }
+
+    private fun setupObservers() {
+        mViewModel.scheduleLiveData.observe(viewLifecycleOwner, Observer {
+            it?.let { result ->
+                when (result.status) {
+                    Result.Status.SUCCESS -> {
+                        EventBus.getDefault().post(result.data)
+                    }
+
+                    Result.Status.ERROR -> {
+                    }
+
+                    Result.Status.LOADING -> {
+                    }
+                }
+            }
+        })
+    }
+
+    private fun setupListeners() {
         weekdayMonday.setOnClickListener(this)
         weekdayTuesday.setOnClickListener(this)
         weekdayWednesday.setOnClickListener(this)
@@ -55,15 +85,6 @@ class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTo
         currentDay.setOnClickListener {
             setPagerPosition(5000)
         }
-
-        initPager()
-    }
-
-    fun setupListeners() {
-        weekdayMonday.setOnClickListener(this)
-    }
-
-    override fun fetchData() {
     }
 
     private fun initPager() {
@@ -75,7 +96,9 @@ class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTo
 
             scheduleListPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
                 override fun onPageSelected(position: Int) {
-                    // TODO: Implement this method.
+                    // TODO: Implement (or refactor) this method.
+
+                    mViewModel.getSchedule("12.07.2020", "12.07.2020")
                 }
 
                 override fun onPageScrollStateChanged(state: Int) {
@@ -99,12 +122,23 @@ class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTo
 
     override fun onClick(view: View) {
         mViewModel.currentWeekday = when (view.id) {
-            R.id.weekdayMonday -> NewScheduleViewModel.Weekday.MONDAY
-            R.id.weekdayTuesday -> NewScheduleViewModel.Weekday.TUESDAY
-            R.id.weekdayWednesday -> NewScheduleViewModel.Weekday.WEDNESDAY
-            R.id.weekdayThursday -> NewScheduleViewModel.Weekday.THURSDAY
-            R.id.weekdayFriday -> NewScheduleViewModel.Weekday.FRIDAY
-            else -> NewScheduleViewModel.Weekday.SATURDAY
+            R.id.weekdayMonday ->
+                NewScheduleViewModel.Weekday.MONDAY
+
+            R.id.weekdayTuesday ->
+                NewScheduleViewModel.Weekday.TUESDAY
+
+            R.id.weekdayWednesday ->
+                NewScheduleViewModel.Weekday.WEDNESDAY
+
+            R.id.weekdayThursday ->
+                NewScheduleViewModel.Weekday.THURSDAY
+
+            R.id.weekdayFriday ->
+                NewScheduleViewModel.Weekday.FRIDAY
+
+            else ->
+                NewScheduleViewModel.Weekday.SATURDAY
         }
     }
 
