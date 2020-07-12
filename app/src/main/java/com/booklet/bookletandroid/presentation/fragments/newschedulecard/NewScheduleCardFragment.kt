@@ -15,6 +15,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.booklet.bookletandroid.R
+import com.booklet.bookletandroid.data.model.booklet.journal.Assignment
 import com.booklet.bookletandroid.data.model.booklet.journal.Data
 import com.booklet.bookletandroid.data.model.booklet.journal.MarksItem
 import com.booklet.bookletandroid.data.model.booklet.journal.SubjectsItem
@@ -87,50 +88,83 @@ class NewScheduleCardFragment : Fragment() {
         cardHeader.text = "Уроков нет"
     }
 
-    private fun prepareHomeworkView(view: TextView, description: String) {
-        if (description.isEmpty()) {
-            view.visibility = View.GONE
-        } else {
-            view.text = description
+    private fun paintSchedule(list: List<SubjectsItem?>) {
+        doAsync {
+            if (list.isEmpty())
+                uiThread { setEmptyContentLayout() }
+
+            val height = 12.px
+
+            val addableView = LinearLayout(context)
+            addableView.orientation = LinearLayout.VERTICAL
+
+            var counter = 0
+            var previous = list[0]
+            val layoutInflater = LayoutInflater.from(context)
+            val layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+
+            for (i in list) {
+                counter++
+                layoutParams.setMargins(0, 0, 0, height)
+
+                val local = layoutInflater
+                        .inflate(R.layout.item_schedule, null, false)
+                local.findViewById<TextView>(R.id.scheduleItemIndex).text = counter.toString()
+                local.findViewById<TextView>(R.id.scheduleItemSubject).text = i?.name ?: ""
+
+                val homeworkDescription = prepareHomeworkView(local, i!!.assignments)
+                prepareLinkView(local, homeworkDescription)
+                prepareMarksView(local, i.marks ?: arrayListOf())
+                prepareTimeView(local, counter, i.time!![0]!!, i.time[1]!!, previous!!.time!![1]!!)
+
+                local.setOnLongClickListener {
+                    Utils.copyToClipboard(requireContext(), "Д/З", homeworkDescription)
+                    requireContext().toast("Д/З скопировано")
+                    true
+                }
+
+                previous = i
+                addableView.addView(local, layoutParams)
+            }
+
+            uiThread { setContentLayout(addableView) }
         }
     }
 
-    private fun prepareTimeView(view: TextView,
-                                lessonNumber: Int,
-                                beginTime: Time,
-                                endTime: Time,
-                                endPreviousTime: Time) {
-        val timeText = "${beginTime.hour.toString().padStart(2, '0')}:" +
-                "${beginTime.minute.toString().padStart(2, '0')}-" +
-                "${endTime.hour.toString().padStart(2, '0')}:" +
-                "${endTime.minute.toString().padStart(2, '0')}"
-        val currentDate = DateHelper.getDate().format("DD.MM.YYYY")
+    private fun prepareHomeworkView(local: View, assignments: List<Assignment?>?): String {
+        val homeworkView = local.findViewById<TextView>(R.id.scheduleItemHomework)
 
-        if (currentDate == mDate && DateHelper.isTimeInInterval(DateHelper.getCurrentTime(),
-                        beginTime,
-                        endTime)) {
-            view.background = ContextCompat
-                    .getDrawable(requireContext(), R.drawable.background_current_lesson)
-            view.textColor = Color.WHITE
-            val paddingDp = 6.px
-            view.setPadding(paddingDp, 0, paddingDp, 0)
-            view.text = "$timeText — ${requireContext().getString(R.string.currentLesson)}"
-        } else if (currentDate == mDate && lessonNumber > 1 &&
-                DateHelper.isTimeInInterval(DateHelper.getCurrentTime(),
-                        endPreviousTime,
-                        beginTime)) {
-            view.background = ContextCompat
-                    .getDrawable(requireContext(), R.drawable.background_next_lesson)
-            view.textColor = Color.WHITE
-            val paddingDp = 6.px
-            view.setPadding(paddingDp, 0, paddingDp, 0)
-            view.text = "$timeText — ${requireContext().getString(R.string.next_lesson)}"
+        // TODO: Вынести блок кода получения текста Д/З.
+        val homeworkDescription = if (assignments != null) {
+            assignments[0]!!.text ?: ""
         } else {
-            view.text = timeText
+            ""
+        }
+
+        if (homeworkDescription.isEmpty()) {
+            homeworkView.visibility = View.GONE
+        } else {
+            homeworkView.text = homeworkDescription
+        }
+
+        return homeworkDescription
+    }
+
+    private fun prepareLinkView(local: View, homeworkDescription: String) {
+        val linkView = local.findViewById<ImageView>(R.id.scheduleItemLink)
+        val urls = Utils.extractUrls(homeworkDescription)
+        if (urls.isNotEmpty()) {
+            linkView.setOnClickListener {
+                requireContext().browse(urls[0])
+            }
+            linkView.visibility = View.VISIBLE
         }
     }
 
-    private fun prepareMarksView(ll: LinearLayout, marks: List<MarksItem?>) {
+    private fun prepareMarksView(local: View, marks: List<MarksItem?>) {
+        val marksView: LinearLayout = local.findViewById(R.id.scheduleMarks)
+
         var isCoefficients = false
         for ((index, mark) in marks.withIndex()) {
             val view = LayoutInflater.from(requireContext())
@@ -166,89 +200,52 @@ class NewScheduleCardFragment : Fragment() {
                 params.marginEnd = 24.px
                 markView.layoutParams = params
             }
-            ll.addView(view)
+
+            marksView.addView(view)
         }
         if (marks.isEmpty())
-            ll.visibility = View.GONE
+            marksView.visibility = View.GONE
         if (isCoefficients)
-            ll.topPadding = 8.px
+            marksView.topPadding = 8.px
     }
 
-    private fun paintSchedule(list: List<SubjectsItem?>) {
-        doAsync {
-            if (list.isEmpty())
-                uiThread { setEmptyContentLayout() }
+    private fun prepareTimeView(local: View,
+                                lessonNumber: Int,
+                                beginTimeString: String,
+                                endTimeString: String,
+                                previousEndTimeString: String) {
+        val timeView = local.findViewById<TextView>(R.id.scheduleItemTime)
+        val beginTime = Time(beginTimeString.split(":").map { it.toInt() }[0], 12)
+        val endTime = Time(endTimeString.split(":").map { it.toInt() }[0], 12)
+        val previousEndTime = Time(previousEndTimeString.split(":").map { it.toInt() }[0], 12)
 
-            val height = 12.px
+        val timeText = "${beginTime.hour.toString().padStart(2, '0')}:" +
+                "${beginTime.minute.toString().padStart(2, '0')}-" +
+                "${endTime.hour.toString().padStart(2, '0')}:" +
+                "${endTime.minute.toString().padStart(2, '0')}"
+        val currentDate = DateHelper.getDate().format("DD.MM.YYYY")
 
-            val addableView = LinearLayout(context)
-            addableView.orientation = LinearLayout.VERTICAL
-
-            var counter = 0
-            var previous = list[0]
-            val layoutInflater = LayoutInflater.from(context)
-            val layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-            for (i in list) {
-                counter++
-                layoutParams.setMargins(0, 0, 0, height)
-
-                val local = layoutInflater
-                        .inflate(R.layout.item_schedule, null, false)
-                local.findViewById<TextView>(R.id.scheduleItemIndex).text = counter.toString()
-                local.findViewById<TextView>(R.id.scheduleItemSubject).text = i?.name ?: ""
-
-                val homeworkView = local.findViewById<TextView>(R.id.scheduleItemHomework)
-                val homeworkDescription = if (i?.assignments != null) {
-                    i.assignments[0]?.text ?: ""
-                } else {
-                    ""
-                }
-                prepareHomeworkView(homeworkView, homeworkDescription)
-
-                val timeView = local.findViewById<TextView>(R.id.scheduleItemTime)
-                val startTime = i!!.time!![0]!!.split(":").map { it.toInt() }
-                val endTime = i.time!![1]!!.split(":").map { it.toInt() }
-                val previousEndTime = previous!!.time!![1]!!
-                        .split(":").map { it.toInt() }
-                prepareTimeView(timeView, counter,
-                        Time(startTime[0], 12),
-                        Time(endTime[0], 12),
-                        Time(previousEndTime[0], 12))
-
-                // TODO: Реализовать аттачменты
-                /*val attachmentView = local.findViewById<ImageView>(R.id.scheduleItemAttachment)
-                if (i.homework?.attachments != null && i.homework!!.attachments.isNotEmpty()) {
-                    attachmentView.setOnClickListener {
-                        mContext.browse("https://dnevnik.mos.ru${i.homework!!.attachments[0]}")
-                    }
-                    attachmentView.visibility = View.VISIBLE
-                }*/
-
-                val linkView = local.findViewById<ImageView>(R.id.scheduleItemLink)
-                val urls = Utils.extractUrls(homeworkDescription)
-                if (urls.isNotEmpty()) {
-                    linkView.setOnClickListener {
-                        requireContext().browse(urls[0])
-                    }
-                    linkView.visibility = View.VISIBLE
-                }
-
-                val markView = local.findViewById<LinearLayout>(R.id.scheduleMarks)
-                prepareMarksView(markView, i.marks ?: arrayListOf())
-
-                previous = i
-
-                local.setOnLongClickListener {
-                    Utils.copyToClipboard(requireContext(), "Д/З", homeworkDescription)
-                    requireContext().toast("Д/З скопировано")
-                    true
-                }
-
-                addableView.addView(local, layoutParams)
-            }
-
-            uiThread { setContentLayout(addableView) }
+        if (currentDate == mDate && DateHelper.isTimeInInterval(DateHelper.getCurrentTime(),
+                        beginTime,
+                        endTime)) {
+            timeView.background = ContextCompat
+                    .getDrawable(requireContext(), R.drawable.background_current_lesson)
+            timeView.textColor = Color.WHITE
+            val paddingDp = 6.px
+            timeView.setPadding(paddingDp, 0, paddingDp, 0)
+            timeView.text = "$timeText — ${requireContext().getString(R.string.currentLesson)}"
+        } else if (currentDate == mDate && lessonNumber > 1 &&
+                DateHelper.isTimeInInterval(DateHelper.getCurrentTime(),
+                        previousEndTime,
+                        beginTime)) {
+            timeView.background = ContextCompat
+                    .getDrawable(requireContext(), R.drawable.background_next_lesson)
+            timeView.textColor = Color.WHITE
+            val paddingDp = 6.px
+            timeView.setPadding(paddingDp, 0, paddingDp, 0)
+            timeView.text = "$timeText — ${requireContext().getString(R.string.next_lesson)}"
+        } else {
+            timeView.text = timeText
         }
     }
 
