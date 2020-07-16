@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.booklet.bookletandroid.R
 import com.booklet.bookletandroid.domain.px
-import com.booklet.bookletandroid.presentation.model.Result
+import com.booklet.bookletandroid.presentation.model.event.Result
 import com.nex3z.flowlayout.FlowLayout
 import kotterknife.bindView
 import org.jetbrains.anko.textColor

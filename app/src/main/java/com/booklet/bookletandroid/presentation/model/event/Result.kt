@@ -1,4 +1,4 @@
-package com.booklet.bookletandroid.presentation.model
+package com.booklet.bookletandroid.presentation.model.event
 
 data class Result(
         val subjectName: String,

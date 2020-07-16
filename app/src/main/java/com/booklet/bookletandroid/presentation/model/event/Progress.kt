@@ -1,4 +1,4 @@
-package com.booklet.bookletandroid.presentation.model
+package com.booklet.bookletandroid.presentation.model.event
 
 import com.booklet.bookletandroid.data.model.booklet.marks.MarksItem
 

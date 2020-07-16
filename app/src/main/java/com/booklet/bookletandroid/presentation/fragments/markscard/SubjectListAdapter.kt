@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.booklet.bookletandroid.R
 import com.booklet.bookletandroid.domain.Preferences
-import com.booklet.bookletandroid.presentation.model.Progress
+import com.booklet.bookletandroid.presentation.model.event.Progress
 
 class SubjectListAdapter(
         private val mContext: Context,

@@ -12,7 +12,7 @@ import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import com.booklet.bookletandroid.R
 import com.booklet.bookletandroid.domain.Preferences
-import com.booklet.bookletandroid.presentation.model.Filter
+import com.booklet.bookletandroid.presentation.model.event.Filter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment

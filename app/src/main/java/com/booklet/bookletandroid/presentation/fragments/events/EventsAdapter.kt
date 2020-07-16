@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.booklet.bookletandroid.R
-import com.booklet.bookletandroid.presentation.model.Event
+import com.booklet.bookletandroid.presentation.model.event.Event
 
 class EventsAdapter(
         private val mEvents: List<com.booklet.bookletandroid.data.model.booklet.events.Event>

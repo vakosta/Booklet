@@ -2,16 +2,16 @@ package com.booklet.bookletandroid.presentation.fragments.newschedule
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import com.booklet.bookletandroid.data.model.booklet.journal.Data
 import com.booklet.bookletandroid.domain.model.Result
 import com.booklet.bookletandroid.domain.repository.ScheduleRepository
 import com.booklet.bookletandroid.presentation.BaseViewModel
+import com.booklet.bookletandroid.presentation.model.schedule.Day
 import kotlinx.coroutines.launch
 
 class NewScheduleViewModel(application: Application) : BaseViewModel(application) {
     override val repository = ScheduleRepository(application.applicationContext)
 
-    val scheduleLiveData = MutableLiveData<Result<Data>>()
+    val scheduleLiveData = MutableLiveData<Result<List<Day>>>()
 
     var pagerPosition = 5000
     var currentWeekday = Weekday.MONDAY
@@ -33,7 +33,7 @@ class NewScheduleViewModel(application: Application) : BaseViewModel(application
             // TODO: Реализовать заполнение LiveData.
             val data = repository.getSchedule(start, end, true)
 
-            val kek = Result.success(data = data.data!!)
+            val kek = Result.success(data = data)
             scheduleLiveData.postValue(kek)
         }
     }
@@ -43,7 +43,7 @@ class NewScheduleViewModel(application: Application) : BaseViewModel(application
      *
      * @param number это номер дня недели.
      */
-    enum class Weekday(val number: Int) {
+    enum class Weekday(private val number: Int) {
         MONDAY(1),
         TUESDAY(2),
         WEDNESDAY(3),

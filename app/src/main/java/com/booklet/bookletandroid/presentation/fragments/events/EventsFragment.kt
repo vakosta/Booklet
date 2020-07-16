@@ -14,7 +14,7 @@ import com.booklet.bookletandroid.data.model.booklet.events.Event
 import com.booklet.bookletandroid.databinding.FragmentEventsBinding
 import com.booklet.bookletandroid.domain.Preferences
 import com.booklet.bookletandroid.presentation.ViewPagerFragment
-import com.booklet.bookletandroid.presentation.model.Filter
+import com.booklet.bookletandroid.presentation.model.event.Filter
 import kotlinx.android.synthetic.main.fragment_events.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe

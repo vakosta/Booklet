@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.booklet.bookletandroid.R
 import com.booklet.bookletandroid.domain.px
 import com.booklet.bookletandroid.presentation.customviews.VerticalSpaceItemDecoration
-import com.booklet.bookletandroid.presentation.model.Progress
-import com.booklet.bookletandroid.presentation.model.Result
+import com.booklet.bookletandroid.presentation.model.event.Progress
+import com.booklet.bookletandroid.presentation.model.event.Result
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.fragment_item_pager_marks.*

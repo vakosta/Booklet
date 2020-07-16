@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.booklet.bookletandroid.R
 import com.booklet.bookletandroid.domain.px
-import com.booklet.bookletandroid.presentation.model.Progress
+import com.booklet.bookletandroid.presentation.model.event.Progress
 import com.nex3z.flowlayout.FlowLayout
 import kotterknife.bindView
 import org.jetbrains.anko.leftPadding

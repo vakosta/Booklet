@@ -7,4 +7,6 @@ import com.booklet.bookletandroid.presentation.BaseViewModel
 
 class NewScheduleCardViewModel(application: Application) : BaseViewModel(application) {
     override val repository: BaseRepository = ScheduleRepository(application.applicationContext)
+
+    var mDate: String = "12.12.12"
 }

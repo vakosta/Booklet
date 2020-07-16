@@ -2,7 +2,8 @@ package com.booklet.bookletandroid.presentation.fragments.marks
 
 import com.booklet.bookletandroid.data.model.booklet.marks.Subject
 import com.booklet.bookletandroid.presentation.fragments.markscard.MarksCardFragment
-import com.booklet.bookletandroid.presentation.model.Result
+import com.booklet.bookletandroid.presentation.model.event.Progress
+import com.booklet.bookletandroid.presentation.model.event.Result
 
 class MarksPagerAdapter(
         fm: androidx.fragment.app.FragmentManager,
@@ -29,10 +30,10 @@ class MarksPagerAdapter(
             return MarksCardFragment.newInstanceResults(results)
         }
 
-        val resultProgresses = arrayListOf<com.booklet.bookletandroid.presentation.model.Progress>()
+        val resultProgresses = arrayListOf<Progress>()
         for (progress in progresses) {
             try {
-                resultProgresses.add(com.booklet.bookletandroid.presentation.model.Progress(
+                resultProgresses.add(Progress(
                         progress.periods!![position]!!.title!!,
                         progress.name!!,
                         //progress.periods!![position].avgFive.toDouble(),
