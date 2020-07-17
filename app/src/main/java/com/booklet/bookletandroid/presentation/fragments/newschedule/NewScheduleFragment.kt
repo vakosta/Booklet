@@ -22,8 +22,8 @@ import org.greenrobot.eventbus.EventBus
 import kotlin.math.abs
 
 class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTouchListener {
-    protected lateinit var mViewModel: NewScheduleViewModel
-    protected lateinit var mBinding: FragmentScheduleBinding
+    private lateinit var mViewModel: NewScheduleViewModel
+    private lateinit var mBinding: FragmentScheduleBinding
 
     private var mIndex = 0
 
