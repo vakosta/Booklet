@@ -19,8 +19,10 @@ import com.booklet.bookletandroid.R
 import com.booklet.bookletandroid.databinding.FragmentCardBinding
 import com.booklet.bookletandroid.domain.DateHelper
 import com.booklet.bookletandroid.domain.Utils
+import com.booklet.bookletandroid.domain.model.Date.Companion.toDate
 import com.booklet.bookletandroid.domain.model.Time
 import com.booklet.bookletandroid.domain.px
+import com.booklet.bookletandroid.presentation.fragments.schedulecard.ScheduleCardFragment
 import com.booklet.bookletandroid.presentation.model.schedule.Day
 import com.booklet.bookletandroid.presentation.model.schedule.Homework
 import com.booklet.bookletandroid.presentation.model.schedule.Mark
@@ -47,30 +49,35 @@ class NewScheduleCardFragment : Fragment() {
                 false)
         mBinding.viewModel = mViewModel
 
+        mViewModel.mDate =
+                requireArguments().getString(ScheduleCardFragment.ARGUMENT_DATE)!!.toDate()
+
         val view = mBinding.root
         return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
         val params = cardList.layoutParams as LinearLayout.LayoutParams
         params.setMargins(0, 118.px, 0, 0)
         cardList.layoutParams = params
+        Log.d(TAG, "CardList инициализирован в карточке ${mViewModel.mDate}.")
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
 
-    override fun onResume() {
-        super.onResume()
         EventBus.getDefault().register(this)
+        Log.d(TAG, "EventBus инициализирован в карточке ${requireArguments()
+                .getString(ScheduleCardFragment.ARGUMENT_DATE)!!}.")
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDetach() {
         EventBus.getDefault().unregister(this)
+        Log.d(TAG, "EventBus деинициализирован в карточке ${mViewModel.mDate}.")
+
+        super.onDetach()
     }
 
     @Subscribe
@@ -238,7 +245,7 @@ class NewScheduleCardFragment : Fragment() {
                 "${endTime.minute.toString().padStart(2, '0')}"
         val currentDate = DateHelper.getDate().format("DD.MM.YYYY")
 
-        if (currentDate == mViewModel.mDate
+        if (currentDate == mViewModel.mDate.toString()
                 && DateHelper.isTimeInInterval(DateHelper.getCurrentTime(), beginTime, endTime)) {
             timeView.background = ContextCompat
                     .getDrawable(requireContext(), R.drawable.background_current_lesson)
@@ -246,7 +253,7 @@ class NewScheduleCardFragment : Fragment() {
             val paddingDp = 6.px
             timeView.setPadding(paddingDp, 0, paddingDp, 0)
             timeView.text = "$timeText — ${requireContext().getString(R.string.currentLesson)}"
-        } else if (currentDate == mViewModel.mDate && lessonNumber > 1 &&
+        } else if (currentDate == mViewModel.mDate.toString() && lessonNumber > 1 &&
                 DateHelper.isTimeInInterval(DateHelper.getCurrentTime(),
                         previousEndTime,
                         beginTime)) {
@@ -276,8 +283,8 @@ class NewScheduleCardFragment : Fragment() {
         private val TAG = this::class.java.simpleName
 
         const val ARGUMENT_POSITION = "arg_page_position"
-
         const val ARGUMENT_DATE = "arg_date"
+
         fun newInstance(position: Int, date: String): NewScheduleCardFragment {
             val fragment = NewScheduleCardFragment()
             val arguments = Bundle()
