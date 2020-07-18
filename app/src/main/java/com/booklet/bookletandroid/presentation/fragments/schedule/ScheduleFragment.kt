@@ -11,12 +11,14 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.booklet.bookletandroid.R
 import com.booklet.bookletandroid.domain.*
+import com.booklet.bookletandroid.domain.model.Date
 import com.booklet.bookletandroid.domain.model.Refresh
 import com.booklet.bookletandroid.presentation.CardBaseView
 import com.booklet.bookletandroid.presentation.FragmentBaseView
 import com.booklet.bookletandroid.presentation.ViewPagerFragment
 import com.booklet.bookletandroid.presentation.customviews.CustomLinearLayout
 import com.booklet.bookletandroid.presentation.customviews.RotateDownTransformer
+import com.booklet.bookletandroid.presentation.fragments.newschedulecard.NewScheduleCardFragment
 import hirondelle.date4j.DateTime
 import kotlinx.android.synthetic.main.layout_week_days.*
 import kotterknife.bindView
@@ -27,7 +29,8 @@ import org.jetbrains.anko.backgroundResource
 import org.jetbrains.anko.find
 import org.jetbrains.anko.textColor
 
-class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener, View.OnTouchListener {
+class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener, View.OnTouchListener,
+        NewScheduleCardFragment.ScheduleDataListener {
     private lateinit var mPresenter: SchedulePresenter
 
     private lateinit var mPager: androidx.viewpager.widget.ViewPager
@@ -158,7 +161,7 @@ class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener
 
     override fun initPager() {
         activityEnabled {
-            mPagerAdapter = SchedulePagerAdapter(childFragmentManager, it)
+            mPagerAdapter = SchedulePagerAdapter(childFragmentManager, it, this)
             mPresenter.setPosition(5000)
             mPager.adapter = mPagerAdapter
             mPager.setPageTransformer(false, RotateDownTransformer())
@@ -281,5 +284,9 @@ class ScheduleFragment : ViewPagerFragment(), ScheduleView, View.OnClickListener
     override fun hidePeriodBar() {
         hideCurrentDay()
         hideWeekdays()
+    }
+
+    override fun onRequestScheduleData(date: Date) {
+        TODO("Not yet implemented")
     }
 }

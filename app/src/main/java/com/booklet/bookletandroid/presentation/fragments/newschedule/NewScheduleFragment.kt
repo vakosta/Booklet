@@ -12,16 +12,19 @@ import androidx.viewpager.widget.ViewPager
 import com.booklet.bookletandroid.R
 import com.booklet.bookletandroid.databinding.FragmentScheduleBinding
 import com.booklet.bookletandroid.domain.Utils
+import com.booklet.bookletandroid.domain.model.Date
 import com.booklet.bookletandroid.domain.model.Result
 import com.booklet.bookletandroid.presentation.ViewPagerFragment
 import com.booklet.bookletandroid.presentation.customviews.RotateDownTransformer
+import com.booklet.bookletandroid.presentation.fragments.newschedulecard.NewScheduleCardFragment
 import com.booklet.bookletandroid.presentation.fragments.schedule.SchedulePagerAdapter
 import kotlinx.android.synthetic.main.fragment_schedule.*
 import kotlinx.android.synthetic.main.layout_week_days.*
 import org.greenrobot.eventbus.EventBus
 import kotlin.math.abs
 
-class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTouchListener {
+class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTouchListener,
+        NewScheduleCardFragment.ScheduleDataListener {
     private lateinit var mViewModel: NewScheduleViewModel
     private lateinit var mBinding: FragmentScheduleBinding
 
@@ -90,7 +93,8 @@ class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTo
     private fun initPager() {
         activityEnabled {
             setPagerPosition(5000)
-            scheduleListPager.adapter = SchedulePagerAdapter(childFragmentManager, it)
+            scheduleListPager.adapter = SchedulePagerAdapter(childFragmentManager, it,
+                    this)
             scheduleListPager.setPageTransformer(false, RotateDownTransformer())
             scheduleListPager.offscreenPageLimit = 1
 
@@ -98,7 +102,7 @@ class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTo
                 override fun onPageSelected(position: Int) {
                     // TODO: Implement (or refactor) this method.
 
-                    mViewModel.getSchedule("12.07.2020", "12.07.2020")
+                    // mViewModel.getSchedule("12.07.2020", "12.07.2020")
                 }
 
                 override fun onPageScrollStateChanged(state: Int) {
@@ -145,5 +149,9 @@ class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTo
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
         return if (isAdded) Utils.convertPixelsToDp(requireActivity(), motionEvent.y) > 118
         else true
+    }
+
+    override fun onRequestScheduleData(date: Date) {
+        mViewModel.getSchedule("12.07.2020", "12.07.2020")
     }
 }

@@ -10,12 +10,17 @@ import hirondelle.date4j.DateTime
 
 class SchedulePagerAdapter(
         private val fm: FragmentManager,
-        private val mContext: Context
+        private val mContext: Context,
+        private val scheduleCardCallback: NewScheduleCardFragment.ScheduleDataListener
 ) : FragmentStatePagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {
         val date = getDateByPosition(position)
-        return NewScheduleCardFragment.newInstance(position - 5000,
+        val fragment = NewScheduleCardFragment.newInstance(position - 5000,
                 date.format("DD.MM.YY").toString())
+
+        fragment.setScheduleDataListener(scheduleCardCallback)
+
+        return fragment
     }
 
     override fun getItemPosition(`object`: Any): Int {

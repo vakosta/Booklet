@@ -19,6 +19,7 @@ import com.booklet.bookletandroid.R
 import com.booklet.bookletandroid.databinding.FragmentCardBinding
 import com.booklet.bookletandroid.domain.DateHelper
 import com.booklet.bookletandroid.domain.Utils
+import com.booklet.bookletandroid.domain.model.Date
 import com.booklet.bookletandroid.domain.model.Date.Companion.toDate
 import com.booklet.bookletandroid.domain.model.Time
 import com.booklet.bookletandroid.domain.px
@@ -34,6 +35,8 @@ import org.jetbrains.anko.*
 class NewScheduleCardFragment : Fragment() {
     private lateinit var mViewModel: NewScheduleCardViewModel
     private lateinit var mBinding: FragmentCardBinding
+
+    private lateinit var scheduleCallback: ScheduleDataListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +66,8 @@ class NewScheduleCardFragment : Fragment() {
         params.setMargins(0, 118.px, 0, 0)
         cardList.layoutParams = params
         Log.d(TAG, "CardList инициализирован в карточке ${mViewModel.mDate}.")
+
+        scheduleCallback.onRequestScheduleData(mViewModel.mDate)
     }
 
     override fun onAttach(context: Context) {
@@ -78,6 +83,10 @@ class NewScheduleCardFragment : Fragment() {
         Log.d(TAG, "EventBus деинициализирован в карточке ${mViewModel.mDate}.")
 
         super.onDetach()
+    }
+
+    fun setScheduleDataListener(callback: ScheduleDataListener) {
+        scheduleCallback = callback
     }
 
     @Subscribe
@@ -277,6 +286,10 @@ class NewScheduleCardFragment : Fragment() {
         layout.animate()
                 .alpha(1F)
                 .duration = 100
+    }
+
+    interface ScheduleDataListener {
+        fun onRequestScheduleData(date: Date)
     }
 
     companion object {
