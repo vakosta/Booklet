@@ -97,6 +97,8 @@ class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTo
                     this)
             scheduleListPager.setPageTransformer(false, RotateDownTransformer())
             scheduleListPager.offscreenPageLimit = 1
+            scheduleListPager.setPadding(-11, 0, -15, 0)
+            scheduleListPager.clipToPadding = false
 
             scheduleListPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
                 override fun onPageSelected(position: Int) {

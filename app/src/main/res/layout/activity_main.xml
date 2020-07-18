@@ -5,16 +5,17 @@
     android:id="@+id/activityMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimary"
+    android:background="?attr/colorBackground"
     tools:context=".presentation.activities.main.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="?attr/colorBackground"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:title="@string/app_name" />
+        app:title="@string/app_name"
+        app:titleTextColor="?attr/colorPrimary" />
 
     <com.booklet.bookletandroid.presentation.customviews.NonSwipeableViewPager
         android:id="@+id/mainPager"
