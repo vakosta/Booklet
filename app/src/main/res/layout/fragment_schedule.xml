@@ -18,7 +18,7 @@
             android:id="@+id/weekDays"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="56dp"
             android:clipChildren="false"
             android:clipToPadding="false">
 
@@ -36,11 +36,10 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
-            <include
-                layout="@layout/layout_week_days"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/weekdaysRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="54dp" />
 
         </RelativeLayout>
 

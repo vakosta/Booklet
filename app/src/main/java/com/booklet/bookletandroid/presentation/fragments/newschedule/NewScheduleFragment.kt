@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.booklet.bookletandroid.R
 import com.booklet.bookletandroid.databinding.FragmentScheduleBinding
@@ -52,7 +53,8 @@ class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTo
         super.onActivityCreated(savedInstanceState)
 
         setupObservers()
-        setupListeners()
+        // setupListeners()
+        initWeekdaysViewPager()
         initPager()
     }
 
@@ -87,6 +89,19 @@ class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTo
 
         currentDay.setOnClickListener {
             setPagerPosition(5000)
+        }
+    }
+
+    private fun initWeekdaysViewPager() {
+        activityEnabled {
+            val adapter = WeekdaysAdapter()
+
+            weekdaysRecyclerView.layoutManager = LinearLayoutManager(requireActivity(),
+                    LinearLayoutManager.HORIZONTAL, false)
+            weekdaysRecyclerView.adapter = adapter
+            weekdaysRecyclerView.scrollToPosition(adapter.itemCount / 2)
+            weekdaysRecyclerView.setHasFixedSize(true)
+            weekdaysRecyclerView.setItemViewCacheSize(30)
         }
     }
 

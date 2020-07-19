@@ -5,7 +5,15 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 
-class Date(val day: Int, val month: Int, val year: Int) {
+class Date(var day: Int, var month: Int, var year: Int) {
+    constructor() : this(0, 0, 0) {
+        val date = Calendar.getInstance().toDate()
+
+        day = date.day
+        month = date.month
+        year = date.year
+    }
+
     fun toCalendar(): Calendar {
         val date = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
                 .parse("$day.$month.$year")

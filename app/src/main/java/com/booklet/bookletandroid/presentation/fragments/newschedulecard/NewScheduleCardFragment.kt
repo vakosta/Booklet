@@ -63,7 +63,7 @@ class NewScheduleCardFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         val params = cardList.layoutParams as LinearLayout.LayoutParams
-        params.setMargins(0, 118.px, 0, 0)
+        params.setMargins(0, 126.px, 0, 0)
         cardList.layoutParams = params
         Log.d(TAG, "CardList инициализирован в карточке ${mViewModel.mDate}.")
 
