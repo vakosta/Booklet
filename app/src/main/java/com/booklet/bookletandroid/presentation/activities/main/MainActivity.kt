@@ -10,7 +10,6 @@ import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.android.billingclient.api.*
 import com.booklet.bookletandroid.R
-import com.booklet.bookletandroid.domain.DateHelper
 import com.booklet.bookletandroid.domain.Preferences
 import com.booklet.bookletandroid.domain.Utils
 import com.booklet.bookletandroid.domain.model.Date
@@ -214,7 +213,7 @@ class MainActivity : AppCompatActivity(),
     @Subscribe
     fun onNewDate(date: Date) {
         mPresenter.mSelectedDate = date
-        setToolbarText(DateHelper.getMonthNameByNumber(date.month))
+        setToolbarText(date.monthText)
     }
 
     @Subscribe

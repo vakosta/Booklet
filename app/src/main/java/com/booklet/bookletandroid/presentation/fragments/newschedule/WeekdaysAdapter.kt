@@ -7,6 +7,8 @@ import com.booklet.bookletandroid.R
 import com.booklet.bookletandroid.domain.model.Date
 
 class WeekdaysAdapter : RecyclerView.Adapter<WeekdayHolder>() {
+    private var activeElement = itemCount / 2
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeekdayHolder {
         return WeekdayHolder(LayoutInflater
                 .from(parent.context)
@@ -17,7 +19,7 @@ class WeekdaysAdapter : RecyclerView.Adapter<WeekdayHolder>() {
 
     override fun onBindViewHolder(holder: WeekdayHolder, position: Int) {
         val date = Date() + (position - itemCount / 2)
-        holder.bind()
+        holder.bind(date, position == activeElement)
     }
 
     override fun getItemCount(): Int = 15000

@@ -6,12 +6,44 @@ import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 
 class Date(var day: Int, var month: Int, var year: Int) {
+    val monthText: String
+        get() {
+            return when (month) {
+                0 -> "Январь"
+                1 -> "Февраль"
+                2 -> "Март"
+                3 -> "Апрель"
+                4 -> "Май"
+                5 -> "Июнь"
+                6 -> "Июль"
+                7 -> "Август"
+                8 -> "Сентябрь"
+                9 -> "Октябрь"
+                10 -> "Ноябрь"
+                else -> "Декабрь"
+            }
+        }
+
     constructor() : this(0, 0, 0) {
         val date = Calendar.getInstance().toDate()
 
         day = date.day
         month = date.month
         year = date.year
+    }
+
+    fun getDayOfWeekNumber(): Int = this.toCalendar().get(Calendar.DAY_OF_WEEK)
+
+    fun getDayOfWeek(): String {
+        return when (getDayOfWeekNumber()) {
+            0 -> DayOfWeek.MONDAY.text
+            1 -> DayOfWeek.TUESDAY.text
+            2 -> DayOfWeek.WEDNESDAY.text
+            3 -> DayOfWeek.THURSDAY.text
+            4 -> DayOfWeek.FRIDAY.text
+            5 -> DayOfWeek.SATURDAY.text
+            else -> DayOfWeek.SUNDAY.text
+        }
     }
 
     fun toCalendar(): Calendar {
@@ -30,7 +62,7 @@ class Date(var day: Int, var month: Int, var year: Int) {
      */
     operator fun plus(days: Int): Date {
         val calendar = this.toCalendar()
-        calendar.add(Calendar.DATE, 1)
+        calendar.add(Calendar.DATE, days)
         return calendar.toDate()
     }
 
@@ -71,5 +103,15 @@ class Date(var day: Int, var month: Int, var year: Int) {
 
             return calendar.toDate()
         }
+    }
+
+    enum class DayOfWeek(val number: Int, val text: String) {
+        MONDAY(1, "ПН"),
+        TUESDAY(2, "ВТ"),
+        WEDNESDAY(3, "СР"),
+        THURSDAY(4, "ЧТ"),
+        FRIDAY(5, "ПТ"),
+        SATURDAY(6, "СБ"),
+        SUNDAY(7, "ВС")
     }
 }

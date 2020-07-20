@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.viewpager.widget.ViewPager
 import com.booklet.bookletandroid.R
 import com.booklet.bookletandroid.databinding.FragmentScheduleBinding
@@ -95,11 +96,22 @@ class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTo
     private fun initWeekdaysViewPager() {
         activityEnabled {
             val adapter = WeekdaysAdapter()
+            val snapHelper = LinearSnapHelper()
 
-            weekdaysRecyclerView.layoutManager = LinearLayoutManager(requireActivity(),
+            weekdaysRecyclerView.layoutManager = CenterLayoutManager(requireActivity(),
                     LinearLayoutManager.HORIZONTAL, false)
+            snapHelper.attachToRecyclerView(weekdaysRecyclerView)
+            weekdaysRecyclerView.attachSnapHelperWithListener(snapHelper,
+                    SnapOnScrollListener.Behavior.NOTIFY_ON_SCROLL,
+                    object : OnSnapPositionChangeListener {
+                        override fun onSnapPositionChange(position: Int) {
+                            EventBus.getDefault().post(Date() + (position -
+                                    adapter.itemCount / 2))
+                        }
+                    })
             weekdaysRecyclerView.adapter = adapter
             weekdaysRecyclerView.scrollToPosition(adapter.itemCount / 2)
+            weekdaysRecyclerView.smoothScrollToPosition(adapter.itemCount / 2)
             weekdaysRecyclerView.setHasFixedSize(true)
             weekdaysRecyclerView.setItemViewCacheSize(30)
         }
