@@ -19,7 +19,7 @@ class WeekdaysAdapter : RecyclerView.Adapter<WeekdayHolder>() {
 
     override fun onBindViewHolder(holder: WeekdayHolder, position: Int) {
         val date = Date() + (position - itemCount / 2)
-        holder.bind(date, position == activeElement)
+        holder.bind(date, date == Date())
     }
 
     override fun getItemCount(): Int = 15000

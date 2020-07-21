@@ -9,17 +9,17 @@ class Date(var day: Int, var month: Int, var year: Int) {
     val monthText: String
         get() {
             return when (month) {
-                0 -> "Январь"
-                1 -> "Февраль"
-                2 -> "Март"
-                3 -> "Апрель"
-                4 -> "Май"
-                5 -> "Июнь"
-                6 -> "Июль"
-                7 -> "Август"
-                8 -> "Сентябрь"
-                9 -> "Октябрь"
-                10 -> "Ноябрь"
+                1 -> "Январь"
+                2 -> "Февраль"
+                3 -> "Март"
+                4 -> "Апрель"
+                5 -> "Май"
+                6 -> "Июнь"
+                7 -> "Июль"
+                8 -> "Август"
+                9 -> "Сентябрь"
+                10 -> "Октябрь"
+                11 -> "Ноябрь"
                 else -> "Декабрь"
             }
         }
@@ -36,12 +36,12 @@ class Date(var day: Int, var month: Int, var year: Int) {
 
     fun getDayOfWeek(): String {
         return when (getDayOfWeekNumber()) {
-            0 -> DayOfWeek.MONDAY.text
-            1 -> DayOfWeek.TUESDAY.text
-            2 -> DayOfWeek.WEDNESDAY.text
-            3 -> DayOfWeek.THURSDAY.text
-            4 -> DayOfWeek.FRIDAY.text
-            5 -> DayOfWeek.SATURDAY.text
+            2 -> DayOfWeek.MONDAY.text
+            3 -> DayOfWeek.TUESDAY.text
+            4 -> DayOfWeek.WEDNESDAY.text
+            5 -> DayOfWeek.THURSDAY.text
+            6 -> DayOfWeek.FRIDAY.text
+            7 -> DayOfWeek.SATURDAY.text
             else -> DayOfWeek.SUNDAY.text
         }
     }
@@ -88,10 +88,30 @@ class Date(var day: Int, var month: Int, var year: Int) {
 
     override fun toString(): String = "$day.$month.$year"
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Date
+
+        if (day != other.day) return false
+        if (month != other.month) return false
+        if (year != other.year) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = day
+        result = 31 * result + month
+        result = 31 * result + year
+        return result
+    }
+
     companion object {
         fun Calendar.toDate(): Date {
             return Date(this[Calendar.DAY_OF_MONTH],
-                    this[Calendar.MONTH],
+                    this[Calendar.MONTH] + 1,
                     this[Calendar.YEAR])
         }
 
