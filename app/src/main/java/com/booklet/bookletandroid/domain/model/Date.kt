@@ -36,12 +36,12 @@ class Date(var day: Int, var month: Int, var year: Int) {
 
     fun getDayOfWeek(): String {
         return when (getDayOfWeekNumber()) {
-            2 -> DayOfWeek.MONDAY.text
-            3 -> DayOfWeek.TUESDAY.text
-            4 -> DayOfWeek.WEDNESDAY.text
-            5 -> DayOfWeek.THURSDAY.text
-            6 -> DayOfWeek.FRIDAY.text
-            7 -> DayOfWeek.SATURDAY.text
+            DayOfWeek.MONDAY.number -> DayOfWeek.MONDAY.text
+            DayOfWeek.TUESDAY.number -> DayOfWeek.TUESDAY.text
+            DayOfWeek.WEDNESDAY.number -> DayOfWeek.WEDNESDAY.text
+            DayOfWeek.THURSDAY.number -> DayOfWeek.THURSDAY.text
+            DayOfWeek.FRIDAY.number -> DayOfWeek.FRIDAY.text
+            DayOfWeek.SATURDAY.number -> DayOfWeek.SATURDAY.text
             else -> DayOfWeek.SUNDAY.text
         }
     }
@@ -125,13 +125,18 @@ class Date(var day: Int, var month: Int, var year: Int) {
         }
     }
 
+    /**
+     * Номера дней недели взяты из класса @see java.time.DayOfWeek.
+     *
+     * @param number
+     */
     enum class DayOfWeek(val number: Int, val text: String) {
-        MONDAY(1, "ПН"),
-        TUESDAY(2, "ВТ"),
-        WEDNESDAY(3, "СР"),
-        THURSDAY(4, "ЧТ"),
-        FRIDAY(5, "ПТ"),
-        SATURDAY(6, "СБ"),
-        SUNDAY(7, "ВС")
+        MONDAY(2, "ПН"),
+        TUESDAY(3, "ВТ"),
+        WEDNESDAY(4, "СР"),
+        THURSDAY(5, "ЧТ"),
+        FRIDAY(6, "ПТ"),
+        SATURDAY(7, "СБ"),
+        SUNDAY(1, "ВС")
     }
 }

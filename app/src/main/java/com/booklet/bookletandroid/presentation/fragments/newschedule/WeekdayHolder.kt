@@ -15,8 +15,7 @@ class WeekdayHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val mDayOfMonth: TextView by bindView(R.id.dayOfMonth)
 
     fun bind(date: Date, isActive: Boolean) {
-        if (isActive)
-            activate()
+        view.isSelected = isActive
 
         mDayOfWeek.text = date.getDayOfWeek()
         mDayOfMonth.text = date.day.toString()

@@ -1,6 +1,8 @@
 package com.booklet.bookletandroid.presentation.fragments.newschedule
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -20,9 +22,11 @@ import com.booklet.bookletandroid.presentation.ViewPagerFragment
 import com.booklet.bookletandroid.presentation.customviews.RotateDownTransformer
 import com.booklet.bookletandroid.presentation.fragments.newschedulecard.NewScheduleCardFragment
 import com.booklet.bookletandroid.presentation.fragments.schedule.SchedulePagerAdapter
+import com.booklet.bookletandroid.presentation.model.event.SelectWeekdayEvent
 import kotlinx.android.synthetic.main.fragment_schedule.*
 import kotlinx.android.synthetic.main.layout_week_days.*
 import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import kotlin.math.abs
 
 class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTouchListener,
@@ -57,6 +61,21 @@ class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTo
         // setupListeners()
         initWeekdaysViewPager()
         initPager()
+        setPagerPosition(scheduleListPager.adapter!!.count / 2)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        EventBus.getDefault().register(this)
+        Log.d(TAG, "EventBus инициализирован.")
+    }
+
+    override fun onDetach() {
+        EventBus.getDefault().unregister(this)
+        Log.d(TAG, "EventBus деинициализирован.")
+
+        super.onDetach()
     }
 
     override fun fetchData() {
@@ -110,18 +129,16 @@ class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTo
                         }
                     })
             weekdaysRecyclerView.adapter = adapter
-            weekdaysRecyclerView.scrollToPosition(adapter.itemCount / 2)
-            weekdaysRecyclerView.smoothScrollToPosition(adapter.itemCount / 2)
             weekdaysRecyclerView.setHasFixedSize(true)
-            weekdaysRecyclerView.setItemViewCacheSize(30)
+            weekdaysRecyclerView.setItemViewCacheSize(50)
         }
     }
 
     private fun initPager() {
         activityEnabled {
-            setPagerPosition(5000)
-            scheduleListPager.adapter = SchedulePagerAdapter(childFragmentManager, it,
-                    this)
+            val adapter = SchedulePagerAdapter(childFragmentManager, it, this)
+
+            scheduleListPager.adapter = adapter
             scheduleListPager.setPageTransformer(false, RotateDownTransformer())
             scheduleListPager.offscreenPageLimit = 1
             scheduleListPager.setPadding(-11, 0, -15, 0)
@@ -132,6 +149,7 @@ class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTo
                     // TODO: Implement (or refactor) this method.
 
                     // mViewModel.getSchedule("12.07.2020", "12.07.2020")
+                    setWeekdaysRecyclerViewPosition(position)
                 }
 
                 override fun onPageScrollStateChanged(state: Int) {
@@ -145,12 +163,25 @@ class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTo
         }
     }
 
-    private fun setPagerPosition(position: Int) {
-        scheduleListPager.setCurrentItem(position, abs(mIndex - position) <= 8)
+    @Subscribe
+    fun onSelectWeekdayEvent(event: SelectWeekdayEvent) {
+        setPagerPosition(event.position)
     }
 
-    private fun setWeekPagerPosition(position: Int) {
-        // TODO: Реализовать обновление Pager с неделями.
+    private fun setPagerPosition(position: Int) {
+        scheduleListPager.setCurrentItem(position, abs(mIndex - position) <= 8)
+        mIndex = position
+    }
+
+    private fun setWeekdaysRecyclerViewPosition(position: Int) {
+        if (abs(position - (weekdaysRecyclerView.adapter as WeekdaysAdapter)
+                        .activeElement) > 80) {
+            weekdaysRecyclerView.scrollToPosition(position)
+            weekdaysRecyclerView.smoothScrollToPosition(position)
+        } else {
+            weekdaysRecyclerView.smoothScrollToPosition(position)
+        }
+        (weekdaysRecyclerView.adapter as WeekdaysAdapter).selectItem(position)
     }
 
     override fun onClick(view: View) {
@@ -182,5 +213,9 @@ class NewScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTo
 
     override fun onRequestScheduleData(date: Date) {
         mViewModel.getSchedule("12.07.2020", "12.07.2020")
+    }
+
+    companion object {
+        private val TAG = this::class.java.simpleName
     }
 }

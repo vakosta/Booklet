@@ -4,7 +4,7 @@
     android:layout_height="54dp"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
-    android:background="@drawable/background_item_weekday"
+    android:background="@drawable/selector_weekday_background"
     android:clickable="true"
     android:focusable="true"
     android:gravity="center"
@@ -17,7 +17,7 @@
         android:layout_marginBottom="7dp"
         android:fontFamily="sans-serif-medium"
         android:text="ВТ"
-        android:textColor="#5690FF"
+        android:textColor="@drawable/selector_weekday_text_color"
         android:textSize="12sp" />
 
     <TextView
@@ -27,7 +27,7 @@
         android:fontFamily="sans-serif-medium"
         android:includeFontPadding="false"
         android:text="7"
-        android:textColor="#5690FF"
+        android:textColor="@drawable/selector_weekday_text_color"
         android:textSize="12sp" />
 
 </LinearLayout>
