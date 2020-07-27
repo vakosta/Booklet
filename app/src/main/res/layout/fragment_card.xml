@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.booklet.bookletandroid.presentation.fragments.newschedulecard.NewScheduleCardViewModel" />
+            type="com.booklet.bookletandroid.presentation.fragments.schedulecard.ScheduleCardViewModel" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

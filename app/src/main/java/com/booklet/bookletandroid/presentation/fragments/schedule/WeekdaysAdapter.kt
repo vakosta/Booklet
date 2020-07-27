@@ -1,4 +1,4 @@
-package com.booklet.bookletandroid.presentation.fragments.newschedule
+package com.booklet.bookletandroid.presentation.fragments.schedule
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

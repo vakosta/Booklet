@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.booklet.bookletandroid.presentation.fragments.newschedule.NewScheduleViewModel" />
+            type="com.booklet.bookletandroid.presentation.fragments.schedule.ScheduleViewModel" />
     </data>
 
     <RelativeLayout

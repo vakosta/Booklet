@@ -1,4 +1,4 @@
-package com.booklet.bookletandroid.presentation.fragments.newschedule
+package com.booklet.bookletandroid.presentation.fragments.schedule
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
@@ -8,7 +8,7 @@ import com.booklet.bookletandroid.presentation.BaseViewModel
 import com.booklet.bookletandroid.presentation.model.schedule.Day
 import kotlinx.coroutines.launch
 
-class NewScheduleViewModel(application: Application) : BaseViewModel(application) {
+class ScheduleViewModel(application: Application) : BaseViewModel(application) {
     override val repository = ScheduleRepository(application.applicationContext)
 
     val scheduleLiveData = MutableLiveData<Result<List<Day>>>()
