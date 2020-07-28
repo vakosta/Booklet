@@ -2,6 +2,7 @@ package com.booklet.bookletandroid.presentation.fragments.schedule
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import com.booklet.bookletandroid.domain.model.Date
 import com.booklet.bookletandroid.domain.model.Result
 import com.booklet.bookletandroid.domain.repository.ScheduleRepository
 import com.booklet.bookletandroid.presentation.BaseViewModel
@@ -28,7 +29,7 @@ class ScheduleViewModel(application: Application) : BaseViewModel(application) {
      * @param start это начальная дата расписания.
      * @param end это конечная дата расписания (включительно).
      */
-    fun getSchedule(start: String, end: String) {
+    fun getSchedule(start: Date, end: Date) {
         scope.launch {
             // TODO: Реализовать заполнение LiveData.
             val data = repository.getSchedule(start, end, true)

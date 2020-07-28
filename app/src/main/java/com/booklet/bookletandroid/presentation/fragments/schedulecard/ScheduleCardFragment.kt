@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.booklet.bookletandroid.R
 import com.booklet.bookletandroid.databinding.FragmentCardBinding
@@ -41,18 +42,14 @@ class ScheduleCardFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         mViewModel = ViewModelProvider(this).get(ScheduleCardViewModel::class.java)
-        mBinding = DataBindingUtil.inflate(inflater,
-                R.layout.fragment_card,
-                container,
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_card, container,
                 false)
         mBinding.viewModel = mViewModel
 
-        mViewModel.mDate =
-                requireArguments().getString(ScheduleCardFragment.ARGUMENT_DATE)!!.toDate()
+        mViewModel.mDate = requireArguments().getString(ARGUMENT_DATE)!!.toDate()
 
         val view = mBinding.root
         return view
@@ -66,6 +63,8 @@ class ScheduleCardFragment : Fragment() {
         cardList.layoutParams = params
         Log.d(TAG, "CardList инициализирован в карточке ${mViewModel.mDate}.")
 
+        setupObservers()
+
         scheduleCallback.onRequestScheduleData(mViewModel.mDate)
     }
 
@@ -74,7 +73,7 @@ class ScheduleCardFragment : Fragment() {
 
         EventBus.getDefault().register(this)
         Log.d(TAG, "EventBus инициализирован в карточке ${requireArguments()
-                .getString(ScheduleCardFragment.ARGUMENT_DATE)!!}.")
+                .getString(ARGUMENT_DATE)!!}.")
     }
 
     override fun onDetach() {
@@ -84,21 +83,39 @@ class ScheduleCardFragment : Fragment() {
         super.onDetach()
     }
 
+    override fun onResume() {
+        super.onResume()
+        mViewModel.isShowing = true
+
+        if (mViewModel.cardLiveData.value != null
+                && (!mViewModel.isLoaded || mViewModel.cardLiveData.value!!.isForcibly))
+            paintSchedule(mViewModel.cardLiveData.value!!)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mViewModel.isShowing = false
+    }
+
+    private fun setupObservers() {
+        mViewModel.cardLiveData.observe(viewLifecycleOwner, Observer {
+            if (!mViewModel.isLoaded && mViewModel.isShowing || it.isForcibly)
+                paintSchedule(it)
+        })
+    }
+
     fun setScheduleDataListener(callback: ScheduleDataListener) {
         scheduleCallback = callback
     }
 
     @Subscribe
     fun onReceivedDataEvent(days: List<Day>) {
-        if (mViewModel.isLoaded)
-            return
         Log.d(TAG, "Данные получены карточкой ${mViewModel.mDate}.")
 
-        mViewModel.isLoaded = true
+        val day =
+                days.filter { it.date.toString() == requireArguments().getString(ARGUMENT_DATE) }[0]
 
-        // data.days!!.filter { it!!.date == requireArguments().getString(ARGUMENT_DATE) }[0]
-
-        paintSchedule(days[0])
+        mViewModel.cardLiveData.postValue(day)
     }
 
     private fun setEmptyContentLayout() {
@@ -119,6 +136,7 @@ class ScheduleCardFragment : Fragment() {
      * @param day это объект-день, который требуется отрисовать на карточке.
      */
     private fun paintSchedule(day: Day) {
+        mViewModel.isLoaded = true
         doAsync {
             if (day.subjects.isEmpty())
                 uiThread { setEmptyContentLayout() }

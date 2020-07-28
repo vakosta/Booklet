@@ -9,18 +9,15 @@ import com.booklet.bookletandroid.presentation.model.event.SelectWeekdayEvent
 import org.greenrobot.eventbus.EventBus
 
 class WeekdaysAdapter : RecyclerView.Adapter<WeekdayHolder>() {
-    var activeElement = itemCount / 2
+    var activeElement = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeekdayHolder {
-        return WeekdayHolder(LayoutInflater
-                .from(parent.context)
-                .inflate(R.layout.item_weekday,
-                        parent,
-                        false))
+        return WeekdayHolder(LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_weekday, parent, false))
     }
 
     override fun onBindViewHolder(holder: WeekdayHolder, position: Int) {
-        val date = Date() + (position - itemCount / 2)
+        val date = Date() + (position - SchedulePagerAdapter.CENTRAL_POSITION)
         holder.bind(date, position == activeElement)
         holder.view.setOnClickListener {
             selectItem(holder.layoutPosition)
@@ -35,5 +32,5 @@ class WeekdaysAdapter : RecyclerView.Adapter<WeekdayHolder>() {
         notifyItemChanged(activeElement)
     }
 
-    override fun getItemCount(): Int = 15000
+    override fun getItemCount(): Int = SchedulePagerAdapter.COUNT
 }

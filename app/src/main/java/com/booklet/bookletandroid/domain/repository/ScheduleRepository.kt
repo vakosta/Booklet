@@ -2,15 +2,14 @@ package com.booklet.bookletandroid.domain.repository
 
 import android.content.Context
 import com.booklet.bookletandroid.domain.model.Date
-import com.booklet.bookletandroid.domain.model.Date.Companion.toDate
 import com.booklet.bookletandroid.presentation.model.schedule.Day
 
 class ScheduleRepository(context: Context) : BaseRepository(context) {
-    suspend fun getSchedule(start: String, end: String, isDemo: Boolean): List<Day> {
+    suspend fun getSchedule(start: Date, end: Date, isDemo: Boolean): List<Day> {
         /*if (!isDemo) // TODO: Добавить получение id и secret.
             return client.getSchedule(1, "secret", start, end).body()!!*/
 
-        return getDefaultSchedule(start.toDate(), end.toDate())
+        return getDefaultSchedule(start, end)
     }
 
     companion object {

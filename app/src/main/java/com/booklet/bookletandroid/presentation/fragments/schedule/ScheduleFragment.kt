@@ -107,7 +107,7 @@ class ScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTouch
         weekdaySaturday.setOnClickListener(this)
 
         currentDay.setOnClickListener {
-            setPagerPosition(5000)
+            setPagerPosition(SchedulePagerAdapter.CENTRAL_POSITION)
         }
     }
 
@@ -211,7 +211,7 @@ class ScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTouch
     }
 
     override fun onRequestScheduleData(date: Date) {
-        mViewModel.getSchedule("12.07.2020", "12.07.2020")
+        mViewModel.getSchedule(date - 1, date + 1)
     }
 
     companion object {
