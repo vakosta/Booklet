@@ -23,8 +23,8 @@ import org.jetbrains.anko.support.v4.onRefresh
 class EventsFragment : ViewPagerFragment() {
     private lateinit var binding: FragmentEventsBinding
 
-    val allItems = arrayListOf<Event>()
-    var filteredItems = arrayListOf<Event>()
+    private val allItems = arrayListOf<Event>()
+    private var filteredItems = arrayListOf<Event>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

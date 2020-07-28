@@ -1,4 +1,4 @@
-package com.booklet.bookletandroid.presentation.fragments.events
+package com.booklet.bookletandroid.presentation.fragments.events.holder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

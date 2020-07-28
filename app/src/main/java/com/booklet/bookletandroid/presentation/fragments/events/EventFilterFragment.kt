@@ -1,4 +1,4 @@
-package com.booklet.bookletandroid.presentation.fragments
+package com.booklet.bookletandroid.presentation.fragments.events
 
 import android.app.Dialog
 import android.content.DialogInterface

@@ -1,4 +1,4 @@
-package com.booklet.bookletandroid.presentation.fragments.events
+package com.booklet.bookletandroid.presentation.fragments.events.holder
 
 import android.os.Build
 import android.text.Html
@@ -9,7 +9,7 @@ import androidx.core.text.HtmlCompat
 import com.booklet.bookletandroid.R
 import kotterknife.bindView
 
-class HolidaysHolder(v: View) : EventHolder(v) {
+class TestHolder(v: View) : EventHolder(v) {
     private val mIcon: ImageView by bindView(R.id.eventIcon)
     private val mText: TextView by bindView(R.id.eventText)
     private val mDate: TextView by bindView(R.id.eventDate)

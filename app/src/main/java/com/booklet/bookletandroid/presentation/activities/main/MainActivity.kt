@@ -23,7 +23,7 @@ import com.booklet.bookletandroid.presentation.CardBaseView
 import com.booklet.bookletandroid.presentation.activities.dark_theme_popup.DarkThemePopupActivity
 import com.booklet.bookletandroid.presentation.activities.login.LoginDiaryActivity
 import com.booklet.bookletandroid.presentation.customviews.NonSwipeableViewPager
-import com.booklet.bookletandroid.presentation.fragments.EventFilterFragment
+import com.booklet.bookletandroid.presentation.fragments.events.EventFilterFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.analytics.FirebaseAnalytics
 import hirondelle.date4j.DateTime
