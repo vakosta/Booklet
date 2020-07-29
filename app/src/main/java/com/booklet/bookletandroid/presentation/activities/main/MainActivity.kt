@@ -24,6 +24,7 @@ import com.booklet.bookletandroid.presentation.activities.dark_theme_popup.DarkT
 import com.booklet.bookletandroid.presentation.activities.login.LoginDiaryActivity
 import com.booklet.bookletandroid.presentation.customviews.NonSwipeableViewPager
 import com.booklet.bookletandroid.presentation.fragments.events.EventFilterFragment
+import com.booklet.bookletandroid.presentation.model.event.SelectedPage
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.analytics.FirebaseAnalytics
 import hirondelle.date4j.DateTime
@@ -176,7 +177,10 @@ class MainActivity : AppCompatActivity(),
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.navSchedule -> setFragment(2)
+            R.id.navSchedule -> {
+                setFragment(2)
+                EventBus.getDefault().post(SelectedPage(SelectedPage.Page.SCHEDULE))
+            }
             R.id.navMarks -> setFragment(1)
             R.id.navAccount -> setFragment(4)
             R.id.navGamefication -> setFragment(0)

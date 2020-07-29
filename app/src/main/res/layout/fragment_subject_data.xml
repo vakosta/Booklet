@@ -194,8 +194,7 @@
                 android:layout_marginStart="17dp"
                 app:layout_constraintBottom_toBottomOf="@+id/mark2TextView"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/mark2TextView"
-                app:srcCompat="@drawable/prefs_five" />
+                app:layout_constraintTop_toTopOf="@+id/mark2TextView" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -216,8 +215,7 @@
                 android:layout_marginStart="17dp"
                 app:layout_constraintBottom_toBottomOf="@+id/mark1TextView"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/mark1TextView"
-                app:srcCompat="@drawable/prefs_five" />
+                app:layout_constraintTop_toTopOf="@+id/mark1TextView" />
 
             <TextView
                 android:id="@+id/mark1TextView"
@@ -500,8 +498,7 @@
                 android:layout_height="22dp"
                 android:layout_marginStart="17dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/mark3TextView"
-                app:srcCompat="@drawable/prefs_five" />
+                app:layout_constraintTop_toTopOf="@+id/mark3TextView" />
 
             <androidx.constraintlayout.widget.Group
                 android:id="@+id/groupMark1"

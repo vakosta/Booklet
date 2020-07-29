@@ -22,6 +22,7 @@ import com.booklet.bookletandroid.presentation.ViewPagerFragment
 import com.booklet.bookletandroid.presentation.customviews.RotateDownTransformer
 import com.booklet.bookletandroid.presentation.fragments.schedulecard.ScheduleCardFragment
 import com.booklet.bookletandroid.presentation.model.event.SelectWeekdayEvent
+import com.booklet.bookletandroid.presentation.model.event.SelectedPage
 import kotlinx.android.synthetic.main.fragment_schedule.*
 import kotlinx.android.synthetic.main.layout_week_days.*
 import org.greenrobot.eventbus.EventBus
@@ -165,6 +166,11 @@ class ScheduleFragment : ViewPagerFragment(), View.OnClickListener, View.OnTouch
     @Subscribe
     fun onSelectWeekdayEvent(event: SelectWeekdayEvent) {
         setPagerPosition(event.position)
+    }
+
+    @Subscribe
+    fun onSelectPage(page: SelectedPage) {
+        setPagerPosition(SchedulePagerAdapter.CENTRAL_POSITION)
     }
 
     private fun setPagerPosition(position: Int) {
