@@ -1,6 +1,7 @@
 package com.booklet.bookletandroid.presentation.model.schedule
 
 import com.booklet.bookletandroid.domain.model.Time
+import java.io.Serializable
 
 data class Subject(
         val number: Int,
@@ -24,4 +25,4 @@ data class Subject(
         val teacher: String?,
 
         val room: String?
-)
+) : Serializable

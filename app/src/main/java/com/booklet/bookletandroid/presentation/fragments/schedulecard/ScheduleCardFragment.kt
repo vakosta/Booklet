@@ -166,15 +166,15 @@ class ScheduleCardFragment : Fragment() {
                 prepareTimeView(subjectView, subject.number, subject.beginTime, subject.endTime,
                         previous.endTime)
 
+                subjectView.setOnClickListener {
+                    val bottomNavDrawerFragment = SubjectDataFragment.newInstance(subject)
+                    bottomNavDrawerFragment.show(parentFragmentManager, bottomNavDrawerFragment.tag)
+                }
+
                 subjectView.setOnLongClickListener {
                     Utils.copyToClipboard(requireContext(), "Д/З", homeworkDescription)
                     requireContext().toast("Д/З скопировано")
                     true
-                }
-
-                subjectView.setOnClickListener {
-                    val bottomNavDrawerFragment = SubjectDataFragment()
-                    bottomNavDrawerFragment.show(parentFragmentManager, bottomNavDrawerFragment.tag)
                 }
 
                 previous = subject
