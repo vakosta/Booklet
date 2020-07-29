@@ -172,6 +172,11 @@ class ScheduleCardFragment : Fragment() {
                     true
                 }
 
+                subjectView.setOnClickListener {
+                    val bottomNavDrawerFragment = SubjectDataFragment()
+                    bottomNavDrawerFragment.show(parentFragmentManager, bottomNavDrawerFragment.tag)
+                }
+
                 previous = subject
                 subjectsView.addView(subjectView, layoutParams)
             }

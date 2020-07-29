@@ -36,7 +36,7 @@
     <color name="colorPlusTextBlockTitle">#212121</color>
     <color name="colorPlusTextBlockContent">#a4a4a4</color>
     <color name="colorTextPrimary">#292929</color>
-    <color name="colorTextHomework">#535353</color>
+    <color name="colorTextSecondary">#535353</color>
     <color name="colorTextTimeOfLesson">#999999</color>
     <color name="colorTextWeekdayActive">#4b9aff</color>
     <color name="colorTextXp">#999999</color>

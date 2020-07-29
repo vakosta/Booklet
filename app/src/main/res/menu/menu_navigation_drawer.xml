@@ -25,7 +25,7 @@
             android:title="Графики" />-->
     </group>
 
-    <!--<group
+    <group
         android:id="@+id/g2"
         android:checkableBehavior="single">
         <item
@@ -41,10 +41,47 @@
             android:icon="@drawable/account_outline"
             android:title="Преподаватели" />
         <item
-            android:id="@+id/navSchoolNews"
+            android:id="@+id/navSchoolNews2"
             android:icon="@drawable/newspaper"
             android:title="Новости школы" />
-    </group>-->
+        <item
+            android:id="@+id/navSchoolNews3"
+            android:icon="@drawable/newspaper"
+            android:title="Новости школы" />
+        <item
+            android:id="@+id/navSchoolNews4"
+            android:icon="@drawable/newspaper"
+            android:title="Новости школы" />
+        <item
+            android:id="@+id/navSchoolNews5"
+            android:icon="@drawable/newspaper"
+            android:title="Новости школы" />
+        <item
+            android:id="@+id/navSchoolNews6"
+            android:icon="@drawable/newspaper"
+            android:title="Новости школы" />
+        <item
+            android:id="@+id/navSchoolNews7"
+            android:icon="@drawable/newspaper"
+            android:title="Новости школы" />
+        <item
+            android:id="@+id/navSchoolNews8"
+            android:icon="@drawable/newspaper"
+            android:title="Новости школы" />
+        <item
+            android:id="@+id/navSchoolNews9"
+            android:icon="@drawable/newspaper"
+            android:title="Новости школы" />
+        <item
+            android:id="@+id/navSchoolNews10"
+            android:icon="@drawable/newspaper"
+            android:title="Новости школы" />
+        <item
+            android:id="@+id/navSchoolNews11"
+            android:icon="@drawable/newspaper"
+            android:title="Новости школы" />
+
+    </group>
 
     <group
         android:id="@+id/g3"

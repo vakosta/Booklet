@@ -21,7 +21,8 @@ import org.greenrobot.eventbus.EventBus
 import org.jetbrains.anko.backgroundResource
 
 class EventFilterFragment : BottomSheetDialogFragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_event_filter, container, false)
     }
 
@@ -77,7 +78,8 @@ class EventFilterFragment : BottomSheetDialogFragment() {
 
             val bottomSheet = d.findViewById<View>(R.id.design_bottom_sheet) as FrameLayout?
             val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet!!)
-            bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            bottomSheetBehavior.setBottomSheetCallback(object :
+                    BottomSheetBehavior.BottomSheetCallback() {
                 override fun onSlide(bottomSheet: View, slideOffset: Float) {
                 }
 

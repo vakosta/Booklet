@@ -35,7 +35,7 @@
         <item name="colorPlusTextBlockTitle">@color/colorPlusTextBlockTitle</item>
         <item name="colorPlusTextBlockContent">@color/colorPlusTextBlockContent</item>
         <item name="colorTextPrimary">@color/colorTextPrimary</item>
-        <item name="colorTextHomework">@color/colorTextHomework</item>
+        <item name="colorTextHomework">@color/colorTextSecondary</item>
         <item name="colorTextTimeOfLesson">@color/colorTextTimeOfLesson</item>
         <item name="colorTextWeekdayActive">@color/colorTextWeekdayActive</item>
         <item name="colorTextXp">@color/colorTextXp</item>
@@ -215,7 +215,7 @@
     </style>
 
     <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/shape_round_bottom_ungles</item>
+        <item name="android:background">@drawable/background_bottomsheet</item>
     </style>
 
 </resources>
