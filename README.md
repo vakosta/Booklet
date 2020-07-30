@@ -7,6 +7,35 @@ Schedule | Marks |  Support
 
 Application supports Android 6 and above.
 
+## Screens
+
+Application contains following screens:
+
+- [x] Schedule;
+- [x] Marks;
+- [x] Gamefication;
+- [ ] Statistics;
+- [ ] Support;
+- [ ] Menu screen;
+- [ ] Paid Subscription;
+- [ ] Advertising Subscription.
+
+## Technologies
+
+Application implements MVVM and MVP architecture patterns. Now I rewrite architecture from MVP to MVVM.
+
+- Kotlin;
+- Coroutines;
+- Firebase;
+- Retrofit2;
+- EventBus.
+
+All dependencies you can see [here](https://github.com/Vakosta/Booklet/blob/master/dependencies.gradle).
+
+## Linked repositories
+
+- [Backend](https://github.com/dormantman/booklet) — server-side of Booklet.
+
 ## Contact
 Send me a message in Telegram: [@vakosta](https://t.me/vakosta).
 
