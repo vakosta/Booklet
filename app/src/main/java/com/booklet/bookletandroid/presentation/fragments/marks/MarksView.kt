@@ -1,6 +1,6 @@
 package com.booklet.bookletandroid.presentation.fragments.marks
 
-import com.booklet.bookletandroid.data.model.booklet.marks.Subject
+import com.booklet.bookletandroid.presentation.model.marks.Subject
 
 interface MarksView {
     fun initPager(progresses: List<Subject>)

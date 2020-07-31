@@ -3,22 +3,22 @@ package com.booklet.bookletandroid.presentation.fragments.marks
 import android.app.Application
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
-import com.booklet.bookletandroid.data.model.booklet.marks.Data
+import com.booklet.bookletandroid.domain.model.Result
 import com.booklet.bookletandroid.domain.repository.MarksRepository
 import com.booklet.bookletandroid.presentation.BaseViewModel
+import com.booklet.bookletandroid.presentation.model.marks.Subject
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 class MarksViewModel(application: Application) : BaseViewModel(application) {
     override val repository = MarksRepository(application.applicationContext)
-    val authLiveData = MutableLiveData<Response<Data>?>()
+    val authLiveData = MutableLiveData<Result<List<Subject>>>()
 
     val status = ObservableField(Status.LOADING)
 
     fun getMarks(id: Long, secret: String) {
         scope.launch {
-            val marks = repository.getMarks(id, secret)
-            authLiveData.postValue(marks)
+            val marks = repository.getMarks(id, secret, true)
+            authLiveData.postValue(Result.success(data = marks))
         }
     }
 

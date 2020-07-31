@@ -12,12 +12,13 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.ViewPager
 import com.booklet.bookletandroid.R
-import com.booklet.bookletandroid.data.model.booklet.marks.Subject
 import com.booklet.bookletandroid.databinding.FragmentMarksBinding
 import com.booklet.bookletandroid.domain.Preferences
 import com.booklet.bookletandroid.domain.Utils
 import com.booklet.bookletandroid.domain.model.Refresh
+import com.booklet.bookletandroid.domain.model.Result
 import com.booklet.bookletandroid.presentation.ViewPagerFragment
+import com.booklet.bookletandroid.presentation.model.marks.Subject
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_marks.*
 import org.greenrobot.eventbus.EventBus
@@ -66,16 +67,21 @@ class MarksFragment : ViewPagerFragment(), MarksView, View.OnClickListener, View
         binding.viewModel!!.authLiveData.observe(viewLifecycleOwner, Observer {
             binding.viewModel!!.status.set(MarksViewModel.Status.LOADED)
             Log.d("Login", "Auth data received")
-            val auth = it?.body()
-            when {
-                auth == null ->
-                    onNetworkProblems()
-                !it.isSuccessful ->
-                    onUnknownError()
-                else -> {
-                    initPager(it.body()?.data ?: arrayListOf())
-                    showContent()
-                    stopRefreshing()
+
+            it?.let { result ->
+                when (result.status) {
+                    Result.Status.SUCCESS -> {
+                        initPager(it.data!!)
+                        showContent()
+                        stopRefreshing()
+                    }
+
+                    Result.Status.ERROR -> {
+                        onUnknownError()
+                    }
+
+                    Result.Status.LOADING -> {
+                    }
                 }
             }
         })

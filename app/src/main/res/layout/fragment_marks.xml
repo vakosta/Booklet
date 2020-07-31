@@ -24,11 +24,11 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_gravity="top"
-            android:background="?attr/colorPrimary"
-            app:tabIndicatorColor="#fff"
+            android:background="#fff"
+            app:tabIndicatorColor="?attr/colorPrimary"
             app:tabMode="fixed"
-            app:tabSelectedTextColor="#fff"
-            app:tabTextColor="#b3ffffff" />
+            app:tabSelectedTextColor="?attr/colorPrimary"
+            app:tabTextColor="?attr/colorPrimary" />
 
         <RelativeLayout
             android:layout_width="match_parent"

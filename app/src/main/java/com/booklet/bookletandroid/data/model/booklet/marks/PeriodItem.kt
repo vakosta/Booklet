@@ -2,9 +2,9 @@ package com.booklet.bookletandroid.data.model.booklet.marks
 
 import com.google.gson.annotations.SerializedName
 
-data class PeriodsItem(
+data class PeriodItem(
         @SerializedName("marks")
-        val marks: List<MarksItem?>? = null,
+        val marks: List<MarkItem?>? = null,
 
         @SerializedName("title")
         val title: String? = null,

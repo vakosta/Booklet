@@ -7,7 +7,7 @@ data class Subject(
         val name: String? = null,
 
         @SerializedName("periods")
-        val periods: List<PeriodsItem?>? = null,
+        val periods: List<PeriodItem?>? = null,
 
         @SerializedName("year_mark")
         val yearMark: String? = null
