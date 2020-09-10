@@ -1,9 +1,9 @@
 # Booklet
 **Booklet** is diary aggregator for Russian schools.
 
-Schedule | Marks |  Support
-:-------:|:-----:|:------------:
-![Schedule](images/schedule.png)  |  ![Marks](images/marks.png) |  ![Support](images/support.png)
+Schedule | Marks
+:-------:|:-----:
+![Schedule](images/schedule.png)  |  ![Marks](images/marks.png)
 
 Application supports Android 6 and above.
 
