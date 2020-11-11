@@ -1,5 +1,5 @@
 # Booklet
-**Booklet** is diary aggregator for Russian schools.
+**Booklet** is diary aggregator for russian schools.
 
 Schedule | Marks
 :-------:|:-----:
@@ -22,7 +22,7 @@ Application contains following screens:
 
 ## Technologies
 
-Application implements MVVM and MVP architecture patterns. Now I rewrite architecture from MVP to MVVM.
+Application implements MVVM and MVP architecture patterns. I am currently in the process of rewriting an application from MVP to MVVM.
 
 - Kotlin;
 - Coroutines;
@@ -30,11 +30,12 @@ Application implements MVVM and MVP architecture patterns. Now I rewrite archite
 - Retrofit2;
 - EventBus.
 
-All dependencies you can see [here](https://github.com/Vakosta/Booklet/blob/master/dependencies.gradle).
+All dependencies you can see [here](https://github.com/Vakosta/BookletAndroid/blob/master/dependencies.gradle).
 
-## Linked repositories
+## Links
 
 - [Backend](https://github.com/dormantman/booklet) — server-side of Booklet.
+- [VK](https://vk.com/bklet) — Booklet's page in VK.
 
 ## Contact
 Send me a message in Telegram: [@vakosta](https://t.me/vakosta).
