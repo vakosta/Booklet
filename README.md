@@ -38,8 +38,8 @@ All dependencies you can see [here](https://github.com/Vakosta/BookletAndroid/bl
 - [VK](https://vk.com/bklet) — Booklet's page in VK.
 
 ## Contact
-Send me a message in Telegram: [@vakosta](https://t.me/vakosta).
+Send me a message in Telegram: [@Vakosta](https://t.me/Vakosta).
 
 Or in VK: [/vakosta](https://vk.com/vakosta).
 
-Or E-mail: [v.akosta@ya.ru](mailto:v.akosta@ya.ru).
+Or E-mail: [v.a.annenkov@ya.ru](mailto:v.a.annenkov@ya.ru).
