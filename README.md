@@ -1,15 +1,15 @@
 # Booklet
-**Booklet** is diary aggregator for russian schools.
+**Booklet** is a diary aggregator for russian schools.
 
 Schedule | Marks
 :-------:|:-----:
 ![Schedule](images/schedule.png)  |  ![Marks](images/marks.png)
 
-Application supports Android 6 and above.
+The application supports Android 6 and above.
 
 ## Screens
 
-Application contains following screens:
+The application contains following screens:
 
 - [x] Schedule;
 - [x] Marks;
@@ -22,7 +22,7 @@ Application contains following screens:
 
 ## Technologies
 
-Application implements MVVM and MVP architecture patterns. I am currently in the process of rewriting an application from MVP to MVVM.
+The application implements MVVM and MVP architecture patterns. I am currently in the process of rewriting the application from MVP to MVVM.
 
 - Kotlin;
 - Coroutines;
@@ -35,7 +35,7 @@ All dependencies you can see [here](https://github.com/Vakosta/BookletAndroid/bl
 ## Links
 
 - [Backend](https://github.com/dormantman/booklet) — server-side of Booklet.
-- [VK](https://vk.com/bklet) — Booklet's page in VK.
+- [VK](https://vk.com/bklet) — Booklet page in VK.
 
 ## Contact
 Send me a message in Telegram: [@Vakosta](https://t.me/Vakosta).
