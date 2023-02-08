@@ -11,14 +11,9 @@ The application supports Android 6 and above.
 
 The application contains following screens:
 
-- [x] Schedule;
-- [x] Marks;
-- [x] Gamefication;
-- [ ] Statistics;
-- [ ] Support;
-- [ ] Menu screen;
-- [ ] Paid Subscription;
-- [ ] Advertising Subscription.
+- Schedule;
+- Marks;
+- Gamefication.
 
 ## Technologies
 
@@ -35,11 +30,9 @@ All dependencies you can see [here](https://github.com/Vakosta/BookletAndroid/bl
 ## Links
 
 - [Backend](https://github.com/dormantman/booklet) — server-side of Booklet.
-- [VK](https://vk.com/bklet) — Booklet page in VK.
+- [VK](https://vk.com/julista.mobile) — Booklet page in VK.
 
 ## Contact
-Send me a message in Telegram: [@Vakosta](https://t.me/Vakosta).
+Send me a message in Telegram: [@vakosta](https://t.me/vakosta).
 
-Or in VK: [/vakosta](https://vk.com/vakosta).
-
-Or E-mail: [v.a.annenkov@ya.ru](mailto:v.a.annenkov@ya.ru).
+Or E-mail: [v.annkv@ya.ru](mailto:v.annkv@ya.ru).
