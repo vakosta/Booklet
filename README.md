@@ -9,7 +9,7 @@ The application supports Android 6 and above.
 
 ## Screens
 
-The application contains following screens:
+The application contains the following screens:
 
 - Schedule;
 - Marks;
@@ -17,7 +17,7 @@ The application contains following screens:
 
 ## Technologies
 
-The application implements MVVM and MVP architecture patterns. I am currently in the process of rewriting the application from MVP to MVVM.
+The application was developed using the following technologies:
 
 - Kotlin;
 - Coroutines;
@@ -25,7 +25,7 @@ The application implements MVVM and MVP architecture patterns. I am currently in
 - Retrofit2;
 - EventBus.
 
-All dependencies you can see [here](https://github.com/Vakosta/BookletAndroid/blob/master/dependencies.gradle).
+You can view all dependencies used in the application [here](https://github.com/Vakosta/BookletAndroid/blob/master/dependencies.gradle).
 
 ## Links
 
