@@ -25,7 +25,7 @@ The application was developed using the following technologies:
 - Retrofit2;
 - EventBus.
 
-You can view all dependencies used in the application [here](https://github.com/Vakosta/BookletAndroid/blob/master/dependencies.gradle).
+You can view all dependencies used in the application [here](https://github.com/Vakosta/Booklet/blob/master/dependencies.gradle).
 
 ## Links
 
